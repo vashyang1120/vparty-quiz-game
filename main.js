@@ -1,4 +1,4 @@
-/* 小V知識挑戰 quiz-v0.1.1-profile-avatar-flow-fix
+/* 小V知識挑戰 quiz-v0.1.2-display-avatar-write-fix
    目標：穩定可跑、沿用共用玩家身份、寫入 gameLogs/quiz 與 leaderboards/quiz/main。
    V幣：第一版只預留 wallet / vCoinLogs 註解，不實際發放。
 */
@@ -551,14 +551,25 @@ function buildAvatarPicker(mode){
           toast("這個顯示頭像尚未解鎖，不能套用。");
           return;
         }
+
+        var oldPlayerKey = PLAYER.playerKey;
+        var oldBaseAvatarKey = PLAYER.baseAvatarKey;
+
         PLAYER.displayAvatarKey = av.key;
         PLAYER.avatarKey = av.key;
         PLAYER.avatarSrc = getAvatarUrl(av.key);
+
+        // 防呆：顯示頭像不可改變身份
+        PLAYER.baseAvatarKey = oldBaseAvatarKey;
+        PLAYER.playerKey = oldPlayerKey;
+
         savePlayerLocal();
         updatePlayerUI();
         buildAvatarPicker("display");
-        ensurePlayerProfile();
-        toast("已更換顯示頭像：" + av.name + "\\nplayerKey 不會改變。");
+
+        writePlayerProfileCurrent().then(function(){
+          toast("已更換顯示頭像：" + av.name + "\nplayerKey 不會改變。");
+        });
       }
     });
     grid.appendChild(btn);
@@ -799,7 +810,7 @@ function buildQuizRecord(totalTime, accuracy){
 
   return {
     gameId: "quiz",
-    version: "quiz-v0.1.1-profile-avatar-flow-fix",
+    version: "quiz-v0.1.2-display-avatar-write-fix",
     mode: "mvp",
 
     id: PLAYER.id,
@@ -887,7 +898,7 @@ function updateLeaderboard(record){
       if (shouldUpdateLeaderboard(old, record)) {
         var lbRecord = {
           gameId: "quiz",
-          version: "quiz-v0.1.1-profile-avatar-flow-fix",
+          version: "quiz-v0.1.2-display-avatar-write-fix",
           id: record.id,
           name: record.name,
           playerKey: record.playerKey,

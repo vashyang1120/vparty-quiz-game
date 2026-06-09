@@ -142,3 +142,8 @@ main{flex:1;display:grid;place-items:center;padding:20px}
   .lb-main{grid-area:main}
   .lb-score{grid-area:score;text-align:left}
 }
+
+/* v0.1.3 leaderboard tabs */
+.lb-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 6px}
+.lb-tabs .btn.active{background:linear-gradient(135deg,var(--pink),var(--pink2));color:#fff;border-color:transparent;box-shadow:0 6px 18px rgba(232,111,154,.25)}
+.save-status{white-space:pre-line}

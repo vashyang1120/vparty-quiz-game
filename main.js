@@ -1,5 +1,5 @@
-/* 小V知識挑戰 quiz-v0.1.2-display-avatar-write-fix
-   目標：穩定可跑、沿用共用玩家身份、寫入 gameLogs/quiz 與 leaderboards/quiz/main。
+/* 小V知識挑戰 quiz-v0.1.3-grade-progress-leaderboards
+   目標：穩定可跑、沿用共用玩家身份、寫入 gameLogs/quiz、quizProgress 與年級累積排行榜。
    V幣：第一版只預留 wallet / vCoinLogs 註解，不實際發放。
 */
 
@@ -16,11 +16,15 @@ var FIREBASE_CONFIG = {
 };
 var FIREBASE_ENABLED = true;
 
+var QUIZ_VERSION = "quiz-v0.1.3-grade-progress-leaderboards";
+
 var DB_PATHS = {
-  gameLogs:      "gameLogs/quiz",
-  leaderboards:  "leaderboards/quiz/main",
-  players:       "players",
-  avatarCatalog: "avatarCatalog"
+  gameLogs:            "gameLogs/quiz",
+  leaderboards:        "leaderboards/quiz/main",
+  leaderboardsMain:    "leaderboards/quiz/main",
+  leaderboardsByGrade: "leaderboards/quiz/byGrade",
+  players:             "players",
+  avatarCatalog:       "avatarCatalog"
   // V幣預留，不在本版寫入：
   // wallet:      "players/{playerKey}/wallet"
   // vCoinLogs:  "players/{playerKey}/vCoinLogs/{autoId}"
@@ -79,6 +83,7 @@ var PLAYER = {
 var QUESTIONS = [];
 var selectedGrade = "low";
 var selectedSubject = "math";
+var leaderboardMode = "main";
 var pickerMode = "base";
 
 var quizState = {
@@ -810,7 +815,7 @@ function buildQuizRecord(totalTime, accuracy){
 
   return {
     gameId: "quiz",
-    version: "quiz-v0.1.2-display-avatar-write-fix",
+    version: QUIZ_VERSION,
     mode: "mvp",
 
     id: PLAYER.id,
@@ -847,38 +852,12 @@ function buildQuizRecord(totalTime, accuracy){
   };
 }
 
-function saveQuizResult(totalTime, accuracy){
-  var record = buildQuizRecord(totalTime, accuracy);
-  $("save-status").textContent = "正在寫入 gameLogs/quiz 與排行榜...";
-
-  saveLocalLog(record);
-
-  return saveGameLog(record)
-    .then(function(){
-      return updateLeaderboard(record);
-    })
-    .then(function(result){
-      $("save-status").textContent = result && result.updated
-        ? "✅ 已寫入紀錄，排行榜已更新！"
-        : "✅ 已寫入紀錄，排行榜保留原本最佳成績。";
-    })
-    .catch(function(e){
-      console.warn("[SaveResult] failed:", e);
-      $("save-status").textContent = "⚠️ Firebase 寫入可能失敗，已保留本機測試紀錄。";
-    });
-}
-
 function saveLocalLog(record){
   try {
     var logs = JSON.parse(localStorage.getItem("vquiz_localLogs") || "[]");
     logs.push(record);
     if (logs.length > 50) logs = logs.slice(logs.length - 50);
     localStorage.setItem("vquiz_localLogs", JSON.stringify(logs));
-
-    var lb = JSON.parse(localStorage.getItem("vquiz_localLeaderboard") || "{}");
-    var old = lb[record.playerKey];
-    if (shouldUpdateLeaderboard(old, record)) lb[record.playerKey] = record;
-    localStorage.setItem("vquiz_localLeaderboard", JSON.stringify(lb));
   } catch(e) {}
 }
 
@@ -889,47 +868,99 @@ function saveGameLog(record){
   });
 }
 
-function updateLeaderboard(record){
+function saveQuizResult(totalTime, accuracy){
+  var record = buildQuizRecord(totalTime, accuracy);
+  $("save-status").textContent = "正在寫入 gameLogs/quiz、個人進度與排行榜...";
+
+  saveLocalLog(record);
+
+  return saveGameLog(record)
+    .then(function(){
+      return updateQuizProgress(record);
+    })
+    .then(function(progressResult){
+      return updateGradeLeaderboard(record.gradeBand).then(function(gradeRecord){
+        return updateMainLeaderboardFromGrades().then(function(mainRecord){
+          return { progressResult:progressResult, gradeRecord:gradeRecord, mainRecord:mainRecord };
+        });
+      });
+    })
+    .then(function(result){
+      var progress = result.progressResult && result.progressResult.progress;
+      var bestUpdated = result.progressResult && result.progressResult.bestUpdated;
+      var gradeRecord = result.gradeRecord || {};
+      var mainRecord = result.mainRecord || {};
+      var subjectName = record.subjectName || record.subject;
+      var lines = ["✅ 本次紀錄已保存"];
+      if (bestUpdated) lines.push("✅ " + subjectName + "最佳紀錄刷新！");
+      else if (progress) lines.push(subjectName + "最佳仍維持 " + (progress.bestScore || 0) + " 分");
+      lines.push((record.gradeBandName || record.gradeBand) + "總分：" + (gradeRecord.gradeTotalScore || 0) + " 分");
+      lines.push("🏆 總榜總分：" + (mainRecord.totalScore || 0) + " 分");
+      $("save-status").textContent = lines.join("\n");
+    })
+    .catch(function(e){
+      console.warn("[SaveResult] failed:", e);
+      $("save-status").textContent = "⚠️ Firebase 寫入可能失敗，已保留本機測試紀錄。";
+    });
+}
+
+function makeSubjectProgressFromRecord(record, oldProgress){
+  var attempts = (oldProgress && Number(oldProgress.attempts || 0) || 0) + 1;
+  var oldBest = oldProgress ? {
+    score: oldProgress.bestScore || 0,
+    correctCount: oldProgress.bestCorrectCount || 0,
+    maxCombo: oldProgress.bestMaxCombo || 0,
+    timeUsedTotal: oldProgress.bestTimeUsedTotal || 999999,
+    ts: oldProgress.bestUpdatedAt || oldProgress.updatedAt || 0
+  } : null;
+  var bestUpdated = shouldUpdateBestRecord(oldBest, record);
+
+  var progress = {
+    gameId: "quiz",
+    version: QUIZ_VERSION,
+    playerKey: PLAYER.playerKey,
+    gradeBand: record.gradeBand,
+    gradeBandName: record.gradeBandName,
+    subject: record.subject,
+    subjectName: record.subjectName,
+
+    bestScore: bestUpdated ? record.score : (oldProgress.bestScore || 0),
+    bestCorrectCount: bestUpdated ? record.correctCount : (oldProgress.bestCorrectCount || 0),
+    bestMaxCombo: bestUpdated ? record.maxCombo : (oldProgress.bestMaxCombo || 0),
+    bestTimeUsedTotal: bestUpdated ? record.timeUsedTotal : (oldProgress.bestTimeUsedTotal || 0),
+    bestTotalQuestions: bestUpdated ? record.totalQuestions : (oldProgress.bestTotalQuestions || oldProgress.totalQuestions || record.totalQuestions || 10),
+    bestUpdatedAt: bestUpdated ? record.ts : (oldProgress.bestUpdatedAt || oldProgress.updatedAt || record.ts),
+
+    attempts: attempts,
+    perfect: false,
+
+    lastScore: record.score,
+    lastCorrectCount: record.correctCount,
+    lastMaxCombo: record.maxCombo,
+    lastTimeUsedTotal: record.timeUsedTotal,
+    lastTotalQuestions: record.totalQuestions,
+
+    updatedAt: Date.now()
+  };
+  progress.totalQuestions = progress.bestTotalQuestions;
+  progress.perfect = (progress.bestCorrectCount || 0) >= (progress.bestTotalQuestions || record.totalQuestions || 10);
+  return { progress:progress, bestUpdated:bestUpdated };
+}
+
+function updateQuizProgress(record){
   return ensureFirebaseReady().then(function(ok){
     if (!ok || !firebaseDb) throw new Error("Firebase not ready");
-    var ref = firebaseDb.ref(DB_PATHS.leaderboards + "/" + record.playerKey);
+    var path = DB_PATHS.players + "/" + PLAYER.playerKey + "/quizProgress/" + record.gradeBand + "/" + record.subject;
+    var ref = firebaseDb.ref(path);
     return ref.once("value").then(function(snap){
-      var old = snap.val();
-      if (shouldUpdateLeaderboard(old, record)) {
-        var lbRecord = {
-          gameId: "quiz",
-          version: "quiz-v0.1.2-display-avatar-write-fix",
-          id: record.id,
-          name: record.name,
-          playerKey: record.playerKey,
-          baseAvatarKey: record.baseAvatarKey,
-          displayAvatarKey: record.displayAvatarKey,
-          avatarKey: record.avatarKey,
-          avatarSrc: record.avatarSrc,
-
-          gradeBand: record.gradeBand,
-          gradeBandName: record.gradeBandName,
-          subject: record.subject,
-          subjectName: record.subjectName,
-
-          score: record.score,
-          correctCount: record.correctCount,
-          totalQuestions: record.totalQuestions,
-          maxCombo: record.maxCombo,
-          accuracy: record.accuracy,
-          timeUsedTotal: record.timeUsedTotal,
-
-          ts: record.ts,
-          date: record.date
-        };
-        return ref.set(lbRecord).then(function(){ return { updated:true }; });
-      }
-      return { updated:false };
+      var oldProgress = snap.val() || {};
+      var result = makeSubjectProgressFromRecord(record, oldProgress);
+      return ref.set(result.progress).then(function(){ return result; });
     });
   });
 }
 
-function shouldUpdateLeaderboard(oldRecord, newRecord){
+function shouldUpdateBestRecord(oldRecord, newRecord){
   if (!oldRecord) return true;
   if ((newRecord.score || 0) !== (oldRecord.score || 0)) return (newRecord.score || 0) > (oldRecord.score || 0);
   if ((newRecord.correctCount || 0) !== (oldRecord.correctCount || 0)) return (newRecord.correctCount || 0) > (oldRecord.correctCount || 0);
@@ -938,39 +969,246 @@ function shouldUpdateLeaderboard(oldRecord, newRecord){
   return (newRecord.ts || 0) > (oldRecord.ts || 0);
 }
 
+function getGradeName(gradeKey){
+  var g = GRADE_OPTIONS.find(function(item){ return item.key === gradeKey; });
+  return g ? g.name : gradeKey;
+}
+
+function getSubjectName(subjectKey){
+  var s = SUBJECT_OPTIONS.find(function(item){ return item.key === subjectKey; });
+  return s ? s.name : subjectKey;
+}
+
+function subjectSortIndex(key){
+  var idx = SUBJECT_OPTIONS.findIndex(function(s){ return s.key === key; });
+  return idx < 0 ? 999 : idx;
+}
+
+function buildGradeRecordFromProgress(gradeBand, progressMap){
+  var now = Date.now();
+  var entries = [];
+  Object.keys(progressMap || {}).forEach(function(subjectKey){
+    var p = progressMap[subjectKey];
+    if (!p || typeof p !== "object") return;
+    if (!p.bestScore && !p.attempts) return;
+    entries.push({ key:subjectKey, progress:p });
+  });
+  entries.sort(function(a,b){ return subjectSortIndex(a.key) - subjectSortIndex(b.key); });
+
+  var subjectKeys = [];
+  var subjectNames = [];
+  var gradeTotalScore = 0;
+  var perfectSubjects = 0;
+  var totalCorrect = 0;
+  var totalQuestions = 0;
+  var totalMaxCombo = 0;
+  var totalTimeUsed = 0;
+  var totalAttempts = 0;
+
+  entries.forEach(function(item){
+    var p = item.progress;
+    subjectKeys.push(p.subject || item.key);
+    subjectNames.push(p.subjectName || getSubjectName(item.key));
+    gradeTotalScore += Number(p.bestScore || 0);
+    if (p.perfect === true) perfectSubjects += 1;
+    totalCorrect += Number(p.bestCorrectCount || 0);
+    totalQuestions += Number(p.bestTotalQuestions || p.totalQuestions || 10);
+    totalMaxCombo += Number(p.bestMaxCombo || 0);
+    totalTimeUsed += Number(p.bestTimeUsedTotal || 0);
+    totalAttempts += Number(p.attempts || 0);
+  });
+
+  var av = getAvatarByKey(PLAYER.displayAvatarKey);
+  return {
+    gameId: "quiz",
+    version: QUIZ_VERSION,
+
+    id: PLAYER.id,
+    name: PLAYER.name || PLAYER.id,
+    playerKey: PLAYER.playerKey,
+    baseAvatarKey: PLAYER.baseAvatarKey,
+    displayAvatarKey: PLAYER.displayAvatarKey,
+    avatarKey: PLAYER.displayAvatarKey,
+    avatarSrc: resolveAvatarSrc(av.src || av.url || PLAYER.avatarSrc || ""),
+
+    gradeBand: gradeBand,
+    gradeBandName: getGradeName(gradeBand),
+
+    gradeTotalScore: gradeTotalScore,
+    completedSubjects: entries.length,
+    perfectSubjects: perfectSubjects,
+
+    subjectKeys: subjectKeys,
+    subjectNames: subjectNames,
+    subjectSummaryText: entries.length + "科：" + subjectNames.join(" / "),
+
+    totalCorrect: totalCorrect,
+    totalQuestions: totalQuestions,
+    totalMaxCombo: totalMaxCombo,
+    totalTimeUsed: totalTimeUsed,
+    totalAttempts: totalAttempts,
+
+    updatedAt: now,
+    date: new Date(now).toISOString()
+  };
+}
+
+function updateGradeLeaderboard(gradeBand){
+  return ensureFirebaseReady().then(function(ok){
+    if (!ok || !firebaseDb) throw new Error("Firebase not ready");
+    var progressRef = firebaseDb.ref(DB_PATHS.players + "/" + PLAYER.playerKey + "/quizProgress/" + gradeBand);
+    return progressRef.once("value").then(function(snap){
+      var progressMap = snap.val() || {};
+      var gradeRecord = buildGradeRecordFromProgress(gradeBand, progressMap);
+      return firebaseDb.ref(DB_PATHS.leaderboardsByGrade + "/" + gradeBand + "/" + PLAYER.playerKey)
+        .set(gradeRecord)
+        .then(function(){ return gradeRecord; });
+    });
+  });
+}
+
+function buildMainRecordFromGradeRecords(gradeRecords){
+  var now = Date.now();
+  var gradeSummary = {};
+  var summaryParts = [];
+  var totalScore = 0;
+  var completedGrades = 0;
+  var completedSubjects = 0;
+  var perfectSubjects = 0;
+  var totalCorrect = 0;
+  var totalQuestions = 0;
+  var totalMaxCombo = 0;
+  var totalTimeUsed = 0;
+  var totalAttempts = 0;
+
+  GRADE_OPTIONS.forEach(function(g){
+    var r = gradeRecords[g.key];
+    var score = r ? Number(r.gradeTotalScore || 0) : 0;
+    gradeSummary[g.key] = score;
+    if (r && Number(r.completedSubjects || 0) > 0) {
+      completedGrades += 1;
+      completedSubjects += Number(r.completedSubjects || 0);
+      perfectSubjects += Number(r.perfectSubjects || 0);
+      totalCorrect += Number(r.totalCorrect || 0);
+      totalQuestions += Number(r.totalQuestions || 0);
+      totalMaxCombo += Number(r.totalMaxCombo || 0);
+      totalTimeUsed += Number(r.totalTimeUsed || 0);
+      totalAttempts += Number(r.totalAttempts || 0);
+      summaryParts.push(g.name + Number(r.completedSubjects || 0) + "科");
+      totalScore += score;
+    }
+  });
+
+  var av = getAvatarByKey(PLAYER.displayAvatarKey);
+  return {
+    gameId: "quiz",
+    version: QUIZ_VERSION,
+
+    id: PLAYER.id,
+    name: PLAYER.name || PLAYER.id,
+    playerKey: PLAYER.playerKey,
+    baseAvatarKey: PLAYER.baseAvatarKey,
+    displayAvatarKey: PLAYER.displayAvatarKey,
+    avatarKey: PLAYER.displayAvatarKey,
+    avatarSrc: resolveAvatarSrc(av.src || av.url || PLAYER.avatarSrc || ""),
+
+    totalScore: totalScore,
+    completedGrades: completedGrades,
+    completedSubjects: completedSubjects,
+    perfectSubjects: perfectSubjects,
+
+    gradeSummary: gradeSummary,
+    gradeSummaryText: summaryParts.join(" / ") || "尚未完成挑戰",
+
+    totalCorrect: totalCorrect,
+    totalQuestions: totalQuestions,
+    totalMaxCombo: totalMaxCombo,
+    totalTimeUsed: totalTimeUsed,
+    totalAttempts: totalAttempts,
+
+    updatedAt: now,
+    date: new Date(now).toISOString()
+  };
+}
+
+function updateMainLeaderboardFromGrades(){
+  return ensureFirebaseReady().then(function(ok){
+    if (!ok || !firebaseDb) throw new Error("Firebase not ready");
+    var reads = GRADE_OPTIONS.map(function(g){
+      return firebaseDb.ref(DB_PATHS.leaderboardsByGrade + "/" + g.key + "/" + PLAYER.playerKey).once("value").then(function(snap){
+        return { key:g.key, val:snap.val() };
+      });
+    });
+    return Promise.all(reads).then(function(results){
+      var gradeRecords = {};
+      results.forEach(function(item){ if (item.val) gradeRecords[item.key] = item.val; });
+      var mainRecord = buildMainRecordFromGradeRecords(gradeRecords);
+      return firebaseDb.ref(DB_PATHS.leaderboardsMain + "/" + PLAYER.playerKey)
+        .set(mainRecord)
+        .then(function(){ return mainRecord; });
+    });
+  });
+}
+
+function compareMainRows(a,b){
+  if ((b.totalScore || 0) !== (a.totalScore || 0)) return (b.totalScore || 0) - (a.totalScore || 0);
+  if ((b.perfectSubjects || 0) !== (a.perfectSubjects || 0)) return (b.perfectSubjects || 0) - (a.perfectSubjects || 0);
+  if ((b.completedSubjects || 0) !== (a.completedSubjects || 0)) return (b.completedSubjects || 0) - (a.completedSubjects || 0);
+  if ((b.totalCorrect || 0) !== (a.totalCorrect || 0)) return (b.totalCorrect || 0) - (a.totalCorrect || 0);
+  if ((a.totalTimeUsed || 999999) !== (b.totalTimeUsed || 999999)) return (a.totalTimeUsed || 999999) - (b.totalTimeUsed || 999999);
+  if ((b.totalMaxCombo || 0) !== (a.totalMaxCombo || 0)) return (b.totalMaxCombo || 0) - (a.totalMaxCombo || 0);
+  if ((a.totalAttempts || 999999) !== (b.totalAttempts || 999999)) return (a.totalAttempts || 999999) - (b.totalAttempts || 999999);
+  return (b.updatedAt || 0) - (a.updatedAt || 0);
+}
+
+function compareGradeRows(a,b){
+  if ((b.gradeTotalScore || 0) !== (a.gradeTotalScore || 0)) return (b.gradeTotalScore || 0) - (a.gradeTotalScore || 0);
+  if ((b.perfectSubjects || 0) !== (a.perfectSubjects || 0)) return (b.perfectSubjects || 0) - (a.perfectSubjects || 0);
+  if ((b.totalCorrect || 0) !== (a.totalCorrect || 0)) return (b.totalCorrect || 0) - (a.totalCorrect || 0);
+  if ((a.totalTimeUsed || 999999) !== (b.totalTimeUsed || 999999)) return (a.totalTimeUsed || 999999) - (b.totalTimeUsed || 999999);
+  if ((b.totalMaxCombo || 0) !== (a.totalMaxCombo || 0)) return (b.totalMaxCombo || 0) - (a.totalMaxCombo || 0);
+  if ((a.totalAttempts || 999999) !== (b.totalAttempts || 999999)) return (a.totalAttempts || 999999) - (b.totalAttempts || 999999);
+  return (b.updatedAt || 0) - (a.updatedAt || 0);
+}
+
 function renderLeaderboard(){
   var listEl = $("leaderboard-list");
   listEl.textContent = "載入中...";
+  updateLeaderboardTabs();
+
+  var path = leaderboardMode === "main"
+    ? DB_PATHS.leaderboardsMain
+    : DB_PATHS.leaderboardsByGrade + "/" + leaderboardMode;
 
   return ensureFirebaseReady().then(function(ok){
     if (!ok || !firebaseDb) throw new Error("Firebase not ready");
-    return firebaseDb.ref(DB_PATHS.leaderboards).once("value").then(function(snap){
+    return firebaseDb.ref(path).once("value").then(function(snap){
       var rows = [];
       snap.forEach(function(child){
         var v = child.val();
         if (v) rows.push(v);
       });
-      renderLeaderboardRows(rows);
+      renderLeaderboardRows(rows, false);
     });
-  }).catch(function(){
-    try {
-      var lb = JSON.parse(localStorage.getItem("vquiz_localLeaderboard") || "{}");
-      renderLeaderboardRows(Object.keys(lb).map(function(k){ return lb[k]; }), true);
-    } catch(e) {
-      listEl.innerHTML = '<div class="muted">排行榜載入失敗，目前沒有本機紀錄。</div>';
-    }
+  }).catch(function(e){
+    console.warn("[Leaderboard] load failed:", e.message);
+    listEl.innerHTML = '<div class="muted">排行榜載入失敗，請稍後再試。</div>';
   });
 }
 
-function renderLeaderboardRows(rows, localOnly){
+function updateLeaderboardTabs(){
+  document.querySelectorAll("[data-lb-mode]").forEach(function(btn){
+    btn.classList.toggle("active", btn.getAttribute("data-lb-mode") === leaderboardMode);
+  });
+  var desc = $("leaderboard-desc");
+  if (!desc) return;
+  if (leaderboardMode === "main") desc.textContent = "leaderboards/quiz/main/{playerKey}：三個年級總分加總的綜合榜。";
+  else desc.textContent = "leaderboards/quiz/byGrade/" + leaderboardMode + "/{playerKey}：該年級各科最佳分數加總。";
+}
+
+function renderLeaderboardRows(rows){
   var listEl = $("leaderboard-list");
-  rows = (rows || []).sort(function(a,b){
-    if ((b.score || 0) !== (a.score || 0)) return (b.score || 0) - (a.score || 0);
-    if ((b.correctCount || 0) !== (a.correctCount || 0)) return (b.correctCount || 0) - (a.correctCount || 0);
-    if ((b.maxCombo || 0) !== (a.maxCombo || 0)) return (b.maxCombo || 0) - (a.maxCombo || 0);
-    if ((a.timeUsedTotal || 999999) !== (b.timeUsedTotal || 999999)) return (a.timeUsedTotal || 999999) - (b.timeUsedTotal || 999999);
-    return (b.ts || 0) - (a.ts || 0);
-  }).slice(0, 30);
+  rows = (rows || []).sort(leaderboardMode === "main" ? compareMainRows : compareGradeRows).slice(0, 30);
 
   if (!rows.length) {
     listEl.innerHTML = '<div class="muted">目前還沒有排行榜紀錄。</div>';
@@ -978,26 +1216,36 @@ function renderLeaderboardRows(rows, localOnly){
   }
 
   listEl.innerHTML = "";
-  if (localOnly) {
-    var note = document.createElement("div");
-    note.className = "notice";
-    note.textContent = "Firebase 未就緒，以下顯示本機測試排行榜。";
-    listEl.appendChild(note);
-  }
-
   rows.forEach(function(r, idx){
     var row = document.createElement("div");
     row.className = "lb-row" + (r.playerKey === PLAYER.playerKey ? " mine" : "");
     var src = resolveAvatarSrc(r.avatarSrc || getAvatarUrl(r.displayAvatarKey || r.avatarKey || r.baseAvatarKey));
-    var date = r.ts ? new Date(r.ts).toLocaleDateString("zh-TW") : "";
-    row.innerHTML =
-      '<div class="lb-rank">' + (idx + 1) + '</div>' +
-      '<img src="' + escapeHtml(src) + '" alt="">' +
-      '<div class="lb-main"><strong>' + escapeHtml(r.name || r.id || "玩家") + '</strong>' +
-      '<span>' + escapeHtml(r.subjectName || "-") + ' / ' + escapeHtml(r.gradeBandName || "-") + '｜答對 ' + (r.correctCount || 0) + '/' + (r.totalQuestions || 10) + '｜Combo ' + (r.maxCombo || 0) + '｜' + date + '</span></div>' +
-      '<div class="lb-score">' + (r.score || 0) + '</div>';
+
+    if (leaderboardMode === "main") {
+      row.innerHTML =
+        '<div class="lb-rank">' + (idx + 1) + '</div>' +
+        '<img src="' + escapeHtml(src) + '" alt="">' +
+        '<div class="lb-main"><strong>' + escapeHtml(r.name || r.id || "玩家") + '</strong>' +
+        '<span>' + (r.completedSubjects || 0) + '科 / 滿分' + (r.perfectSubjects || 0) + '科｜' + escapeHtml(r.gradeSummaryText || "尚未完成挑戰") + '</span></div>' +
+        '<div class="lb-score">' + (r.totalScore || 0) + '</div>';
+    } else {
+      row.innerHTML =
+        '<div class="lb-rank">' + (idx + 1) + '</div>' +
+        '<img src="' + escapeHtml(src) + '" alt="">' +
+        '<div class="lb-main"><strong>' + escapeHtml(r.name || r.id || "玩家") + '</strong>' +
+        '<span>' + (r.completedSubjects || 0) + '科 / 滿分' + (r.perfectSubjects || 0) + '科｜' + escapeHtml((r.subjectNames || []).join(" / ") || r.subjectSummaryText || "-") + '｜' + formatSeconds(r.totalTimeUsed || 0) + '</span></div>' +
+        '<div class="lb-score">' + (r.gradeTotalScore || 0) + '</div>';
+    }
     listEl.appendChild(row);
   });
+}
+
+function formatSeconds(sec){
+  sec = Math.max(0, Number(sec || 0));
+  var m = Math.floor(sec / 60);
+  var s = sec % 60;
+  if (!m) return s + "秒";
+  return m + "分" + String(s).padStart(2, "0") + "秒";
 }
 
 function bindEvents(){
@@ -1017,6 +1265,12 @@ function bindEvents(){
   $("btn-result-home").addEventListener("click", function(){ showScreen("screen-title"); });
   $("btn-result-leaderboard").addEventListener("click", function(){ showScreen("screen-leaderboard"); });
   $("btn-refresh-leaderboard").addEventListener("click", renderLeaderboard);
+  document.querySelectorAll("[data-lb-mode]").forEach(function(btn){
+    btn.addEventListener("click", function(){
+      leaderboardMode = btn.getAttribute("data-lb-mode") || "main";
+      renderLeaderboard();
+    });
+  });
   $("btn-start-quiz").addEventListener("click", startQuiz);
   $("btn-play-again").addEventListener("click", function(){ showScreen("screen-setup"); });
   $("btn-quit-quiz").addEventListener("click", function(){

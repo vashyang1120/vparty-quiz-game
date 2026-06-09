@@ -1,4 +1,4 @@
-/* 小V知識挑戰 quiz-v0.1.0-mvp-test-1
+/* 小V知識挑戰 quiz-v0.1.1-profile-avatar-flow-fix
    目標：穩定可跑、沿用共用玩家身份、寫入 gameLogs/quiz 與 leaderboards/quiz/main。
    V幣：第一版只預留 wallet / vCoinLogs 註解，不實際發放。
 */
@@ -400,6 +400,7 @@ function savePlayerLocal(){
   localStorage.setItem("vquiz_baseAvatarKey", PLAYER.baseAvatarKey);
   localStorage.setItem("vquiz_displayAvatarKey", PLAYER.displayAvatarKey);
   localStorage.setItem("vquiz_playerKey", PLAYER.playerKey);
+  localStorage.setItem("vquiz_profileConfirmed", "1");
 
   // 寫入一份共用感較高的 profile，方便未來入口頁銜接。
   localStorage.setItem("vPartyPlayerProfile", JSON.stringify({
@@ -414,6 +415,46 @@ function savePlayerLocal(){
   }));
 }
 
+function hasConfirmedQuizProfile(){
+  return localStorage.getItem("vquiz_profileConfirmed") === "1"
+    && !!localStorage.getItem("vquiz_playerId")
+    && !!localStorage.getItem("vquiz_baseAvatarKey")
+    && !!localStorage.getItem("vquiz_playerKey");
+}
+
+function buildCurrentProfilePayload(isCreate){
+  validateDisplayAvatarForCurrentIdentity();
+  var payload = {
+    id: PLAYER.id,
+    name: PLAYER.name || PLAYER.id,
+    playerKey: PLAYER.playerKey,
+    baseAvatarKey: PLAYER.baseAvatarKey,
+    displayAvatarKey: PLAYER.displayAvatarKey,
+    avatarKey: PLAYER.displayAvatarKey,
+    avatarSrc: PLAYER.avatarSrc,
+    updatedAt: Date.now()
+  };
+  if (isCreate) payload.createdAt = Date.now();
+  return payload;
+}
+
+// v0.1.1：使用「目前畫面選擇」直接寫回 profile。
+// 這個函式不會先讀 Firebase 舊 displayAvatarKey，因此不會把剛選的新顯示頭像蓋回舊值。
+function writePlayerProfileCurrent(){
+  if (!FIREBASE_ENABLED) return Promise.resolve(false);
+  return ensureFirebaseReady().then(function(ok){
+    if (!ok || !firebaseDb || !PLAYER.playerKey) return false;
+    var ref = firebaseDb.ref(DB_PATHS.players + "/" + PLAYER.playerKey + "/profile");
+    return ref.once("value").then(function(snap){
+      var payload = buildCurrentProfilePayload(!snap.exists());
+      return ref.update(payload).then(function(){ return true; });
+    });
+  }).catch(function(e){
+    console.warn("[Profile] write current failed:", e.message);
+    return false;
+  });
+}
+
 function savePlayer(){
   savePlayerLocal();
   updatePlayerUI();
@@ -421,7 +462,7 @@ function savePlayer(){
     validateDisplayAvatarForCurrentIdentity();
     savePlayerLocal();
     updatePlayerUI();
-    return ensurePlayerProfile();
+    return writePlayerProfileCurrent();
   });
 }
 
@@ -758,7 +799,7 @@ function buildQuizRecord(totalTime, accuracy){
 
   return {
     gameId: "quiz",
-    version: "quiz-v0.1.0-mvp-test-1",
+    version: "quiz-v0.1.1-profile-avatar-flow-fix",
     mode: "mvp",
 
     id: PLAYER.id,
@@ -846,7 +887,7 @@ function updateLeaderboard(record){
       if (shouldUpdateLeaderboard(old, record)) {
         var lbRecord = {
           gameId: "quiz",
-          version: "quiz-v0.1.0-mvp-test-1",
+          version: "quiz-v0.1.1-profile-avatar-flow-fix",
           id: record.id,
           name: record.name,
           playerKey: record.playerKey,
@@ -950,7 +991,14 @@ function renderLeaderboardRows(rows, localOnly){
 
 function bindEvents(){
   $("btn-go-profile").addEventListener("click", function(){ showScreen("screen-profile"); });
-  $("btn-go-setup").addEventListener("click", function(){ showScreen("screen-setup"); });
+  $("btn-go-setup").addEventListener("click", function(){
+    if (!hasConfirmedQuizProfile()) {
+      toast("首次遊玩請先確認玩家身份。");
+      showScreen("screen-profile");
+      return;
+    }
+    showScreen("screen-setup");
+  });
   $("btn-go-leaderboard").addEventListener("click", function(){ showScreen("screen-leaderboard"); });
   $("btn-profile-back").addEventListener("click", function(){ showScreen("screen-title"); });
   $("btn-setup-back").addEventListener("click", function(){ showScreen("screen-title"); });
@@ -1009,19 +1057,26 @@ function bindEvents(){
 
 function init(){
   bindEvents();
+  var alreadyConfirmed = hasConfirmedQuizProfile();
   loadPlayerLocal();
   buildSetupOptions();
   updatePlayerUI();
-  showScreen("screen-title");
+
+  // v0.1.1：獨立測試頁首次進入時，強制先確認玩家身份。
+  // 未來統一遊戲入口完成後，可以改由入口傳入已確認的 profile。
+  showScreen(alreadyConfirmed ? "screen-title" : "screen-profile");
+  if (!alreadyConfirmed) {
+    toast("首次遊玩請先確認玩家身份。", 3200);
+  }
 
   ensureFirebaseReady()
     .then(loadAvatarCatalog)
     .then(loadUnlockedAvatars)
     .then(function(){
       validateDisplayAvatarForCurrentIdentity();
-      savePlayerLocal();
       updatePlayerUI();
-      return ensurePlayerProfile();
+      if (alreadyConfirmed) return ensurePlayerProfile();
+      return null;
     })
     .catch(function(e){ console.warn("[Init] Firebase/profile init skipped:", e.message); });
 

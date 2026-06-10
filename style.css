@@ -588,7 +588,7 @@ main{flex:1;display:grid;place-items:center;padding:20px}
 }
 
 
-/* ── quiz-v0.2.19-base-avatar-warning: sticker placement, larger host image, real pause overlay ── */
+/* ── quiz-v0.2.20-friendly-identity-copy: sticker placement, larger host image, real pause overlay ── */
 .quiz-hud{grid-template-columns:repeat(4,1fr) auto auto auto;align-items:stretch;}
 .pause-toggle{border:1.5px solid rgba(255,190,11,.45);background:#fff8e6;border-radius:18px;padding:8px 12px;color:#9b6a00;font-weight:900;box-shadow:0 4px 14px rgba(255,190,11,.14);min-width:86px;}
 .pause-toggle:active{transform:scale(.94)}
@@ -735,7 +735,7 @@ main{flex:1;display:grid;place-items:center;padding:20px}
   .mobile-host-sticker.host-reveal{width:96px;height:132px;right:-4px;bottom:82px;}
 }
 
-/* ── quiz-v0.2.19-base-avatar-warning: 解鎖提示與手機浮動主持人放大 ── */
+/* ── quiz-v0.2.20-friendly-identity-copy: 解鎖提示與手機浮動主持人放大 ── */
 .unlock-banner{
   display:flex;
   align-items:center;
@@ -796,7 +796,7 @@ main{flex:1;display:grid;place-items:center;padding:20px}
   }
 }
 
-/* ── quiz-v0.2.19-base-avatar-warning: mobile floating host left shift ── */
+/* ── quiz-v0.2.20-friendly-identity-copy: mobile floating host left shift ── */
 @media(max-width:760px){
   .mobile-host-sticker.show{
     right:18px;
@@ -815,7 +815,7 @@ main{flex:1;display:grid;place-items:center;padding:20px}
 }
 
 
-/* ── quiz-v0.2.19-base-avatar-warning: mobile floating host move up to avoid explanation text ── */
+/* ── quiz-v0.2.20-friendly-identity-copy: mobile floating host move up to avoid explanation text ── */
 @media(max-width:760px){
   .mobile-host-sticker.show{
     right:20px;

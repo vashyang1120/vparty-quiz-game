@@ -1,4 +1,4 @@
-/* 小V知識挑戰 quiz-v0.2.19-base-avatar-warning
+/* 小V知識挑戰 quiz-v0.2.20-friendly-identity-copy
    目標：穩定可跑、沿用共用玩家身份、寫入 gameLogs/quiz、quizProgress 與年級累積排行榜。
    V幣：第一版只預留 wallet / vCoinLogs 註解，不實際發放。
 */
@@ -16,7 +16,7 @@ var FIREBASE_CONFIG = {
 };
 var FIREBASE_ENABLED = true;
 
-var QUIZ_VERSION = "quiz-v0.2.19-base-avatar-warning";
+var QUIZ_VERSION = "quiz-v0.2.20-friendly-identity-copy";
 
 var DB_PATHS = {
   gameLogs:            "gameLogs/quiz",
@@ -883,6 +883,19 @@ function savePlayer(){
   });
 }
 
+function getBaseAvatarName(key){
+  var found = AVATARS.find(function(a){ return a.key === key; });
+  if (found) return found.label || found.name || found.key;
+  var cat = AVATAR_CATALOG[key];
+  if (cat) return cat.name || cat.label || key;
+  return key || "未選擇";
+}
+
+function getFriendlyIdentityLabel(id, baseAvatarKey){
+  var cleanId = normalizePlayerId(id || PLAYER.id || "玩家");
+  return cleanId + " + " + getBaseAvatarName(baseAvatarKey || PLAYER.baseAvatarKey || "boy1");
+}
+
 function updatePlayerUI(){
   var av = getAvatarByKey(PLAYER.displayAvatarKey);
   PLAYER.avatarSrc = av.src || av.url;
@@ -890,12 +903,12 @@ function updatePlayerUI(){
 
   if ($("top-avatar")) $("top-avatar").src = PLAYER.avatarSrc;
   if ($("top-name")) $("top-name").textContent = PLAYER.name || PLAYER.id || "玩家";
-  if ($("top-player-key")) $("top-player-key").textContent = PLAYER.playerKey || "尚未設定身份";
+  if ($("top-player-key")) $("top-player-key").textContent = PLAYER.playerKey ? ("身份：" + getFriendlyIdentityLabel(PLAYER.id, PLAYER.baseAvatarKey)) : "尚未設定身份";
 
   if ($("player-id-input")) $("player-id-input").value = PLAYER.id || "";
   if ($("base-avatar-preview")) $("base-avatar-preview").src = getAvatarUrl(PLAYER.baseAvatarKey);
   if ($("display-avatar-preview")) $("display-avatar-preview").src = PLAYER.avatarSrc;
-  if ($("profile-player-key")) $("profile-player-key").textContent = makePlayerKey(normalizePlayerId($("player-id-input").value), PLAYER.baseAvatarKey);
+  if ($("profile-player-key")) $("profile-player-key").textContent = getFriendlyIdentityLabel(normalizePlayerId($("player-id-input").value), PLAYER.baseAvatarKey);
 }
 
 function getAvailableDisplayAvatars(){
@@ -962,13 +975,14 @@ function getAvailableDisplayAvatars(){
 
 function getIdentityChangeWarningText(newAvatarName, newAvatarKey){
   var currentKey = PLAYER.baseAvatarKey || "boy1";
-  var currentPlayerKey = makePlayerKey(PLAYER.id || "玩家", currentKey);
-  var nextPlayerKey = makePlayerKey(PLAYER.id || "玩家", newAvatarKey || currentKey);
+  var playerId = normalizePlayerId(PLAYER.id || "玩家");
+  var currentIdentity = getFriendlyIdentityLabel(playerId, currentKey);
+  var nextIdentity = getFriendlyIdentityLabel(playerId, newAvatarKey || currentKey);
   return "你正在更換「身份頭像」。\n\n" +
-    "身份頭像 = 遊戲身分證，會決定 playerKey 與成績歸屬。\n" +
+    "身份頭像就像遊戲身分證，會決定成績、解鎖和排行榜歸在哪一個玩家身上。\n" +
     "換成「" + (newAvatarName || newAvatarKey || "新頭像") + "」後，系統會把你當成另一個玩家身份。\n\n" +
-    "目前身份：" + currentPlayerKey + "\n" +
-    "新身份：" + nextPlayerKey + "\n\n" +
+    "目前身份：" + currentIdentity + "\n" +
+    "新身份：" + nextIdentity + "\n\n" +
     "原本成績、解鎖、排行榜不會自動一起帶過來。\n" +
     "確定要更換身份頭像嗎？";
 }
@@ -993,8 +1007,8 @@ function buildAvatarPicker(mode){
   var note = document.createElement("div");
   note.className = "picker-note " + (mode === "base" ? "danger" : "safe");
   note.innerHTML = mode === "base"
-    ? "<strong>⚠️ 身份頭像 = 遊戲身分證</strong><br>換掉身份頭像會變成另一個玩家，原本成績、解鎖與排行榜不會自動帶過來。"
-    : "<strong>✅ 顯示頭像 = 外觀造型</strong><br>只改畫面與排行榜顯示快照，不會改變 playerKey。";
+    ? "<strong>⚠️ ID + 身份頭像 = 遊戲身分證</strong><br>會決定成績、解鎖和排行榜歸在哪一個玩家身上；只要更換 ID 或身份頭像，系統就會把你當成另一個玩家身份。"
+    : "<strong>✅ 顯示頭像 = 外觀造型</strong><br>只改畫面長相，不會改變你的遊戲身份，也不會搬動成績。";
   grid.parentNode.insertBefore(note, grid);
 
   var list = mode === "base"
@@ -1049,7 +1063,7 @@ function buildAvatarPicker(mode){
         buildAvatarPicker("display");
 
         writePlayerProfileCurrent().then(function(){
-          toast("已更換顯示頭像：" + av.name + "\nplayerKey 不會改變。");
+          toast("已更換顯示頭像：" + av.name + "\n遊戲身份不會改變。");
         });
       }
     });
@@ -1553,7 +1567,7 @@ function showAvatarUnlockBanner(unlockPayload){
   var msg = $("unlock-message");
   var name = unlockPayload.name || "新顯示頭像";
   if (title) title.textContent = "🎉 新頭像解鎖：" + name;
-  if (msg) msg.textContent = "完成問答挑戰成功解鎖！到「玩家設定 → 選顯示頭像」可以手動裝備；目前身份與 playerKey 不會改變。";
+  if (msg) msg.textContent = "完成問答挑戰成功解鎖！到「玩家設定 → 選顯示頭像」可以手動裝備；目前遊戲身份不會改變。";
   box.classList.remove("hidden");
   box.classList.remove("pop");
   void box.offsetWidth;
@@ -1562,7 +1576,7 @@ function showAvatarUnlockBanner(unlockPayload){
 
 function saveQuizResult(totalTime, accuracy){
   var record = buildQuizRecord(totalTime, accuracy);
-  $("save-status").textContent = "正在寫入 gameLogs/quiz、個人進度、排行榜與 V學園成績單...";
+  $("save-status").textContent = "正在保存本次成績、個人進度、排行榜與 V學園成績單...";
   if ($("result-academy-progress")) $("result-academy-progress").classList.add("hidden");
   if ($("result-unlock-banner")) $("result-unlock-banner").classList.add("hidden");
 
@@ -2625,7 +2639,7 @@ function bindEvents(){
     }).then(function(){
       return refreshAcademyProgressCard();
     }).then(function(){
-      toast("玩家身份已確認！\\n" + PLAYER.playerKey);
+      toast("玩家身份已確認！\\n" + getFriendlyIdentityLabel(PLAYER.id, PLAYER.baseAvatarKey));
       showScreen("screen-setup");
     });
   });

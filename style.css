@@ -426,7 +426,6 @@ main{flex:1;display:grid;place-items:center;padding:20px}
 .host-lines span{display:block;font-size:16px;font-weight:900;line-height:1.45;margin-top:2px;}
 .host-card.host-correct{background:linear-gradient(135deg,#116d47,#20c982);}
 .host-card.host-wrong{background:linear-gradient(135deg,#6e2430,#e86f9a);}
-.host-card.host-timeout{background:linear-gradient(135deg,#4b223d,#5d2c83,#ffbe0b);}
 .host-card.host-urgent{animation:hostUrgent .6s ease-in-out infinite alternate;background:linear-gradient(135deg,#5d2c83,#e86f9a,#ffbe0b);}
 @keyframes hostUrgent{from{transform:translateY(0);box-shadow:0 14px 34px rgba(232,111,154,.18)}to{transform:translateY(-2px);box-shadow:0 18px 42px rgba(255,190,11,.26)}}
 .timer-card{width:100%;background:rgba(255,255,255,.92);border:1.5px solid rgba(255,182,215,.45);border-radius:22px;padding:12px 14px;box-shadow:0 8px 22px rgba(232,111,154,.10);}
@@ -569,4 +568,39 @@ main{flex:1;display:grid;place-items:center;padding:20px}
 #btn-game-menu{border-color:rgba(155,93,229,.28);}
 @media(max-width:720px){
   .academy-mascot{right:8px;bottom:10px;width:52px;max-width:18%;opacity:.22;}
+}
+
+
+/* ── v0.2.7 Host Assets / Sticker Fix ──
+   只修主持人素材狀態與成績單貼紙呈現；不改音樂播放器、Firebase、排行榜與題庫邏輯。 */
+.academy-student-card{overflow:visible;}
+.academy-mascot{
+  right:-56px !important;
+  bottom:-22px !important;
+  width:128px !important;
+  max-width:26% !important;
+  opacity:1 !important;
+  z-index:4 !important;
+  pointer-events:none !important;
+  transform:rotate(-3deg) !important;
+  background:rgba(255,255,255,.94) !important;
+  border:3px solid rgba(255,255,255,.98) !important;
+  border-radius:28px !important;
+  padding:4px !important;
+  box-shadow:0 14px 28px rgba(101,52,131,.18),0 0 0 2px rgba(255,182,215,.55) !important;
+  filter:drop-shadow(0 8px 10px rgba(101,52,131,.10)) !important;
+}
+.academy-student-card > *:not(.academy-mascot){position:relative;z-index:1;}
+.leaderboard-brand-image,.result-host-image{
+  opacity:1 !important;
+}
+@media(max-width:720px){
+  .academy-mascot{
+    right:-18px !important;
+    bottom:-12px !important;
+    width:88px !important;
+    max-width:30% !important;
+    opacity:1 !important;
+    border-radius:22px !important;
+  }
 }

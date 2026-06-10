@@ -1,4 +1,4 @@
-/* 小V知識挑戰 quiz-v0.2.6-host-assets-integration
+/* 小V知識挑戰 quiz-v0.2.2-auto-bgm-louder-sfx
    目標：穩定可跑、沿用共用玩家身份、寫入 gameLogs/quiz、quizProgress 與年級累積排行榜。
    V幣：第一版只預留 wallet / vCoinLogs 註解，不實際發放。
 */
@@ -16,7 +16,7 @@ var FIREBASE_CONFIG = {
 };
 var FIREBASE_ENABLED = true;
 
-var QUIZ_VERSION = "quiz-v0.2.6-host-assets-integration";
+var QUIZ_VERSION = "quiz-v0.2.7-host-sticker-assets-fix";
 
 var DB_PATHS = {
   gameLogs:            "gameLogs/quiz",
@@ -174,8 +174,8 @@ function getHostArtByTone(tone){
   if (tone === "wrong") return HOST_ART.wrong;
   if (tone === "timeout") return HOST_ART.timeout;
   if (tone === "urgent") return HOST_ART.timewarning;
-  if (tone === "ranking") return HOST_ART.ranking;
   if (tone === "result") return HOST_ART.result;
+  if (tone === "ranking") return HOST_ART.ranking;
   if (tone === "intro") return HOST_ART.intro;
   return HOST_ART.question;
 }
@@ -194,7 +194,7 @@ function setHostMessage(msg, tone){
   setImageSrc("host-image", getHostArtByTone(tone));
   var card = $("host-card");
   if (card) {
-    card.classList.remove("host-correct","host-wrong","host-urgent","host-timeout");
+    card.classList.remove("host-correct","host-wrong","host-urgent");
     if (tone) card.classList.add("host-" + tone);
   }
 }
@@ -1137,7 +1137,7 @@ function answerQuestion(selectedIndex, timedOut){
   var qCard = document.querySelector(".question-card");
   if (qCard) qCard.classList.add(correct ? "show-correct" : (timedOut ? "show-timeout" : "show-wrong"));
   if (correct) { playCorrect(); setHostMessage("太棒了！魔法氣球升起，combo 繼續累積！", "correct"); }
-  else if (timedOut) { setHostMessage("時間到！沒關係，來看看解析，下題再出發。", "timeout"); }
+  else if (timedOut) { playTimeout(); setHostMessage("時間到！沒關係，來看看解析，下題再出發。", "timeout"); }
   else { playWrong(); setHostMessage("沒關係，來看看解析，下一題再追回來！", "wrong"); }
 
   $("answer-result").textContent = correct ? "✅ 答對了！" : (timedOut ? "⏰ 時間到！" : "❌ 答錯了");

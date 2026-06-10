@@ -1,4 +1,4 @@
-/* 小V知識挑戰 quiz-v0.2.1-rhythm-music-player-audio-balance
+/* 小V知識挑戰 quiz-v0.2.2-auto-bgm-louder-sfx
    目標：穩定可跑、沿用共用玩家身份、寫入 gameLogs/quiz、quizProgress 與年級累積排行榜。
    V幣：第一版只預留 wallet / vCoinLogs 註解，不實際發放。
 */
@@ -16,7 +16,7 @@ var FIREBASE_CONFIG = {
 };
 var FIREBASE_ENABLED = true;
 
-var QUIZ_VERSION = "quiz-v0.2.1-rhythm-music-player-audio-balance";
+var QUIZ_VERSION = "quiz-v0.2.2-auto-bgm-louder-sfx";
 
 var DB_PATHS = {
   gameLogs:            "gameLogs/quiz",
@@ -89,7 +89,7 @@ var pickerMode = "base";
 var QUESTION_TIME_LIMIT = 15;
 var soundEnabled = localStorage.getItem("vquiz_soundEnabled") !== "false";
 var audioCtx = null;
-var SFX_MASTER_GAIN = 1.85;
+var SFX_MASTER_GAIN = 3.0;
 
 // 音樂播放器：讀取節奏遊戲 songs.json，歌曲檔不複製到問答 repo
 var SONG_BASE = "https://vashyang1120.github.io/vparty-rhythm-game/";
@@ -101,6 +101,7 @@ var musicPlaying = false;
 var musicLoop = "all";
 var musicShuffle = false;
 var musicProgressTimer = null;
+var quizBgmManaged = false;
 musicAudio.volume = 0.10;
 
 var quizState = {
@@ -176,7 +177,7 @@ function ensureAudioContext(){
   return audioCtx;
 }
 
-function clampGain(v){ return Math.max(0.0001, Math.min(0.32, v * SFX_MASTER_GAIN)); }
+function clampGain(v){ return Math.max(0.0001, Math.min(0.55, v * SFX_MASTER_GAIN)); }
 
 function beep(freq, duration, type, gainValue, when){
   if (!soundEnabled) return;
@@ -201,35 +202,37 @@ function playTick(secondsLeft){
   var left = Number(secondsLeft || quizState.questionTimeLeft || 5);
   var step = Math.max(1, Math.min(5, left));
   var freqMap = {5:520,4:620,3:760,2:930,1:1120};
-  var gainMap = {5:0.045,4:0.055,3:0.07,2:0.085,1:0.105};
-  var durMap = {5:0.065,4:0.06,3:0.055,2:0.05,1:0.045};
+  var gainMap = {5:0.075,4:0.09,3:0.115,2:0.14,1:0.17};
+  var durMap = {5:0.08,4:0.075,3:0.065,2:0.055,1:0.048};
   beep(freqMap[step] || 720, durMap[step] || 0.055, "square", gainMap[step] || 0.065);
   if (step <= 2) {
-    setTimeout(function(){ beep((freqMap[step] || 900) * 1.22, 0.035, "square", 0.045); }, 105);
+    setTimeout(function(){ beep((freqMap[step] || 900) * 1.25, 0.04, "square", 0.09); }, 95);
   }
 }
 function playCorrect(){
   var ctx = ensureAudioContext();
   if (!ctx) return;
   var now = ctx.currentTime;
-  beep(523.25, 0.09, "sine", 0.055, now);
-  beep(659.25, 0.10, "sine", 0.06, now + 0.09);
-  beep(783.99, 0.16, "triangle", 0.07, now + 0.18);
+  beep(523.25, 0.10, "sine", 0.09, now);
+  beep(659.25, 0.11, "sine", 0.105, now + 0.085);
+  beep(783.99, 0.18, "triangle", 0.13, now + 0.17);
+  beep(1046.5, 0.10, "sine", 0.08, now + 0.29);
 }
 function playWrong(){
   var ctx = ensureAudioContext();
   if (!ctx) return;
   var now = ctx.currentTime;
-  beep(260, 0.09, "sawtooth", 0.06, now);
-  beep(190, 0.14, "sawtooth", 0.055, now + 0.09);
-  beep(125, 0.24, "triangle", 0.05, now + 0.21);
+  beep(300, 0.10, "sawtooth", 0.095, now);
+  beep(210, 0.15, "sawtooth", 0.09, now + 0.09);
+  beep(130, 0.26, "triangle", 0.085, now + 0.22);
 }
 function playTimeout(){
   var ctx = ensureAudioContext();
   if (!ctx) return;
   var now = ctx.currentTime;
-  beep(120, 0.42, "triangle", 0.105, now);
-  beep(82, 0.52, "sine", 0.075, now + 0.08);
+  beep(130, 0.48, "triangle", 0.17, now);
+  beep(82, 0.60, "sine", 0.13, now + 0.07);
+  beep(55, 0.42, "sine", 0.095, now + 0.18);
 }
 
 function musicFmt(sec){
@@ -365,7 +368,32 @@ function updateSongList(){
 function openMusic(){ updateSongList(); if ($("music-modal")) $("music-modal").classList.add("show"); }
 function closeMusic(){ if ($("music-modal")) $("music-modal").classList.remove("show"); }
 
+function startQuizBgm(){
+  quizBgmManaged = true;
+  if (!SONGS.length) {
+    loadSongs().then(function(){ playSong(); });
+    return;
+  }
+  playSong();
+}
+
+function pauseQuizBgm(){
+  if (!quizBgmManaged) return;
+  pauseSong();
+  quizBgmManaged = false;
+}
+
 function showScreen(id){
+  var current = document.querySelector(".screen.active");
+  var currentId = current ? current.id : "";
+
+  // 問答 BGM 管理：開始答題後自動播放，結算畫面保持播放；離開結算或中途離開答題時暫停。
+  if (quizBgmManaged) {
+    var leavingResult = currentId === "screen-result" && id !== "screen-result";
+    var leavingQuizBeforeResult = currentId === "screen-quiz" && id !== "screen-result" && id !== "screen-quiz";
+    if (leavingResult || leavingQuizBeforeResult) pauseQuizBgm();
+  }
+
   document.querySelectorAll(".screen").forEach(function(s){ s.classList.remove("active"); });
   var el = $(id);
   if (el) el.classList.add("active");
@@ -924,6 +952,7 @@ function startQuiz(){
   quizState.questionAnswered = false;
   quizState.totalQuestions = 10;
   ensureAudioContext();
+  startQuizBgm();
 
   showScreen("screen-quiz");
   startQuizTimer();
@@ -1854,7 +1883,7 @@ function bindEvents(){
     $("btn-sound-toggle").addEventListener("click", function(){
       soundEnabled = !soundEnabled;
       localStorage.setItem("vquiz_soundEnabled", soundEnabled ? "true" : "false");
-      if (soundEnabled) { ensureAudioContext(); beep(660, 0.08, "sine", 0.04); }
+      if (soundEnabled) { ensureAudioContext(); beep(660, 0.10, "sine", 0.09); }
       updateSoundButton();
     });
   }

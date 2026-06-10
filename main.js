@@ -1,4 +1,4 @@
-/* 小V知識挑戰 quiz-v0.1.3-grade-progress-leaderboards
+/* 小V知識挑戰 quiz-v0.1.4-brain-riddles
    目標：穩定可跑、沿用共用玩家身份、寫入 gameLogs/quiz、quizProgress 與年級累積排行榜。
    V幣：第一版只預留 wallet / vCoinLogs 註解，不實際發放。
 */
@@ -16,7 +16,7 @@ var FIREBASE_CONFIG = {
 };
 var FIREBASE_ENABLED = true;
 
-var QUIZ_VERSION = "quiz-v0.1.3-grade-progress-leaderboards";
+var QUIZ_VERSION = "quiz-v0.1.4-brain-riddles-cachefix";
 
 var DB_PATHS = {
   gameLogs:            "gameLogs/quiz",
@@ -114,7 +114,8 @@ var SUBJECT_OPTIONS = [
   {key:"social", name:"社會", emoji:"🌏"},
   {key:"english", name:"英文", emoji:"ABC"},
   {key:"balloon", name:"氣球知識", emoji:"🎈"},
-  {key:"brand", name:"小V品牌", emoji:"✨"}
+  {key:"brand", name:"小V品牌", emoji:"✨"},
+  {key:"brain", name:"腦筋急轉彎", emoji:"🧠"}
 ];
 
 function $(id){ return document.getElementById(id); }
@@ -590,7 +591,7 @@ function escapeHtml(s){
 }
 
 function loadQuestions(){
-  return fetch("./quiz_questions.json", { cache:"no-store" })
+  return fetch("./quiz_questions.json?v=" + encodeURIComponent(QUIZ_VERSION), { cache:"no-store" })
     .then(function(res){
       if (!res.ok) throw new Error("題庫讀取失敗");
       return res.json();

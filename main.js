@@ -16,7 +16,7 @@ var FIREBASE_CONFIG = {
 };
 var FIREBASE_ENABLED = true;
 
-var QUIZ_VERSION = "quiz-v0.2.3-brand-host-visual";
+var QUIZ_VERSION = "quiz-v0.2.4-local-host-assets-fix";
 
 var DB_PATHS = {
   gameLogs:            "gameLogs/quiz",
@@ -93,10 +93,10 @@ var SFX_MASTER_GAIN = 3.0;
 
 
 var HOST_ART = {
-  intro: "https://balloonv.com/wp-content/uploads/xiaov_quiz_host_intro_v1.png",
-  question: "https://balloonv.com/wp-content/uploads/xiaov_quiz_host_question_v1.png",
-  correct: "https://balloonv.com/wp-content/uploads/xiaov_quiz_host_correct_v1.png",
-  timewarning: "https://balloonv.com/wp-content/uploads/xiaov_quiz_host_timewarning_v1.png"
+  intro: "./assets/hosts/xiaov_quiz_host_intro_v1.png",
+  question: "./assets/hosts/xiaov_quiz_host_question_v1.png",
+  correct: "./assets/hosts/xiaov_quiz_host_correct_v1.png",
+  timewarning: "./assets/hosts/xiaov_quiz_host_timewarning_v1.png"
 };
 
 // 音樂播放器：讀取節奏遊戲 songs.json，歌曲檔不複製到問答 repo

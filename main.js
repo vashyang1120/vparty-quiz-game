@@ -1,4 +1,4 @@
-/* 小V知識挑戰 quiz-v0.2.13-academy-merge-gamelogs-fix
+/* 小V知識挑戰 quiz-v0.2.14-xiaov-base-unlock
    目標：穩定可跑、沿用共用玩家身份、寫入 gameLogs/quiz、quizProgress 與年級累積排行榜。
    V幣：第一版只預留 wallet / vCoinLogs 註解，不實際發放。
 */
@@ -16,7 +16,7 @@ var FIREBASE_CONFIG = {
 };
 var FIREBASE_ENABLED = true;
 
-var QUIZ_VERSION = "quiz-v0.2.13-academy-merge-gamelogs-fix";
+var QUIZ_VERSION = "quiz-v0.2.14-xiaov-base-unlock";
 
 var DB_PATHS = {
   gameLogs:            "gameLogs/quiz",
@@ -1375,6 +1375,83 @@ function saveGameLog(record){
   });
 }
 
+
+function ensureXiaovBaseCatalog(){
+  return ensureFirebaseReady().then(function(ok){
+    if (!ok || !firebaseDb) return null;
+
+    var now = Date.now();
+    var catalogRef = firebaseDb.ref("avatarCatalog/xiaov_base");
+
+    return catalogRef.once("value").then(function(snap){
+      if (snap.exists()) {
+        var data = snap.val() || {};
+        if (data.active !== true) {
+          return catalogRef.update({
+            active: true,
+            allowAsBaseAvatar: false,
+            manualUnlock: true,
+            visibility: "hiddenUntilUnlocked",
+            updatedAt: now,
+            updatedBy: "quiz-game"
+          });
+        }
+        return null;
+      }
+
+      return catalogRef.set({
+        key: "xiaov_base",
+        name: "氣球小V",
+        type: "special",
+        active: true,
+        allowAsBaseAvatar: false,
+        manualUnlock: true,
+        visibility: "hiddenUntilUnlocked",
+        unlockText: "完成任一遊戲解鎖",
+        file: "assets/avatars/xiaov_base.png",
+        fileName: "xiaov_base.png",
+        createdAt: now,
+        createdBy: "quiz-game",
+        updatedAt: now,
+        updatedBy: "quiz-game"
+      });
+    });
+  });
+}
+
+function unlockXiaovBaseAfterGameComplete(){
+  if (!PLAYER || !PLAYER.playerKey) return Promise.resolve(null);
+
+  return ensureFirebaseReady().then(function(ok){
+    if (!ok || !firebaseDb) return null;
+
+    return ensureXiaovBaseCatalog().then(function(){
+      var unlockRef = firebaseDb.ref(DB_PATHS.players + "/" + PLAYER.playerKey + "/unlockedAvatars/xiaov_base");
+      return unlockRef.once("value").then(function(snap){
+        if (snap.exists()) return null;
+
+        var payload = {
+          unlocked: true,
+          type: "special",
+          source: "any-game-complete",
+          unlockedBy: "quiz-game",
+          unlockedAt: Date.now(),
+          name: "氣球小V",
+          file: "assets/avatars/xiaov_base.png",
+          visibility: "hiddenUntilUnlocked"
+        };
+
+        return unlockRef.set(payload).then(function(){
+          // 只更新本機解鎖快取，方便玩家不重新整理也能在顯示頭像清單看到。
+          // 不修改 PLAYER.baseAvatarKey / displayAvatarKey / avatarKey / playerKey，也不自動裝備。
+          unlockedAvatars.xiaov_base = payload;
+          return payload;
+        });
+      });
+    });
+  });
+}
+
 function saveQuizResult(totalTime, accuracy){
   var record = buildQuizRecord(totalTime, accuracy);
   $("save-status").textContent = "正在寫入 gameLogs/quiz、個人進度、排行榜與 V學園成績單...";
@@ -1386,6 +1463,12 @@ function saveQuizResult(totalTime, accuracy){
   return loadQuizAcademyProgressSummary().then(function(before){
       academyBefore = before;
       return saveGameLog(record);
+    })
+    .then(function(){
+      return unlockXiaovBaseAfterGameComplete().catch(function(err){
+        console.warn("[Quiz] unlock xiaov_base failed:", err);
+        return null;
+      });
     })
     .then(function(){
       return updateQuizProgress(record);

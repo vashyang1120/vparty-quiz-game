@@ -1,4 +1,4 @@
-/* 小V知識挑戰 quiz-v0.2.12-unlock-legacy-gamelogs-fallback
+/* 小V知識挑戰 quiz-v0.2.13-academy-merge-gamelogs-fix
    目標：穩定可跑、沿用共用玩家身份、寫入 gameLogs/quiz、quizProgress 與年級累積排行榜。
    V幣：第一版只預留 wallet / vCoinLogs 註解，不實際發放。
 */
@@ -16,7 +16,7 @@ var FIREBASE_CONFIG = {
 };
 var FIREBASE_ENABLED = true;
 
-var QUIZ_VERSION = "quiz-v0.2.12-unlock-legacy-gamelogs-fallback";
+var QUIZ_VERSION = "quiz-v0.2.13-academy-merge-gamelogs-fix";
 
 var DB_PATHS = {
   gameLogs:            "gameLogs/quiz",
@@ -1950,7 +1950,65 @@ function buildProgressRootFromGameLogs(logMap){
   return progressRoot;
 }
 
-function readGameLogsAcademyFallback(){
+function pickBetterSubjectProgress(a, b){
+  if (!a) return b || null;
+  if (!b) return a || null;
+
+  var aBest = {
+    score: Number(a.bestScore || 0),
+    correctCount: Number(a.bestCorrectCount || 0),
+    maxCombo: Number(a.bestMaxCombo || 0),
+    timeUsedTotal: Number(a.bestTimeUsedTotal || 999999),
+    ts: Number(a.bestUpdatedAt || a.updatedAt || 0)
+  };
+  var bBest = {
+    score: Number(b.bestScore || 0),
+    correctCount: Number(b.bestCorrectCount || 0),
+    maxCombo: Number(b.bestMaxCombo || 0),
+    timeUsedTotal: Number(b.bestTimeUsedTotal || 999999),
+    ts: Number(b.bestUpdatedAt || b.updatedAt || 0)
+  };
+
+  var useB = shouldUpdateBestRecord(aBest, bBest);
+  var picked = Object.assign({}, useB ? b : a);
+
+  // 合併時 attempts 取較大值，避免 quizProgress 與 gameLogs 同一場重複加總。
+  picked.attempts = Math.max(Number(a.attempts || 0), Number(b.attempts || 0));
+
+  // last* 取 updatedAt 較新的來源，讓「最近一場」資訊合理。
+  var aUpdated = Number(a.updatedAt || a.bestUpdatedAt || 0);
+  var bUpdated = Number(b.updatedAt || b.bestUpdatedAt || 0);
+  var latest = bUpdated >= aUpdated ? b : a;
+  ["lastScore","lastCorrectCount","lastMaxCombo","lastTimeUsedTotal","lastTotalQuestions"].forEach(function(k){
+    if (latest[k] !== undefined) picked[k] = latest[k];
+  });
+
+  picked.perfect = Number(picked.bestCorrectCount || 0) >= Number(picked.bestTotalQuestions || picked.totalQuestions || 10);
+  picked.totalQuestions = Number(picked.bestTotalQuestions || picked.totalQuestions || 10);
+  return picked;
+}
+
+function mergeProgressRoots(baseRoot, extraRoot){
+  var merged = JSON.parse(JSON.stringify(baseRoot || {}));
+  Object.keys(extraRoot || {}).forEach(function(gradeKey){
+    if (!merged[gradeKey]) merged[gradeKey] = {};
+    Object.keys(extraRoot[gradeKey] || {}).forEach(function(subjectKey){
+      merged[gradeKey][subjectKey] = pickBetterSubjectProgress(merged[gradeKey][subjectKey], extraRoot[gradeKey][subjectKey]);
+    });
+  });
+  return merged;
+}
+
+function filterLogsByCurrentPlayer(logs){
+  var out = {};
+  Object.keys(logs || {}).forEach(function(key){
+    var log = logs[key];
+    if (log && log.playerKey === PLAYER.playerKey) out[key] = log;
+  });
+  return out;
+}
+
+function readGameLogsProgressRoot(){
   return ensureFirebaseReady().then(function(ok){
     if (!ok || !firebaseDb || !PLAYER.playerKey) return null;
 
@@ -1960,39 +2018,54 @@ function readGameLogsAcademyFallback(){
       .once("value")
       .then(function(snap){
         var logs = snap.val() || {};
-        if (!logs || !Object.keys(logs).length) return null;
-        var progressRoot = buildProgressRootFromGameLogs(logs);
-        var academy = calculateQuizAcademyProgress(progressRoot);
-        academy.rebuiltFrom = "gameLogs";
-        return hasAcademyActivity(academy) ? academy : null;
+        if (logs && Object.keys(logs).length) return buildProgressRootFromGameLogs(logs);
+
+        // 如果舊資料未建 index 或舊規則讓 equalTo 查不到，最後改用全表讀取後本機過濾。
+        return firebaseDb.ref(DB_PATHS.gameLogs).once("value").then(function(allSnap){
+          var allLogs = filterLogsByCurrentPlayer(allSnap.val() || {});
+          return Object.keys(allLogs).length ? buildProgressRootFromGameLogs(allLogs) : null;
+        });
       });
   }).catch(function(e){
-    console.warn("[Academy] gameLogs fallback read failed:", e.message);
+    console.warn("[Academy] gameLogs progressRoot read failed:", e.message);
     return null;
   });
 }
 
+function readGameLogsAcademyFallback(){
+  return readGameLogsProgressRoot().then(function(progressRoot){
+    if (!progressRoot) return null;
+    var academy = calculateQuizAcademyProgress(progressRoot);
+    academy.rebuiltFrom = "gameLogs";
+    return hasAcademyActivity(academy) ? academy : null;
+  });
+}
+
 function loadQuizAcademyProgressSummary(){
-  var calculated = null;
+  var progressRootBase = {};
 
   return readQuizProgressMap()
     .then(function(progressRoot){
-      calculated = calculateQuizAcademyProgress(progressRoot);
-      if (hasAcademyActivity(calculated)) return calculated;
+      progressRootBase = progressRoot || {};
+      // 重要：即使 quizProgress 已有部分新資料，也要合併舊 gameLogs，避免只顯示最新一場。
+      return readGameLogsProgressRoot();
+    })
+    .then(function(logProgressRoot){
+      var mergedRoot = logProgressRoot ? mergeProgressRoots(logProgressRoot, progressRootBase) : progressRootBase;
+      var mergedAcademy = calculateQuizAcademyProgress(mergedRoot);
+      if (hasAcademyActivity(mergedAcademy)) {
+        mergedAcademy.rebuiltFrom = logProgressRoot ? "quizProgress+gameLogs" : "quizProgress";
+        return mergedAcademy;
+      }
       return readStoredQuizAcademyProgress();
     })
     .then(function(stored){
       if (stored && hasAcademyActivity(stored)) return stored;
-      if (calculated && hasAcademyActivity(calculated)) return calculated;
       return readGradeLeaderboardSelfSummary();
     })
     .then(function(fallback){
       if (fallback && hasAcademyActivity(fallback)) return fallback;
-      return readGameLogsAcademyFallback();
-    })
-    .then(function(logFallback){
-      if (logFallback && hasAcademyActivity(logFallback)) return logFallback;
-      return calculated || calculateQuizAcademyProgress({});
+      return calculateQuizAcademyProgress({});
     })
     .catch(function(e){
       console.warn("[Academy] summary load failed:", e.message);

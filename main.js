@@ -1,4 +1,4 @@
-/* 小V知識挑戰 quiz-v0.2.20-friendly-identity-copy
+/* 小V知識挑戰 quiz-v0.2.21-question-quality-system
    目標：穩定可跑、沿用共用玩家身份、寫入 gameLogs/quiz、quizProgress 與年級累積排行榜。
    V幣：第一版只預留 wallet / vCoinLogs 註解，不實際發放。
 */
@@ -16,7 +16,7 @@ var FIREBASE_CONFIG = {
 };
 var FIREBASE_ENABLED = true;
 
-var QUIZ_VERSION = "quiz-v0.2.20-friendly-identity-copy";
+var QUIZ_VERSION = "quiz-v0.2.21-question-quality-system";
 
 var DB_PATHS = {
   gameLogs:            "gameLogs/quiz",
@@ -1132,18 +1132,24 @@ function buildSetupOptions(){
 
 function updateQuestionCountHint(){
   var list = getQuestionPool();
-  var subject = SUBJECT_OPTIONS.find(function(s){ return s.key === selectedSubject; });
-  var grade = GRADE_OPTIONS.find(function(g){ return g.key === selectedGrade; });
-  var text = (grade ? grade.name : selectedGrade) + " / " + (subject ? subject.name : selectedSubject) + "：目前有 " + list.length + " 題";
-  if (list.length < 10) text += "，不足 10 題，請補題後再開始。";
-  $("question-count-hint").textContent = text;
+  var ready = list.length >= 10;
+  var hint = $("question-count-hint");
+  if (hint) hint.textContent = ready ? "題庫準備完成｜可挑戰" : "題庫準備中｜暫時不能挑戰";
   var startBtn = $("btn-start-quiz");
-  if (startBtn) startBtn.disabled = list.length < 10;
+  if (startBtn) startBtn.disabled = !ready;
+}
+
+function isQuestionEnabled(q){
+  if (!q) return false;
+  if (q.disabled === true) return false;
+  if (q.active === false) return false;
+  if (String(q.quality || "").toLowerCase() === "disabled") return false;
+  return true;
 }
 
 function getQuestionPool(){
   return QUESTIONS.filter(function(q){
-    return q.gradeBand === selectedGrade && q.subject === selectedSubject;
+    return q.gradeBand === selectedGrade && q.subject === selectedSubject && isQuestionEnabled(q);
   });
 }
 

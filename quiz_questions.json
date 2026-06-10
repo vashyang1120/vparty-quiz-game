@@ -18,7 +18,11 @@
     "tags": [
       "原創題",
       "數學"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "math_low_002",
@@ -39,7 +43,11 @@
     "tags": [
       "原創題",
       "數學"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "math_low_003",
@@ -60,7 +68,11 @@
     "tags": [
       "原創題",
       "數學"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "math_low_004",
@@ -81,7 +93,11 @@
     "tags": [
       "原創題",
       "數學"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "math_low_005",
@@ -102,7 +118,11 @@
     "tags": [
       "原創題",
       "數學"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "math_low_006",
@@ -123,7 +143,11 @@
     "tags": [
       "原創題",
       "數學"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "math_low_007",
@@ -144,7 +168,11 @@
     "tags": [
       "原創題",
       "數學"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "math_low_008",
@@ -165,7 +193,11 @@
     "tags": [
       "原創題",
       "數學"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "math_low_009",
@@ -186,7 +218,11 @@
     "tags": [
       "原創題",
       "數學"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "math_low_010",
@@ -207,7 +243,11 @@
     "tags": [
       "原創題",
       "數學"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "math_low_011",
@@ -229,7 +269,11 @@
       "原創題",
       "數學",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "math_low_012",
@@ -251,7 +295,11 @@
       "原創題",
       "數學",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "math_low_013",
@@ -273,7 +321,11 @@
       "原創題",
       "數學",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "math_low_014",
@@ -295,7 +347,11 @@
       "原創題",
       "數學",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "math_low_015",
@@ -317,7 +373,11 @@
       "原創題",
       "數學",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "math_low_016",
@@ -339,7 +399,11 @@
       "原創題",
       "數學",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "math_low_017",
@@ -361,7 +425,11 @@
       "原創題",
       "數學",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "math_low_018",
@@ -383,7 +451,11 @@
       "原創題",
       "數學",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "math_low_019",
@@ -405,7 +477,11 @@
       "原創題",
       "數學",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "math_low_020",
@@ -427,7 +503,11 @@
       "原創題",
       "數學",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "math_low_021",
@@ -449,7 +529,11 @@
       "原創題",
       "數學",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "math_low_022",
@@ -471,7 +555,11 @@
       "原創題",
       "數學",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "math_low_023",
@@ -493,7 +581,11 @@
       "原創題",
       "數學",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "math_low_024",
@@ -515,7 +607,11 @@
       "原創題",
       "數學",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "math_low_025",
@@ -537,7 +633,11 @@
       "原創題",
       "數學",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "math_low_026",
@@ -559,7 +659,11 @@
       "原創題",
       "數學",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "math_low_027",
@@ -581,7 +685,11 @@
       "原創題",
       "數學",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "math_low_028",
@@ -603,7 +711,11 @@
       "原創題",
       "數學",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "math_low_029",
@@ -625,7 +737,11 @@
       "原創題",
       "數學",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "math_low_030",
@@ -647,7 +763,11 @@
       "原創題",
       "數學",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "math_middle_001",
@@ -668,7 +788,11 @@
     "tags": [
       "原創題",
       "數學"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "math_middle_002",
@@ -689,7 +813,11 @@
     "tags": [
       "原創題",
       "數學"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "math_middle_003",
@@ -710,7 +838,11 @@
     "tags": [
       "原創題",
       "數學"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "math_middle_004",
@@ -731,7 +863,11 @@
     "tags": [
       "原創題",
       "數學"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "math_middle_005",
@@ -752,7 +888,11 @@
     "tags": [
       "原創題",
       "數學"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "math_middle_006",
@@ -773,7 +913,11 @@
     "tags": [
       "原創題",
       "數學"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "math_middle_007",
@@ -794,7 +938,11 @@
     "tags": [
       "原創題",
       "數學"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "math_middle_008",
@@ -815,7 +963,11 @@
     "tags": [
       "原創題",
       "數學"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "math_middle_009",
@@ -836,7 +988,11 @@
     "tags": [
       "原創題",
       "數學"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "math_middle_010",
@@ -857,7 +1013,11 @@
     "tags": [
       "原創題",
       "數學"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "math_middle_011",
@@ -879,7 +1039,11 @@
       "原創題",
       "數學",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "math_middle_012",
@@ -901,7 +1065,11 @@
       "原創題",
       "數學",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "math_middle_013",
@@ -923,7 +1091,11 @@
       "原創題",
       "數學",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "math_middle_014",
@@ -945,7 +1117,11 @@
       "原創題",
       "數學",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "math_middle_015",
@@ -967,7 +1143,11 @@
       "原創題",
       "數學",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "math_middle_016",
@@ -989,7 +1169,11 @@
       "原創題",
       "數學",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "math_middle_017",
@@ -1011,7 +1195,11 @@
       "原創題",
       "數學",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "math_middle_018",
@@ -1033,7 +1221,11 @@
       "原創題",
       "數學",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "math_middle_019",
@@ -1055,7 +1247,11 @@
       "原創題",
       "數學",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "math_middle_020",
@@ -1077,7 +1273,11 @@
       "原創題",
       "數學",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "math_middle_021",
@@ -1099,7 +1299,11 @@
       "原創題",
       "數學",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "math_middle_022",
@@ -1121,7 +1325,11 @@
       "原創題",
       "數學",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "math_middle_023",
@@ -1143,7 +1351,11 @@
       "原創題",
       "數學",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "math_middle_024",
@@ -1165,7 +1377,11 @@
       "原創題",
       "數學",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "math_middle_025",
@@ -1187,7 +1403,11 @@
       "原創題",
       "數學",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "math_middle_026",
@@ -1209,7 +1429,11 @@
       "原創題",
       "數學",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "math_middle_027",
@@ -1231,7 +1455,11 @@
       "原創題",
       "數學",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "math_middle_028",
@@ -1253,7 +1481,11 @@
       "原創題",
       "數學",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "math_middle_029",
@@ -1275,7 +1507,11 @@
       "原創題",
       "數學",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "math_middle_030",
@@ -1297,7 +1533,11 @@
       "原創題",
       "數學",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "math_high_001",
@@ -1318,7 +1558,11 @@
     "tags": [
       "原創題",
       "數學"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "math_high_002",
@@ -1339,7 +1583,11 @@
     "tags": [
       "原創題",
       "數學"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "math_high_003",
@@ -1360,7 +1608,11 @@
     "tags": [
       "原創題",
       "數學"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "math_high_004",
@@ -1381,7 +1633,11 @@
     "tags": [
       "原創題",
       "數學"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "math_high_005",
@@ -1402,7 +1658,11 @@
     "tags": [
       "原創題",
       "數學"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "math_high_006",
@@ -1423,7 +1683,11 @@
     "tags": [
       "原創題",
       "數學"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "math_high_007",
@@ -1444,7 +1708,11 @@
     "tags": [
       "原創題",
       "數學"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "math_high_008",
@@ -1465,7 +1733,11 @@
     "tags": [
       "原創題",
       "數學"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "math_high_009",
@@ -1486,7 +1758,11 @@
     "tags": [
       "原創題",
       "數學"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "math_high_010",
@@ -1507,7 +1783,11 @@
     "tags": [
       "原創題",
       "數學"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "math_high_011",
@@ -1529,7 +1809,11 @@
       "原創題",
       "數學",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "math_high_012",
@@ -1551,7 +1835,11 @@
       "原創題",
       "數學",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "math_high_013",
@@ -1573,7 +1861,11 @@
       "原創題",
       "數學",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "math_high_014",
@@ -1595,7 +1887,11 @@
       "原創題",
       "數學",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "math_high_015",
@@ -1617,7 +1913,11 @@
       "原創題",
       "數學",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "math_high_016",
@@ -1639,7 +1939,11 @@
       "原創題",
       "數學",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "math_high_017",
@@ -1661,7 +1965,11 @@
       "原創題",
       "數學",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "math_high_018",
@@ -1683,7 +1991,11 @@
       "原創題",
       "數學",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "math_high_019",
@@ -1705,7 +2017,11 @@
       "原創題",
       "數學",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "math_high_020",
@@ -1727,7 +2043,11 @@
       "原創題",
       "數學",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "math_high_021",
@@ -1749,7 +2069,11 @@
       "原創題",
       "數學",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "math_high_022",
@@ -1771,7 +2095,11 @@
       "原創題",
       "數學",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "math_high_023",
@@ -1793,7 +2121,11 @@
       "原創題",
       "數學",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "math_high_024",
@@ -1815,7 +2147,11 @@
       "原創題",
       "數學",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "math_high_025",
@@ -1837,7 +2173,11 @@
       "原創題",
       "數學",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "math_high_026",
@@ -1859,7 +2199,11 @@
       "原創題",
       "數學",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "math_high_027",
@@ -1881,7 +2225,11 @@
       "原創題",
       "數學",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "math_high_028",
@@ -1903,7 +2251,11 @@
       "原創題",
       "數學",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "math_high_029",
@@ -1925,7 +2277,11 @@
       "原創題",
       "數學",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "math_high_030",
@@ -1947,7 +2303,11 @@
       "原創題",
       "數學",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "mandarin_low_001",
@@ -1968,7 +2328,11 @@
     "tags": [
       "原創題",
       "國語"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "mandarin_low_002",
@@ -1989,7 +2353,11 @@
     "tags": [
       "原創題",
       "國語"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "mandarin_low_003",
@@ -2010,7 +2378,11 @@
     "tags": [
       "原創題",
       "國語"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "mandarin_low_004",
@@ -2031,7 +2403,11 @@
     "tags": [
       "原創題",
       "國語"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "mandarin_low_005",
@@ -2052,7 +2428,11 @@
     "tags": [
       "原創題",
       "國語"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "mandarin_low_006",
@@ -2073,7 +2453,11 @@
     "tags": [
       "原創題",
       "國語"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "mandarin_low_007",
@@ -2094,7 +2478,11 @@
     "tags": [
       "原創題",
       "國語"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "mandarin_low_008",
@@ -2115,7 +2503,11 @@
     "tags": [
       "原創題",
       "國語"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "mandarin_low_009",
@@ -2136,7 +2528,11 @@
     "tags": [
       "原創題",
       "國語"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "mandarin_low_010",
@@ -2157,7 +2553,11 @@
     "tags": [
       "原創題",
       "國語"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "mandarin_low_011",
@@ -2179,7 +2579,11 @@
       "原創題",
       "國語",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "mandarin_low_012",
@@ -2201,7 +2605,11 @@
       "原創題",
       "國語",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "mandarin_low_013",
@@ -2223,7 +2631,11 @@
       "原創題",
       "國語",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "mandarin_low_014",
@@ -2245,7 +2657,11 @@
       "原創題",
       "國語",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "mandarin_low_015",
@@ -2267,7 +2683,11 @@
       "原創題",
       "國語",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "mandarin_low_016",
@@ -2289,7 +2709,11 @@
       "原創題",
       "國語",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "mandarin_low_017",
@@ -2311,7 +2735,11 @@
       "原創題",
       "國語",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "mandarin_low_018",
@@ -2333,7 +2761,11 @@
       "原創題",
       "國語",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "mandarin_low_019",
@@ -2355,7 +2787,11 @@
       "原創題",
       "國語",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "mandarin_low_020",
@@ -2377,7 +2813,11 @@
       "原創題",
       "國語",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "mandarin_low_021",
@@ -2399,7 +2839,11 @@
       "原創題",
       "國語",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "mandarin_low_022",
@@ -2421,7 +2865,11 @@
       "原創題",
       "國語",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "mandarin_low_023",
@@ -2443,7 +2891,11 @@
       "原創題",
       "國語",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "mandarin_low_024",
@@ -2465,7 +2917,11 @@
       "原創題",
       "國語",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "mandarin_low_025",
@@ -2487,7 +2943,11 @@
       "原創題",
       "國語",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "mandarin_low_026",
@@ -2509,7 +2969,11 @@
       "原創題",
       "國語",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "mandarin_low_027",
@@ -2531,7 +2995,11 @@
       "原創題",
       "國語",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "mandarin_low_028",
@@ -2553,7 +3021,11 @@
       "原創題",
       "國語",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "mandarin_low_029",
@@ -2575,7 +3047,11 @@
       "原創題",
       "國語",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "mandarin_low_030",
@@ -2597,7 +3073,11 @@
       "原創題",
       "國語",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "mandarin_middle_001",
@@ -2618,7 +3098,11 @@
     "tags": [
       "原創題",
       "國語"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "mandarin_middle_002",
@@ -2639,7 +3123,11 @@
     "tags": [
       "原創題",
       "國語"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "mandarin_middle_003",
@@ -2660,7 +3148,11 @@
     "tags": [
       "原創題",
       "國語"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "mandarin_middle_004",
@@ -2681,7 +3173,11 @@
     "tags": [
       "原創題",
       "國語"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "mandarin_middle_005",
@@ -2702,7 +3198,11 @@
     "tags": [
       "原創題",
       "國語"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "mandarin_middle_006",
@@ -2723,7 +3223,11 @@
     "tags": [
       "原創題",
       "國語"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "mandarin_middle_007",
@@ -2744,7 +3248,11 @@
     "tags": [
       "原創題",
       "國語"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "mandarin_middle_008",
@@ -2765,7 +3273,11 @@
     "tags": [
       "原創題",
       "國語"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "mandarin_middle_009",
@@ -2786,7 +3298,11 @@
     "tags": [
       "原創題",
       "國語"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "mandarin_middle_010",
@@ -2807,7 +3323,11 @@
     "tags": [
       "原創題",
       "國語"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "mandarin_middle_011",
@@ -2829,7 +3349,11 @@
       "原創題",
       "國語",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "mandarin_middle_012",
@@ -2851,7 +3375,11 @@
       "原創題",
       "國語",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "mandarin_middle_013",
@@ -2873,7 +3401,11 @@
       "原創題",
       "國語",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "mandarin_middle_014",
@@ -2895,7 +3427,11 @@
       "原創題",
       "國語",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "mandarin_middle_015",
@@ -2917,7 +3453,11 @@
       "原創題",
       "國語",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "mandarin_middle_016",
@@ -2939,7 +3479,11 @@
       "原創題",
       "國語",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "mandarin_middle_017",
@@ -2961,7 +3505,11 @@
       "原創題",
       "國語",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "mandarin_middle_018",
@@ -2983,7 +3531,11 @@
       "原創題",
       "國語",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "mandarin_middle_019",
@@ -3005,7 +3557,11 @@
       "原創題",
       "國語",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "mandarin_middle_020",
@@ -3027,7 +3583,11 @@
       "原創題",
       "國語",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "mandarin_middle_021",
@@ -3049,7 +3609,11 @@
       "原創題",
       "國語",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "mandarin_middle_022",
@@ -3071,7 +3635,11 @@
       "原創題",
       "國語",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "mandarin_middle_023",
@@ -3093,7 +3661,11 @@
       "原創題",
       "國語",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "mandarin_middle_024",
@@ -3115,7 +3687,11 @@
       "原創題",
       "國語",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "mandarin_middle_025",
@@ -3137,7 +3713,11 @@
       "原創題",
       "國語",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "mandarin_middle_026",
@@ -3159,7 +3739,11 @@
       "原創題",
       "國語",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "mandarin_middle_027",
@@ -3181,7 +3765,11 @@
       "原創題",
       "國語",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "mandarin_middle_028",
@@ -3203,7 +3791,11 @@
       "原創題",
       "國語",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "mandarin_middle_029",
@@ -3225,7 +3817,11 @@
       "原創題",
       "國語",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "mandarin_middle_030",
@@ -3247,7 +3843,11 @@
       "原創題",
       "國語",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "mandarin_high_001",
@@ -3268,7 +3868,11 @@
     "tags": [
       "原創題",
       "國語"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "mandarin_high_002",
@@ -3289,7 +3893,11 @@
     "tags": [
       "原創題",
       "國語"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "mandarin_high_003",
@@ -3310,7 +3918,11 @@
     "tags": [
       "原創題",
       "國語"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "mandarin_high_004",
@@ -3331,7 +3943,11 @@
     "tags": [
       "原創題",
       "國語"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "mandarin_high_005",
@@ -3352,7 +3968,11 @@
     "tags": [
       "原創題",
       "國語"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "mandarin_high_006",
@@ -3373,7 +3993,11 @@
     "tags": [
       "原創題",
       "國語"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "mandarin_high_007",
@@ -3394,7 +4018,11 @@
     "tags": [
       "原創題",
       "國語"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "mandarin_high_008",
@@ -3415,7 +4043,11 @@
     "tags": [
       "原創題",
       "國語"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "mandarin_high_009",
@@ -3436,7 +4068,11 @@
     "tags": [
       "原創題",
       "國語"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "mandarin_high_010",
@@ -3457,7 +4093,11 @@
     "tags": [
       "原創題",
       "國語"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "mandarin_high_011",
@@ -3479,7 +4119,11 @@
       "原創題",
       "國語",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "mandarin_high_012",
@@ -3501,7 +4145,11 @@
       "原創題",
       "國語",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "mandarin_high_013",
@@ -3523,7 +4171,11 @@
       "原創題",
       "國語",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "mandarin_high_014",
@@ -3545,7 +4197,11 @@
       "原創題",
       "國語",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "mandarin_high_015",
@@ -3567,7 +4223,11 @@
       "原創題",
       "國語",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "mandarin_high_016",
@@ -3589,7 +4249,11 @@
       "原創題",
       "國語",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "mandarin_high_017",
@@ -3611,7 +4275,11 @@
       "原創題",
       "國語",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "mandarin_high_018",
@@ -3633,7 +4301,11 @@
       "原創題",
       "國語",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "mandarin_high_019",
@@ -3655,7 +4327,11 @@
       "原創題",
       "國語",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "mandarin_high_020",
@@ -3677,7 +4353,11 @@
       "原創題",
       "國語",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "mandarin_high_021",
@@ -3699,7 +4379,11 @@
       "原創題",
       "國語",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "mandarin_high_022",
@@ -3721,7 +4405,11 @@
       "原創題",
       "國語",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "mandarin_high_023",
@@ -3743,7 +4431,11 @@
       "原創題",
       "國語",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "mandarin_high_024",
@@ -3765,7 +4457,11 @@
       "原創題",
       "國語",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "mandarin_high_025",
@@ -3787,7 +4483,11 @@
       "原創題",
       "國語",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "mandarin_high_026",
@@ -3809,7 +4509,11 @@
       "原創題",
       "國語",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "mandarin_high_027",
@@ -3831,7 +4535,11 @@
       "原創題",
       "國語",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "mandarin_high_028",
@@ -3853,7 +4561,11 @@
       "原創題",
       "國語",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "mandarin_high_029",
@@ -3875,7 +4587,11 @@
       "原創題",
       "國語",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "mandarin_high_030",
@@ -3897,7 +4613,11 @@
       "原創題",
       "國語",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "science_low_001",
@@ -3918,7 +4638,11 @@
     "tags": [
       "原創題",
       "自然"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "science_low_002",
@@ -3939,7 +4663,11 @@
     "tags": [
       "原創題",
       "自然"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "science_low_003",
@@ -3960,7 +4688,11 @@
     "tags": [
       "原創題",
       "自然"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "science_low_004",
@@ -3981,7 +4713,11 @@
     "tags": [
       "原創題",
       "自然"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "science_low_005",
@@ -4002,7 +4738,11 @@
     "tags": [
       "原創題",
       "自然"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "science_low_006",
@@ -4023,7 +4763,11 @@
     "tags": [
       "原創題",
       "自然"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "science_low_007",
@@ -4044,7 +4788,11 @@
     "tags": [
       "原創題",
       "自然"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "science_low_008",
@@ -4065,7 +4813,11 @@
     "tags": [
       "原創題",
       "自然"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "science_low_009",
@@ -4086,7 +4838,11 @@
     "tags": [
       "原創題",
       "自然"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "science_low_010",
@@ -4107,7 +4863,11 @@
     "tags": [
       "原創題",
       "自然"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "science_low_011",
@@ -4129,7 +4889,11 @@
       "原創題",
       "自然",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "science_low_012",
@@ -4151,7 +4915,11 @@
       "原創題",
       "自然",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "science_low_013",
@@ -4173,7 +4941,11 @@
       "原創題",
       "自然",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "science_low_014",
@@ -4195,7 +4967,11 @@
       "原創題",
       "自然",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "science_low_015",
@@ -4217,7 +4993,11 @@
       "原創題",
       "自然",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "science_low_016",
@@ -4239,7 +5019,11 @@
       "原創題",
       "自然",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "science_low_017",
@@ -4261,7 +5045,11 @@
       "原創題",
       "自然",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "science_low_018",
@@ -4283,7 +5071,11 @@
       "原創題",
       "自然",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "science_low_019",
@@ -4305,7 +5097,11 @@
       "原創題",
       "自然",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "science_low_020",
@@ -4327,7 +5123,11 @@
       "原創題",
       "自然",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "science_low_021",
@@ -4349,7 +5149,11 @@
       "原創題",
       "自然",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "science_low_022",
@@ -4371,7 +5175,11 @@
       "原創題",
       "自然",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "science_low_023",
@@ -4393,7 +5201,11 @@
       "原創題",
       "自然",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "science_low_024",
@@ -4415,7 +5227,11 @@
       "原創題",
       "自然",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "science_low_025",
@@ -4437,7 +5253,11 @@
       "原創題",
       "自然",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "science_low_026",
@@ -4459,7 +5279,11 @@
       "原創題",
       "自然",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "science_low_027",
@@ -4481,7 +5305,11 @@
       "原創題",
       "自然",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "science_low_028",
@@ -4503,7 +5331,11 @@
       "原創題",
       "自然",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "science_low_029",
@@ -4525,7 +5357,11 @@
       "原創題",
       "自然",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "science_low_030",
@@ -4547,7 +5383,11 @@
       "原創題",
       "自然",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "science_middle_001",
@@ -4568,7 +5408,11 @@
     "tags": [
       "原創題",
       "自然"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "science_middle_002",
@@ -4589,7 +5433,11 @@
     "tags": [
       "原創題",
       "自然"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "science_middle_003",
@@ -4610,7 +5458,11 @@
     "tags": [
       "原創題",
       "自然"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "science_middle_004",
@@ -4631,7 +5483,11 @@
     "tags": [
       "原創題",
       "自然"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "science_middle_005",
@@ -4652,7 +5508,11 @@
     "tags": [
       "原創題",
       "自然"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "science_middle_006",
@@ -4673,7 +5533,11 @@
     "tags": [
       "原創題",
       "自然"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "science_middle_007",
@@ -4694,7 +5558,11 @@
     "tags": [
       "原創題",
       "自然"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "science_middle_008",
@@ -4715,7 +5583,11 @@
     "tags": [
       "原創題",
       "自然"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "science_middle_009",
@@ -4736,7 +5608,11 @@
     "tags": [
       "原創題",
       "自然"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "science_middle_010",
@@ -4757,7 +5633,11 @@
     "tags": [
       "原創題",
       "自然"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "science_middle_011",
@@ -4779,7 +5659,11 @@
       "原創題",
       "自然",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "science_middle_012",
@@ -4801,7 +5685,11 @@
       "原創題",
       "自然",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "science_middle_013",
@@ -4823,7 +5711,11 @@
       "原創題",
       "自然",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "science_middle_014",
@@ -4845,7 +5737,11 @@
       "原創題",
       "自然",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "science_middle_015",
@@ -4867,7 +5763,11 @@
       "原創題",
       "自然",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "science_middle_016",
@@ -4889,7 +5789,11 @@
       "原創題",
       "自然",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "science_middle_017",
@@ -4911,7 +5815,11 @@
       "原創題",
       "自然",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "science_middle_018",
@@ -4933,7 +5841,11 @@
       "原創題",
       "自然",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "science_middle_019",
@@ -4955,7 +5867,11 @@
       "原創題",
       "自然",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "science_middle_020",
@@ -4977,7 +5893,11 @@
       "原創題",
       "自然",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "science_middle_021",
@@ -4999,7 +5919,11 @@
       "原創題",
       "自然",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "science_middle_022",
@@ -5021,7 +5945,11 @@
       "原創題",
       "自然",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "science_middle_023",
@@ -5043,7 +5971,11 @@
       "原創題",
       "自然",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "science_middle_024",
@@ -5065,7 +5997,11 @@
       "原創題",
       "自然",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "science_middle_025",
@@ -5087,7 +6023,11 @@
       "原創題",
       "自然",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "science_middle_026",
@@ -5109,7 +6049,11 @@
       "原創題",
       "自然",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "science_middle_027",
@@ -5131,7 +6075,11 @@
       "原創題",
       "自然",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "science_middle_028",
@@ -5153,7 +6101,11 @@
       "原創題",
       "自然",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "science_middle_029",
@@ -5175,7 +6127,11 @@
       "原創題",
       "自然",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "science_middle_030",
@@ -5197,7 +6153,11 @@
       "原創題",
       "自然",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "science_high_001",
@@ -5218,7 +6178,11 @@
     "tags": [
       "原創題",
       "自然"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "science_high_002",
@@ -5239,7 +6203,11 @@
     "tags": [
       "原創題",
       "自然"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "science_high_003",
@@ -5260,7 +6228,11 @@
     "tags": [
       "原創題",
       "自然"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "science_high_004",
@@ -5281,7 +6253,11 @@
     "tags": [
       "原創題",
       "自然"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "science_high_005",
@@ -5302,7 +6278,11 @@
     "tags": [
       "原創題",
       "自然"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "science_high_006",
@@ -5323,7 +6303,11 @@
     "tags": [
       "原創題",
       "自然"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "science_high_007",
@@ -5344,7 +6328,11 @@
     "tags": [
       "原創題",
       "自然"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "science_high_008",
@@ -5365,7 +6353,11 @@
     "tags": [
       "原創題",
       "自然"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "science_high_009",
@@ -5386,7 +6378,11 @@
     "tags": [
       "原創題",
       "自然"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "science_high_010",
@@ -5407,7 +6403,11 @@
     "tags": [
       "原創題",
       "自然"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "science_high_011",
@@ -5429,7 +6429,11 @@
       "原創題",
       "自然",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "science_high_012",
@@ -5451,7 +6455,11 @@
       "原創題",
       "自然",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "science_high_013",
@@ -5473,7 +6481,11 @@
       "原創題",
       "自然",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "science_high_014",
@@ -5495,7 +6507,11 @@
       "原創題",
       "自然",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "science_high_015",
@@ -5517,7 +6533,11 @@
       "原創題",
       "自然",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "science_high_016",
@@ -5539,7 +6559,11 @@
       "原創題",
       "自然",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "science_high_017",
@@ -5561,7 +6585,11 @@
       "原創題",
       "自然",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "science_high_018",
@@ -5583,7 +6611,11 @@
       "原創題",
       "自然",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "science_high_019",
@@ -5605,7 +6637,11 @@
       "原創題",
       "自然",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "science_high_020",
@@ -5627,7 +6663,11 @@
       "原創題",
       "自然",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "science_high_021",
@@ -5649,7 +6689,11 @@
       "原創題",
       "自然",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "science_high_022",
@@ -5671,7 +6715,11 @@
       "原創題",
       "自然",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "science_high_023",
@@ -5693,7 +6741,11 @@
       "原創題",
       "自然",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "science_high_024",
@@ -5715,7 +6767,11 @@
       "原創題",
       "自然",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "science_high_025",
@@ -5737,7 +6793,11 @@
       "原創題",
       "自然",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "science_high_026",
@@ -5759,7 +6819,11 @@
       "原創題",
       "自然",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "science_high_027",
@@ -5781,7 +6845,11 @@
       "原創題",
       "自然",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "science_high_028",
@@ -5803,7 +6871,11 @@
       "原創題",
       "自然",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "science_high_029",
@@ -5825,7 +6897,11 @@
       "原創題",
       "自然",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "science_high_030",
@@ -5847,7 +6923,11 @@
       "原創題",
       "自然",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "social_low_001",
@@ -5868,7 +6948,11 @@
     "tags": [
       "原創題",
       "社會"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "social_low_002",
@@ -5889,7 +6973,11 @@
     "tags": [
       "原創題",
       "社會"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "social_low_003",
@@ -5910,7 +6998,11 @@
     "tags": [
       "原創題",
       "社會"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "social_low_004",
@@ -5931,7 +7023,11 @@
     "tags": [
       "原創題",
       "社會"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "social_low_005",
@@ -5952,7 +7048,11 @@
     "tags": [
       "原創題",
       "社會"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "social_low_006",
@@ -5973,7 +7073,11 @@
     "tags": [
       "原創題",
       "社會"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "social_low_007",
@@ -5994,7 +7098,11 @@
     "tags": [
       "原創題",
       "社會"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "social_low_008",
@@ -6015,7 +7123,11 @@
     "tags": [
       "原創題",
       "社會"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "social_low_009",
@@ -6036,7 +7148,11 @@
     "tags": [
       "原創題",
       "社會"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "social_low_010",
@@ -6057,7 +7173,11 @@
     "tags": [
       "原創題",
       "社會"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "social_low_011",
@@ -6079,7 +7199,11 @@
       "原創題",
       "社會",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "social_low_012",
@@ -6101,7 +7225,11 @@
       "原創題",
       "社會",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "social_low_013",
@@ -6123,7 +7251,11 @@
       "原創題",
       "社會",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "social_low_014",
@@ -6145,7 +7277,11 @@
       "原創題",
       "社會",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "social_low_015",
@@ -6167,7 +7303,11 @@
       "原創題",
       "社會",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "social_low_016",
@@ -6189,7 +7329,11 @@
       "原創題",
       "社會",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "social_low_017",
@@ -6211,7 +7355,11 @@
       "原創題",
       "社會",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "social_low_018",
@@ -6233,7 +7381,11 @@
       "原創題",
       "社會",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "social_low_019",
@@ -6255,7 +7407,11 @@
       "原創題",
       "社會",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "social_low_020",
@@ -6277,7 +7433,11 @@
       "原創題",
       "社會",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "social_low_021",
@@ -6299,7 +7459,11 @@
       "原創題",
       "社會",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "social_low_022",
@@ -6321,7 +7485,11 @@
       "原創題",
       "社會",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "social_low_023",
@@ -6343,7 +7511,11 @@
       "原創題",
       "社會",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "social_low_024",
@@ -6365,7 +7537,11 @@
       "原創題",
       "社會",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "social_low_025",
@@ -6387,7 +7563,11 @@
       "原創題",
       "社會",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "social_low_026",
@@ -6409,7 +7589,11 @@
       "原創題",
       "社會",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "social_low_027",
@@ -6431,7 +7615,11 @@
       "原創題",
       "社會",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "social_low_028",
@@ -6453,7 +7641,11 @@
       "原創題",
       "社會",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "social_low_029",
@@ -6475,7 +7667,11 @@
       "原創題",
       "社會",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "social_low_030",
@@ -6497,7 +7693,11 @@
       "原創題",
       "社會",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "social_middle_001",
@@ -6518,7 +7718,11 @@
     "tags": [
       "原創題",
       "社會"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "social_middle_002",
@@ -6539,7 +7743,11 @@
     "tags": [
       "原創題",
       "社會"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "social_middle_003",
@@ -6560,7 +7768,11 @@
     "tags": [
       "原創題",
       "社會"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "social_middle_004",
@@ -6581,7 +7793,11 @@
     "tags": [
       "原創題",
       "社會"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "social_middle_005",
@@ -6602,7 +7818,11 @@
     "tags": [
       "原創題",
       "社會"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "social_middle_006",
@@ -6623,7 +7843,11 @@
     "tags": [
       "原創題",
       "社會"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "social_middle_007",
@@ -6644,7 +7868,11 @@
     "tags": [
       "原創題",
       "社會"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "social_middle_008",
@@ -6665,7 +7893,11 @@
     "tags": [
       "原創題",
       "社會"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "social_middle_009",
@@ -6686,7 +7918,11 @@
     "tags": [
       "原創題",
       "社會"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "social_middle_010",
@@ -6707,7 +7943,11 @@
     "tags": [
       "原創題",
       "社會"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "social_middle_011",
@@ -6729,7 +7969,11 @@
       "原創題",
       "社會",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "social_middle_012",
@@ -6751,7 +7995,11 @@
       "原創題",
       "社會",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "social_middle_013",
@@ -6773,7 +8021,11 @@
       "原創題",
       "社會",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "social_middle_014",
@@ -6795,7 +8047,11 @@
       "原創題",
       "社會",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "social_middle_015",
@@ -6817,7 +8073,11 @@
       "原創題",
       "社會",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "social_middle_016",
@@ -6839,7 +8099,11 @@
       "原創題",
       "社會",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "social_middle_017",
@@ -6861,7 +8125,11 @@
       "原創題",
       "社會",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "social_middle_018",
@@ -6883,7 +8151,11 @@
       "原創題",
       "社會",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "social_middle_019",
@@ -6905,7 +8177,11 @@
       "原創題",
       "社會",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "social_middle_020",
@@ -6927,7 +8203,11 @@
       "原創題",
       "社會",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "social_middle_021",
@@ -6949,7 +8229,11 @@
       "原創題",
       "社會",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "social_middle_022",
@@ -6971,7 +8255,11 @@
       "原創題",
       "社會",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "social_middle_023",
@@ -6993,7 +8281,11 @@
       "原創題",
       "社會",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "social_middle_024",
@@ -7015,7 +8307,11 @@
       "原創題",
       "社會",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "social_middle_025",
@@ -7037,7 +8333,11 @@
       "原創題",
       "社會",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "social_middle_026",
@@ -7059,7 +8359,11 @@
       "原創題",
       "社會",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "social_middle_027",
@@ -7081,7 +8385,11 @@
       "原創題",
       "社會",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "social_middle_028",
@@ -7103,7 +8411,11 @@
       "原創題",
       "社會",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "social_middle_029",
@@ -7125,7 +8437,11 @@
       "原創題",
       "社會",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "social_middle_030",
@@ -7147,7 +8463,11 @@
       "原創題",
       "社會",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "social_high_001",
@@ -7168,7 +8488,11 @@
     "tags": [
       "原創題",
       "社會"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "social_high_002",
@@ -7189,7 +8513,11 @@
     "tags": [
       "原創題",
       "社會"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "social_high_003",
@@ -7210,7 +8538,11 @@
     "tags": [
       "原創題",
       "社會"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "social_high_004",
@@ -7231,7 +8563,11 @@
     "tags": [
       "原創題",
       "社會"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "social_high_005",
@@ -7252,7 +8588,11 @@
     "tags": [
       "原創題",
       "社會"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "social_high_006",
@@ -7273,7 +8613,11 @@
     "tags": [
       "原創題",
       "社會"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "social_high_007",
@@ -7294,7 +8638,11 @@
     "tags": [
       "原創題",
       "社會"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "social_high_008",
@@ -7315,7 +8663,11 @@
     "tags": [
       "原創題",
       "社會"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "social_high_009",
@@ -7336,7 +8688,11 @@
     "tags": [
       "原創題",
       "社會"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "social_high_010",
@@ -7357,7 +8713,11 @@
     "tags": [
       "原創題",
       "社會"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "social_high_011",
@@ -7379,7 +8739,11 @@
       "原創題",
       "社會",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "social_high_012",
@@ -7401,7 +8765,11 @@
       "原創題",
       "社會",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "social_high_013",
@@ -7423,7 +8791,11 @@
       "原創題",
       "社會",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "social_high_014",
@@ -7445,7 +8817,11 @@
       "原創題",
       "社會",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "social_high_015",
@@ -7467,7 +8843,11 @@
       "原創題",
       "社會",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "social_high_016",
@@ -7489,7 +8869,11 @@
       "原創題",
       "社會",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "social_high_017",
@@ -7511,7 +8895,11 @@
       "原創題",
       "社會",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "social_high_018",
@@ -7533,7 +8921,11 @@
       "原創題",
       "社會",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "social_high_019",
@@ -7555,7 +8947,11 @@
       "原創題",
       "社會",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "social_high_020",
@@ -7577,7 +8973,11 @@
       "原創題",
       "社會",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "social_high_021",
@@ -7599,7 +8999,11 @@
       "原創題",
       "社會",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "social_high_022",
@@ -7621,7 +9025,11 @@
       "原創題",
       "社會",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "social_high_023",
@@ -7643,7 +9051,11 @@
       "原創題",
       "社會",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "social_high_024",
@@ -7665,7 +9077,11 @@
       "原創題",
       "社會",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "social_high_025",
@@ -7687,7 +9103,11 @@
       "原創題",
       "社會",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "social_high_026",
@@ -7709,7 +9129,11 @@
       "原創題",
       "社會",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "social_high_027",
@@ -7731,7 +9155,11 @@
       "原創題",
       "社會",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "social_high_028",
@@ -7753,7 +9181,11 @@
       "原創題",
       "社會",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "social_high_029",
@@ -7775,7 +9207,11 @@
       "原創題",
       "社會",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "social_high_030",
@@ -7797,7 +9233,11 @@
       "原創題",
       "社會",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "english_low_001",
@@ -7818,7 +9258,11 @@
     "tags": [
       "原創題",
       "英文"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "english_low_002",
@@ -7839,7 +9283,11 @@
     "tags": [
       "原創題",
       "英文"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "english_low_003",
@@ -7860,7 +9308,11 @@
     "tags": [
       "原創題",
       "英文"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "english_low_004",
@@ -7881,7 +9333,11 @@
     "tags": [
       "原創題",
       "英文"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "english_low_005",
@@ -7902,7 +9358,11 @@
     "tags": [
       "原創題",
       "英文"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "english_low_006",
@@ -7923,7 +9383,11 @@
     "tags": [
       "原創題",
       "英文"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "english_low_007",
@@ -7944,7 +9408,11 @@
     "tags": [
       "原創題",
       "英文"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "english_low_008",
@@ -7965,7 +9433,11 @@
     "tags": [
       "原創題",
       "英文"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "english_low_009",
@@ -7986,7 +9458,11 @@
     "tags": [
       "原創題",
       "英文"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "english_low_010",
@@ -8007,7 +9483,11 @@
     "tags": [
       "原創題",
       "英文"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "english_low_011",
@@ -8029,7 +9509,11 @@
       "原創題",
       "英文",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "english_low_012",
@@ -8051,7 +9535,11 @@
       "原創題",
       "英文",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "english_low_013",
@@ -8073,7 +9561,11 @@
       "原創題",
       "英文",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "english_low_014",
@@ -8095,7 +9587,11 @@
       "原創題",
       "英文",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "english_low_015",
@@ -8117,7 +9613,11 @@
       "原創題",
       "英文",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "english_low_016",
@@ -8139,7 +9639,11 @@
       "原創題",
       "英文",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "english_low_017",
@@ -8161,7 +9665,11 @@
       "原創題",
       "英文",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "english_low_018",
@@ -8183,7 +9691,11 @@
       "原創題",
       "英文",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "english_low_019",
@@ -8205,7 +9717,11 @@
       "原創題",
       "英文",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "english_low_020",
@@ -8227,7 +9743,11 @@
       "原創題",
       "英文",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "english_low_021",
@@ -8249,7 +9769,11 @@
       "原創題",
       "英文",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "english_low_022",
@@ -8271,7 +9795,11 @@
       "原創題",
       "英文",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "english_low_023",
@@ -8293,7 +9821,11 @@
       "原創題",
       "英文",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "english_low_024",
@@ -8315,7 +9847,11 @@
       "原創題",
       "英文",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "english_low_025",
@@ -8337,7 +9873,11 @@
       "原創題",
       "英文",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "english_low_026",
@@ -8359,7 +9899,11 @@
       "原創題",
       "英文",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "english_low_027",
@@ -8381,7 +9925,11 @@
       "原創題",
       "英文",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "english_low_028",
@@ -8403,7 +9951,11 @@
       "原創題",
       "英文",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "english_low_029",
@@ -8425,7 +9977,11 @@
       "原創題",
       "英文",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "english_low_030",
@@ -8447,7 +10003,11 @@
       "原創題",
       "英文",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "english_middle_001",
@@ -8468,7 +10028,11 @@
     "tags": [
       "原創題",
       "英文"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "english_middle_002",
@@ -8489,7 +10053,11 @@
     "tags": [
       "原創題",
       "英文"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "english_middle_003",
@@ -8510,7 +10078,11 @@
     "tags": [
       "原創題",
       "英文"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "english_middle_004",
@@ -8531,7 +10103,11 @@
     "tags": [
       "原創題",
       "英文"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "english_middle_005",
@@ -8552,7 +10128,11 @@
     "tags": [
       "原創題",
       "英文"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "english_middle_006",
@@ -8573,7 +10153,11 @@
     "tags": [
       "原創題",
       "英文"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "english_middle_007",
@@ -8594,7 +10178,11 @@
     "tags": [
       "原創題",
       "英文"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "english_middle_008",
@@ -8615,7 +10203,11 @@
     "tags": [
       "原創題",
       "英文"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "english_middle_009",
@@ -8636,7 +10228,11 @@
     "tags": [
       "原創題",
       "英文"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "english_middle_010",
@@ -8657,7 +10253,11 @@
     "tags": [
       "原創題",
       "英文"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "english_middle_011",
@@ -8679,7 +10279,11 @@
       "原創題",
       "英文",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "english_middle_012",
@@ -8701,7 +10305,11 @@
       "原創題",
       "英文",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "english_middle_013",
@@ -8723,7 +10331,11 @@
       "原創題",
       "英文",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "english_middle_014",
@@ -8745,7 +10357,11 @@
       "原創題",
       "英文",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "english_middle_015",
@@ -8767,7 +10383,11 @@
       "原創題",
       "英文",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "english_middle_016",
@@ -8789,7 +10409,11 @@
       "原創題",
       "英文",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "english_middle_017",
@@ -8811,7 +10435,11 @@
       "原創題",
       "英文",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "english_middle_018",
@@ -8833,7 +10461,11 @@
       "原創題",
       "英文",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "english_middle_019",
@@ -8855,7 +10487,11 @@
       "原創題",
       "英文",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "english_middle_020",
@@ -8877,7 +10513,11 @@
       "原創題",
       "英文",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "english_middle_021",
@@ -8899,7 +10539,11 @@
       "原創題",
       "英文",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "english_middle_022",
@@ -8921,7 +10565,11 @@
       "原創題",
       "英文",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "english_middle_023",
@@ -8943,7 +10591,11 @@
       "原創題",
       "英文",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "english_middle_024",
@@ -8965,7 +10617,11 @@
       "原創題",
       "英文",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "english_middle_025",
@@ -8987,7 +10643,11 @@
       "原創題",
       "英文",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "english_middle_026",
@@ -9009,7 +10669,11 @@
       "原創題",
       "英文",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "english_middle_027",
@@ -9031,7 +10695,11 @@
       "原創題",
       "英文",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "english_middle_028",
@@ -9053,7 +10721,11 @@
       "原創題",
       "英文",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "english_middle_029",
@@ -9075,7 +10747,11 @@
       "原創題",
       "英文",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "english_middle_030",
@@ -9097,7 +10773,11 @@
       "原創題",
       "英文",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "english_high_001",
@@ -9118,7 +10798,11 @@
     "tags": [
       "原創題",
       "英文"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "english_high_002",
@@ -9139,7 +10823,11 @@
     "tags": [
       "原創題",
       "英文"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "english_high_003",
@@ -9160,7 +10848,11 @@
     "tags": [
       "原創題",
       "英文"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "english_high_004",
@@ -9181,7 +10873,11 @@
     "tags": [
       "原創題",
       "英文"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "english_high_005",
@@ -9202,7 +10898,11 @@
     "tags": [
       "原創題",
       "英文"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "english_high_006",
@@ -9223,7 +10923,11 @@
     "tags": [
       "原創題",
       "英文"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "english_high_007",
@@ -9244,7 +10948,11 @@
     "tags": [
       "原創題",
       "英文"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "english_high_008",
@@ -9265,7 +10973,11 @@
     "tags": [
       "原創題",
       "英文"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "english_high_009",
@@ -9286,7 +10998,11 @@
     "tags": [
       "原創題",
       "英文"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "english_high_010",
@@ -9307,7 +11023,11 @@
     "tags": [
       "原創題",
       "英文"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "english_high_011",
@@ -9329,7 +11049,11 @@
       "原創題",
       "英文",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "english_high_012",
@@ -9351,7 +11075,11 @@
       "原創題",
       "英文",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "english_high_013",
@@ -9373,7 +11101,11 @@
       "原創題",
       "英文",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "english_high_014",
@@ -9395,7 +11127,11 @@
       "原創題",
       "英文",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "english_high_015",
@@ -9417,7 +11153,11 @@
       "原創題",
       "英文",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "english_high_016",
@@ -9439,7 +11179,11 @@
       "原創題",
       "英文",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "english_high_017",
@@ -9461,7 +11205,11 @@
       "原創題",
       "英文",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "english_high_018",
@@ -9483,7 +11231,11 @@
       "原創題",
       "英文",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "english_high_019",
@@ -9505,7 +11257,11 @@
       "原創題",
       "英文",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "english_high_020",
@@ -9527,7 +11283,11 @@
       "原創題",
       "英文",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "english_high_021",
@@ -9549,7 +11309,11 @@
       "原創題",
       "英文",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "english_high_022",
@@ -9571,7 +11335,11 @@
       "原創題",
       "英文",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "english_high_023",
@@ -9593,7 +11361,11 @@
       "原創題",
       "英文",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "english_high_024",
@@ -9615,7 +11387,11 @@
       "原創題",
       "英文",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "english_high_025",
@@ -9637,7 +11413,11 @@
       "原創題",
       "英文",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "english_high_026",
@@ -9659,7 +11439,11 @@
       "原創題",
       "英文",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "english_high_027",
@@ -9681,7 +11465,11 @@
       "原創題",
       "英文",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "english_high_028",
@@ -9703,7 +11491,11 @@
       "原創題",
       "英文",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "english_high_029",
@@ -9725,7 +11517,11 @@
       "原創題",
       "英文",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "english_high_030",
@@ -9747,7 +11543,11 @@
       "原創題",
       "英文",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "balloon_low_001",
@@ -9768,7 +11568,11 @@
     "tags": [
       "原創題",
       "氣球知識"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "balloon_low_002",
@@ -9789,7 +11593,11 @@
     "tags": [
       "原創題",
       "氣球知識"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "balloon_low_003",
@@ -9810,7 +11618,11 @@
     "tags": [
       "原創題",
       "氣球知識"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "balloon_low_004",
@@ -9831,7 +11643,11 @@
     "tags": [
       "原創題",
       "氣球知識"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "balloon_low_005",
@@ -9852,7 +11668,11 @@
     "tags": [
       "原創題",
       "氣球知識"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "balloon_low_006",
@@ -9873,7 +11693,11 @@
     "tags": [
       "原創題",
       "氣球知識"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "balloon_low_007",
@@ -9894,7 +11718,11 @@
     "tags": [
       "原創題",
       "氣球知識"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "balloon_low_008",
@@ -9915,7 +11743,11 @@
     "tags": [
       "原創題",
       "氣球知識"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "balloon_low_009",
@@ -9936,7 +11768,11 @@
     "tags": [
       "原創題",
       "氣球知識"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "balloon_low_010",
@@ -9957,7 +11793,11 @@
     "tags": [
       "原創題",
       "氣球知識"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "balloon_low_011",
@@ -9979,7 +11819,11 @@
       "原創題",
       "氣球知識",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "balloon_low_012",
@@ -10001,7 +11845,11 @@
       "原創題",
       "氣球知識",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "balloon_low_013",
@@ -10023,7 +11871,11 @@
       "原創題",
       "氣球知識",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "balloon_low_014",
@@ -10045,7 +11897,11 @@
       "原創題",
       "氣球知識",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "balloon_low_015",
@@ -10067,7 +11923,11 @@
       "原創題",
       "氣球知識",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "balloon_low_016",
@@ -10089,7 +11949,11 @@
       "原創題",
       "氣球知識",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "balloon_low_017",
@@ -10111,7 +11975,11 @@
       "原創題",
       "氣球知識",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "balloon_low_018",
@@ -10133,7 +12001,11 @@
       "原創題",
       "氣球知識",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "balloon_low_019",
@@ -10155,7 +12027,11 @@
       "原創題",
       "氣球知識",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "balloon_low_020",
@@ -10177,7 +12053,11 @@
       "原創題",
       "氣球知識",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "balloon_low_021",
@@ -10199,7 +12079,11 @@
       "原創題",
       "氣球知識",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "balloon_low_022",
@@ -10221,7 +12105,11 @@
       "原創題",
       "氣球知識",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "balloon_low_023",
@@ -10243,7 +12131,11 @@
       "原創題",
       "氣球知識",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "balloon_low_024",
@@ -10265,7 +12157,11 @@
       "原創題",
       "氣球知識",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "balloon_low_025",
@@ -10287,7 +12183,11 @@
       "原創題",
       "氣球知識",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "balloon_low_026",
@@ -10309,7 +12209,11 @@
       "原創題",
       "氣球知識",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "balloon_low_027",
@@ -10331,7 +12235,11 @@
       "原創題",
       "氣球知識",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "balloon_low_028",
@@ -10353,7 +12261,11 @@
       "原創題",
       "氣球知識",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "balloon_low_029",
@@ -10375,7 +12287,11 @@
       "原創題",
       "氣球知識",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "balloon_low_030",
@@ -10397,7 +12313,11 @@
       "原創題",
       "氣球知識",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "balloon_middle_001",
@@ -10418,7 +12338,11 @@
     "tags": [
       "原創題",
       "氣球知識"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "balloon_middle_002",
@@ -10439,7 +12363,11 @@
     "tags": [
       "原創題",
       "氣球知識"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "balloon_middle_003",
@@ -10460,7 +12388,11 @@
     "tags": [
       "原創題",
       "氣球知識"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "balloon_middle_004",
@@ -10481,7 +12413,11 @@
     "tags": [
       "原創題",
       "氣球知識"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "balloon_middle_005",
@@ -10502,7 +12438,11 @@
     "tags": [
       "原創題",
       "氣球知識"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "balloon_middle_006",
@@ -10523,7 +12463,11 @@
     "tags": [
       "原創題",
       "氣球知識"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "balloon_middle_007",
@@ -10544,7 +12488,11 @@
     "tags": [
       "原創題",
       "氣球知識"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "balloon_middle_008",
@@ -10565,7 +12513,11 @@
     "tags": [
       "原創題",
       "氣球知識"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "balloon_middle_009",
@@ -10586,7 +12538,11 @@
     "tags": [
       "原創題",
       "氣球知識"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "balloon_middle_010",
@@ -10607,7 +12563,11 @@
     "tags": [
       "原創題",
       "氣球知識"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "balloon_middle_011",
@@ -10629,7 +12589,11 @@
       "原創題",
       "氣球知識",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "balloon_middle_012",
@@ -10651,7 +12615,11 @@
       "原創題",
       "氣球知識",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "balloon_middle_013",
@@ -10673,7 +12641,11 @@
       "原創題",
       "氣球知識",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "balloon_middle_014",
@@ -10695,7 +12667,11 @@
       "原創題",
       "氣球知識",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "balloon_middle_015",
@@ -10717,7 +12693,11 @@
       "原創題",
       "氣球知識",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "balloon_middle_016",
@@ -10739,7 +12719,11 @@
       "原創題",
       "氣球知識",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "balloon_middle_017",
@@ -10761,7 +12745,11 @@
       "原創題",
       "氣球知識",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "balloon_middle_018",
@@ -10783,7 +12771,11 @@
       "原創題",
       "氣球知識",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "balloon_middle_019",
@@ -10805,7 +12797,11 @@
       "原創題",
       "氣球知識",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "balloon_middle_020",
@@ -10827,7 +12823,11 @@
       "原創題",
       "氣球知識",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "balloon_middle_021",
@@ -10849,7 +12849,11 @@
       "原創題",
       "氣球知識",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "balloon_middle_022",
@@ -10871,7 +12875,11 @@
       "原創題",
       "氣球知識",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "balloon_middle_023",
@@ -10893,7 +12901,11 @@
       "原創題",
       "氣球知識",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "balloon_middle_024",
@@ -10915,7 +12927,11 @@
       "原創題",
       "氣球知識",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "balloon_middle_025",
@@ -10937,7 +12953,11 @@
       "原創題",
       "氣球知識",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "balloon_middle_026",
@@ -10959,7 +12979,11 @@
       "原創題",
       "氣球知識",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "balloon_middle_027",
@@ -10981,7 +13005,11 @@
       "原創題",
       "氣球知識",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "balloon_middle_028",
@@ -11003,7 +13031,11 @@
       "原創題",
       "氣球知識",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "balloon_middle_029",
@@ -11025,7 +13057,11 @@
       "原創題",
       "氣球知識",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "balloon_middle_030",
@@ -11047,7 +13083,11 @@
       "原創題",
       "氣球知識",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "balloon_high_001",
@@ -11068,7 +13108,11 @@
     "tags": [
       "原創題",
       "氣球知識"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "balloon_high_002",
@@ -11089,7 +13133,11 @@
     "tags": [
       "原創題",
       "氣球知識"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "balloon_high_003",
@@ -11110,7 +13158,11 @@
     "tags": [
       "原創題",
       "氣球知識"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "balloon_high_004",
@@ -11131,7 +13183,11 @@
     "tags": [
       "原創題",
       "氣球知識"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "balloon_high_005",
@@ -11152,7 +13208,11 @@
     "tags": [
       "原創題",
       "氣球知識"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "balloon_high_006",
@@ -11173,7 +13233,11 @@
     "tags": [
       "原創題",
       "氣球知識"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "balloon_high_007",
@@ -11194,7 +13258,11 @@
     "tags": [
       "原創題",
       "氣球知識"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "balloon_high_008",
@@ -11215,7 +13283,11 @@
     "tags": [
       "原創題",
       "氣球知識"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "balloon_high_009",
@@ -11236,7 +13308,11 @@
     "tags": [
       "原創題",
       "氣球知識"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "balloon_high_010",
@@ -11257,7 +13333,11 @@
     "tags": [
       "原創題",
       "氣球知識"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "balloon_high_011",
@@ -11279,7 +13359,11 @@
       "原創題",
       "氣球知識",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "balloon_high_012",
@@ -11301,7 +13385,11 @@
       "原創題",
       "氣球知識",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "balloon_high_013",
@@ -11323,7 +13411,11 @@
       "原創題",
       "氣球知識",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "balloon_high_014",
@@ -11345,7 +13437,11 @@
       "原創題",
       "氣球知識",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "balloon_high_015",
@@ -11367,7 +13463,11 @@
       "原創題",
       "氣球知識",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "balloon_high_016",
@@ -11389,7 +13489,11 @@
       "原創題",
       "氣球知識",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "balloon_high_017",
@@ -11411,7 +13515,11 @@
       "原創題",
       "氣球知識",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "balloon_high_018",
@@ -11433,7 +13541,11 @@
       "原創題",
       "氣球知識",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "balloon_high_019",
@@ -11455,7 +13567,11 @@
       "原創題",
       "氣球知識",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "balloon_high_020",
@@ -11477,7 +13593,11 @@
       "原創題",
       "氣球知識",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "balloon_high_021",
@@ -11499,7 +13619,11 @@
       "原創題",
       "氣球知識",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "balloon_high_022",
@@ -11521,7 +13645,11 @@
       "原創題",
       "氣球知識",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "balloon_high_023",
@@ -11543,7 +13671,11 @@
       "原創題",
       "氣球知識",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "balloon_high_024",
@@ -11565,7 +13697,11 @@
       "原創題",
       "氣球知識",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "balloon_high_025",
@@ -11587,7 +13723,11 @@
       "原創題",
       "氣球知識",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "balloon_high_026",
@@ -11609,7 +13749,11 @@
       "原創題",
       "氣球知識",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "balloon_high_027",
@@ -11631,7 +13775,11 @@
       "原創題",
       "氣球知識",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "balloon_high_028",
@@ -11653,7 +13801,11 @@
       "原創題",
       "氣球知識",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "balloon_high_029",
@@ -11675,7 +13827,11 @@
       "原創題",
       "氣球知識",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "balloon_high_030",
@@ -11697,7 +13853,11 @@
       "原創題",
       "氣球知識",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brand_low_001",
@@ -11718,7 +13878,11 @@
     "tags": [
       "原創題",
       "小V品牌"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brand_low_002",
@@ -11739,7 +13903,11 @@
     "tags": [
       "原創題",
       "小V品牌"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brand_low_003",
@@ -11760,7 +13928,11 @@
     "tags": [
       "原創題",
       "小V品牌"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brand_low_004",
@@ -11781,7 +13953,11 @@
     "tags": [
       "原創題",
       "小V品牌"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brand_low_005",
@@ -11802,7 +13978,11 @@
     "tags": [
       "原創題",
       "小V品牌"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brand_low_006",
@@ -11823,7 +14003,11 @@
     "tags": [
       "原創題",
       "小V品牌"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brand_low_007",
@@ -11844,7 +14028,11 @@
     "tags": [
       "原創題",
       "小V品牌"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brand_low_008",
@@ -11865,7 +14053,11 @@
     "tags": [
       "原創題",
       "小V品牌"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brand_low_009",
@@ -11886,7 +14078,11 @@
     "tags": [
       "原創題",
       "小V品牌"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brand_low_010",
@@ -11907,7 +14103,11 @@
     "tags": [
       "原創題",
       "小V品牌"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brand_low_011",
@@ -11929,7 +14129,11 @@
       "原創題",
       "小V品牌",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brand_low_012",
@@ -11951,7 +14155,11 @@
       "原創題",
       "小V品牌",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brand_low_013",
@@ -11973,7 +14181,11 @@
       "原創題",
       "小V品牌",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brand_low_014",
@@ -11995,7 +14207,11 @@
       "原創題",
       "小V品牌",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brand_low_015",
@@ -12017,7 +14233,11 @@
       "原創題",
       "小V品牌",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brand_low_016",
@@ -12039,7 +14259,11 @@
       "原創題",
       "小V品牌",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brand_low_017",
@@ -12061,7 +14285,11 @@
       "原創題",
       "小V品牌",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brand_low_018",
@@ -12083,7 +14311,11 @@
       "原創題",
       "小V品牌",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brand_low_019",
@@ -12105,7 +14337,11 @@
       "原創題",
       "小V品牌",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brand_low_020",
@@ -12127,7 +14363,11 @@
       "原創題",
       "小V品牌",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brand_low_021",
@@ -12149,7 +14389,11 @@
       "原創題",
       "小V品牌",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brand_low_022",
@@ -12171,7 +14415,11 @@
       "原創題",
       "小V品牌",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brand_low_023",
@@ -12193,7 +14441,11 @@
       "原創題",
       "小V品牌",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brand_low_024",
@@ -12215,7 +14467,11 @@
       "原創題",
       "小V品牌",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brand_low_025",
@@ -12237,7 +14493,11 @@
       "原創題",
       "小V品牌",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brand_low_026",
@@ -12259,7 +14519,11 @@
       "原創題",
       "小V品牌",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brand_low_027",
@@ -12281,7 +14545,11 @@
       "原創題",
       "小V品牌",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brand_low_028",
@@ -12303,7 +14571,11 @@
       "原創題",
       "小V品牌",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brand_low_029",
@@ -12325,7 +14597,11 @@
       "原創題",
       "小V品牌",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brand_low_030",
@@ -12347,7 +14623,11 @@
       "原創題",
       "小V品牌",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brand_middle_001",
@@ -12368,7 +14648,11 @@
     "tags": [
       "原創題",
       "小V品牌"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brand_middle_002",
@@ -12389,7 +14673,11 @@
     "tags": [
       "原創題",
       "小V品牌"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brand_middle_003",
@@ -12410,7 +14698,11 @@
     "tags": [
       "原創題",
       "小V品牌"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brand_middle_004",
@@ -12431,7 +14723,11 @@
     "tags": [
       "原創題",
       "小V品牌"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brand_middle_005",
@@ -12452,7 +14748,11 @@
     "tags": [
       "原創題",
       "小V品牌"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brand_middle_006",
@@ -12473,7 +14773,11 @@
     "tags": [
       "原創題",
       "小V品牌"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brand_middle_007",
@@ -12494,7 +14798,11 @@
     "tags": [
       "原創題",
       "小V品牌"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brand_middle_008",
@@ -12515,7 +14823,11 @@
     "tags": [
       "原創題",
       "小V品牌"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brand_middle_009",
@@ -12536,7 +14848,11 @@
     "tags": [
       "原創題",
       "小V品牌"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brand_middle_010",
@@ -12557,7 +14873,11 @@
     "tags": [
       "原創題",
       "小V品牌"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brand_middle_011",
@@ -12579,7 +14899,11 @@
       "原創題",
       "小V品牌",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brand_middle_012",
@@ -12601,7 +14925,11 @@
       "原創題",
       "小V品牌",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brand_middle_013",
@@ -12623,7 +14951,11 @@
       "原創題",
       "小V品牌",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brand_middle_014",
@@ -12645,7 +14977,11 @@
       "原創題",
       "小V品牌",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brand_middle_015",
@@ -12667,7 +15003,11 @@
       "原創題",
       "小V品牌",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brand_middle_016",
@@ -12689,7 +15029,11 @@
       "原創題",
       "小V品牌",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brand_middle_017",
@@ -12711,7 +15055,11 @@
       "原創題",
       "小V品牌",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brand_middle_018",
@@ -12733,7 +15081,11 @@
       "原創題",
       "小V品牌",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brand_middle_019",
@@ -12755,7 +15107,11 @@
       "原創題",
       "小V品牌",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brand_middle_020",
@@ -12777,7 +15133,11 @@
       "原創題",
       "小V品牌",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brand_middle_021",
@@ -12799,7 +15159,11 @@
       "原創題",
       "小V品牌",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brand_middle_022",
@@ -12821,7 +15185,11 @@
       "原創題",
       "小V品牌",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brand_middle_023",
@@ -12843,7 +15211,11 @@
       "原創題",
       "小V品牌",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brand_middle_024",
@@ -12865,7 +15237,11 @@
       "原創題",
       "小V品牌",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brand_middle_025",
@@ -12887,7 +15263,11 @@
       "原創題",
       "小V品牌",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brand_middle_026",
@@ -12909,7 +15289,11 @@
       "原創題",
       "小V品牌",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brand_middle_027",
@@ -12931,7 +15315,11 @@
       "原創題",
       "小V品牌",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brand_middle_028",
@@ -12953,7 +15341,11 @@
       "原創題",
       "小V品牌",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brand_middle_029",
@@ -12975,7 +15367,11 @@
       "原創題",
       "小V品牌",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brand_middle_030",
@@ -12997,7 +15393,11 @@
       "原創題",
       "小V品牌",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brand_high_001",
@@ -13018,7 +15418,11 @@
     "tags": [
       "原創題",
       "小V品牌"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brand_high_002",
@@ -13039,7 +15443,11 @@
     "tags": [
       "原創題",
       "小V品牌"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brand_high_003",
@@ -13060,7 +15468,11 @@
     "tags": [
       "原創題",
       "小V品牌"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brand_high_004",
@@ -13081,7 +15493,11 @@
     "tags": [
       "原創題",
       "小V品牌"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brand_high_005",
@@ -13102,7 +15518,11 @@
     "tags": [
       "原創題",
       "小V品牌"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brand_high_006",
@@ -13123,7 +15543,11 @@
     "tags": [
       "原創題",
       "小V品牌"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brand_high_007",
@@ -13144,7 +15568,11 @@
     "tags": [
       "原創題",
       "小V品牌"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brand_high_008",
@@ -13165,7 +15593,11 @@
     "tags": [
       "原創題",
       "小V品牌"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brand_high_009",
@@ -13186,7 +15618,11 @@
     "tags": [
       "原創題",
       "小V品牌"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brand_high_010",
@@ -13207,7 +15643,11 @@
     "tags": [
       "原創題",
       "小V品牌"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brand_high_011",
@@ -13229,7 +15669,11 @@
       "原創題",
       "小V品牌",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brand_high_012",
@@ -13251,7 +15695,11 @@
       "原創題",
       "小V品牌",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brand_high_013",
@@ -13273,7 +15721,11 @@
       "原創題",
       "小V品牌",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brand_high_014",
@@ -13295,7 +15747,11 @@
       "原創題",
       "小V品牌",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brand_high_015",
@@ -13317,7 +15773,11 @@
       "原創題",
       "小V品牌",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brand_high_016",
@@ -13339,7 +15799,11 @@
       "原創題",
       "小V品牌",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brand_high_017",
@@ -13361,7 +15825,11 @@
       "原創題",
       "小V品牌",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brand_high_018",
@@ -13383,7 +15851,11 @@
       "原創題",
       "小V品牌",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brand_high_019",
@@ -13405,7 +15877,11 @@
       "原創題",
       "小V品牌",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brand_high_020",
@@ -13427,7 +15903,11 @@
       "原創題",
       "小V品牌",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brand_high_021",
@@ -13449,7 +15929,11 @@
       "原創題",
       "小V品牌",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brand_high_022",
@@ -13471,7 +15955,11 @@
       "原創題",
       "小V品牌",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brand_high_023",
@@ -13493,7 +15981,11 @@
       "原創題",
       "小V品牌",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brand_high_024",
@@ -13515,7 +16007,11 @@
       "原創題",
       "小V品牌",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brand_high_025",
@@ -13537,7 +16033,11 @@
       "原創題",
       "小V品牌",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brand_high_026",
@@ -13559,7 +16059,11 @@
       "原創題",
       "小V品牌",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brand_high_027",
@@ -13581,7 +16085,11 @@
       "原創題",
       "小V品牌",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brand_high_028",
@@ -13603,7 +16111,11 @@
       "原創題",
       "小V品牌",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brand_high_029",
@@ -13625,7 +16137,11 @@
       "原創題",
       "小V品牌",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brand_high_030",
@@ -13647,7 +16163,11 @@
       "原創題",
       "小V品牌",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brain_low_001",
@@ -13669,7 +16189,11 @@
       "腦筋急轉彎",
       "原創題"
     ],
-    "questionType": "riddle"
+    "questionType": "riddle",
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brain_low_002",
@@ -13691,7 +16215,11 @@
       "腦筋急轉彎",
       "原創題"
     ],
-    "questionType": "riddle"
+    "questionType": "riddle",
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brain_low_003",
@@ -13713,7 +16241,11 @@
       "腦筋急轉彎",
       "原創題"
     ],
-    "questionType": "riddle"
+    "questionType": "riddle",
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brain_low_004",
@@ -13735,7 +16267,11 @@
       "腦筋急轉彎",
       "原創題"
     ],
-    "questionType": "riddle"
+    "questionType": "riddle",
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brain_low_005",
@@ -13757,7 +16293,11 @@
       "腦筋急轉彎",
       "原創題"
     ],
-    "questionType": "riddle"
+    "questionType": "riddle",
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brain_low_006",
@@ -13780,7 +16320,11 @@
       "諧音",
       "學生回饋修正"
     ],
-    "questionType": "riddle"
+    "questionType": "riddle",
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brain_low_007",
@@ -13802,7 +16346,11 @@
       "腦筋急轉彎",
       "原創題"
     ],
-    "questionType": "riddle"
+    "questionType": "riddle",
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brain_low_008",
@@ -13824,7 +16372,11 @@
       "腦筋急轉彎",
       "原創題"
     ],
-    "questionType": "riddle"
+    "questionType": "riddle",
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brain_low_009",
@@ -13846,7 +16398,11 @@
       "腦筋急轉彎",
       "原創題"
     ],
-    "questionType": "riddle"
+    "questionType": "riddle",
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brain_low_010",
@@ -13868,7 +16424,11 @@
       "腦筋急轉彎",
       "原創題"
     ],
-    "questionType": "riddle"
+    "questionType": "riddle",
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brain_low_011",
@@ -13890,7 +16450,11 @@
       "原創題",
       "腦筋急轉彎",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brain_low_012",
@@ -13912,7 +16476,11 @@
       "原創題",
       "腦筋急轉彎",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brain_low_013",
@@ -13934,7 +16502,11 @@
       "原創題",
       "腦筋急轉彎",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brain_low_014",
@@ -13956,7 +16528,11 @@
       "原創題",
       "腦筋急轉彎",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brain_low_015",
@@ -13978,7 +16554,11 @@
       "原創題",
       "腦筋急轉彎",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brain_low_016",
@@ -14000,7 +16580,11 @@
       "原創題",
       "腦筋急轉彎",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brain_low_017",
@@ -14022,7 +16606,11 @@
       "原創題",
       "腦筋急轉彎",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brain_low_018",
@@ -14044,7 +16632,11 @@
       "原創題",
       "腦筋急轉彎",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brain_low_019",
@@ -14066,7 +16658,11 @@
       "原創題",
       "腦筋急轉彎",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brain_low_020",
@@ -14088,7 +16684,11 @@
       "原創題",
       "腦筋急轉彎",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brain_low_021",
@@ -14110,7 +16710,11 @@
       "原創題",
       "腦筋急轉彎",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brain_low_022",
@@ -14132,7 +16736,11 @@
       "原創題",
       "腦筋急轉彎",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brain_low_023",
@@ -14154,7 +16762,11 @@
       "原創題",
       "腦筋急轉彎",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brain_low_024",
@@ -14176,7 +16788,11 @@
       "原創題",
       "腦筋急轉彎",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brain_low_025",
@@ -14198,7 +16814,11 @@
       "原創題",
       "腦筋急轉彎",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brain_low_026",
@@ -14220,7 +16840,11 @@
       "原創題",
       "腦筋急轉彎",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brain_low_027",
@@ -14242,7 +16866,11 @@
       "原創題",
       "腦筋急轉彎",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brain_low_028",
@@ -14264,7 +16892,11 @@
       "原創題",
       "腦筋急轉彎",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brain_low_029",
@@ -14286,7 +16918,11 @@
       "原創題",
       "腦筋急轉彎",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brain_low_030",
@@ -14308,7 +16944,11 @@
       "原創題",
       "腦筋急轉彎",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brain_middle_001",
@@ -14330,7 +16970,11 @@
       "腦筋急轉彎",
       "原創題"
     ],
-    "questionType": "riddle"
+    "questionType": "riddle",
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brain_middle_002",
@@ -14352,7 +16996,11 @@
       "腦筋急轉彎",
       "原創題"
     ],
-    "questionType": "riddle"
+    "questionType": "riddle",
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brain_middle_003",
@@ -14374,7 +17022,11 @@
       "腦筋急轉彎",
       "原創題"
     ],
-    "questionType": "riddle"
+    "questionType": "riddle",
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brain_middle_004",
@@ -14396,7 +17048,11 @@
       "腦筋急轉彎",
       "原創題"
     ],
-    "questionType": "riddle"
+    "questionType": "riddle",
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brain_middle_005",
@@ -14418,7 +17074,11 @@
       "腦筋急轉彎",
       "原創題"
     ],
-    "questionType": "riddle"
+    "questionType": "riddle",
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brain_middle_006",
@@ -14440,7 +17100,11 @@
       "腦筋急轉彎",
       "原創題"
     ],
-    "questionType": "riddle"
+    "questionType": "riddle",
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brain_middle_007",
@@ -14462,7 +17126,11 @@
       "腦筋急轉彎",
       "原創題"
     ],
-    "questionType": "riddle"
+    "questionType": "riddle",
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brain_middle_008",
@@ -14484,7 +17152,11 @@
       "腦筋急轉彎",
       "原創題"
     ],
-    "questionType": "riddle"
+    "questionType": "riddle",
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brain_middle_009",
@@ -14506,7 +17178,11 @@
       "腦筋急轉彎",
       "原創題"
     ],
-    "questionType": "riddle"
+    "questionType": "riddle",
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brain_middle_010",
@@ -14528,7 +17204,11 @@
       "腦筋急轉彎",
       "原創題"
     ],
-    "questionType": "riddle"
+    "questionType": "riddle",
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brain_middle_011",
@@ -14550,7 +17230,11 @@
       "原創題",
       "腦筋急轉彎",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brain_middle_012",
@@ -14572,7 +17256,11 @@
       "原創題",
       "腦筋急轉彎",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brain_middle_013",
@@ -14594,7 +17282,11 @@
       "原創題",
       "腦筋急轉彎",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brain_middle_014",
@@ -14616,7 +17308,11 @@
       "原創題",
       "腦筋急轉彎",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brain_middle_015",
@@ -14638,7 +17334,11 @@
       "原創題",
       "腦筋急轉彎",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brain_middle_016",
@@ -14660,7 +17360,11 @@
       "原創題",
       "腦筋急轉彎",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brain_middle_017",
@@ -14682,7 +17386,11 @@
       "原創題",
       "腦筋急轉彎",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brain_middle_018",
@@ -14704,7 +17412,11 @@
       "原創題",
       "腦筋急轉彎",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brain_middle_019",
@@ -14726,7 +17438,11 @@
       "原創題",
       "腦筋急轉彎",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brain_middle_020",
@@ -14748,7 +17464,11 @@
       "原創題",
       "腦筋急轉彎",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brain_middle_021",
@@ -14770,7 +17490,11 @@
       "原創題",
       "腦筋急轉彎",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brain_middle_022",
@@ -14792,7 +17516,11 @@
       "原創題",
       "腦筋急轉彎",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brain_middle_023",
@@ -14814,7 +17542,11 @@
       "原創題",
       "腦筋急轉彎",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brain_middle_024",
@@ -14836,7 +17568,11 @@
       "原創題",
       "腦筋急轉彎",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brain_middle_025",
@@ -14858,7 +17594,11 @@
       "原創題",
       "腦筋急轉彎",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brain_middle_026",
@@ -14880,7 +17620,11 @@
       "原創題",
       "腦筋急轉彎",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brain_middle_027",
@@ -14902,7 +17646,11 @@
       "原創題",
       "腦筋急轉彎",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brain_middle_028",
@@ -14924,7 +17672,11 @@
       "原創題",
       "腦筋急轉彎",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brain_middle_029",
@@ -14946,7 +17698,11 @@
       "原創題",
       "腦筋急轉彎",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brain_middle_030",
@@ -14968,7 +17724,11 @@
       "原創題",
       "腦筋急轉彎",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brain_high_001",
@@ -14990,7 +17750,11 @@
       "腦筋急轉彎",
       "原創題"
     ],
-    "questionType": "riddle"
+    "questionType": "riddle",
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brain_high_002",
@@ -15012,7 +17776,11 @@
       "腦筋急轉彎",
       "原創題"
     ],
-    "questionType": "riddle"
+    "questionType": "riddle",
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brain_high_003",
@@ -15034,7 +17802,11 @@
       "腦筋急轉彎",
       "原創題"
     ],
-    "questionType": "riddle"
+    "questionType": "riddle",
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brain_high_004",
@@ -15056,7 +17828,11 @@
       "腦筋急轉彎",
       "原創題"
     ],
-    "questionType": "riddle"
+    "questionType": "riddle",
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brain_high_005",
@@ -15078,7 +17854,11 @@
       "腦筋急轉彎",
       "原創題"
     ],
-    "questionType": "riddle"
+    "questionType": "riddle",
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brain_high_006",
@@ -15100,7 +17880,11 @@
       "腦筋急轉彎",
       "原創題"
     ],
-    "questionType": "riddle"
+    "questionType": "riddle",
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brain_high_007",
@@ -15122,7 +17906,11 @@
       "腦筋急轉彎",
       "原創題"
     ],
-    "questionType": "riddle"
+    "questionType": "riddle",
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brain_high_008",
@@ -15144,7 +17932,11 @@
       "腦筋急轉彎",
       "原創題"
     ],
-    "questionType": "riddle"
+    "questionType": "riddle",
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brain_high_009",
@@ -15166,7 +17958,11 @@
       "腦筋急轉彎",
       "原創題"
     ],
-    "questionType": "riddle"
+    "questionType": "riddle",
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brain_high_010",
@@ -15188,7 +17984,11 @@
       "腦筋急轉彎",
       "原創題"
     ],
-    "questionType": "riddle"
+    "questionType": "riddle",
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brain_high_011",
@@ -15210,7 +18010,11 @@
       "原創題",
       "腦筋急轉彎",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brain_high_012",
@@ -15232,7 +18036,11 @@
       "原創題",
       "腦筋急轉彎",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brain_high_013",
@@ -15254,7 +18062,11 @@
       "原創題",
       "腦筋急轉彎",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brain_high_014",
@@ -15276,7 +18088,11 @@
       "原創題",
       "腦筋急轉彎",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brain_high_015",
@@ -15298,7 +18114,11 @@
       "原創題",
       "腦筋急轉彎",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brain_high_016",
@@ -15320,7 +18140,11 @@
       "原創題",
       "腦筋急轉彎",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brain_high_017",
@@ -15342,7 +18166,11 @@
       "原創題",
       "腦筋急轉彎",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brain_high_018",
@@ -15364,7 +18192,11 @@
       "原創題",
       "腦筋急轉彎",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brain_high_019",
@@ -15386,7 +18218,11 @@
       "原創題",
       "腦筋急轉彎",
       "修正版"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brain_high_020",
@@ -15408,7 +18244,11 @@
       "原創題",
       "腦筋急轉彎",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brain_high_021",
@@ -15430,7 +18270,11 @@
       "原創題",
       "腦筋急轉彎",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brain_high_022",
@@ -15452,7 +18296,11 @@
       "原創題",
       "腦筋急轉彎",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brain_high_023",
@@ -15474,7 +18322,11 @@
       "原創題",
       "腦筋急轉彎",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brain_high_024",
@@ -15496,7 +18348,11 @@
       "原創題",
       "腦筋急轉彎",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brain_high_025",
@@ -15518,7 +18374,11 @@
       "原創題",
       "腦筋急轉彎",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brain_high_026",
@@ -15540,7 +18400,11 @@
       "原創題",
       "腦筋急轉彎",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brain_high_027",
@@ -15562,7 +18426,11 @@
       "原創題",
       "腦筋急轉彎",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brain_high_028",
@@ -15584,7 +18452,11 @@
       "原創題",
       "腦筋急轉彎",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brain_high_029",
@@ -15606,7 +18478,11 @@
       "原創題",
       "腦筋急轉彎",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   },
   {
     "id": "brain_high_030",
@@ -15628,6 +18504,10 @@
       "原創題",
       "腦筋急轉彎",
       "擴充題庫"
-    ]
+    ],
+    "disabled": false,
+    "quality": "ok",
+    "reviewNote": "",
+    "source": "manual"
   }
 ]

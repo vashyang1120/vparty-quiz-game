@@ -14,6 +14,8 @@
   --card:#ffffff;
   --text:#5a3a4a;
   --muted:#9b7a8a;
+  --text2:#9b7a8a;
+  --pink-bg:#fff0f6;
   --shadow:0 12px 32px rgba(232,111,154,.16);
   --radius:28px;
 }
@@ -168,3 +170,30 @@ main{flex:1;display:grid;place-items:center;padding:20px}
 .academy-result strong{display:block;color:var(--purple);font-size:16px;margin-bottom:6px}
 .academy-result.hidden{display:none}
 @media(max-width:620px){.academy-mini-grid{grid-template-columns:1fr}.academy-grade-lines div{flex-direction:column;gap:2px}.academy-head{flex-direction:column;align-items:flex-start}.academy-power strong{font-size:26px}}
+
+
+/* v0.1.6 V學園視覺優化：不改資料結構，只提升成績單、排行榜與結算呈現 */
+.academy-student-card{position:relative;overflow:hidden;border:2px solid rgba(255,133,161,.24);background:
+  radial-gradient(circle at 14% 20%,rgba(255,209,102,.32),transparent 26%),
+  radial-gradient(circle at 90% 0%,rgba(199,125,255,.28),transparent 28%),
+  linear-gradient(135deg,#fff8fb,#fffdf2 55%,#f7f0ff);}
+.academy-student-card::after{content:"V ACADEMY";position:absolute;right:-22px;bottom:8px;font-family:'Fredoka One','Nunito',sans-serif;font-size:34px;letter-spacing:.08em;color:rgba(155,93,229,.055);transform:rotate(-8deg);pointer-events:none}
+.academy-head strong{font-size:19px;display:block}
+.academy-head small{display:inline-flex;margin-top:5px;background:linear-gradient(135deg,var(--purple),var(--pink2));color:#fff;border-radius:999px;padding:4px 10px;font-size:11px;font-weight:900;box-shadow:0 5px 14px rgba(155,93,229,.18)}
+.academy-power-hero{position:relative;background:linear-gradient(135deg,#fff,#fff7fb);border:1.5px solid rgba(155,93,229,.16);box-shadow:inset 0 0 0 1px rgba(255,255,255,.7)}
+.academy-power-hero strong{font-size:36px;text-shadow:0 4px 16px rgba(155,93,229,.16)}
+.academy-power-hero em{font-style:normal;font-size:10px;color:var(--muted);font-weight:900;letter-spacing:.12em;text-transform:uppercase}
+.academy-grade-row{display:block!important;padding:10px 12px!important}
+.academy-grade-top{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:7px}
+.academy-grade-top span{color:var(--text);font-weight:900}
+.academy-bar{height:9px;background:#fff0f6;border-radius:999px;overflow:hidden;box-shadow:inset 0 0 0 1px rgba(255,133,161,.16)}
+.academy-bar i{display:block;width:0%;height:100%;border-radius:999px;background:linear-gradient(90deg,var(--pink),var(--purple2));transition:width .45s ease}
+.academy-result{box-shadow:0 6px 20px rgba(155,93,229,.08)}
+.lb-tabs{background:#fff7fb;border:1.5px solid var(--pinkLight);border-radius:999px;padding:6px;display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.lb-tabs .btn{border-radius:999px;border-color:transparent;background:transparent;color:var(--muted)}
+.lb-tabs .btn.active{background:linear-gradient(135deg,var(--pink),var(--pink2));color:#fff;border-color:transparent;box-shadow:0 6px 18px rgba(232,111,154,.25)}
+.lb-row{background:linear-gradient(135deg,#fff,#fff7fb);box-shadow:0 4px 14px rgba(232,111,154,.08)}
+.lb-main span b{color:var(--purple);font-weight:900}
+.lb-score{display:flex;flex-direction:column;align-items:flex-end;line-height:1.05}
+.lb-score small{font-family:'Nunito','Noto Sans TC',sans-serif;font-size:10px;color:var(--muted);font-weight:900;margin-bottom:3px}
+@media(max-width:720px){.lb-score{align-items:flex-start}.academy-student-card::after{font-size:24px;right:-15px}.academy-power-hero strong{font-size:30px}}

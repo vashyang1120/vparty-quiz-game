@@ -1,4 +1,4 @@
-/* 小V知識挑戰 quiz-v0.1.5-academy-progress
+/* 小V知識挑戰 quiz-v0.1.6-academy-visual-polish
    目標：穩定可跑、沿用共用玩家身份、寫入 gameLogs/quiz、quizProgress 與年級累積排行榜。
    V幣：第一版只預留 wallet / vCoinLogs 註解，不實際發放。
 */
@@ -16,7 +16,7 @@ var FIREBASE_CONFIG = {
 };
 var FIREBASE_ENABLED = true;
 
-var QUIZ_VERSION = "quiz-v0.1.5-academy-progress";
+var QUIZ_VERSION = "quiz-v0.1.6-academy-visual-polish";
 
 var DB_PATHS = {
   gameLogs:            "gameLogs/quiz",
@@ -903,8 +903,9 @@ function saveQuizResult(totalTime, accuracy){
       var lines = ["✅ 本次紀錄已保存"];
       if (bestUpdated) lines.push("✅ " + subjectName + "最佳紀錄刷新！");
       else if (progress) lines.push(subjectName + "最佳仍維持 " + (progress.bestScore || 0) + " 分");
-      lines.push((record.gradeBandName || record.gradeBand) + "總分：" + (gradeRecord.gradeTotalScore || 0) + " 分");
+      lines.push("🌱 " + (record.gradeBandName || record.gradeBand) + "總分：" + (gradeRecord.gradeTotalScore || 0) + " 分");
       lines.push("🏆 總榜總分：" + (mainRecord.totalScore || 0) + " 分");
+      if (!bestUpdated) lines.push("再挑戰其他科目，也可以提升 V學園完成度。");
       $("save-status").textContent = lines.join("\n");
 
       if ($("result-academy-progress") && $("result-academy-lines")) {
@@ -1293,6 +1294,26 @@ function updateQuizAcademyProgress(){
   });
 }
 
+
+function getAcademyTitle(quizPower){
+  quizPower = Number(quizPower || 0);
+  if (quizPower >= 6000) return "V學園傳說挑戰者";
+  if (quizPower >= 4000) return "知識派對王";
+  if (quizPower >= 2500) return "V學園優等生";
+  if (quizPower >= 1500) return "氣球智慧使者";
+  if (quizPower >= 800) return "派對知識學徒";
+  if (quizPower >= 300) return "見習知識魔法師";
+  return "V學園新生";
+}
+
+function setAcademyProgressBar(gradeKey, completed, total){
+  var bar = $("academy-" + gradeKey + "-bar");
+  if (!bar) return;
+  total = Math.max(1, Number(total || SUBJECT_OPTIONS.length));
+  var pct = Math.max(0, Math.min(100, Math.round((Number(completed || 0) / total) * 100)));
+  bar.style.width = pct + "%";
+}
+
 function renderAcademyProgress(academy){
   academy = academy || {
     quizPower: 0,
@@ -1308,15 +1329,20 @@ function renderAcademyProgress(academy){
   };
 
   var totalSlots = academy.totalSubjectSlots || getTotalSubjectSlots();
-  if ($("academy-power")) $("academy-power").textContent = academy.quizPower || 0;
+  var quizPower = Number(academy.quizPower || 0);
+  if ($("academy-power")) $("academy-power").textContent = quizPower;
+  if ($("academy-title")) $("academy-title").textContent = getAcademyTitle(quizPower);
   if ($("academy-completed")) $("academy-completed").textContent = (academy.completedSubjects || 0) + " / " + totalSlots;
   if ($("academy-perfect")) $("academy-perfect").textContent = academy.perfectSubjects || 0;
   if ($("academy-correct")) $("academy-correct").textContent = academy.totalCorrect || 0;
 
   GRADE_OPTIONS.forEach(function(g){
     var gp = (academy.gradeProgress && academy.gradeProgress[g.key]) || getEmptyGradeProgress();
+    var total = gp.totalSubjects || SUBJECT_OPTIONS.length;
+    var completed = gp.completedSubjects || 0;
     var el = $("academy-" + g.key);
-    if (el) el.textContent = (gp.completedSubjects || 0) + " / " + (gp.totalSubjects || SUBJECT_OPTIONS.length) + "｜滿分 " + (gp.perfectSubjects || 0);
+    if (el) el.textContent = completed + " / " + total + "｜滿分 " + (gp.perfectSubjects || 0);
+    setAcademyProgressBar(g.key, completed, total);
   });
 
   if ($("academy-updated")) {
@@ -1344,14 +1370,17 @@ function buildAcademyResultLines(before, after){
   if (!after) return "V學園進度暫時無法更新。";
   var beforePower = before ? Number(before.quizPower || 0) : 0;
   var afterPower = Number(after.quizPower || 0);
+  var delta = afterPower - beforePower;
   var gradeKey = selectedGrade;
   var grade = GRADE_OPTIONS.find(function(g){ return g.key === gradeKey; }) || {name:gradeKey};
   var gp = (after.gradeProgress && after.gradeProgress[gradeKey]) || getEmptyGradeProgress();
   var lines = [];
-  lines.push("知識力：" + beforePower + " → " + afterPower);
+  lines.push("知識力：" + beforePower + " → " + afterPower + (delta > 0 ? "（+" + delta + "）" : ""));
+  lines.push("稱號：" + getAcademyTitle(afterPower));
   lines.push("已挑戰科目：" + (after.completedSubjects || 0) + " / " + (after.totalSubjectSlots || getTotalSubjectSlots()));
   lines.push("滿分科目：" + (after.perfectSubjects || 0));
   lines.push(grade.name + "進度：" + (gp.completedSubjects || 0) + " / " + (gp.totalSubjects || SUBJECT_OPTIONS.length) + "｜滿分 " + (gp.perfectSubjects || 0));
+  if (delta <= 0) lines.push("提示：挑戰其他科目或刷新最佳紀錄，也能推進 V學園進度！");
   return lines.join("\n");
 }
 
@@ -1407,8 +1436,8 @@ function updateLeaderboardTabs(){
   });
   var desc = $("leaderboard-desc");
   if (!desc) return;
-  if (leaderboardMode === "main") desc.textContent = "leaderboards/quiz/main/{playerKey}：三個年級總分加總的綜合榜。";
-  else desc.textContent = "leaderboards/quiz/byGrade/" + leaderboardMode + "/{playerKey}：該年級各科最佳分數加總。";
+  if (leaderboardMode === "main") desc.textContent = "🏆 總榜：低 / 中 / 高三個年級總分加總，代表玩家目前的 V學園整體成就。";
+  else desc.textContent = "年級榜：該年級各科最佳分數加總，鼓勵挑戰不同科目。";
 }
 
 function renderLeaderboardRows(rows){
@@ -1431,15 +1460,15 @@ function renderLeaderboardRows(rows){
         '<div class="lb-rank">' + (idx + 1) + '</div>' +
         '<img src="' + escapeHtml(src) + '" alt="">' +
         '<div class="lb-main"><strong>' + escapeHtml(r.name || r.id || "玩家") + '</strong>' +
-        '<span>' + (r.completedSubjects || 0) + '科 / 滿分' + (r.perfectSubjects || 0) + '科｜' + escapeHtml(r.gradeSummaryText || "尚未完成挑戰") + '</span></div>' +
-        '<div class="lb-score">' + (r.totalScore || 0) + '</div>';
+        '<span><b>總成就</b>｜' + (r.completedSubjects || 0) + '科 / 滿分' + (r.perfectSubjects || 0) + '科｜' + escapeHtml(r.gradeSummaryText || "尚未完成挑戰") + '</span></div>' +
+        '<div class="lb-score"><small>總分</small>' + (r.totalScore || 0) + '</div>';
     } else {
       row.innerHTML =
         '<div class="lb-rank">' + (idx + 1) + '</div>' +
         '<img src="' + escapeHtml(src) + '" alt="">' +
         '<div class="lb-main"><strong>' + escapeHtml(r.name || r.id || "玩家") + '</strong>' +
-        '<span>' + (r.completedSubjects || 0) + '科 / 滿分' + (r.perfectSubjects || 0) + '科｜' + escapeHtml((r.subjectNames || []).join(" / ") || r.subjectSummaryText || "-") + '｜' + formatSeconds(r.totalTimeUsed || 0) + '</span></div>' +
-        '<div class="lb-score">' + (r.gradeTotalScore || 0) + '</div>';
+        '<span><b>年級累積</b>｜' + (r.completedSubjects || 0) + '科 / 滿分' + (r.perfectSubjects || 0) + '科｜' + escapeHtml((r.subjectNames || []).join(" / ") || r.subjectSummaryText || "-") + '｜' + formatSeconds(r.totalTimeUsed || 0) + '</span></div>' +
+        '<div class="lb-score"><small>年級分</small>' + (r.gradeTotalScore || 0) + '</div>';
     }
     listEl.appendChild(row);
   });

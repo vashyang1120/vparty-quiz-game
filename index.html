@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
-  <title>小V知識挑戰｜quiz-v0.2.0-v-academy-quiz-show</title>
+  <title>小V知識挑戰｜quiz-v0.2.1-rhythm-music-player-audio-balance</title>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
-  <link rel="stylesheet" href="./style.css?v=quiz-v0.2.0-v-academy-quiz-show">
+  <link rel="stylesheet" href="./style.css?v=quiz-v0.2.1-rhythm-music-player-audio-balance">
 </head>
 <body>
   <div id="app">
@@ -16,7 +16,7 @@
         <div class="logo-bubble">🎈</div>
         <div>
           <h1>小V知識挑戰</h1>
-          <p>quiz-v0.2.0-v-academy-quiz-show</p>
+          <p>quiz-v0.2.1-rhythm-music-player-audio-balance</p>
         </div>
       </div>
       <div class="player-chip">
@@ -72,6 +72,7 @@
             <button id="btn-go-profile" class="btn primary">👤 玩家設定</button>
             <button id="btn-go-setup" class="btn secondary">🎮 開始挑戰</button>
             <button id="btn-go-leaderboard" class="btn ghost">🏆 排行榜</button>
+            <button id="btn-music-title" class="btn ghost">🎵 音樂</button>
           </div>
           <div class="notice">
             V幣仍只預留，不發放；本版新增 Quiz Show 限時、主持人提示與音效。
@@ -154,6 +155,15 @@
             <div><span>Combo</span><strong id="hud-combo">0</strong></div>
             <div><span>總時間</span><strong id="hud-time">0s</strong></div>
             <button id="btn-sound-toggle" class="sound-toggle" type="button">🔊 音效</button>
+            <div class="music-mini quiz-music-mini">
+              <div class="mini-title" id="mini-title">🎵 音樂載入中</div>
+              <div class="mc-row">
+                <button class="mc-btn" id="mc-prev" type="button">⏮</button>
+                <button class="mc-btn" id="mc-play" type="button">▶</button>
+                <button class="mc-btn" id="mc-next" type="button">⏭</button>
+                <button class="mc-btn" id="mc-list" type="button">☰</button>
+              </div>
+            </div>
           </div>
 
           <div class="host-card" id="host-card">
@@ -231,9 +241,44 @@
       </section>
     </main>
 
+
+    <div id="music-modal" class="music-modal">
+      <div class="mp">
+        <div class="mp-head">
+          <div class="mp-ttl">🎵 音樂播放器</div>
+          <button class="mp-x" id="mp-close" type="button">✕</button>
+        </div>
+        <div class="mp-now">
+          <div class="mp-disc" id="mp-disc">🎈</div>
+          <div class="mp-nt" id="mp-nt">— 尚未播放 —</div>
+          <div class="mp-ar" id="mp-ar">氣球小V</div>
+        </div>
+        <div class="mp-prog-row">
+          <div class="mp-time" id="mp-cur">0:00</div>
+          <div class="mp-prog" id="mp-prog"><div class="mp-prog-fill" id="mp-fill"></div></div>
+          <div class="mp-time" id="mp-dur">0:00</div>
+        </div>
+        <div class="mp-ctrl">
+          <button class="mpb sm" id="mp-loop" type="button">🔁</button>
+          <button class="mpb sm" id="mp-prev2" type="button">⏮</button>
+          <button class="mpb lg" id="mp-play2" type="button">▶</button>
+          <button class="mpb sm" id="mp-next2" type="button">⏭</button>
+          <button class="mpb sm" id="mp-shuf" type="button">🔀</button>
+        </div>
+        <div class="mp-vol-row">
+          <span>🔈</span>
+          <input type="range" class="mp-vol" id="mp-vol" min="0" max="100" value="10">
+          <span>🔊</span>
+          <div class="mp-badge" id="mp-badge">全部循環</div>
+        </div>
+        <div class="mp-list-hd">播放清單｜來源：節奏遊戲 songs.json</div>
+        <div class="mp-list" id="mp-list"></div>
+      </div>
+    </div>
+
     <div id="toast" class="toast"></div>
   </div>
 
-  <script src="./main.js?v=quiz-v0.2.0-v-academy-quiz-show"></script>
+  <script src="./main.js?v=quiz-v0.2.1-rhythm-music-player-audio-balance"></script>
 </body>
 </html>

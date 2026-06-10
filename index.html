@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
-  <title>小V知識挑戰｜quiz-v0.2.7-host-sticker-assets-fix</title>
+  <title>小V知識挑戰｜quiz-v0.2.8-host-sticker-pause-layout-fix</title>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
-  <link rel="stylesheet" href="./style.css?v=quiz-v0.2.7-host-sticker-assets-fix">
+  <link rel="stylesheet" href="./style.css?v=quiz-v0.2.8-host-sticker-pause-layout-fix">
 </head>
 <body>
   <div id="app">
@@ -16,7 +16,7 @@
         <div class="logo-bubble">🎈</div>
         <div>
           <h1>小V知識挑戰</h1>
-          <p>quiz-v0.2.7-host-sticker-assets-fix</p>
+          <p>quiz-v0.2.8-host-sticker-pause-layout-fix</p>
         </div>
       </div>
       <div class="player-chip">
@@ -166,6 +166,7 @@
             <div><span>Combo</span><strong id="hud-combo">0</strong></div>
             <div><span>總時間</span><strong id="hud-time">0s</strong></div>
             <button id="btn-sound-toggle" class="sound-toggle" type="button">🔊 音效</button>
+            <button id="btn-pause-quiz" class="pause-toggle" type="button">⏸ 暫停</button>
             <div class="music-mini quiz-music-mini">
               <div class="mini-title" id="mini-title">🎵 音樂載入中</div>
               <div class="mc-row">
@@ -204,6 +205,20 @@
               <strong id="answer-result">答題結果</strong>
               <p id="explanation-text"></p>
               <button id="btn-next-question" class="btn primary">下一題</button>
+            </div>
+          </div>
+
+          <div id="quiz-pause-overlay" class="quiz-pause-overlay hidden" role="dialog" aria-modal="true" aria-label="挑戰暫停">
+            <div class="pause-panel">
+              <img id="pause-host-image" class="pause-host-image" src="" alt="暫停中的小V主持人">
+              <div class="pause-copy">
+                <strong>⏸ 挑戰暫停</strong>
+                <p>題目已遮住，倒數已停止。準備好後再繼續挑戰！</p>
+              </div>
+              <div class="pause-actions">
+                <button id="btn-resume-quiz" class="btn primary" type="button">▶ 繼續挑戰</button>
+                <button id="btn-pause-quit" class="btn ghost" type="button">🏠 離開本局</button>
+              </div>
             </div>
           </div>
 
@@ -300,6 +315,6 @@
     <div id="toast" class="toast"></div>
   </div>
 
-  <script src="./main.js?v=quiz-v0.2.7-host-sticker-assets-fix"></script>
+  <script src="./main.js?v=quiz-v0.2.8-host-sticker-pause-layout-fix"></script>
 </body>
 </html>

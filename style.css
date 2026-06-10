@@ -571,36 +571,96 @@ main{flex:1;display:grid;place-items:center;padding:20px}
 }
 
 
-/* ── v0.2.7 Host Assets / Sticker Fix ──
-   只修主持人素材狀態與成績單貼紙呈現；不改音樂播放器、Firebase、排行榜與題庫邏輯。 */
+/* ── quiz-v0.2.8-host-sticker-pause-layout-fix: sticker placement, larger host image, real pause overlay ── */
+.quiz-hud{grid-template-columns:repeat(4,1fr) auto auto auto;align-items:stretch;}
+.pause-toggle{border:1.5px solid rgba(255,190,11,.45);background:#fff8e6;border-radius:18px;padding:8px 12px;color:#9b6a00;font-weight:900;box-shadow:0 4px 14px rgba(255,190,11,.14);min-width:86px;}
+.pause-toggle:active{transform:scale(.94)}
+
 .academy-student-card{overflow:visible;}
 .academy-mascot{
-  right:-56px !important;
-  bottom:-22px !important;
-  width:128px !important;
-  max-width:26% !important;
-  opacity:1 !important;
-  z-index:4 !important;
-  pointer-events:none !important;
-  transform:rotate(-3deg) !important;
-  background:rgba(255,255,255,.94) !important;
-  border:3px solid rgba(255,255,255,.98) !important;
-  border-radius:28px !important;
-  padding:4px !important;
-  box-shadow:0 14px 28px rgba(101,52,131,.18),0 0 0 2px rgba(255,182,215,.55) !important;
-  filter:drop-shadow(0 8px 10px rgba(101,52,131,.10)) !important;
+  position:absolute;
+  right:-112px;
+  bottom:-34px;
+  width:108px;
+  max-width:none;
+  opacity:1;
+  z-index:6;
+  pointer-events:none;
+  background:rgba(255,255,255,.96);
+  border:3px solid #fff;
+  border-radius:24px;
+  padding:6px;
+  box-shadow:0 14px 30px rgba(101,52,131,.18),0 0 0 1.5px rgba(255,182,215,.55);
+  filter:drop-shadow(0 10px 16px rgba(80,40,90,.12));
+  transform:rotate(3deg);
 }
 .academy-student-card > *:not(.academy-mascot){position:relative;z-index:1;}
-.leaderboard-brand-image,.result-host-image{
-  opacity:1 !important;
+
+.brand-host-card{
+  min-height:210px;
+  align-items:center;
+  gap:24px;
+  padding:18px 26px;
 }
-@media(max-width:720px){
-  .academy-mascot{
-    right:-18px !important;
-    bottom:-12px !important;
-    width:88px !important;
-    max-width:30% !important;
-    opacity:1 !important;
-    border-radius:22px !important;
-  }
+.brand-host-card .host-avatar{
+  width:190px;
+  height:190px;
+  border-radius:32px;
+  background:rgba(255,255,255,.16);
+  box-shadow:0 0 0 6px rgba(255,255,255,.15),0 14px 28px rgba(40,10,70,.20);
+  overflow:hidden;
+  padding:8px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-shrink:0;
+}
+.brand-host-card .host-avatar img{width:100%;height:100%;object-fit:contain;display:block;}
+.brand-host-card .host-lines strong{font-size:17px;letter-spacing:.08em;}
+.brand-host-card .host-lines span{font-size:23px;line-height:1.45;max-width:760px;}
+.host-card.host-timeout{background:linear-gradient(135deg,#45204c,#6e2430,#d86b00);}
+
+.quiz-pause-overlay{
+  position:absolute;
+  inset:0;
+  z-index:95;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  border-radius:28px;
+  background:rgba(35,12,54,.86);
+  backdrop-filter:blur(10px);
+  box-shadow:inset 0 0 0 2px rgba(255,255,255,.12);
+}
+.quiz-pause-overlay.hidden{display:none!important;}
+.pause-panel{
+  width:min(560px,92%);
+  background:linear-gradient(145deg,#fff7fb,#f8f0ff 58%,#fff7e5);
+  border:2px solid rgba(255,255,255,.85);
+  border-radius:32px;
+  padding:24px;
+  text-align:center;
+  box-shadow:0 28px 70px rgba(15,5,35,.38);
+  color:var(--text);
+}
+.pause-host-image{
+  display:block;
+  width:min(230px,58vw);
+  max-height:260px;
+  object-fit:contain;
+  margin:0 auto 8px;
+  filter:drop-shadow(0 18px 26px rgba(101,52,131,.20));
+}
+.pause-copy strong{display:block;font-family:'Fredoka One','Noto Sans TC',cursive;font-size:clamp(24px,5vw,36px);color:var(--pink2);margin-bottom:6px;}
+.pause-copy p{margin:0;color:var(--muted);font-weight:900;line-height:1.7;}
+.pause-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:18px;}
+
+@media(max-width:760px){
+  .quiz-hud{grid-template-columns:repeat(2,1fr);}
+  .sound-toggle,.pause-toggle,.music-mini{grid-column:1 / -1;width:100%;}
+  .brand-host-card{min-height:0;gap:14px;padding:14px;align-items:flex-start;}
+  .brand-host-card .host-avatar{width:128px;height:128px;border-radius:24px;padding:5px;}
+  .brand-host-card .host-lines span{font-size:16px;}
+  .academy-mascot{right:-28px;bottom:-22px;width:72px;max-width:none;opacity:1;border-radius:18px;padding:4px;}
 }

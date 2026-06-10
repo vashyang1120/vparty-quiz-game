@@ -1,4 +1,4 @@
-/* 小V知識挑戰 quiz-v0.2.2-auto-bgm-louder-sfx
+/* 小V知識挑戰 quiz-v0.2.8-host-sticker-pause-layout-fix
    目標：穩定可跑、沿用共用玩家身份、寫入 gameLogs/quiz、quizProgress 與年級累積排行榜。
    V幣：第一版只預留 wallet / vCoinLogs 註解，不實際發放。
 */
@@ -16,7 +16,7 @@ var FIREBASE_CONFIG = {
 };
 var FIREBASE_ENABLED = true;
 
-var QUIZ_VERSION = "quiz-v0.2.7-host-sticker-assets-fix";
+var QUIZ_VERSION = "quiz-v0.2.8-host-sticker-pause-layout-fix";
 
 var DB_PATHS = {
   gameLogs:            "gameLogs/quiz",
@@ -132,6 +132,9 @@ var quizState = {
   questionTimer: null,
   questionTimeLeft: QUESTION_TIME_LIMIT,
   questionAnswered: false,
+  paused: false,
+  pauseStartedAt: 0,
+  wasMusicPlayingBeforePause: false,
   totalQuestions: 10
 };
 
@@ -171,21 +174,22 @@ function setImageSrc(id, src){
 
 function getHostArtByTone(tone){
   if (tone === "correct") return HOST_ART.correct;
-  if (tone === "wrong") return HOST_ART.wrong;
-  if (tone === "timeout") return HOST_ART.timeout;
+  if (tone === "wrong") return HOST_ART.wrong || HOST_ART.question;
+  if (tone === "timeout") return HOST_ART.timeout || HOST_ART.wrong || HOST_ART.question;
   if (tone === "urgent") return HOST_ART.timewarning;
-  if (tone === "result") return HOST_ART.result;
-  if (tone === "ranking") return HOST_ART.ranking;
   if (tone === "intro") return HOST_ART.intro;
+  if (tone === "result") return HOST_ART.result || HOST_ART.correct;
+  if (tone === "ranking") return HOST_ART.ranking || HOST_ART.intro;
   return HOST_ART.question;
 }
 
 function refreshBrandHostVisuals(){
   setImageSrc("home-host-image", HOST_ART.intro);
   setImageSrc("academy-host-image", HOST_ART.correct);
-  setImageSrc("leaderboard-brand-image", HOST_ART.ranking);
-  setImageSrc("result-host-image", HOST_ART.result);
+  setImageSrc("leaderboard-brand-image", HOST_ART.ranking || HOST_ART.intro);
+  setImageSrc("result-host-image", HOST_ART.result || HOST_ART.correct);
   setImageSrc("host-image", HOST_ART.question);
+  setImageSrc("pause-host-image", HOST_ART.timeout || HOST_ART.timewarning || HOST_ART.question);
 }
 
 function setHostMessage(msg, tone){
@@ -194,13 +198,13 @@ function setHostMessage(msg, tone){
   setImageSrc("host-image", getHostArtByTone(tone));
   var card = $("host-card");
   if (card) {
-    card.classList.remove("host-correct","host-wrong","host-urgent");
+    card.classList.remove("host-correct","host-wrong","host-urgent","host-timeout");
     if (tone) card.classList.add("host-" + tone);
   }
 }
 
 function setResultHostVisual(){
-  setImageSrc("result-host-image", HOST_ART.result);
+  setImageSrc("result-host-image", HOST_ART.result || HOST_ART.correct || HOST_ART.intro);
 }
 
 function updateSoundButton(){
@@ -439,13 +443,13 @@ function showScreen(id){
   document.querySelectorAll(".screen").forEach(function(s){ s.classList.remove("active"); });
   var el = $(id);
   if (el) el.classList.add("active");
-  if (id !== "screen-quiz") { stopQuizTimer(); stopQuestionTimer(); }
+  if (id !== "screen-quiz") { stopQuizTimer(); stopQuestionTimer(); quizState.paused = false; hidePauseOverlay(); }
   if (id === "screen-title") {
     setImageSrc("home-host-image", HOST_ART.intro);
     setImageSrc("academy-host-image", HOST_ART.correct);
   }
   if (id === "screen-leaderboard") {
-    setImageSrc("leaderboard-brand-image", HOST_ART.ranking);
+    setImageSrc("leaderboard-brand-image", HOST_ART.ranking || HOST_ART.intro);
     renderLeaderboard();
   }
 }
@@ -999,6 +1003,10 @@ function startQuiz(){
   quizState.questionStartedAt = Date.now();
   quizState.questionTimeLeft = QUESTION_TIME_LIMIT;
   quizState.questionAnswered = false;
+  quizState.paused = false;
+  quizState.pauseStartedAt = 0;
+  quizState.wasMusicPlayingBeforePause = false;
+  hidePauseOverlay();
   quizState.totalQuestions = 10;
   ensureAudioContext();
   startQuizBgm();
@@ -1011,6 +1019,7 @@ function startQuiz(){
 function startQuizTimer(){
   stopQuizTimer();
   quizState.timeTimer = setInterval(function(){
+    if (quizState.paused) return;
     var sec = Math.floor((Date.now() - quizState.startedAt) / 1000);
     $("hud-time").textContent = sec + "s";
   }, 250);
@@ -1026,12 +1035,12 @@ function stopQuestionTimer(){
   quizState.questionTimer = null;
 }
 
-function startQuestionCountdown(){
+function startQuestionCountdown(reset){
   stopQuestionTimer();
-  quizState.questionTimeLeft = QUESTION_TIME_LIMIT;
+  if (reset !== false) quizState.questionTimeLeft = QUESTION_TIME_LIMIT;
   updateQuestionTimerUI();
   quizState.questionTimer = setInterval(function(){
-    if (!quizState.active || quizState.questionAnswered) return;
+    if (!quizState.active || quizState.questionAnswered || quizState.paused) return;
     quizState.questionTimeLeft -= 1;
     if (quizState.questionTimeLeft <= 5 && quizState.questionTimeLeft > 0) {
       playTick(quizState.questionTimeLeft);
@@ -1061,6 +1070,48 @@ function handleQuestionTimeout(){
   playTimeout();
   answerQuestion(-1, true);
 }
+function hidePauseOverlay(){
+  var ov = $("quiz-pause-overlay");
+  if (ov) ov.classList.add("hidden");
+}
+
+function showPauseOverlay(){
+  setImageSrc("pause-host-image", HOST_ART.timeout || HOST_ART.timewarning || HOST_ART.question);
+  var ov = $("quiz-pause-overlay");
+  if (ov) ov.classList.remove("hidden");
+}
+
+function pauseQuiz(){
+  if (!quizState.active || quizState.paused) return;
+  if (quizState.questionAnswered) {
+    toast("本題已作答，請先看解析或進下一題。");
+    return;
+  }
+  quizState.paused = true;
+  quizState.pauseStartedAt = Date.now();
+  quizState.wasMusicPlayingBeforePause = !!musicPlaying;
+  stopQuizTimer();
+  stopQuestionTimer();
+  if (musicPlaying) pauseSong();
+  setHostMessage("挑戰暫停中。題目已遮住，準備好再繼續！", "urgent");
+  showPauseOverlay();
+}
+
+function resumeQuiz(){
+  if (!quizState.active || !quizState.paused) return;
+  var pausedMs = Math.max(0, Date.now() - (quizState.pauseStartedAt || Date.now()));
+  quizState.startedAt += pausedMs;
+  quizState.questionStartedAt += pausedMs;
+  quizState.paused = false;
+  quizState.pauseStartedAt = 0;
+  hidePauseOverlay();
+  if (quizState.wasMusicPlayingBeforePause) playSong();
+  setHostMessage("繼續挑戰！請看題～", "");
+  startQuizTimer();
+  startQuestionCountdown(false);
+  updateQuestionTimerUI();
+}
+
 
 function renderQuestion(){
   var q = quizState.questions[quizState.currentIndex];
@@ -1137,7 +1188,7 @@ function answerQuestion(selectedIndex, timedOut){
   var qCard = document.querySelector(".question-card");
   if (qCard) qCard.classList.add(correct ? "show-correct" : (timedOut ? "show-timeout" : "show-wrong"));
   if (correct) { playCorrect(); setHostMessage("太棒了！魔法氣球升起，combo 繼續累積！", "correct"); }
-  else if (timedOut) { playTimeout(); setHostMessage("時間到！沒關係，來看看解析，下題再出發。", "timeout"); }
+  else if (timedOut) { setHostMessage("時間到！沒關係，來看看解析，下題再出發。", "timeout"); }
   else { playWrong(); setHostMessage("沒關係，來看看解析，下一題再追回來！", "wrong"); }
 
   $("answer-result").textContent = correct ? "✅ 答對了！" : (timedOut ? "⏰ 時間到！" : "❌ 答錯了");
@@ -1941,6 +1992,25 @@ function bindEvents(){
     });
   }
   bindMusicEvents();
+  if ($("btn-pause-quiz")) $("btn-pause-quiz").addEventListener("click", pauseQuiz);
+  if ($("btn-resume-quiz")) $("btn-resume-quiz").addEventListener("click", resumeQuiz);
+  if ($("btn-pause-quit")) $("btn-pause-quit").addEventListener("click", function(){
+    if (confirm("確定要離開本次挑戰嗎？本局不會寫入紀錄。")) {
+      quizState.paused = false;
+      hidePauseOverlay();
+      quizState.paused = false;
+      hidePauseOverlay();
+      stopQuizTimer();
+      stopQuestionTimer();
+      showScreen("screen-title");
+    }
+  });
+  document.addEventListener("keydown", function(e){
+    if (e.key === "Escape" && quizState.active && document.querySelector("#screen-quiz.active")) {
+      if (quizState.paused) resumeQuiz();
+      else pauseQuiz();
+    }
+  });
   $("btn-start-quiz").addEventListener("click", startQuiz);
   $("btn-play-again").addEventListener("click", function(){ showScreen("screen-setup"); });
   $("btn-quit-quiz").addEventListener("click", function(){

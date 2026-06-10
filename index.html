@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
-  <title>小V知識挑戰｜quiz-v0.2.21-question-quality-system</title>
+  <title>小V知識挑戰｜quiz-v0.2.22-quiz-admin-panel</title>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
-  <link rel="stylesheet" href="./style.css?v=quiz-v0.2.21-question-quality-system">
+  <link rel="stylesheet" href="./style.css?v=quiz-v0.2.22-quiz-admin-panel">
 </head>
 <body>
   <div id="app">
@@ -15,8 +15,8 @@
       <div class="brand">
         <div class="logo-bubble">🎈</div>
         <div>
-          <h1>小V知識挑戰</h1>
-          <p>quiz-v0.2.21-question-quality-system</p>
+          <h1 id="quiz-logo-title">小V知識挑戰</h1>
+          <p>quiz-v0.2.22-quiz-admin-panel</p>
         </div>
       </div>
       <div class="player-chip">
@@ -286,6 +286,66 @@
           </div>
         </div>
       </section>
+
+      <section id="screen-admin" class="screen">
+        <div class="panel wide admin-panel">
+          <div class="admin-head">
+            <div>
+              <h2>⚙ 問答後台管理</h2>
+              <p class="muted">查看最近問答紀錄、題目品質統計與匯出資料。這裡是管理者資訊，不會顯示給一般玩家。</p>
+            </div>
+            <div class="admin-head-actions">
+              <button id="btn-admin-refresh" class="btn secondary small" type="button">🔄 重新整理</button>
+              <button id="btn-admin-out" class="btn ghost small" type="button">回首頁</button>
+            </div>
+          </div>
+
+          <div class="admin-stat-grid">
+            <div class="admin-stat"><span>總紀錄數</span><strong id="adm-total">—</strong></div>
+            <div class="admin-stat"><span>玩家身份數</span><strong id="adm-identities">—</strong></div>
+            <div class="admin-stat"><span>最高分</span><strong id="adm-topscore">—</strong></div>
+            <div class="admin-stat"><span>今日挑戰</span><strong id="adm-today">—</strong></div>
+          </div>
+
+          <div class="admin-card">
+            <div class="admin-card-head">
+              <strong>📚 題目品質統計</strong>
+              <span id="adm-question-summary">題庫載入中...</span>
+            </div>
+            <div class="admin-quality-grid">
+              <div><span>總題數</span><strong id="adm-q-total">—</strong></div>
+              <div><span>啟用題</span><strong id="adm-q-enabled">—</strong></div>
+              <div><span>停用題</span><strong id="adm-q-disabled">—</strong></div>
+              <div><span>待檢查</span><strong id="adm-q-review">—</strong></div>
+            </div>
+            <div id="adm-question-groups" class="admin-group-list"></div>
+          </div>
+
+          <div class="admin-card">
+            <div class="admin-card-head">
+              <strong>📝 最近問答紀錄</strong>
+              <span id="adm-log-count">尚未載入</span>
+            </div>
+            <div class="admin-toolbar">
+              <button class="btn ghost tiny active" data-admin-sort="time_desc" type="button">最新→最舊</button>
+              <button class="btn ghost tiny" data-admin-sort="score_desc" type="button">分數高→低</button>
+              <button class="btn ghost tiny" data-admin-sort="time_asc" type="button">最舊→最新</button>
+              <button id="btn-admin-export" class="btn secondary tiny" type="button">📥 匯出 JSON</button>
+            </div>
+            <div id="adm-log-list" class="admin-log-list">載入中...</div>
+          </div>
+
+          <div class="admin-card">
+            <div class="admin-card-head"><strong>🔐 更改後台密碼</strong><span>密碼只儲存在本機瀏覽器</span></div>
+            <div class="admin-password-row">
+              <input id="adm-pw1" type="password" maxlength="20" placeholder="新密碼">
+              <input id="adm-pw2" type="password" maxlength="20" placeholder="確認新密碼">
+              <button id="btn-admin-pw" class="btn primary small" type="button">更改</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
     </main>
 
 
@@ -323,9 +383,24 @@
       </div>
     </div>
 
+
+
+    <div id="admin-pwd-modal" class="admin-pwd-modal" aria-hidden="true">
+      <div class="admin-pwd-card" role="dialog" aria-modal="true" aria-label="後台密碼">
+        <h2>🔐 後台管理</h2>
+        <p>請輸入問答遊戲後台密碼。</p>
+        <input id="admin-pwd-input" type="password" maxlength="20" placeholder="輸入密碼">
+        <div id="admin-pwd-error" class="admin-pwd-error hidden">密碼錯誤，請再試一次。</div>
+        <div class="actions">
+          <button id="btn-admin-pwd-ok" class="btn primary small" type="button">確認</button>
+          <button id="btn-admin-pwd-cancel" class="btn ghost small" type="button">取消</button>
+        </div>
+      </div>
+    </div>
+
     <div id="toast" class="toast"></div>
   </div>
 
-  <script src="./main.js?v=quiz-v0.2.21-question-quality-system"></script>
+  <script src="./main.js?v=quiz-v0.2.22-quiz-admin-panel"></script>
 </body>
 </html>

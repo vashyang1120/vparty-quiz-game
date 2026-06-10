@@ -1,4 +1,4 @@
-/* 小V知識挑戰 quiz-v0.2.21-question-quality-system
+/* 小V知識挑戰 quiz-v0.2.22-quiz-admin-panel
    目標：穩定可跑、沿用共用玩家身份、寫入 gameLogs/quiz、quizProgress 與年級累積排行榜。
    V幣：第一版只預留 wallet / vCoinLogs 註解，不實際發放。
 */
@@ -16,7 +16,7 @@ var FIREBASE_CONFIG = {
 };
 var FIREBASE_ENABLED = true;
 
-var QUIZ_VERSION = "quiz-v0.2.21-question-quality-system";
+var QUIZ_VERSION = "quiz-v0.2.22-quiz-admin-panel";
 
 var DB_PATHS = {
   gameLogs:            "gameLogs/quiz",
@@ -2495,6 +2495,261 @@ function formatSeconds(sec){
   return m + "分" + String(s).padStart(2, "0") + "秒";
 }
 
+
+
+// ── v0.2.22 問答遊戲內建後台 ──
+var ADMIN_PW_KEY = "vquiz_admin_pw";
+var adminTapCount = 0;
+var adminTapTimer = null;
+var adminLogs = [];
+var adminSortMode = "time_desc";
+
+function getAdminPassword(){
+  return localStorage.getItem(ADMIN_PW_KEY) || "vparty2024";
+}
+
+function openAdminPasswordModal(){
+  var modal = $("admin-pwd-modal");
+  if (!modal) return;
+  modal.classList.add("show");
+  modal.setAttribute("aria-hidden", "false");
+  if ($("admin-pwd-input")) $("admin-pwd-input").value = "";
+  if ($("admin-pwd-error")) $("admin-pwd-error").classList.add("hidden");
+  setTimeout(function(){ if ($("admin-pwd-input")) $("admin-pwd-input").focus(); }, 40);
+}
+
+function closeAdminPasswordModal(){
+  var modal = $("admin-pwd-modal");
+  if (!modal) return;
+  modal.classList.remove("show");
+  modal.setAttribute("aria-hidden", "true");
+}
+
+function tryAdminLogin(){
+  var input = $("admin-pwd-input");
+  var err = $("admin-pwd-error");
+  var pw = input ? input.value : "";
+  if (pw === getAdminPassword()) {
+    closeAdminPasswordModal();
+    showScreen("screen-admin");
+    loadAdminData();
+  } else if (err) {
+    err.classList.remove("hidden");
+  }
+}
+
+function initAdminEntrance(){
+  var title = $("quiz-logo-title") || document.querySelector(".brand h1");
+  if (!title || initAdminEntrance._bound) return;
+  initAdminEntrance._bound = true;
+  title.addEventListener("click", function(){
+    adminTapCount += 1;
+    clearTimeout(adminTapTimer);
+    adminTapTimer = setTimeout(function(){ adminTapCount = 0; }, 2000);
+    if (adminTapCount >= 5) {
+      adminTapCount = 0;
+      openAdminPasswordModal();
+    }
+  });
+}
+
+function formatAdminDate(ts){
+  if (!ts) return "—";
+  try {
+    return new Date(ts).toLocaleString("zh-TW", { month:"2-digit", day:"2-digit", hour:"2-digit", minute:"2-digit" });
+  } catch(e) { return String(ts); }
+}
+
+function isTodayTs(ts){
+  if (!ts) return false;
+  var d = new Date(ts);
+  var n = new Date();
+  return d.getFullYear() === n.getFullYear() && d.getMonth() === n.getMonth() && d.getDate() === n.getDate();
+}
+
+function getGradeName(key){
+  var g = GRADE_OPTIONS.find(function(item){ return item.key === key; });
+  return g ? g.name : (key || "—");
+}
+
+function getSubjectName(key){
+  var s = SUBJECT_OPTIONS.find(function(item){ return item.key === key; });
+  return s ? s.name : (key || "—");
+}
+
+function renderAdminQuestionStats(){
+  var total = QUESTIONS.length;
+  var enabled = 0;
+  var disabled = 0;
+  var review = 0;
+  var groups = {};
+
+  QUESTIONS.forEach(function(q){
+    var gKey = q.gradeBand || "unknown";
+    var sKey = q.subject || "unknown";
+    var key = gKey + "__" + sKey;
+    if (!groups[key]) groups[key] = { gradeBand:gKey, subject:sKey, total:0, enabled:0, disabled:0, review:0 };
+    groups[key].total += 1;
+    var ok = isQuestionEnabled(q);
+    if (ok) { enabled += 1; groups[key].enabled += 1; }
+    else { disabled += 1; groups[key].disabled += 1; }
+    var quality = String(q.quality || "ok").toLowerCase();
+    if (quality !== "ok" || q.reviewNote) { review += 1; groups[key].review += 1; }
+  });
+
+  if ($("adm-q-total")) $("adm-q-total").textContent = total;
+  if ($("adm-q-enabled")) $("adm-q-enabled").textContent = enabled;
+  if ($("adm-q-disabled")) $("adm-q-disabled").textContent = disabled;
+  if ($("adm-q-review")) $("adm-q-review").textContent = review;
+  if ($("adm-question-summary")) $("adm-question-summary").textContent = "管理者用統計，不顯示給玩家";
+
+  var wrap = $("adm-question-groups");
+  if (!wrap) return;
+  var ordered = [];
+  GRADE_OPTIONS.forEach(function(g){
+    SUBJECT_OPTIONS.forEach(function(s){
+      var item = groups[g.key + "__" + s.key] || { gradeBand:g.key, subject:s.key, total:0, enabled:0, disabled:0, review:0 };
+      ordered.push(item);
+    });
+  });
+  wrap.innerHTML = "";
+  ordered.forEach(function(item){
+    var row = document.createElement("div");
+    row.className = "admin-group-row";
+    row.innerHTML = '<div>' + escapeHtml(getGradeName(item.gradeBand) + "・" + getSubjectName(item.subject)) +
+      '<small>啟用 ' + item.enabled + ' / 總題 ' + item.total + '</small></div>' +
+      '<div>' + (item.disabled ? '停用 ' + item.disabled : 'OK') + '</div>';
+    wrap.appendChild(row);
+  });
+}
+
+function normalizeAdminLog(child){
+  var r = child && child.val ? child.val() : child;
+  r = r || {};
+  if (child && child.key && !r._key) r._key = child.key;
+  return r;
+}
+
+function loadAdminData(){
+  if ($("adm-log-list")) $("adm-log-list").innerHTML = '<div class="muted">🎈 載入中...</div>';
+  renderAdminQuestionStats();
+
+  return ensureFirebaseReady().then(function(ok){
+    if (!ok || !firebaseDb) throw new Error("Firebase 尚未就緒");
+    return firebaseDb.ref(DB_PATHS.gameLogs).orderByChild("ts").limitToLast(300).once("value");
+  }).then(function(snap){
+    var rows = [];
+    snap.forEach(function(child){ rows.push(normalizeAdminLog(child)); });
+    adminLogs = rows;
+    renderAdminStats();
+    renderAdminLogs();
+  }).catch(function(e){
+    console.warn("[Admin] load failed:", e);
+    if ($("adm-log-list")) $("adm-log-list").innerHTML = '<div class="muted">⚠️ 後台資料載入失敗：' + escapeHtml(e.message || String(e)) + '</div>';
+    toast("後台資料載入失敗，請稍後再試。", 3200);
+  });
+}
+
+function renderAdminStats(){
+  var identities = {};
+  var topScore = 0;
+  var today = 0;
+  adminLogs.forEach(function(r){
+    if (r.playerKey) identities[r.playerKey] = true;
+    topScore = Math.max(topScore, Number(r.score || 0));
+    if (isTodayTs(r.ts || Date.parse(r.date || ""))) today += 1;
+  });
+  if ($("adm-total")) $("adm-total").textContent = adminLogs.length;
+  if ($("adm-identities")) $("adm-identities").textContent = Object.keys(identities).length;
+  if ($("adm-topscore")) $("adm-topscore").textContent = topScore;
+  if ($("adm-today")) $("adm-today").textContent = today;
+  if ($("adm-log-count")) $("adm-log-count").textContent = "最近 " + adminLogs.length + " 筆";
+}
+
+function getSortedAdminLogs(){
+  var rows = adminLogs.slice();
+  rows.sort(function(a,b){
+    if (adminSortMode === "score_desc") return Number(b.score || 0) - Number(a.score || 0) || Number(b.ts || 0) - Number(a.ts || 0);
+    if (adminSortMode === "time_asc") return Number(a.ts || 0) - Number(b.ts || 0);
+    return Number(b.ts || 0) - Number(a.ts || 0);
+  });
+  return rows;
+}
+
+function renderAdminLogs(){
+  var list = $("adm-log-list");
+  if (!list) return;
+  var rows = getSortedAdminLogs().slice(0, 80);
+  if (!rows.length) {
+    list.innerHTML = '<div class="muted">目前還沒有問答紀錄。</div>';
+    return;
+  }
+  list.innerHTML = "";
+  rows.forEach(function(r){
+    var row = document.createElement("div");
+    row.className = "admin-log-row";
+    var avatar = resolveAvatarSrc(r.avatarSrc || getAvatarUrl(r.displayAvatarKey || r.avatarKey || r.baseAvatarKey));
+    var ts = r.ts || Date.parse(r.date || "") || 0;
+    var identity = getFriendlyIdentityLabel(r.id || r.name || "玩家", r.baseAvatarKey || "boy1");
+    var meta = [
+      formatAdminDate(ts),
+      r.gradeBandName || getGradeName(r.gradeBand),
+      r.subjectName || getSubjectName(r.subject),
+      '答對 ' + (r.correctCount || 0) + ' / ' + (r.totalQuestions || 10),
+      'Combo ' + (r.maxCombo || 0),
+      formatSeconds(r.timeUsedTotal || 0)
+    ].join('｜');
+    row.innerHTML = '<img src="' + escapeHtml(avatar) + '" alt="">' +
+      '<div class="admin-log-main"><strong>' + escapeHtml(identity) + '</strong><span>' + escapeHtml(meta) + '</span></div>' +
+      '<div class="admin-log-score"><small>分數</small>' + Number(r.score || 0) + '</div>';
+    list.appendChild(row);
+  });
+}
+
+function exportAdminLogs(){
+  if (!adminLogs.length) { toast("目前沒有資料可匯出"); return; }
+  var blob = new Blob([JSON.stringify(adminLogs, null, 2)], { type:"application/json" });
+  var a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "quiz_gamelogs_" + new Date().toISOString().slice(0,10) + ".json";
+  a.click();
+  setTimeout(function(){ URL.revokeObjectURL(a.href); }, 1000);
+  toast("已匯出最近問答紀錄 JSON");
+}
+
+function changeAdminPassword(){
+  var pw1 = ($("adm-pw1") && $("adm-pw1").value || "").trim();
+  var pw2 = ($("adm-pw2") && $("adm-pw2").value || "").trim();
+  if (!pw1) { toast("請輸入新密碼"); return; }
+  if (pw1.length < 4) { toast("密碼至少 4 個字"); return; }
+  if (pw1 !== pw2) { toast("兩次密碼不一致"); return; }
+  localStorage.setItem(ADMIN_PW_KEY, pw1);
+  if ($("adm-pw1")) $("adm-pw1").value = "";
+  if ($("adm-pw2")) $("adm-pw2").value = "";
+  toast("後台密碼已更改 ✅");
+}
+
+function bindAdminEvents(){
+  if (bindAdminEvents._bound) return;
+  bindAdminEvents._bound = true;
+  initAdminEntrance();
+  if ($("btn-admin-pwd-ok")) $("btn-admin-pwd-ok").addEventListener("click", tryAdminLogin);
+  if ($("btn-admin-pwd-cancel")) $("btn-admin-pwd-cancel").addEventListener("click", closeAdminPasswordModal);
+  if ($("admin-pwd-input")) $("admin-pwd-input").addEventListener("keydown", function(e){ if (e.key === "Enter") tryAdminLogin(); });
+  if ($("admin-pwd-modal")) $("admin-pwd-modal").addEventListener("click", function(e){ if (e.target === $("admin-pwd-modal")) closeAdminPasswordModal(); });
+  if ($("btn-admin-out")) $("btn-admin-out").addEventListener("click", function(){ showScreen("screen-title"); });
+  if ($("btn-admin-refresh")) $("btn-admin-refresh").addEventListener("click", loadAdminData);
+  if ($("btn-admin-export")) $("btn-admin-export").addEventListener("click", exportAdminLogs);
+  if ($("btn-admin-pw")) $("btn-admin-pw").addEventListener("click", changeAdminPassword);
+  document.querySelectorAll("[data-admin-sort]").forEach(function(btn){
+    btn.addEventListener("click", function(){
+      adminSortMode = btn.getAttribute("data-admin-sort") || "time_desc";
+      document.querySelectorAll("[data-admin-sort]").forEach(function(b){ b.classList.toggle("active", b === btn); });
+      renderAdminLogs();
+    });
+  });
+}
+
 function bindMusicEvents(){
   if (bindMusicEvents._bound) return;
   bindMusicEvents._bound = true;
@@ -2580,6 +2835,7 @@ function bindEvents(){
     });
   }
   bindMusicEvents();
+  bindAdminEvents();
   if ($("btn-pause-quiz")) $("btn-pause-quiz").addEventListener("click", pauseQuiz);
   if ($("btn-resume-quiz")) $("btn-resume-quiz").addEventListener("click", resumeQuiz);
   if ($("btn-pause-quit")) $("btn-pause-quit").addEventListener("click", function(){

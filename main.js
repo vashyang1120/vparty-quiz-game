@@ -1,4 +1,4 @@
-/* 小V知識挑戰 quiz-v0.2.10-mobile-host-reveal-fix
+/* 小V知識挑戰 quiz-v0.2.12-unlock-legacy-gamelogs-fallback
    目標：穩定可跑、沿用共用玩家身份、寫入 gameLogs/quiz、quizProgress 與年級累積排行榜。
    V幣：第一版只預留 wallet / vCoinLogs 註解，不實際發放。
 */
@@ -16,7 +16,7 @@ var FIREBASE_CONFIG = {
 };
 var FIREBASE_ENABLED = true;
 
-var QUIZ_VERSION = "quiz-v0.2.10-mobile-host-reveal-fix";
+var QUIZ_VERSION = "quiz-v0.2.12-unlock-legacy-gamelogs-fallback";
 
 var DB_PATHS = {
   gameLogs:            "gameLogs/quiz",
@@ -515,11 +515,45 @@ function isBuiltinAvatar(key) {
   return AVATARS.some(function(a){ return a.key === key; });
 }
 
+function hasUnlockedAvatar(key) {
+  if (!key || !unlockedAvatars) return false;
+  var u = unlockedAvatars[key];
+  if (!u) return false;
+  if (u === true) return true;
+  return u.unlocked === true;
+}
+
+function isPrivateCatalogAvatar(key, cat) {
+  if (!cat) return false;
+  var k = String(key || cat.key || "").toLowerCase();
+  var tier = String(cat.tier || "").toLowerCase();
+  var type = String(cat.type || cat.category || cat.group || cat.kind || "").toLowerCase();
+
+  return cat.hiddenUntilUnlocked === true ||
+    tier === "student" ||
+    type === "student" ||
+    k.indexOf("student_") === 0 ||
+    k.indexOf("student-") === 0 ||
+    cat.studentOnly === true ||
+    cat.private === true ||
+    !!cat.ownerPlayerKey ||
+    !!cat.exclusivePlayerKey;
+}
+
 function isDisplayAvatarAllowed(key) {
   if (!key) return false;
   if (isBuiltinAvatar(key)) return true;
-  if (unlockedAvatars[key] && unlockedAvatars[key].unlocked) return true;
-  if (unlockedAvatars[key] && (unlockedAvatars[key].src || unlockedAvatars[key].file || unlockedAvatars[key].name)) return true;
+
+  // 解鎖頭像支援新舊格式：
+  // 1) unlockedAvatars[key] === true
+  // 2) unlockedAvatars[key].unlocked === true
+  // 但不能只因為有 metadata / name / src 就視為可用。
+  if (hasUnlockedAvatar(key)) return true;
+
+  // catalog 的學生 / hiddenUntilUnlocked / 私人頭像未解鎖時不可用。
+  var cat = AVATAR_CATALOG[key];
+  if (cat && cat.active !== false && !isPrivateCatalogAvatar(key, cat)) return true;
+
   return false;
 }
 
@@ -837,7 +871,7 @@ function getAvailableDisplayAvatars(){
   });
 
   UNLOCKABLE_AVATARS.forEach(function(a){
-    if (unlockedAvatars[a.key] && unlockedAvatars[a.key].unlocked) {
+    if (hasUnlockedAvatar(a.key)) {
       list.push({ key:a.key, name:a.name || a.key, src:resolveAvatarSrc(a.file || a.src || a.url), type:"unlock" });
     }
   });
@@ -845,11 +879,15 @@ function getAvailableDisplayAvatars(){
   Object.keys(AVATAR_CATALOG).forEach(function(key){
     var cat = AVATAR_CATALOG[key];
     if (!cat || cat.active === false) return;
-    var hidden = cat.hiddenUntilUnlocked === true || cat.tier === "student";
-    var isUnlocked = unlockedAvatars[key] && unlockedAvatars[key].unlocked;
-    if (hidden && !isUnlocked) return;
-    if (!isUnlocked && hidden) return;
-    if (isUnlocked || !hidden) {
+
+    var isPrivate = isPrivateCatalogAvatar(key, cat);
+    var isUnlocked = hasUnlockedAvatar(key);
+
+    // 學生專屬 / hiddenUntilUnlocked / 私人頭像：未解鎖時完全不出現在顯示頭像選單。
+    if (isPrivate && !isUnlocked) return;
+
+    // 公開 catalog 頭像可以顯示；私人 catalog 頭像只有已解鎖才顯示。
+    if (!isPrivate || isUnlocked) {
       var src = resolveAvatarSrc(cat.src || cat.file || cat.url || "");
       if (src) list.push({ key:key, name:cat.name || key, src:src, type:"catalog" });
     }
@@ -1747,10 +1785,227 @@ function calculateQuizAcademyProgress(progressRoot){
   };
 }
 
-function loadQuizAcademyProgressSummary(){
-  return readQuizProgressMap().then(function(progressRoot){
-    return calculateQuizAcademyProgress(progressRoot);
+function hasAcademyActivity(academy){
+  if (!academy) return false;
+  return Number(academy.completedSubjects || 0) > 0 ||
+    Number(academy.quizPower || 0) > 0 ||
+    Number(academy.totalCorrect || 0) > 0;
+}
+
+function readStoredQuizAcademyProgress(){
+  return ensureFirebaseReady().then(function(ok){
+    if (!ok || !firebaseDb || !PLAYER.playerKey) return null;
+    return firebaseDb.ref(DB_PATHS.players + "/" + PLAYER.playerKey + "/quizAcademyProgress").once("value").then(function(snap){
+      return snap.val() || null;
+    });
+  }).catch(function(e){
+    console.warn("[Academy] stored summary read failed:", e.message);
+    return null;
   });
+}
+
+function calculateQuizPowerFromGradeSummary(summary){
+  var quizPower = 0;
+  var allGradesPerfect = true;
+
+  GRADE_OPTIONS.forEach(function(g){
+    var gp = summary.gradeProgress[g.key] || getEmptyGradeProgress();
+    var completed = Number(gp.completedSubjects || 0);
+    var perfect = Number(gp.perfectSubjects || 0);
+    var totalSubjects = Number(gp.totalSubjects || SUBJECT_OPTIONS.length);
+    var correct = Number(gp.totalCorrect || 0);
+    var gradeScore = Number(gp.gradeTotalScore || 0);
+
+    quizPower += completed * 20;
+    quizPower += correct * 5;
+
+    // byGrade 只有彙總資料，無法精準知道每一科是否達 1000 分；用年級總分保守估算。
+    var estimatedHighScoreSubjects = Math.min(completed, Math.floor(gradeScore / 1000));
+    quizPower += estimatedHighScoreSubjects * 30;
+
+    quizPower += perfect * 80;
+    if (completed >= totalSubjects) quizPower += 200;
+    if (perfect >= totalSubjects) quizPower += 500;
+    if (perfect < totalSubjects) allGradesPerfect = false;
+  });
+
+  if (summary.perfectSubjects >= summary.totalSubjectSlots && allGradesPerfect) quizPower += 1000;
+  return quizPower;
+}
+
+function buildAcademyProgressFromGradeLeaderboards(gradeRecords){
+  var now = Date.now();
+  var totalSubjectSlots = getTotalSubjectSlots();
+  var summary = {
+    gameId: "quiz",
+    version: QUIZ_VERSION,
+    playerKey: PLAYER.playerKey,
+    id: PLAYER.id,
+    name: PLAYER.name || PLAYER.id,
+    quizPower: 0,
+    completedSubjects: 0,
+    perfectSubjects: 0,
+    totalSubjectSlots: totalSubjectSlots,
+    totalCorrect: 0,
+    totalQuestions: 0,
+    totalAttempts: 0,
+    gradeProgress: {},
+    rebuiltFrom: "leaderboardsByGrade",
+    updatedAt: now,
+    date: new Date(now).toISOString()
+  };
+
+  GRADE_OPTIONS.forEach(function(g){
+    var rec = gradeRecords && gradeRecords[g.key] ? gradeRecords[g.key] : null;
+    var gp = getEmptyGradeProgress();
+    if (rec) {
+      gp.completedSubjects = Number(rec.completedSubjects || 0);
+      gp.perfectSubjects = Number(rec.perfectSubjects || 0);
+      gp.totalSubjects = SUBJECT_OPTIONS.length;
+      gp.totalCorrect = Number(rec.totalCorrect || 0);
+      gp.totalQuestions = Number(rec.totalQuestions || gp.completedSubjects * 10 || 0);
+      gp.totalAttempts = Number(rec.totalAttempts || 0);
+      gp.gradeTotalScore = Number(rec.gradeTotalScore || 0);
+
+      summary.completedSubjects += gp.completedSubjects;
+      summary.perfectSubjects += gp.perfectSubjects;
+      summary.totalCorrect += gp.totalCorrect;
+      summary.totalQuestions += gp.totalQuestions;
+      summary.totalAttempts += gp.totalAttempts;
+    }
+    summary.gradeProgress[g.key] = gp;
+  });
+
+  summary.quizPower = calculateQuizPowerFromGradeSummary(summary);
+  return summary;
+}
+
+function readGradeLeaderboardSelfSummary(){
+  return ensureFirebaseReady().then(function(ok){
+    if (!ok || !firebaseDb || !PLAYER.playerKey) return null;
+    var jobs = GRADE_OPTIONS.map(function(g){
+      return firebaseDb.ref(DB_PATHS.leaderboardsByGrade + "/" + g.key + "/" + PLAYER.playerKey)
+        .once("value")
+        .then(function(snap){ return { key:g.key, val:snap.val() || null }; });
+    });
+    return Promise.all(jobs).then(function(rows){
+      var records = {};
+      var hasAny = false;
+      rows.forEach(function(row){
+        if (row.val) {
+          records[row.key] = row.val;
+          hasAny = true;
+        }
+      });
+      return hasAny ? buildAcademyProgressFromGradeLeaderboards(records) : null;
+    });
+  }).catch(function(e){
+    console.warn("[Academy] byGrade fallback read failed:", e.message);
+    return null;
+  });
+}
+
+
+function normalizeLogRecordForProgress(log){
+  if (!log || typeof log !== "object") return null;
+  if (log.playerKey !== PLAYER.playerKey) return null;
+  if (!log.gradeBand || !log.subject) return null;
+
+  var ts = Number(log.ts || log.updatedAt || Date.parse(log.date || "") || 0);
+  return {
+    gameId: "quiz",
+    version: log.version || QUIZ_VERSION,
+    playerKey: PLAYER.playerKey,
+    gradeBand: log.gradeBand,
+    gradeBandName: log.gradeBandName || getGradeName(log.gradeBand),
+    subject: log.subject,
+    subjectName: log.subjectName || getSubjectName(log.subject),
+    score: Number(log.score || 0),
+    correctCount: Number(log.correctCount || 0),
+    maxCombo: Number(log.maxCombo || 0),
+    timeUsedTotal: Number(log.timeUsedTotal || log.timeUsed || 0),
+    totalQuestions: Number(log.totalQuestions || 10),
+    ts: ts
+  };
+}
+
+function buildProgressRootFromGameLogs(logMap){
+  var progressRoot = {};
+  var rows = [];
+  Object.keys(logMap || {}).forEach(function(key){
+    var rec = normalizeLogRecordForProgress(logMap[key]);
+    if (rec) rows.push(rec);
+  });
+
+  // 依時間由舊到新重建，attempts 才會累加成接近真實遊玩次數。
+  rows.sort(function(a,b){ return (a.ts || 0) - (b.ts || 0); });
+
+  rows.forEach(function(rec){
+    if (!progressRoot[rec.gradeBand]) progressRoot[rec.gradeBand] = {};
+    var oldProgress = progressRoot[rec.gradeBand][rec.subject] || {};
+    var result = makeSubjectProgressFromRecord(rec, oldProgress);
+    progressRoot[rec.gradeBand][rec.subject] = result.progress;
+  });
+
+  return progressRoot;
+}
+
+function readGameLogsAcademyFallback(){
+  return ensureFirebaseReady().then(function(ok){
+    if (!ok || !firebaseDb || !PLAYER.playerKey) return null;
+
+    return firebaseDb.ref(DB_PATHS.gameLogs)
+      .orderByChild("playerKey")
+      .equalTo(PLAYER.playerKey)
+      .once("value")
+      .then(function(snap){
+        var logs = snap.val() || {};
+        if (!logs || !Object.keys(logs).length) return null;
+        var progressRoot = buildProgressRootFromGameLogs(logs);
+        var academy = calculateQuizAcademyProgress(progressRoot);
+        academy.rebuiltFrom = "gameLogs";
+        return hasAcademyActivity(academy) ? academy : null;
+      });
+  }).catch(function(e){
+    console.warn("[Academy] gameLogs fallback read failed:", e.message);
+    return null;
+  });
+}
+
+function loadQuizAcademyProgressSummary(){
+  var calculated = null;
+
+  return readQuizProgressMap()
+    .then(function(progressRoot){
+      calculated = calculateQuizAcademyProgress(progressRoot);
+      if (hasAcademyActivity(calculated)) return calculated;
+      return readStoredQuizAcademyProgress();
+    })
+    .then(function(stored){
+      if (stored && hasAcademyActivity(stored)) return stored;
+      if (calculated && hasAcademyActivity(calculated)) return calculated;
+      return readGradeLeaderboardSelfSummary();
+    })
+    .then(function(fallback){
+      if (fallback && hasAcademyActivity(fallback)) return fallback;
+      return readGameLogsAcademyFallback();
+    })
+    .then(function(logFallback){
+      if (logFallback && hasAcademyActivity(logFallback)) return logFallback;
+      return calculated || calculateQuizAcademyProgress({});
+    })
+    .catch(function(e){
+      console.warn("[Academy] summary load failed:", e.message);
+      return readStoredQuizAcademyProgress().then(function(stored){
+        if (stored && hasAcademyActivity(stored)) return stored;
+        return readGradeLeaderboardSelfSummary().then(function(fallback){
+          if (fallback && hasAcademyActivity(fallback)) return fallback;
+          return readGameLogsAcademyFallback().then(function(logFallback){
+            return logFallback || calculateQuizAcademyProgress({});
+          });
+        });
+      });
+    });
 }
 
 function updateQuizAcademyProgress(){

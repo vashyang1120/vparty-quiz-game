@@ -579,7 +579,7 @@ main{flex:1;display:grid;place-items:center;padding:20px}
 }
 
 
-/* ── quiz-v0.2.15-locked-avatar-picker-fix: sticker placement, larger host image, real pause overlay ── */
+/* ── quiz-v0.2.16-unlock-banner-host-scale: sticker placement, larger host image, real pause overlay ── */
 .quiz-hud{grid-template-columns:repeat(4,1fr) auto auto auto;align-items:stretch;}
 .pause-toggle{border:1.5px solid rgba(255,190,11,.45);background:#fff8e6;border-radius:18px;padding:8px 12px;color:#9b6a00;font-weight:900;box-shadow:0 4px 14px rgba(255,190,11,.14);min-width:86px;}
 .pause-toggle:active{transform:scale(.94)}
@@ -724,4 +724,65 @@ main{flex:1;display:grid;place-items:center;padding:20px}
 @media(max-width:380px){
   .mobile-host-sticker{width:70px;height:98px;right:2px;bottom:68px;}
   .mobile-host-sticker.host-reveal{width:96px;height:132px;right:-4px;bottom:82px;}
+}
+
+/* ── quiz-v0.2.16-unlock-banner-host-scale: 解鎖提示與手機浮動主持人放大 ── */
+.unlock-banner{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin:14px auto;
+  padding:14px 16px;
+  border-radius:22px;
+  border:2px solid rgba(255,190,11,.45);
+  background:linear-gradient(135deg,#fff7da,#fff0f6 55%,#f8f0ff);
+  color:#6b3d2f;
+  box-shadow:0 12px 26px rgba(255,190,11,.18),0 8px 24px rgba(232,111,154,.14);
+  text-align:left;
+  max-width:680px;
+}
+.unlock-banner.hidden{display:none!important}
+.unlock-banner .unlock-spark{
+  flex:0 0 auto;
+  width:54px;
+  height:54px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  font-size:30px;
+  background:#fff;
+  box-shadow:0 0 0 4px rgba(255,209,102,.34),0 8px 16px rgba(232,111,154,.16);
+}
+.unlock-banner strong{display:block;font-size:18px;color:#d95f8a;margin-bottom:4px;font-weight:900}
+.unlock-banner p{margin:0;color:#6b3d2f;line-height:1.55;font-weight:800}
+.unlock-banner.pop{animation:unlockPop .48s cubic-bezier(.34,1.56,.64,1)}
+@keyframes unlockPop{0%{transform:scale(.92);opacity:.2}65%{transform:scale(1.035);opacity:1}100%{transform:scale(1);opacity:1}}
+
+@media(max-width:760px){
+  .mobile-host-sticker.show{
+    width:148px;
+    height:209px;
+    right:-30px;
+    bottom:58px;
+  }
+  .mobile-host-sticker.host-reveal{
+    width:212px;
+    height:292px;
+    right:-58px;
+    bottom:70px;
+  }
+}
+@media(max-width:380px){
+  .mobile-host-sticker.show{
+    width:126px;
+    height:176px;
+    right:-24px;
+    bottom:56px;
+  }
+  .mobile-host-sticker.host-reveal{
+    width:173px;
+    height:238px;
+    right:-48px;
+    bottom:66px;
+  }
 }

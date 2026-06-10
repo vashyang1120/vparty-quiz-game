@@ -1,4 +1,4 @@
-/* 小V知識挑戰 quiz-v0.2.15-locked-avatar-picker-fix
+/* 小V知識挑戰 quiz-v0.2.16-unlock-banner-host-scale
    目標：穩定可跑、沿用共用玩家身份、寫入 gameLogs/quiz、quizProgress 與年級累積排行榜。
    V幣：第一版只預留 wallet / vCoinLogs 註解，不實際發放。
 */
@@ -16,7 +16,7 @@ var FIREBASE_CONFIG = {
 };
 var FIREBASE_ENABLED = true;
 
-var QUIZ_VERSION = "quiz-v0.2.15-locked-avatar-picker-fix";
+var QUIZ_VERSION = "quiz-v0.2.16-unlock-banner-host-scale";
 
 var DB_PATHS = {
   gameLogs:            "gameLogs/quiz",
@@ -1368,6 +1368,7 @@ function finishQuiz(){
   $("result-title").textContent = title;
   $("result-emoji").textContent = emoji;
   setResultHostVisual();
+  if ($("result-unlock-banner")) $("result-unlock-banner").classList.add("hidden");
 
   showScreen("screen-result");
   saveQuizResult(totalTime, accuracy);
@@ -1513,10 +1514,25 @@ function unlockXiaovBaseAfterGameComplete(){
   });
 }
 
+function showAvatarUnlockBanner(unlockPayload){
+  var box = $("result-unlock-banner");
+  if (!box || !unlockPayload) return;
+  var title = $("unlock-title");
+  var msg = $("unlock-message");
+  var name = unlockPayload.name || "新顯示頭像";
+  if (title) title.textContent = "🎉 新頭像解鎖：" + name;
+  if (msg) msg.textContent = "完成問答挑戰成功解鎖！到「玩家設定 → 選顯示頭像」可以手動裝備；目前身份與 playerKey 不會改變。";
+  box.classList.remove("hidden");
+  box.classList.remove("pop");
+  void box.offsetWidth;
+  box.classList.add("pop");
+}
+
 function saveQuizResult(totalTime, accuracy){
   var record = buildQuizRecord(totalTime, accuracy);
   $("save-status").textContent = "正在寫入 gameLogs/quiz、個人進度、排行榜與 V學園成績單...";
   if ($("result-academy-progress")) $("result-academy-progress").classList.add("hidden");
+  if ($("result-unlock-banner")) $("result-unlock-banner").classList.add("hidden");
 
   saveLocalLog(record);
 
@@ -1531,14 +1547,17 @@ function saveQuizResult(totalTime, accuracy){
         return null;
       });
     })
-    .then(function(){
-      return updateQuizProgress(record);
+    .then(function(unlockResult){
+      return updateQuizProgress(record).then(function(progressResult){
+        return { unlockResult: unlockResult, progressResult: progressResult };
+      });
     })
-    .then(function(progressResult){
+    .then(function(stage){
+      var progressResult = stage.progressResult;
       return updateGradeLeaderboard(record.gradeBand).then(function(gradeRecord){
         return updateMainLeaderboardFromGrades().then(function(mainRecord){
           return updateQuizAcademyProgress().then(function(academyAfter){
-            return { progressResult:progressResult, gradeRecord:gradeRecord, mainRecord:mainRecord, academyAfter:academyAfter };
+            return { unlockResult:stage.unlockResult, progressResult:progressResult, gradeRecord:gradeRecord, mainRecord:mainRecord, academyAfter:academyAfter };
           });
         });
       });
@@ -1549,7 +1568,9 @@ function saveQuizResult(totalTime, accuracy){
       var gradeRecord = result.gradeRecord || {};
       var mainRecord = result.mainRecord || {};
       var academyAfter = result.academyAfter || null;
+      var unlockResult = result.unlockResult || null;
       var subjectName = record.subjectName || record.subject;
+      showAvatarUnlockBanner(unlockResult);
       var lines = ["✅ 本次紀錄已保存"];
       if (bestUpdated) lines.push("✅ " + subjectName + "最佳紀錄刷新！");
       else if (progress) lines.push(subjectName + "最佳仍維持 " + (progress.bestScore || 0) + " 分");

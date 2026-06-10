@@ -1,4 +1,4 @@
-/* 小V知識挑戰 quiz-v0.1.4-brain-riddles
+/* 小V知識挑戰 quiz-v0.1.5-academy-progress
    目標：穩定可跑、沿用共用玩家身份、寫入 gameLogs/quiz、quizProgress 與年級累積排行榜。
    V幣：第一版只預留 wallet / vCoinLogs 註解，不實際發放。
 */
@@ -16,7 +16,7 @@ var FIREBASE_CONFIG = {
 };
 var FIREBASE_ENABLED = true;
 
-var QUIZ_VERSION = "quiz-v0.1.4-brain-riddles-cachefix";
+var QUIZ_VERSION = "quiz-v0.1.5-academy-progress";
 
 var DB_PATHS = {
   gameLogs:            "gameLogs/quiz",
@@ -871,18 +871,25 @@ function saveGameLog(record){
 
 function saveQuizResult(totalTime, accuracy){
   var record = buildQuizRecord(totalTime, accuracy);
-  $("save-status").textContent = "正在寫入 gameLogs/quiz、個人進度與排行榜...";
+  $("save-status").textContent = "正在寫入 gameLogs/quiz、個人進度、排行榜與 V學園成績單...";
+  if ($("result-academy-progress")) $("result-academy-progress").classList.add("hidden");
 
   saveLocalLog(record);
 
-  return saveGameLog(record)
+  var academyBefore = null;
+  return loadQuizAcademyProgressSummary().then(function(before){
+      academyBefore = before;
+      return saveGameLog(record);
+    })
     .then(function(){
       return updateQuizProgress(record);
     })
     .then(function(progressResult){
       return updateGradeLeaderboard(record.gradeBand).then(function(gradeRecord){
         return updateMainLeaderboardFromGrades().then(function(mainRecord){
-          return { progressResult:progressResult, gradeRecord:gradeRecord, mainRecord:mainRecord };
+          return updateQuizAcademyProgress().then(function(academyAfter){
+            return { progressResult:progressResult, gradeRecord:gradeRecord, mainRecord:mainRecord, academyAfter:academyAfter };
+          });
         });
       });
     })
@@ -891,6 +898,7 @@ function saveQuizResult(totalTime, accuracy){
       var bestUpdated = result.progressResult && result.progressResult.bestUpdated;
       var gradeRecord = result.gradeRecord || {};
       var mainRecord = result.mainRecord || {};
+      var academyAfter = result.academyAfter || null;
       var subjectName = record.subjectName || record.subject;
       var lines = ["✅ 本次紀錄已保存"];
       if (bestUpdated) lines.push("✅ " + subjectName + "最佳紀錄刷新！");
@@ -898,6 +906,12 @@ function saveQuizResult(totalTime, accuracy){
       lines.push((record.gradeBandName || record.gradeBand) + "總分：" + (gradeRecord.gradeTotalScore || 0) + " 分");
       lines.push("🏆 總榜總分：" + (mainRecord.totalScore || 0) + " 分");
       $("save-status").textContent = lines.join("\n");
+
+      if ($("result-academy-progress") && $("result-academy-lines")) {
+        $("result-academy-lines").textContent = buildAcademyResultLines(academyBefore, academyAfter);
+        $("result-academy-progress").classList.remove("hidden");
+      }
+      renderAcademyProgress(academyAfter);
     })
     .catch(function(e){
       console.warn("[SaveResult] failed:", e);
@@ -1151,6 +1165,196 @@ function updateMainLeaderboardFromGrades(){
   });
 }
 
+
+function getTotalSubjectSlots(){
+  return GRADE_OPTIONS.length * SUBJECT_OPTIONS.length;
+}
+
+function getEmptyGradeProgress(){
+  return {
+    completedSubjects: 0,
+    perfectSubjects: 0,
+    totalSubjects: SUBJECT_OPTIONS.length
+  };
+}
+
+function readQuizProgressMap(){
+  return ensureFirebaseReady().then(function(ok){
+    if (!ok || !firebaseDb || !PLAYER.playerKey) throw new Error("Firebase not ready");
+    return firebaseDb.ref(DB_PATHS.players + "/" + PLAYER.playerKey + "/quizProgress").once("value").then(function(snap){
+      return snap.val() || {};
+    });
+  });
+}
+
+function calculateQuizAcademyProgress(progressRoot){
+  var now = Date.now();
+  var totalSubjectSlots = getTotalSubjectSlots();
+  var quizPower = 0;
+  var completedSubjects = 0;
+  var perfectSubjects = 0;
+  var totalCorrect = 0;
+  var totalQuestions = 0;
+  var totalAttempts = 0;
+  var allGradesPerfect = true;
+
+  var gradeProgress = {};
+
+  GRADE_OPTIONS.forEach(function(grade){
+    var gradeMap = (progressRoot && progressRoot[grade.key]) || {};
+    var gradeCompleted = 0;
+    var gradePerfect = 0;
+    var gradeCorrect = 0;
+    var gradeQuestions = 0;
+    var gradeAttempts = 0;
+
+    SUBJECT_OPTIONS.forEach(function(subject){
+      var p = gradeMap[subject.key];
+      if (!p || typeof p !== "object" || (!p.bestScore && !p.attempts)) return;
+
+      var bestCorrect = Number(p.bestCorrectCount || 0);
+      var bestQuestions = Number(p.bestTotalQuestions || p.totalQuestions || 10);
+      var bestScore = Number(p.bestScore || 0);
+      var attempts = Number(p.attempts || 0);
+      var isPerfect = p.perfect === true || (bestQuestions > 0 && bestCorrect >= bestQuestions);
+
+      gradeCompleted += 1;
+      completedSubjects += 1;
+      totalCorrect += bestCorrect;
+      totalQuestions += bestQuestions;
+      totalAttempts += attempts;
+      gradeCorrect += bestCorrect;
+      gradeQuestions += bestQuestions;
+      gradeAttempts += attempts;
+
+      quizPower += 20;                // 已挑戰該科
+      quizPower += bestCorrect * 5;   // 最佳答對題數
+      if (bestScore >= 1000) quizPower += 30;
+      if (isPerfect) {
+        quizPower += 80;
+        gradePerfect += 1;
+        perfectSubjects += 1;
+      }
+    });
+
+    if (gradeCompleted >= SUBJECT_OPTIONS.length) quizPower += 200;
+    if (gradePerfect >= SUBJECT_OPTIONS.length) quizPower += 500;
+    if (gradePerfect < SUBJECT_OPTIONS.length) allGradesPerfect = false;
+
+    gradeProgress[grade.key] = {
+      completedSubjects: gradeCompleted,
+      perfectSubjects: gradePerfect,
+      totalSubjects: SUBJECT_OPTIONS.length,
+      totalCorrect: gradeCorrect,
+      totalQuestions: gradeQuestions,
+      totalAttempts: gradeAttempts
+    };
+  });
+
+  if (perfectSubjects >= totalSubjectSlots && allGradesPerfect) quizPower += 1000;
+
+  return {
+    gameId: "quiz",
+    version: QUIZ_VERSION,
+
+    playerKey: PLAYER.playerKey,
+    id: PLAYER.id,
+    name: PLAYER.name || PLAYER.id,
+
+    quizPower: quizPower,
+
+    completedSubjects: completedSubjects,
+    perfectSubjects: perfectSubjects,
+    totalSubjectSlots: totalSubjectSlots,
+
+    totalCorrect: totalCorrect,
+    totalQuestions: totalQuestions,
+    totalAttempts: totalAttempts,
+
+    gradeProgress: gradeProgress,
+
+    updatedAt: now,
+    date: new Date(now).toISOString()
+  };
+}
+
+function loadQuizAcademyProgressSummary(){
+  return readQuizProgressMap().then(function(progressRoot){
+    return calculateQuizAcademyProgress(progressRoot);
+  });
+}
+
+function updateQuizAcademyProgress(){
+  return loadQuizAcademyProgressSummary().then(function(academy){
+    if (!firebaseDb || !PLAYER.playerKey) return academy;
+    return firebaseDb.ref(DB_PATHS.players + "/" + PLAYER.playerKey + "/quizAcademyProgress")
+      .set(academy)
+      .then(function(){ return academy; });
+  });
+}
+
+function renderAcademyProgress(academy){
+  academy = academy || {
+    quizPower: 0,
+    completedSubjects: 0,
+    perfectSubjects: 0,
+    totalSubjectSlots: getTotalSubjectSlots(),
+    totalCorrect: 0,
+    gradeProgress: {
+      low: getEmptyGradeProgress(),
+      middle: getEmptyGradeProgress(),
+      high: getEmptyGradeProgress()
+    }
+  };
+
+  var totalSlots = academy.totalSubjectSlots || getTotalSubjectSlots();
+  if ($("academy-power")) $("academy-power").textContent = academy.quizPower || 0;
+  if ($("academy-completed")) $("academy-completed").textContent = (academy.completedSubjects || 0) + " / " + totalSlots;
+  if ($("academy-perfect")) $("academy-perfect").textContent = academy.perfectSubjects || 0;
+  if ($("academy-correct")) $("academy-correct").textContent = academy.totalCorrect || 0;
+
+  GRADE_OPTIONS.forEach(function(g){
+    var gp = (academy.gradeProgress && academy.gradeProgress[g.key]) || getEmptyGradeProgress();
+    var el = $("academy-" + g.key);
+    if (el) el.textContent = (gp.completedSubjects || 0) + " / " + (gp.totalSubjects || SUBJECT_OPTIONS.length) + "｜滿分 " + (gp.perfectSubjects || 0);
+  });
+
+  if ($("academy-updated")) {
+    $("academy-updated").textContent = academy.updatedAt ? "已更新" : "尚未開始";
+  }
+}
+
+function refreshAcademyProgressCard(){
+  if (!hasConfirmedQuizProfile() || !PLAYER.playerKey) {
+    renderAcademyProgress(null);
+    return Promise.resolve(null);
+  }
+  return loadQuizAcademyProgressSummary().then(function(academy){
+    renderAcademyProgress(academy);
+    return academy;
+  }).catch(function(e){
+    console.warn("[Academy] refresh failed:", e.message);
+    renderAcademyProgress(null);
+    return null;
+  });
+}
+
+function buildAcademyResultLines(before, after){
+  after = after || null;
+  if (!after) return "V學園進度暫時無法更新。";
+  var beforePower = before ? Number(before.quizPower || 0) : 0;
+  var afterPower = Number(after.quizPower || 0);
+  var gradeKey = selectedGrade;
+  var grade = GRADE_OPTIONS.find(function(g){ return g.key === gradeKey; }) || {name:gradeKey};
+  var gp = (after.gradeProgress && after.gradeProgress[gradeKey]) || getEmptyGradeProgress();
+  var lines = [];
+  lines.push("知識力：" + beforePower + " → " + afterPower);
+  lines.push("已挑戰科目：" + (after.completedSubjects || 0) + " / " + (after.totalSubjectSlots || getTotalSubjectSlots()));
+  lines.push("滿分科目：" + (after.perfectSubjects || 0));
+  lines.push(grade.name + "進度：" + (gp.completedSubjects || 0) + " / " + (gp.totalSubjects || SUBJECT_OPTIONS.length) + "｜滿分 " + (gp.perfectSubjects || 0));
+  return lines.join("\n");
+}
+
 function compareMainRows(a,b){
   if ((b.totalScore || 0) !== (a.totalScore || 0)) return (b.totalScore || 0) - (a.totalScore || 0);
   if ((b.perfectSubjects || 0) !== (a.perfectSubjects || 0)) return (b.perfectSubjects || 0) - (a.perfectSubjects || 0);
@@ -1315,6 +1519,8 @@ function bindEvents(){
       updatePlayerUI();
       return ensurePlayerProfile();
     }).then(function(){
+      return refreshAcademyProgressCard();
+    }).then(function(){
       toast("玩家身份已確認！\\n" + PLAYER.playerKey);
       showScreen("screen-setup");
     });
@@ -1341,7 +1547,8 @@ function init(){
     .then(function(){
       validateDisplayAvatarForCurrentIdentity();
       updatePlayerUI();
-      if (alreadyConfirmed) return ensurePlayerProfile();
+      if (alreadyConfirmed) return ensurePlayerProfile().then(refreshAcademyProgressCard);
+      renderAcademyProgress(null);
       return null;
     })
     .catch(function(e){ console.warn("[Init] Firebase/profile init skipped:", e.message); });

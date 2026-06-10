@@ -147,3 +147,24 @@ main{flex:1;display:grid;place-items:center;padding:20px}
 .lb-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 6px}
 .lb-tabs .btn.active{background:linear-gradient(135deg,var(--pink),var(--pink2));color:#fff;border-color:transparent;box-shadow:0 6px 18px rgba(232,111,154,.25)}
 .save-status{white-space:pre-line}
+
+
+/* V學園成績單 */
+.academy-card{margin:18px auto 10px;background:linear-gradient(135deg,#fff8fb,#fffdf2);border:1.5px solid rgba(255,133,161,.28);border-radius:24px;padding:16px;box-shadow:0 8px 24px rgba(232,111,154,.10);text-align:left;max-width:640px}
+.academy-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px;color:var(--text)}
+.academy-head strong{font-size:18px;color:var(--pink2)}
+.academy-head span{font-size:11px;color:var(--text2);font-weight:800}
+.academy-power{display:flex;align-items:center;justify-content:space-between;background:#fff;border:1px solid rgba(255,182,215,.5);border-radius:18px;padding:10px 14px;margin-bottom:10px}
+.academy-power span{font-size:12px;color:var(--text2);font-weight:900;letter-spacing:.08em}
+.academy-power strong{font-family:'Fredoka One','Nunito',sans-serif;font-size:30px;color:var(--purple)}
+.academy-mini-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:10px}
+.academy-mini-grid>div{background:var(--pink-bg);border-radius:16px;padding:10px;text-align:center}
+.academy-mini-grid span{display:block;font-size:10px;color:var(--text2);font-weight:900;margin-bottom:4px}
+.academy-mini-grid strong{font-size:16px;color:var(--pink2)}
+.academy-grade-lines{display:grid;gap:6px;font-size:12px;color:var(--text2);font-weight:800}
+.academy-grade-lines div{display:flex;justify-content:space-between;gap:12px;background:#fff;border-radius:14px;padding:8px 10px;border:1px dashed rgba(232,111,154,.25)}
+.academy-grade-lines strong{color:var(--text)}
+.academy-result{white-space:pre-line;text-align:left;background:linear-gradient(135deg,#fff8fb,#f8f0ff);border:1.5px solid rgba(155,93,229,.18);border-radius:20px;padding:14px;margin:14px 0;color:var(--text);font-weight:800;line-height:1.7}
+.academy-result strong{display:block;color:var(--purple);font-size:16px;margin-bottom:6px}
+.academy-result.hidden{display:none}
+@media(max-width:620px){.academy-mini-grid{grid-template-columns:1fr}.academy-grade-lines div{flex-direction:column;gap:2px}.academy-head{flex-direction:column;align-items:flex-start}.academy-power strong{font-size:26px}}

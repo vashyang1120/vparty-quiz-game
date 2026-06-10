@@ -5069,5 +5069,5285 @@
       "原創題"
     ],
     "questionType": "riddle"
+  },
+  {
+    "id": "math_low_011",
+    "subject": "math",
+    "subjectName": "數學",
+    "gradeBand": "low",
+    "gradeBandName": "低年級",
+    "difficulty": 1,
+    "question": "小V有 7 顆星星貼紙，又得到 2 顆，一共有幾顆？",
+    "choices": [
+      "8 顆",
+      "9 顆",
+      "10 顆",
+      "7 顆"
+    ],
+    "answerIndex": 1,
+    "explanation": "7 + 2 = 9。",
+    "tags": [
+      "原創題",
+      "數學",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "math_low_012",
+    "subject": "math",
+    "subjectName": "數學",
+    "gradeBand": "low",
+    "gradeBandName": "低年級",
+    "difficulty": 1,
+    "question": "桌上有 14 顆糖，吃掉 5 顆，還剩幾顆？",
+    "choices": [
+      "8 顆",
+      "9 顆",
+      "10 顆",
+      "7 顆"
+    ],
+    "answerIndex": 1,
+    "explanation": "14 - 5 = 9。",
+    "tags": [
+      "原創題",
+      "數學",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "math_low_013",
+    "subject": "math",
+    "subjectName": "數學",
+    "gradeBand": "low",
+    "gradeBandName": "低年級",
+    "difficulty": 1,
+    "question": "哪一個數字最小？",
+    "choices": [
+      "31",
+      "13",
+      "23",
+      "30"
+    ],
+    "answerIndex": 1,
+    "explanation": "13 比其他數字都小。",
+    "tags": [
+      "原創題",
+      "數學",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "math_low_014",
+    "subject": "math",
+    "subjectName": "數學",
+    "gradeBand": "low",
+    "gradeBandName": "低年級",
+    "difficulty": 1,
+    "question": "6 加 8 等於多少？",
+    "choices": [
+      "12",
+      "13",
+      "14",
+      "15"
+    ],
+    "answerIndex": 2,
+    "explanation": "6 + 8 = 14。",
+    "tags": [
+      "原創題",
+      "數學",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "math_low_015",
+    "subject": "math",
+    "subjectName": "數學",
+    "gradeBand": "low",
+    "gradeBandName": "低年級",
+    "difficulty": 1,
+    "question": "一排有 5 個小朋友，後面又排了 4 個，共有幾個？",
+    "choices": [
+      "8 個",
+      "9 個",
+      "10 個",
+      "11 個"
+    ],
+    "answerIndex": 1,
+    "explanation": "5 + 4 = 9。",
+    "tags": [
+      "原創題",
+      "數學",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "math_low_016",
+    "subject": "math",
+    "subjectName": "數學",
+    "gradeBand": "low",
+    "gradeBandName": "低年級",
+    "difficulty": 1,
+    "question": "18 裡面有幾個十？",
+    "choices": [
+      "1 個",
+      "2 個",
+      "8 個",
+      "10 個"
+    ],
+    "answerIndex": 0,
+    "explanation": "18 裡面有 1 個十和 8 個一。",
+    "tags": [
+      "原創題",
+      "數學",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "math_low_017",
+    "subject": "math",
+    "subjectName": "數學",
+    "gradeBand": "low",
+    "gradeBandName": "低年級",
+    "difficulty": 1,
+    "question": "哪一個是奇數？",
+    "choices": [
+      "10",
+      "12",
+      "15",
+      "18"
+    ],
+    "answerIndex": 2,
+    "explanation": "15 不能被 2 平均分，所以是奇數。",
+    "tags": [
+      "原創題",
+      "數學",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "math_low_018",
+    "subject": "math",
+    "subjectName": "數學",
+    "gradeBand": "low",
+    "gradeBandName": "低年級",
+    "difficulty": 1,
+    "question": "小V做了 4 隻氣球狗和 6 把氣球劍，共幾個作品？",
+    "choices": [
+      "9 個",
+      "10 個",
+      "11 個",
+      "12 個"
+    ],
+    "answerIndex": 1,
+    "explanation": "4 + 6 = 10。",
+    "tags": [
+      "原創題",
+      "數學",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "math_low_019",
+    "subject": "math",
+    "subjectName": "數學",
+    "gradeBand": "low",
+    "gradeBandName": "低年級",
+    "difficulty": 1,
+    "question": "從 20 倒數 4 個數會到哪個數？",
+    "choices": [
+      "17",
+      "16",
+      "15",
+      "14"
+    ],
+    "answerIndex": 1,
+    "explanation": "20 → 19 → 18 → 17 → 16。",
+    "tags": [
+      "原創題",
+      "數學",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "math_low_020",
+    "subject": "math",
+    "subjectName": "數學",
+    "gradeBand": "low",
+    "gradeBandName": "低年級",
+    "difficulty": 1,
+    "question": "一盒有 5 顆球，三盒共有幾顆？",
+    "choices": [
+      "10 顆",
+      "15 顆",
+      "20 顆",
+      "8 顆"
+    ],
+    "answerIndex": 1,
+    "explanation": "5 + 5 + 5 = 15。",
+    "tags": [
+      "原創題",
+      "數學",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "math_middle_011",
+    "subject": "math",
+    "subjectName": "數學",
+    "gradeBand": "middle",
+    "gradeBandName": "中年級",
+    "difficulty": 2,
+    "question": "36 顆氣球平均分給 4 組，每組幾顆？",
+    "choices": [
+      "8 顆",
+      "9 顆",
+      "10 顆",
+      "12 顆"
+    ],
+    "answerIndex": 1,
+    "explanation": "36 ÷ 4 = 9。",
+    "tags": [
+      "原創題",
+      "數學",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "math_middle_012",
+    "subject": "math",
+    "subjectName": "數學",
+    "gradeBand": "middle",
+    "gradeBandName": "中年級",
+    "difficulty": 2,
+    "question": "9 × 6 等於多少？",
+    "choices": [
+      "42",
+      "48",
+      "54",
+      "56"
+    ],
+    "answerIndex": 2,
+    "explanation": "9 × 6 = 54。",
+    "tags": [
+      "原創題",
+      "數學",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "math_middle_013",
+    "subject": "math",
+    "subjectName": "數學",
+    "gradeBand": "middle",
+    "gradeBandName": "中年級",
+    "difficulty": 2,
+    "question": "一場表演 60 分鐘，已表演 35 分鐘，還剩幾分鐘？",
+    "choices": [
+      "15 分鐘",
+      "20 分鐘",
+      "25 分鐘",
+      "30 分鐘"
+    ],
+    "answerIndex": 2,
+    "explanation": "60 - 35 = 25。",
+    "tags": [
+      "原創題",
+      "數學",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "math_middle_014",
+    "subject": "math",
+    "subjectName": "數學",
+    "gradeBand": "middle",
+    "gradeBandName": "中年級",
+    "difficulty": 2,
+    "question": "一包貼紙 7 張，8 包共有幾張？",
+    "choices": [
+      "54 張",
+      "56 張",
+      "58 張",
+      "64 張"
+    ],
+    "answerIndex": 1,
+    "explanation": "7 × 8 = 56。",
+    "tags": [
+      "原創題",
+      "數學",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "math_middle_015",
+    "subject": "math",
+    "subjectName": "數學",
+    "gradeBand": "middle",
+    "gradeBandName": "中年級",
+    "difficulty": 2,
+    "question": "72 ÷ 8 等於多少？",
+    "choices": [
+      "8",
+      "9",
+      "10",
+      "12"
+    ],
+    "answerIndex": 1,
+    "explanation": "72 ÷ 8 = 9。",
+    "tags": [
+      "原創題",
+      "數學",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "math_middle_016",
+    "subject": "math",
+    "subjectName": "數學",
+    "gradeBand": "middle",
+    "gradeBandName": "中年級",
+    "difficulty": 2,
+    "question": "哪一個分數最大？",
+    "choices": [
+      "1/3",
+      "1/6",
+      "1/2",
+      "1/5"
+    ],
+    "answerIndex": 2,
+    "explanation": "同樣分成幾等分，1/2 最大。",
+    "tags": [
+      "原創題",
+      "數學",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "math_middle_017",
+    "subject": "math",
+    "subjectName": "數學",
+    "gradeBand": "middle",
+    "gradeBandName": "中年級",
+    "difficulty": 2,
+    "question": "2 公尺等於幾公分？",
+    "choices": [
+      "20 公分",
+      "100 公分",
+      "200 公分",
+      "2000 公分"
+    ],
+    "answerIndex": 2,
+    "explanation": "1 公尺 = 100 公分，所以 2 公尺 = 200 公分。",
+    "tags": [
+      "原創題",
+      "數學",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "math_middle_018",
+    "subject": "math",
+    "subjectName": "數學",
+    "gradeBand": "middle",
+    "gradeBandName": "中年級",
+    "difficulty": 2,
+    "question": "正方形有幾條邊？",
+    "choices": [
+      "3 條",
+      "4 條",
+      "5 條",
+      "6 條"
+    ],
+    "answerIndex": 1,
+    "explanation": "正方形有 4 條邊。",
+    "tags": [
+      "原創題",
+      "數學",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "math_middle_019",
+    "subject": "math",
+    "subjectName": "數學",
+    "gradeBand": "middle",
+    "gradeBandName": "中年級",
+    "difficulty": 2,
+    "question": "小V一天練習 25 分鐘，4 天共練習幾分鐘？",
+    "choices": [
+      "75 分鐘",
+      "100 分鐘",
+      "120 分鐘",
+      "90 分鐘"
+    ],
+    "answerIndex": 1,
+    "explanation": "25 × 4 = 100。",
+    "tags": [
+      "原創題",
+      "數學",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "math_middle_020",
+    "subject": "math",
+    "subjectName": "數學",
+    "gradeBand": "middle",
+    "gradeBandName": "中年級",
+    "difficulty": 2,
+    "question": "150 - 68 等於多少？",
+    "choices": [
+      "72",
+      "82",
+      "88",
+      "92"
+    ],
+    "answerIndex": 1,
+    "explanation": "150 - 68 = 82。",
+    "tags": [
+      "原創題",
+      "數學",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "math_high_011",
+    "subject": "math",
+    "subjectName": "數學",
+    "gradeBand": "high",
+    "gradeBandName": "高年級",
+    "difficulty": 3,
+    "question": "一件道具 500 元，打 9 折後是多少元？",
+    "choices": [
+      "400 元",
+      "450 元",
+      "480 元",
+      "550 元"
+    ],
+    "answerIndex": 1,
+    "explanation": "9 折是 90%，500 × 0.9 = 450。",
+    "tags": [
+      "原創題",
+      "數學",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "math_high_012",
+    "subject": "math",
+    "subjectName": "數學",
+    "gradeBand": "high",
+    "gradeBandName": "高年級",
+    "difficulty": 3,
+    "question": "0.75 等於哪個分數？",
+    "choices": [
+      "1/4",
+      "1/2",
+      "3/4",
+      "2/3"
+    ],
+    "answerIndex": 2,
+    "explanation": "0.75 = 75/100 = 3/4。",
+    "tags": [
+      "原創題",
+      "數學",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "math_high_013",
+    "subject": "math",
+    "subjectName": "數學",
+    "gradeBand": "high",
+    "gradeBandName": "高年級",
+    "difficulty": 3,
+    "question": "長方形長 12 公分、寬 7 公分，面積是多少？",
+    "choices": [
+      "38",
+      "84",
+      "96",
+      "72"
+    ],
+    "answerIndex": 1,
+    "explanation": "12 × 7 = 84 平方公分。",
+    "tags": [
+      "原創題",
+      "數學",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "math_high_014",
+    "subject": "math",
+    "subjectName": "數學",
+    "gradeBand": "high",
+    "gradeBandName": "高年級",
+    "difficulty": 3,
+    "question": "45 和 60 的最大公因數是多少？",
+    "choices": [
+      "5",
+      "10",
+      "15",
+      "20"
+    ],
+    "answerIndex": 2,
+    "explanation": "45 和 60 的最大公因數是 15。",
+    "tags": [
+      "原創題",
+      "數學",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "math_high_015",
+    "subject": "math",
+    "subjectName": "數學",
+    "gradeBand": "high",
+    "gradeBandName": "高年級",
+    "difficulty": 3,
+    "question": "2/5 換成百分率是多少？",
+    "choices": [
+      "20%",
+      "25%",
+      "40%",
+      "50%"
+    ],
+    "answerIndex": 2,
+    "explanation": "2 ÷ 5 = 0.4 = 40%。",
+    "tags": [
+      "原創題",
+      "數學",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "math_high_016",
+    "subject": "math",
+    "subjectName": "數學",
+    "gradeBand": "high",
+    "gradeBandName": "高年級",
+    "difficulty": 3,
+    "question": "一個數的 20% 是 18，這個數是多少？",
+    "choices": [
+      "72",
+      "80",
+      "90",
+      "100"
+    ],
+    "answerIndex": 2,
+    "explanation": "20% 是 1/5，18 × 5 = 90。",
+    "tags": [
+      "原創題",
+      "數學",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "math_high_017",
+    "subject": "math",
+    "subjectName": "數學",
+    "gradeBand": "high",
+    "gradeBandName": "高年級",
+    "difficulty": 3,
+    "question": "3.6 + 4.85 等於多少？",
+    "choices": [
+      "8.35",
+      "8.45",
+      "8.55",
+      "7.45"
+    ],
+    "answerIndex": 1,
+    "explanation": "3.6 + 4.85 = 8.45。",
+    "tags": [
+      "原創題",
+      "數學",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "math_high_018",
+    "subject": "math",
+    "subjectName": "數學",
+    "gradeBand": "high",
+    "gradeBandName": "高年級",
+    "difficulty": 3,
+    "question": "比例 4：5 中，如果前項變成 16，後項應變成多少？",
+    "choices": [
+      "18",
+      "20",
+      "24",
+      "25"
+    ],
+    "answerIndex": 1,
+    "explanation": "4 變成 16 是乘以 4，所以 5 × 4 = 20。",
+    "tags": [
+      "原創題",
+      "數學",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "math_high_019",
+    "subject": "math",
+    "subjectName": "數學",
+    "gradeBand": "high",
+    "gradeBandName": "高年級",
+    "difficulty": 3,
+    "question": "半徑 8 公分的圓，直徑是多少？",
+    "choices": [
+      "8 公分",
+      "12 公分",
+      "16 公分",
+      "24 公分"
+    ],
+    "answerIndex": 2,
+    "explanation": "直徑是半徑的 2 倍，8 × 2 = 16。",
+    "tags": [
+      "原創題",
+      "數學",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "math_high_020",
+    "subject": "math",
+    "subjectName": "數學",
+    "gradeBand": "high",
+    "gradeBandName": "高年級",
+    "difficulty": 3,
+    "question": "小V 15 分鐘走 1 公里，1 小時大約走幾公里？",
+    "choices": [
+      "2 公里",
+      "3 公里",
+      "4 公里",
+      "5 公里"
+    ],
+    "answerIndex": 2,
+    "explanation": "1 小時是 60 分鐘，60 ÷ 15 = 4。",
+    "tags": [
+      "原創題",
+      "數學",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "mandarin_low_011",
+    "subject": "mandarin",
+    "subjectName": "國語",
+    "gradeBand": "low",
+    "gradeBandName": "低年級",
+    "difficulty": 1,
+    "question": "「我愛氣球。」這句話的句號是哪一個？",
+    "choices": [
+      "，",
+      "。",
+      "？",
+      "！"
+    ],
+    "answerIndex": 1,
+    "explanation": "句號是「。」。",
+    "tags": [
+      "原創題",
+      "國語",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "mandarin_low_012",
+    "subject": "mandarin",
+    "subjectName": "國語",
+    "gradeBand": "low",
+    "gradeBandName": "低年級",
+    "difficulty": 1,
+    "question": "「快樂」表示什麼心情？",
+    "choices": [
+      "難過",
+      "高興",
+      "生氣",
+      "害怕"
+    ],
+    "answerIndex": 1,
+    "explanation": "快樂表示高興。",
+    "tags": [
+      "原創題",
+      "國語",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "mandarin_low_013",
+    "subject": "mandarin",
+    "subjectName": "國語",
+    "gradeBand": "low",
+    "gradeBandName": "低年級",
+    "difficulty": 1,
+    "question": "「上」的相反詞是什麼？",
+    "choices": [
+      "下",
+      "大",
+      "小",
+      "左"
+    ],
+    "answerIndex": 0,
+    "explanation": "上的相反詞是下。",
+    "tags": [
+      "原創題",
+      "國語",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "mandarin_low_014",
+    "subject": "mandarin",
+    "subjectName": "國語",
+    "gradeBand": "low",
+    "gradeBandName": "低年級",
+    "difficulty": 1,
+    "question": "下列哪一個是水果？",
+    "choices": [
+      "鉛筆",
+      "香蕉",
+      "書包",
+      "椅子"
+    ],
+    "answerIndex": 1,
+    "explanation": "香蕉是水果。",
+    "tags": [
+      "原創題",
+      "國語",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "mandarin_low_015",
+    "subject": "mandarin",
+    "subjectName": "國語",
+    "gradeBand": "low",
+    "gradeBandName": "低年級",
+    "difficulty": 1,
+    "question": "「小V表演魔術」主要在說誰表演？",
+    "choices": [
+      "老師",
+      "小V",
+      "媽媽",
+      "狗狗"
+    ],
+    "answerIndex": 1,
+    "explanation": "句子說小V表演魔術。",
+    "tags": [
+      "原創題",
+      "國語",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "mandarin_low_016",
+    "subject": "mandarin",
+    "subjectName": "國語",
+    "gradeBand": "low",
+    "gradeBandName": "低年級",
+    "difficulty": 1,
+    "question": "「花」字和哪個東西有關？",
+    "choices": [
+      "植物",
+      "交通",
+      "電器",
+      "天氣"
+    ],
+    "answerIndex": 0,
+    "explanation": "花是植物的一部分。",
+    "tags": [
+      "原創題",
+      "國語",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "mandarin_low_017",
+    "subject": "mandarin",
+    "subjectName": "國語",
+    "gradeBand": "low",
+    "gradeBandName": "低年級",
+    "difficulty": 1,
+    "question": "「請」通常用來表示什麼？",
+    "choices": [
+      "有禮貌",
+      "很生氣",
+      "很害怕",
+      "很累"
+    ],
+    "answerIndex": 0,
+    "explanation": "請是有禮貌的用語。",
+    "tags": [
+      "原創題",
+      "國語",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "mandarin_low_018",
+    "subject": "mandarin",
+    "subjectName": "國語",
+    "gradeBand": "low",
+    "gradeBandName": "低年級",
+    "difficulty": 1,
+    "question": "「大大的氣球」中，哪個詞在形容氣球？",
+    "choices": [
+      "大大的",
+      "氣球",
+      "的",
+      "沒有"
+    ],
+    "answerIndex": 0,
+    "explanation": "大大的用來形容氣球。",
+    "tags": [
+      "原創題",
+      "國語",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "mandarin_low_019",
+    "subject": "mandarin",
+    "subjectName": "國語",
+    "gradeBand": "low",
+    "gradeBandName": "低年級",
+    "difficulty": 1,
+    "question": "「早安」通常在什麼時候說？",
+    "choices": [
+      "早上",
+      "晚上",
+      "半夜",
+      "吃飯後"
+    ],
+    "answerIndex": 0,
+    "explanation": "早安通常早上說。",
+    "tags": [
+      "原創題",
+      "國語",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "mandarin_low_020",
+    "subject": "mandarin",
+    "subjectName": "國語",
+    "gradeBand": "low",
+    "gradeBandName": "低年級",
+    "difficulty": 1,
+    "question": "下列哪個標點表示疑問？",
+    "choices": [
+      "。",
+      "，",
+      "？",
+      "！"
+    ],
+    "answerIndex": 2,
+    "explanation": "問號「？」表示疑問。",
+    "tags": [
+      "原創題",
+      "國語",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "mandarin_middle_011",
+    "subject": "mandarin",
+    "subjectName": "國語",
+    "gradeBand": "middle",
+    "gradeBandName": "中年級",
+    "difficulty": 2,
+    "question": "「專心致志」最接近哪個意思？",
+    "choices": [
+      "很專心",
+      "很吵鬧",
+      "很害怕",
+      "很生氣"
+    ],
+    "answerIndex": 0,
+    "explanation": "專心致志表示非常專心。",
+    "tags": [
+      "原創題",
+      "國語",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "mandarin_middle_012",
+    "subject": "mandarin",
+    "subjectName": "國語",
+    "gradeBand": "middle",
+    "gradeBandName": "中年級",
+    "difficulty": 2,
+    "question": "下列哪個是動詞？",
+    "choices": [
+      "美麗",
+      "跑步",
+      "學校",
+      "紅色"
+    ],
+    "answerIndex": 1,
+    "explanation": "跑步是動作。",
+    "tags": [
+      "原創題",
+      "國語",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "mandarin_middle_013",
+    "subject": "mandarin",
+    "subjectName": "國語",
+    "gradeBand": "middle",
+    "gradeBandName": "中年級",
+    "difficulty": 2,
+    "question": "「雖然下雨，但是活動照常舉行。」這句有什麼關係？",
+    "choices": [
+      "因果",
+      "轉折",
+      "並列",
+      "選擇"
+    ],
+    "answerIndex": 1,
+    "explanation": "雖然……但是……表示轉折。",
+    "tags": [
+      "原創題",
+      "國語",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "mandarin_middle_014",
+    "subject": "mandarin",
+    "subjectName": "國語",
+    "gradeBand": "middle",
+    "gradeBandName": "中年級",
+    "difficulty": 2,
+    "question": "「他像風一樣跑得很快」使用了什麼修辭？",
+    "choices": [
+      "譬喻",
+      "排比",
+      "設問",
+      "誇飾"
+    ],
+    "answerIndex": 0,
+    "explanation": "把他跑得快比成風，是譬喻。",
+    "tags": [
+      "原創題",
+      "國語",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "mandarin_middle_015",
+    "subject": "mandarin",
+    "subjectName": "國語",
+    "gradeBand": "middle",
+    "gradeBandName": "中年級",
+    "difficulty": 2,
+    "question": "下列哪一句有禮貌？",
+    "choices": [
+      "快給我",
+      "請問可以幫忙嗎",
+      "你走開",
+      "我才不要"
+    ],
+    "answerIndex": 1,
+    "explanation": "請問可以幫忙嗎較有禮貌。",
+    "tags": [
+      "原創題",
+      "國語",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "mandarin_middle_016",
+    "subject": "mandarin",
+    "subjectName": "國語",
+    "gradeBand": "middle",
+    "gradeBandName": "中年級",
+    "difficulty": 2,
+    "question": "「津津有味」通常形容什麼？",
+    "choices": [
+      "吃得很有味道",
+      "走得很慢",
+      "睡得很久",
+      "哭得很大聲"
+    ],
+    "answerIndex": 0,
+    "explanation": "津津有味常形容吃或讀得很投入。",
+    "tags": [
+      "原創題",
+      "國語",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "mandarin_middle_017",
+    "subject": "mandarin",
+    "subjectName": "國語",
+    "gradeBand": "middle",
+    "gradeBandName": "中年級",
+    "difficulty": 2,
+    "question": "「小V把氣球交給壽星。」句子中的受詞是？",
+    "choices": [
+      "小V",
+      "氣球",
+      "交給",
+      "壽星"
+    ],
+    "answerIndex": 1,
+    "explanation": "被交出去的是氣球。",
+    "tags": [
+      "原創題",
+      "國語",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "mandarin_middle_018",
+    "subject": "mandarin",
+    "subjectName": "國語",
+    "gradeBand": "middle",
+    "gradeBandName": "中年級",
+    "difficulty": 2,
+    "question": "下列哪個詞語表示時間很短？",
+    "choices": [
+      "一瞬間",
+      "很久很久",
+      "永遠",
+      "整天"
+    ],
+    "answerIndex": 0,
+    "explanation": "一瞬間表示時間很短。",
+    "tags": [
+      "原創題",
+      "國語",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "mandarin_middle_019",
+    "subject": "mandarin",
+    "subjectName": "國語",
+    "gradeBand": "middle",
+    "gradeBandName": "中年級",
+    "difficulty": 2,
+    "question": "「熱鬧」的相反詞較接近？",
+    "choices": [
+      "安靜",
+      "開心",
+      "明亮",
+      "快速"
+    ],
+    "answerIndex": 0,
+    "explanation": "熱鬧的相反較接近安靜。",
+    "tags": [
+      "原創題",
+      "國語",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "mandarin_middle_020",
+    "subject": "mandarin",
+    "subjectName": "國語",
+    "gradeBand": "middle",
+    "gradeBandName": "中年級",
+    "difficulty": 2,
+    "question": "「因為努力，所以進步。」這句屬於什麼關係？",
+    "choices": [
+      "因果",
+      "轉折",
+      "選擇",
+      "比較"
+    ],
+    "answerIndex": 0,
+    "explanation": "因為……所以……表示因果。",
+    "tags": [
+      "原創題",
+      "國語",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "mandarin_high_011",
+    "subject": "mandarin",
+    "subjectName": "國語",
+    "gradeBand": "high",
+    "gradeBandName": "高年級",
+    "difficulty": 3,
+    "question": "「畫龍點睛」比喻什麼？",
+    "choices": [
+      "把重點補上，使內容更精彩",
+      "真的在畫龍",
+      "把眼睛畫大",
+      "做事很慢"
+    ],
+    "answerIndex": 0,
+    "explanation": "畫龍點睛比喻加上關鍵一筆。",
+    "tags": [
+      "原創題",
+      "國語",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "mandarin_high_012",
+    "subject": "mandarin",
+    "subjectName": "國語",
+    "gradeBand": "high",
+    "gradeBandName": "高年級",
+    "difficulty": 3,
+    "question": "「他沉默不語」的意思是？",
+    "choices": [
+      "不停說話",
+      "沒有說話",
+      "大聲唱歌",
+      "很快跑走"
+    ],
+    "answerIndex": 1,
+    "explanation": "沉默不語表示不說話。",
+    "tags": [
+      "原創題",
+      "國語",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "mandarin_high_013",
+    "subject": "mandarin",
+    "subjectName": "國語",
+    "gradeBand": "high",
+    "gradeBandName": "高年級",
+    "difficulty": 3,
+    "question": "下列哪個成語表示非常熟練？",
+    "choices": [
+      "駕輕就熟",
+      "手忙腳亂",
+      "半途而廢",
+      "東張西望"
+    ],
+    "answerIndex": 0,
+    "explanation": "駕輕就熟表示很熟練。",
+    "tags": [
+      "原創題",
+      "國語",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "mandarin_high_014",
+    "subject": "mandarin",
+    "subjectName": "國語",
+    "gradeBand": "high",
+    "gradeBandName": "高年級",
+    "difficulty": 3,
+    "question": "「與其抱怨，不如行動。」句型表示什麼？",
+    "choices": [
+      "比較選擇",
+      "時間先後",
+      "因果關係",
+      "並列動作"
+    ],
+    "answerIndex": 0,
+    "explanation": "與其……不如……表示比較選擇。",
+    "tags": [
+      "原創題",
+      "國語",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "mandarin_high_015",
+    "subject": "mandarin",
+    "subjectName": "國語",
+    "gradeBand": "high",
+    "gradeBandName": "高年級",
+    "difficulty": 3,
+    "question": "「這場表演讓人目不轉睛」表示？",
+    "choices": [
+      "很無聊",
+      "很吸引人",
+      "很安靜",
+      "很短暫"
+    ],
+    "answerIndex": 1,
+    "explanation": "目不轉睛表示看得很專注。",
+    "tags": [
+      "原創題",
+      "國語",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "mandarin_high_016",
+    "subject": "mandarin",
+    "subjectName": "國語",
+    "gradeBand": "high",
+    "gradeBandName": "高年級",
+    "difficulty": 3,
+    "question": "下列哪個詞是副詞？",
+    "choices": [
+      "非常",
+      "桌子",
+      "奔跑",
+      "學生"
+    ],
+    "answerIndex": 0,
+    "explanation": "非常用來修飾程度，是副詞。",
+    "tags": [
+      "原創題",
+      "國語",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "mandarin_high_017",
+    "subject": "mandarin",
+    "subjectName": "國語",
+    "gradeBand": "high",
+    "gradeBandName": "高年級",
+    "difficulty": 3,
+    "question": "「他不是不會，而是不敢。」句子重點是？",
+    "choices": [
+      "他完全不會",
+      "他不敢嘗試",
+      "他很生氣",
+      "他想睡覺"
+    ],
+    "answerIndex": 1,
+    "explanation": "句子說重點是不敢。",
+    "tags": [
+      "原創題",
+      "國語",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "mandarin_high_018",
+    "subject": "mandarin",
+    "subjectName": "國語",
+    "gradeBand": "high",
+    "gradeBandName": "高年級",
+    "difficulty": 3,
+    "question": "「臨機應變」最適合形容？",
+    "choices": [
+      "遇到情況能即時處理",
+      "每天睡覺",
+      "一直拖延",
+      "完全不動"
+    ],
+    "answerIndex": 0,
+    "explanation": "臨機應變表示依情況快速處理。",
+    "tags": [
+      "原創題",
+      "國語",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "mandarin_high_019",
+    "subject": "mandarin",
+    "subjectName": "國語",
+    "gradeBand": "high",
+    "gradeBandName": "高年級",
+    "difficulty": 3,
+    "question": "「這個點子別出心裁」表示？",
+    "choices": [
+      "很普通",
+      "很有創意",
+      "很危險",
+      "很便宜"
+    ],
+    "answerIndex": 1,
+    "explanation": "別出心裁表示有創意。",
+    "tags": [
+      "原創題",
+      "國語",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "mandarin_high_020",
+    "subject": "mandarin",
+    "subjectName": "國語",
+    "gradeBand": "high",
+    "gradeBandName": "高年級",
+    "difficulty": 3,
+    "question": "「先禮後兵」的「禮」是指？",
+    "choices": [
+      "有禮貌地溝通",
+      "禮物",
+      "音樂",
+      "遊戲"
+    ],
+    "answerIndex": 0,
+    "explanation": "先禮後兵指先用禮貌方式溝通。",
+    "tags": [
+      "原創題",
+      "國語",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "science_low_011",
+    "subject": "science",
+    "subjectName": "自然",
+    "gradeBand": "low",
+    "gradeBandName": "低年級",
+    "difficulty": 1,
+    "question": "植物通常需要哪一樣才能長大？",
+    "choices": [
+      "陽光",
+      "橡皮擦",
+      "遙控器",
+      "鉛筆"
+    ],
+    "answerIndex": 0,
+    "explanation": "植物需要陽光、水和空氣。",
+    "tags": [
+      "原創題",
+      "自然",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "science_low_012",
+    "subject": "science",
+    "subjectName": "自然",
+    "gradeBand": "low",
+    "gradeBandName": "低年級",
+    "difficulty": 1,
+    "question": "下雨時天空常會有什麼？",
+    "choices": [
+      "雲",
+      "星星貼紙",
+      "電視",
+      "書包"
+    ],
+    "answerIndex": 0,
+    "explanation": "雨通常來自雲中的水滴。",
+    "tags": [
+      "原創題",
+      "自然",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "science_low_013",
+    "subject": "science",
+    "subjectName": "自然",
+    "gradeBand": "low",
+    "gradeBandName": "低年級",
+    "difficulty": 1,
+    "question": "冰塊放在太陽下會怎樣？",
+    "choices": [
+      "融化",
+      "變成石頭",
+      "變大很多",
+      "發芽"
+    ],
+    "answerIndex": 0,
+    "explanation": "冰受熱會融化成水。",
+    "tags": [
+      "原創題",
+      "自然",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "science_low_014",
+    "subject": "science",
+    "subjectName": "自然",
+    "gradeBand": "low",
+    "gradeBandName": "低年級",
+    "difficulty": 1,
+    "question": "魚生活在什麼地方最適合？",
+    "choices": [
+      "水裡",
+      "沙發上",
+      "書包裡",
+      "火上"
+    ],
+    "answerIndex": 0,
+    "explanation": "魚需要水生活。",
+    "tags": [
+      "原創題",
+      "自然",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "science_low_015",
+    "subject": "science",
+    "subjectName": "自然",
+    "gradeBand": "low",
+    "gradeBandName": "低年級",
+    "difficulty": 1,
+    "question": "我們用什麼器官看東西？",
+    "choices": [
+      "眼睛",
+      "耳朵",
+      "鼻子",
+      "手肘"
+    ],
+    "answerIndex": 0,
+    "explanation": "眼睛用來看東西。",
+    "tags": [
+      "原創題",
+      "自然",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "science_low_016",
+    "subject": "science",
+    "subjectName": "自然",
+    "gradeBand": "low",
+    "gradeBandName": "低年級",
+    "difficulty": 1,
+    "question": "白天常看到的星球是？",
+    "choices": [
+      "太陽",
+      "月亮",
+      "火星",
+      "土星"
+    ],
+    "answerIndex": 0,
+    "explanation": "白天主要看到太陽。",
+    "tags": [
+      "原創題",
+      "自然",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "science_low_017",
+    "subject": "science",
+    "subjectName": "自然",
+    "gradeBand": "low",
+    "gradeBandName": "低年級",
+    "difficulty": 1,
+    "question": "哪一個是昆蟲？",
+    "choices": [
+      "蝴蝶",
+      "小狗",
+      "金魚",
+      "麻雀"
+    ],
+    "answerIndex": 0,
+    "explanation": "蝴蝶是昆蟲。",
+    "tags": [
+      "原創題",
+      "自然",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "science_low_018",
+    "subject": "science",
+    "subjectName": "自然",
+    "gradeBand": "low",
+    "gradeBandName": "低年級",
+    "difficulty": 1,
+    "question": "風吹來時，旗子會怎樣？",
+    "choices": [
+      "飄動",
+      "消失",
+      "變成水",
+      "發光"
+    ],
+    "answerIndex": 0,
+    "explanation": "風會讓旗子飄動。",
+    "tags": [
+      "原創題",
+      "自然",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "science_low_019",
+    "subject": "science",
+    "subjectName": "自然",
+    "gradeBand": "low",
+    "gradeBandName": "低年級",
+    "difficulty": 1,
+    "question": "哪一種東西會吸鐵？",
+    "choices": [
+      "磁鐵",
+      "紙巾",
+      "氣球",
+      "木頭"
+    ],
+    "answerIndex": 0,
+    "explanation": "磁鐵可以吸引鐵製品。",
+    "tags": [
+      "原創題",
+      "自然",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "science_low_020",
+    "subject": "science",
+    "subjectName": "自然",
+    "gradeBand": "low",
+    "gradeBandName": "低年級",
+    "difficulty": 1,
+    "question": "人需要呼吸什麼？",
+    "choices": [
+      "空氣",
+      "鉛筆",
+      "石頭",
+      "汽水"
+    ],
+    "answerIndex": 0,
+    "explanation": "人需要呼吸空氣。",
+    "tags": [
+      "原創題",
+      "自然",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "science_middle_011",
+    "subject": "science",
+    "subjectName": "自然",
+    "gradeBand": "middle",
+    "gradeBandName": "中年級",
+    "difficulty": 2,
+    "question": "水加熱到很熱時會產生什麼？",
+    "choices": [
+      "水蒸氣",
+      "沙子",
+      "木頭",
+      "冰塊"
+    ],
+    "answerIndex": 0,
+    "explanation": "水受熱會蒸發成水蒸氣。",
+    "tags": [
+      "原創題",
+      "自然",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "science_middle_012",
+    "subject": "science",
+    "subjectName": "自然",
+    "gradeBand": "middle",
+    "gradeBandName": "中年級",
+    "difficulty": 2,
+    "question": "聲音是由物體的什麼產生？",
+    "choices": [
+      "振動",
+      "顏色",
+      "重量",
+      "形狀"
+    ],
+    "answerIndex": 0,
+    "explanation": "聲音來自物體振動。",
+    "tags": [
+      "原創題",
+      "自然",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "science_middle_013",
+    "subject": "science",
+    "subjectName": "自然",
+    "gradeBand": "middle",
+    "gradeBandName": "中年級",
+    "difficulty": 2,
+    "question": "植物的根主要功能是？",
+    "choices": [
+      "吸收水分和固定植物",
+      "開花",
+      "製造聲音",
+      "飛行"
+    ],
+    "answerIndex": 0,
+    "explanation": "根能吸水並固定植物。",
+    "tags": [
+      "原創題",
+      "自然",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "science_middle_014",
+    "subject": "science",
+    "subjectName": "自然",
+    "gradeBand": "middle",
+    "gradeBandName": "中年級",
+    "difficulty": 2,
+    "question": "地球自轉造成什麼現象？",
+    "choices": [
+      "晝夜交替",
+      "四季完全消失",
+      "海水變甜",
+      "雲不會動"
+    ],
+    "answerIndex": 0,
+    "explanation": "地球自轉造成白天黑夜。",
+    "tags": [
+      "原創題",
+      "自然",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "science_middle_015",
+    "subject": "science",
+    "subjectName": "自然",
+    "gradeBand": "middle",
+    "gradeBandName": "中年級",
+    "difficulty": 2,
+    "question": "哪一項是良好的用電習慣？",
+    "choices": [
+      "手濕不碰插座",
+      "插座塞滿插頭",
+      "拉電線拔插頭",
+      "用破皮電線"
+    ],
+    "answerIndex": 0,
+    "explanation": "手濕碰電很危險。",
+    "tags": [
+      "原創題",
+      "自然",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "science_middle_016",
+    "subject": "science",
+    "subjectName": "自然",
+    "gradeBand": "middle",
+    "gradeBandName": "中年級",
+    "difficulty": 2,
+    "question": "空氣有重量嗎？",
+    "choices": [
+      "有",
+      "沒有",
+      "只有晚上有",
+      "只有氣球裡沒有"
+    ],
+    "answerIndex": 0,
+    "explanation": "空氣是物質，也有重量。",
+    "tags": [
+      "原創題",
+      "自然",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "science_middle_017",
+    "subject": "science",
+    "subjectName": "自然",
+    "gradeBand": "middle",
+    "gradeBandName": "中年級",
+    "difficulty": 2,
+    "question": "影子長短會受到什麼影響？",
+    "choices": [
+      "光照角度",
+      "書包顏色",
+      "鞋子大小",
+      "音量大小"
+    ],
+    "answerIndex": 0,
+    "explanation": "光的角度會影響影子。",
+    "tags": [
+      "原創題",
+      "自然",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "science_middle_018",
+    "subject": "science",
+    "subjectName": "自然",
+    "gradeBand": "middle",
+    "gradeBandName": "中年級",
+    "difficulty": 2,
+    "question": "蝌蚪長大後會變成？",
+    "choices": [
+      "青蛙",
+      "蝴蝶",
+      "小鳥",
+      "魚"
+    ],
+    "answerIndex": 0,
+    "explanation": "蝌蚪是青蛙的幼體。",
+    "tags": [
+      "原創題",
+      "自然",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "science_middle_019",
+    "subject": "science",
+    "subjectName": "自然",
+    "gradeBand": "middle",
+    "gradeBandName": "中年級",
+    "difficulty": 2,
+    "question": "溫度計用來測量什麼？",
+    "choices": [
+      "溫度",
+      "重量",
+      "長度",
+      "聲音"
+    ],
+    "answerIndex": 0,
+    "explanation": "溫度計用來測量溫度。",
+    "tags": [
+      "原創題",
+      "自然",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "science_middle_020",
+    "subject": "science",
+    "subjectName": "自然",
+    "gradeBand": "middle",
+    "gradeBandName": "中年級",
+    "difficulty": 2,
+    "question": "月亮本身會發光嗎？",
+    "choices": [
+      "不會，是反射太陽光",
+      "會像燈泡發光",
+      "只在白天發光",
+      "只在水裡發光"
+    ],
+    "answerIndex": 0,
+    "explanation": "月亮看起來亮是反射太陽光。",
+    "tags": [
+      "原創題",
+      "自然",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "science_high_011",
+    "subject": "science",
+    "subjectName": "自然",
+    "gradeBand": "high",
+    "gradeBandName": "高年級",
+    "difficulty": 3,
+    "question": "食物鏈中，植物通常扮演什麼角色？",
+    "choices": [
+      "生產者",
+      "消費者",
+      "分解者",
+      "捕食者"
+    ],
+    "answerIndex": 0,
+    "explanation": "植物能行光合作用，是生產者。",
+    "tags": [
+      "原創題",
+      "自然",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "science_high_012",
+    "subject": "science",
+    "subjectName": "自然",
+    "gradeBand": "high",
+    "gradeBandName": "高年級",
+    "difficulty": 3,
+    "question": "力可以改變物體的什麼？",
+    "choices": [
+      "運動狀態或形狀",
+      "名字",
+      "顏色一定變黑",
+      "年齡"
+    ],
+    "answerIndex": 0,
+    "explanation": "力可改變速度、方向或形狀。",
+    "tags": [
+      "原創題",
+      "自然",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "science_high_013",
+    "subject": "science",
+    "subjectName": "自然",
+    "gradeBand": "high",
+    "gradeBandName": "高年級",
+    "difficulty": 3,
+    "question": "電路要讓燈泡發亮，通常需要？",
+    "choices": [
+      "形成通路",
+      "斷路",
+      "沒有電池",
+      "只要紙張"
+    ],
+    "answerIndex": 0,
+    "explanation": "完整通路才能讓電流流動。",
+    "tags": [
+      "原創題",
+      "自然",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "science_high_014",
+    "subject": "science",
+    "subjectName": "自然",
+    "gradeBand": "high",
+    "gradeBandName": "高年級",
+    "difficulty": 3,
+    "question": "人體消化食物主要從哪裡開始？",
+    "choices": [
+      "口腔",
+      "腳掌",
+      "頭髮",
+      "耳朵"
+    ],
+    "answerIndex": 0,
+    "explanation": "食物進入口腔後開始咀嚼與消化。",
+    "tags": [
+      "原創題",
+      "自然",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "science_high_015",
+    "subject": "science",
+    "subjectName": "自然",
+    "gradeBand": "high",
+    "gradeBandName": "高年級",
+    "difficulty": 3,
+    "question": "地震時在室內應先？",
+    "choices": [
+      "保護頭部並躲在堅固桌下",
+      "立刻搭電梯",
+      "站在窗邊",
+      "衝去陽台"
+    ],
+    "answerIndex": 0,
+    "explanation": "地震時先保護頭部並避開危險物。",
+    "tags": [
+      "原創題",
+      "自然",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "science_high_016",
+    "subject": "science",
+    "subjectName": "自然",
+    "gradeBand": "high",
+    "gradeBandName": "高年級",
+    "difficulty": 3,
+    "question": "哪一種能源屬於再生能源？",
+    "choices": [
+      "太陽能",
+      "煤炭",
+      "石油",
+      "天然氣"
+    ],
+    "answerIndex": 0,
+    "explanation": "太陽能可持續取得。",
+    "tags": [
+      "原創題",
+      "自然",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "science_high_017",
+    "subject": "science",
+    "subjectName": "自然",
+    "gradeBand": "high",
+    "gradeBandName": "高年級",
+    "difficulty": 3,
+    "question": "水循環包含蒸發、凝結和什麼？",
+    "choices": [
+      "降水",
+      "燃燒",
+      "結冰成石頭",
+      "發芽"
+    ],
+    "answerIndex": 0,
+    "explanation": "水循環包括蒸發、凝結、降水等。",
+    "tags": [
+      "原創題",
+      "自然",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "science_high_018",
+    "subject": "science",
+    "subjectName": "自然",
+    "gradeBand": "high",
+    "gradeBandName": "高年級",
+    "difficulty": 3,
+    "question": "聲音在真空中能傳播嗎？",
+    "choices": [
+      "不能",
+      "能，而且更大聲",
+      "只能傳低音",
+      "只能傳高音"
+    ],
+    "answerIndex": 0,
+    "explanation": "聲音需要介質，真空不能傳聲。",
+    "tags": [
+      "原創題",
+      "自然",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "science_high_019",
+    "subject": "science",
+    "subjectName": "自然",
+    "gradeBand": "high",
+    "gradeBandName": "高年級",
+    "difficulty": 3,
+    "question": "生物多樣性高通常代表？",
+    "choices": [
+      "生態系較豐富穩定",
+      "只有一種生物",
+      "完全沒有植物",
+      "空氣不能呼吸"
+    ],
+    "answerIndex": 0,
+    "explanation": "多樣性有助於生態系穩定。",
+    "tags": [
+      "原創題",
+      "自然",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "science_high_020",
+    "subject": "science",
+    "subjectName": "自然",
+    "gradeBand": "high",
+    "gradeBandName": "高年級",
+    "difficulty": 3,
+    "question": "鐵生鏽通常需要水和什麼？",
+    "choices": [
+      "氧氣",
+      "糖",
+      "陽光貼紙",
+      "塑膠"
+    ],
+    "answerIndex": 0,
+    "explanation": "鐵與水、氧氣反應會生鏽。",
+    "tags": [
+      "原創題",
+      "自然",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "social_low_011",
+    "subject": "social",
+    "subjectName": "社會",
+    "gradeBand": "low",
+    "gradeBandName": "低年級",
+    "difficulty": 1,
+    "question": "過馬路時應該看什麼？",
+    "choices": [
+      "紅綠燈",
+      "漫畫書",
+      "電視",
+      "鞋帶"
+    ],
+    "answerIndex": 0,
+    "explanation": "過馬路要看紅綠燈並注意車輛。",
+    "tags": [
+      "原創題",
+      "社會",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "social_low_012",
+    "subject": "social",
+    "subjectName": "社會",
+    "gradeBand": "low",
+    "gradeBandName": "低年級",
+    "difficulty": 1,
+    "question": "在學校遇到老師可以說？",
+    "choices": [
+      "老師好",
+      "不要吵",
+      "走開",
+      "快點"
+    ],
+    "answerIndex": 0,
+    "explanation": "向老師問好是有禮貌的行為。",
+    "tags": [
+      "原創題",
+      "社會",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "social_low_013",
+    "subject": "social",
+    "subjectName": "社會",
+    "gradeBand": "low",
+    "gradeBandName": "低年級",
+    "difficulty": 1,
+    "question": "台灣常見的交通工具是？",
+    "choices": [
+      "公車",
+      "太空船",
+      "潛水艇",
+      "火箭背包"
+    ],
+    "answerIndex": 0,
+    "explanation": "公車是常見交通工具。",
+    "tags": [
+      "原創題",
+      "社會",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "social_low_014",
+    "subject": "social",
+    "subjectName": "社會",
+    "gradeBand": "low",
+    "gradeBandName": "低年級",
+    "difficulty": 1,
+    "question": "家人一起吃飯時應該？",
+    "choices": [
+      "有禮貌並珍惜食物",
+      "大聲丟餐具",
+      "搶別人的菜",
+      "浪費食物"
+    ],
+    "answerIndex": 0,
+    "explanation": "用餐要有禮貌並珍惜食物。",
+    "tags": [
+      "原創題",
+      "社會",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "social_low_015",
+    "subject": "social",
+    "subjectName": "社會",
+    "gradeBand": "low",
+    "gradeBandName": "低年級",
+    "difficulty": 1,
+    "question": "看到垃圾應該？",
+    "choices": [
+      "丟到垃圾桶",
+      "丟地上",
+      "藏在書包",
+      "踢給別人"
+    ],
+    "answerIndex": 0,
+    "explanation": "垃圾應丟到垃圾桶。",
+    "tags": [
+      "原創題",
+      "社會",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "social_low_016",
+    "subject": "social",
+    "subjectName": "社會",
+    "gradeBand": "low",
+    "gradeBandName": "低年級",
+    "difficulty": 1,
+    "question": "迷路時可以找誰幫忙？",
+    "choices": [
+      "警察或服務人員",
+      "陌生人給的車",
+      "躲起來",
+      "亂跑"
+    ],
+    "answerIndex": 0,
+    "explanation": "可以找可信任的大人或服務人員。",
+    "tags": [
+      "原創題",
+      "社會",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "social_low_017",
+    "subject": "social",
+    "subjectName": "社會",
+    "gradeBand": "low",
+    "gradeBandName": "低年級",
+    "difficulty": 1,
+    "question": "升旗時通常要怎麼做？",
+    "choices": [
+      "安靜並尊重",
+      "追逐打鬧",
+      "吃零食",
+      "躺下"
+    ],
+    "answerIndex": 0,
+    "explanation": "升旗時要保持尊重。",
+    "tags": [
+      "原創題",
+      "社會",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "social_low_018",
+    "subject": "social",
+    "subjectName": "社會",
+    "gradeBand": "low",
+    "gradeBandName": "低年級",
+    "difficulty": 1,
+    "question": "排隊買東西時應該？",
+    "choices": [
+      "依序排隊",
+      "插隊",
+      "推人",
+      "大叫"
+    ],
+    "answerIndex": 0,
+    "explanation": "排隊是尊重他人的表現。",
+    "tags": [
+      "原創題",
+      "社會",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "social_low_019",
+    "subject": "social",
+    "subjectName": "社會",
+    "gradeBand": "low",
+    "gradeBandName": "低年級",
+    "difficulty": 1,
+    "question": "哪一個是公共場所？",
+    "choices": [
+      "公園",
+      "自己的床",
+      "家裡衣櫃",
+      "私人日記"
+    ],
+    "answerIndex": 0,
+    "explanation": "公園是大家可使用的公共場所。",
+    "tags": [
+      "原創題",
+      "社會",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "social_low_020",
+    "subject": "social",
+    "subjectName": "社會",
+    "gradeBand": "low",
+    "gradeBandName": "低年級",
+    "difficulty": 1,
+    "question": "別人幫忙你時可以說？",
+    "choices": [
+      "謝謝",
+      "走開",
+      "不要管",
+      "快一點"
+    ],
+    "answerIndex": 0,
+    "explanation": "受到幫助要說謝謝。",
+    "tags": [
+      "原創題",
+      "社會",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "social_middle_011",
+    "subject": "social",
+    "subjectName": "社會",
+    "gradeBand": "middle",
+    "gradeBandName": "中年級",
+    "difficulty": 2,
+    "question": "地圖上的方向通常上方代表？",
+    "choices": [
+      "北方",
+      "南方",
+      "東方",
+      "西方"
+    ],
+    "answerIndex": 0,
+    "explanation": "地圖一般上北下南。",
+    "tags": [
+      "原創題",
+      "社會",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "social_middle_012",
+    "subject": "social",
+    "subjectName": "社會",
+    "gradeBand": "middle",
+    "gradeBandName": "中年級",
+    "difficulty": 2,
+    "question": "保存古蹟的原因是？",
+    "choices": [
+      "了解歷史文化",
+      "拿來亂塗鴉",
+      "拆掉比較快",
+      "讓人丟垃圾"
+    ],
+    "answerIndex": 0,
+    "explanation": "古蹟能幫助我們了解歷史。",
+    "tags": [
+      "原創題",
+      "社會",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "social_middle_013",
+    "subject": "social",
+    "subjectName": "社會",
+    "gradeBand": "middle",
+    "gradeBandName": "中年級",
+    "difficulty": 2,
+    "question": "民主社會投票時應該？",
+    "choices": [
+      "尊重不同意見",
+      "只准一種意見",
+      "不讓別人投票",
+      "用暴力決定"
+    ],
+    "answerIndex": 0,
+    "explanation": "民主重視尊重與選擇。",
+    "tags": [
+      "原創題",
+      "社會",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "social_middle_014",
+    "subject": "social",
+    "subjectName": "社會",
+    "gradeBand": "middle",
+    "gradeBandName": "中年級",
+    "difficulty": 2,
+    "question": "颱風來前應注意？",
+    "choices": [
+      "防災準備和安全",
+      "去海邊玩浪",
+      "打開所有窗戶",
+      "站在招牌下"
+    ],
+    "answerIndex": 0,
+    "explanation": "颱風時要做好防災準備。",
+    "tags": [
+      "原創題",
+      "社會",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "social_middle_015",
+    "subject": "social",
+    "subjectName": "社會",
+    "gradeBand": "middle",
+    "gradeBandName": "中年級",
+    "difficulty": 2,
+    "question": "資源回收的目的之一是？",
+    "choices": [
+      "減少浪費",
+      "增加垃圾",
+      "讓環境更髒",
+      "浪費能源"
+    ],
+    "answerIndex": 0,
+    "explanation": "回收能減少浪費與污染。",
+    "tags": [
+      "原創題",
+      "社會",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "social_middle_016",
+    "subject": "social",
+    "subjectName": "社會",
+    "gradeBand": "middle",
+    "gradeBandName": "中年級",
+    "difficulty": 2,
+    "question": "台灣四面環什麼？",
+    "choices": [
+      "海洋",
+      "沙漠",
+      "冰山",
+      "高牆"
+    ],
+    "answerIndex": 0,
+    "explanation": "台灣是島嶼，四面環海。",
+    "tags": [
+      "原創題",
+      "社會",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "social_middle_017",
+    "subject": "social",
+    "subjectName": "社會",
+    "gradeBand": "middle",
+    "gradeBandName": "中年級",
+    "difficulty": 2,
+    "question": "社區裡的圖書館主要功能是？",
+    "choices": [
+      "借書與閱讀學習",
+      "修理汽車",
+      "販售煙火",
+      "飼養老虎"
+    ],
+    "answerIndex": 0,
+    "explanation": "圖書館提供閱讀與學習。",
+    "tags": [
+      "原創題",
+      "社會",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "social_middle_018",
+    "subject": "social",
+    "subjectName": "社會",
+    "gradeBand": "middle",
+    "gradeBandName": "中年級",
+    "difficulty": 2,
+    "question": "遇到火災時應該？",
+    "choices": [
+      "通知大人並撥 119",
+      "躲進衣櫃",
+      "搭電梯逃生",
+      "回去拿玩具"
+    ],
+    "answerIndex": 0,
+    "explanation": "火災時應通報並遵守逃生原則。",
+    "tags": [
+      "原創題",
+      "社會",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "social_middle_019",
+    "subject": "social",
+    "subjectName": "社會",
+    "gradeBand": "middle",
+    "gradeBandName": "中年級",
+    "difficulty": 2,
+    "question": "哪一個是尊重多元文化的表現？",
+    "choices": [
+      "了解並尊重不同習俗",
+      "嘲笑別人節日",
+      "禁止別人說母語",
+      "只准一種食物"
+    ],
+    "answerIndex": 0,
+    "explanation": "尊重不同文化是重要公民素養。",
+    "tags": [
+      "原創題",
+      "社會",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "social_middle_020",
+    "subject": "social",
+    "subjectName": "社會",
+    "gradeBand": "middle",
+    "gradeBandName": "中年級",
+    "difficulty": 2,
+    "question": "使用網路時應注意？",
+    "choices": [
+      "保護個人資料",
+      "公開所有密碼",
+      "相信所有陌生連結",
+      "隨便罵人"
+    ],
+    "answerIndex": 0,
+    "explanation": "網路上要保護個人資料與禮貌。",
+    "tags": [
+      "原創題",
+      "社會",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "social_high_011",
+    "subject": "social",
+    "subjectName": "社會",
+    "gradeBand": "high",
+    "gradeBandName": "高年級",
+    "difficulty": 3,
+    "question": "政府設置法律的主要目的之一是？",
+    "choices": [
+      "維持社會秩序與保障權利",
+      "讓大家更混亂",
+      "只保護壞人",
+      "禁止所有活動"
+    ],
+    "answerIndex": 0,
+    "explanation": "法律能規範行為並保障權利。",
+    "tags": [
+      "原創題",
+      "社會",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "social_high_012",
+    "subject": "social",
+    "subjectName": "社會",
+    "gradeBand": "high",
+    "gradeBandName": "高年級",
+    "difficulty": 3,
+    "question": "經濟活動中的「消費者」是指？",
+    "choices": [
+      "購買或使用商品服務的人",
+      "只生產商品的人",
+      "只運送貨物的人",
+      "只制定法律的人"
+    ],
+    "answerIndex": 0,
+    "explanation": "消費者購買或使用商品服務。",
+    "tags": [
+      "原創題",
+      "社會",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "social_high_013",
+    "subject": "social",
+    "subjectName": "社會",
+    "gradeBand": "high",
+    "gradeBandName": "高年級",
+    "difficulty": 3,
+    "question": "全球暖化可能造成？",
+    "choices": [
+      "極端天氣增加",
+      "地球停止轉動",
+      "海水全部變甜",
+      "人不用喝水"
+    ],
+    "answerIndex": 0,
+    "explanation": "全球暖化可能增加極端氣候。",
+    "tags": [
+      "原創題",
+      "社會",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "social_high_014",
+    "subject": "social",
+    "subjectName": "社會",
+    "gradeBand": "high",
+    "gradeBandName": "高年級",
+    "difficulty": 3,
+    "question": "判讀新聞時應該？",
+    "choices": [
+      "查證來源",
+      "只看標題就相信",
+      "越誇張越可信",
+      "不需要思考"
+    ],
+    "answerIndex": 0,
+    "explanation": "資訊需要查證來源與內容。",
+    "tags": [
+      "原創題",
+      "社會",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "social_high_015",
+    "subject": "social",
+    "subjectName": "社會",
+    "gradeBand": "high",
+    "gradeBandName": "高年級",
+    "difficulty": 3,
+    "question": "台灣地方政府提供哪類服務？",
+    "choices": [
+      "垃圾清運與地方建設",
+      "控制太陽升起",
+      "管理外太空",
+      "決定全世界天氣"
+    ],
+    "answerIndex": 0,
+    "explanation": "地方政府負責許多地方公共服務。",
+    "tags": [
+      "原創題",
+      "社會",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "social_high_016",
+    "subject": "social",
+    "subjectName": "社會",
+    "gradeBand": "high",
+    "gradeBandName": "高年級",
+    "difficulty": 3,
+    "question": "「供給」增加而需求不變，價格可能？",
+    "choices": [
+      "下降",
+      "一定上升",
+      "變成零",
+      "與市場無關"
+    ],
+    "answerIndex": 0,
+    "explanation": "供給增加可能使價格下降。",
+    "tags": [
+      "原創題",
+      "社會",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "social_high_017",
+    "subject": "social",
+    "subjectName": "社會",
+    "gradeBand": "high",
+    "gradeBandName": "高年級",
+    "difficulty": 3,
+    "question": "世界文化遺產的重要性在於？",
+    "choices": [
+      "保存人類共同文化資產",
+      "方便塗鴉",
+      "讓人拆除",
+      "只給一個人使用"
+    ],
+    "answerIndex": 0,
+    "explanation": "文化遺產具有人類共同價值。",
+    "tags": [
+      "原創題",
+      "社會",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "social_high_018",
+    "subject": "social",
+    "subjectName": "社會",
+    "gradeBand": "high",
+    "gradeBandName": "高年級",
+    "difficulty": 3,
+    "question": "公民參與可以包含？",
+    "choices": [
+      "參加公共討論",
+      "破壞公共設施",
+      "散布謠言",
+      "拒絕所有溝通"
+    ],
+    "answerIndex": 0,
+    "explanation": "公共討論是公民參與方式之一。",
+    "tags": [
+      "原創題",
+      "社會",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "social_high_019",
+    "subject": "social",
+    "subjectName": "社會",
+    "gradeBand": "high",
+    "gradeBandName": "高年級",
+    "difficulty": 3,
+    "question": "颱風假資訊應以哪裡公告為準？",
+    "choices": [
+      "政府正式公告",
+      "路邊傳言",
+      "陌生群組截圖",
+      "玩笑訊息"
+    ],
+    "answerIndex": 0,
+    "explanation": "停班停課應以正式公告為準。",
+    "tags": [
+      "原創題",
+      "社會",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "social_high_020",
+    "subject": "social",
+    "subjectName": "社會",
+    "gradeBand": "high",
+    "gradeBandName": "高年級",
+    "difficulty": 3,
+    "question": "公平交易的概念是？",
+    "choices": [
+      "交易雙方資訊與權益較受保障",
+      "只讓一方得利",
+      "一定不能退貨",
+      "不用標示價格"
+    ],
+    "answerIndex": 0,
+    "explanation": "公平交易重視資訊透明與權益保障。",
+    "tags": [
+      "原創題",
+      "社會",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "english_low_011",
+    "subject": "english",
+    "subjectName": "英文",
+    "gradeBand": "low",
+    "gradeBandName": "低年級",
+    "difficulty": 1,
+    "question": "「貓」的英文是？",
+    "choices": [
+      "dog",
+      "cat",
+      "bird",
+      "fish"
+    ],
+    "answerIndex": 1,
+    "explanation": "cat 是貓。",
+    "tags": [
+      "原創題",
+      "英文",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "english_low_012",
+    "subject": "english",
+    "subjectName": "英文",
+    "gradeBand": "low",
+    "gradeBandName": "低年級",
+    "difficulty": 1,
+    "question": "「紅色」的英文是？",
+    "choices": [
+      "blue",
+      "green",
+      "red",
+      "yellow"
+    ],
+    "answerIndex": 2,
+    "explanation": "red 是紅色。",
+    "tags": [
+      "原創題",
+      "英文",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "english_low_013",
+    "subject": "english",
+    "subjectName": "英文",
+    "gradeBand": "low",
+    "gradeBandName": "低年級",
+    "difficulty": 1,
+    "question": "看到朋友可以說？",
+    "choices": [
+      "Good morning",
+      "Goodbye",
+      "Hello",
+      "Sorry"
+    ],
+    "answerIndex": 2,
+    "explanation": "Hello 是打招呼。",
+    "tags": [
+      "原創題",
+      "英文",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "english_low_014",
+    "subject": "english",
+    "subjectName": "英文",
+    "gradeBand": "low",
+    "gradeBandName": "低年級",
+    "difficulty": 1,
+    "question": "one, two, three 下一個是？",
+    "choices": [
+      "four",
+      "five",
+      "six",
+      "seven"
+    ],
+    "answerIndex": 0,
+    "explanation": "one two three four。",
+    "tags": [
+      "原創題",
+      "英文",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "english_low_015",
+    "subject": "english",
+    "subjectName": "英文",
+    "gradeBand": "low",
+    "gradeBandName": "低年級",
+    "difficulty": 1,
+    "question": "「蘋果」的英文是？",
+    "choices": [
+      "apple",
+      "book",
+      "ball",
+      "door"
+    ],
+    "answerIndex": 0,
+    "explanation": "apple 是蘋果。",
+    "tags": [
+      "原創題",
+      "英文",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "english_low_016",
+    "subject": "english",
+    "subjectName": "英文",
+    "gradeBand": "low",
+    "gradeBandName": "低年級",
+    "difficulty": 1,
+    "question": "I am happy. 的 happy 是？",
+    "choices": [
+      "開心",
+      "生氣",
+      "害怕",
+      "疲倦"
+    ],
+    "answerIndex": 0,
+    "explanation": "happy 是開心。",
+    "tags": [
+      "原創題",
+      "英文",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "english_low_017",
+    "subject": "english",
+    "subjectName": "英文",
+    "gradeBand": "low",
+    "gradeBandName": "低年級",
+    "difficulty": 1,
+    "question": "「狗」的英文是？",
+    "choices": [
+      "cat",
+      "dog",
+      "duck",
+      "cow"
+    ],
+    "answerIndex": 1,
+    "explanation": "dog 是狗。",
+    "tags": [
+      "原創題",
+      "英文",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "english_low_018",
+    "subject": "english",
+    "subjectName": "英文",
+    "gradeBand": "low",
+    "gradeBandName": "低年級",
+    "difficulty": 1,
+    "question": "blue 是什麼顏色？",
+    "choices": [
+      "藍色",
+      "紅色",
+      "黑色",
+      "白色"
+    ],
+    "answerIndex": 0,
+    "explanation": "blue 是藍色。",
+    "tags": [
+      "原創題",
+      "英文",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "english_low_019",
+    "subject": "english",
+    "subjectName": "英文",
+    "gradeBand": "low",
+    "gradeBandName": "低年級",
+    "difficulty": 1,
+    "question": "Thank you. 是什麼意思？",
+    "choices": [
+      "謝謝你",
+      "對不起",
+      "早安",
+      "再見"
+    ],
+    "answerIndex": 0,
+    "explanation": "Thank you 是謝謝。",
+    "tags": [
+      "原創題",
+      "英文",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "english_low_020",
+    "subject": "english",
+    "subjectName": "英文",
+    "gradeBand": "low",
+    "gradeBandName": "低年級",
+    "difficulty": 1,
+    "question": "「書」的英文是？",
+    "choices": [
+      "book",
+      "bag",
+      "box",
+      "bed"
+    ],
+    "answerIndex": 0,
+    "explanation": "book 是書。",
+    "tags": [
+      "原創題",
+      "英文",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "english_middle_011",
+    "subject": "english",
+    "subjectName": "英文",
+    "gradeBand": "middle",
+    "gradeBandName": "中年級",
+    "difficulty": 2,
+    "question": "I like balloons. 的意思是？",
+    "choices": [
+      "我喜歡氣球",
+      "我討厭氣球",
+      "我有書",
+      "我在睡覺"
+    ],
+    "answerIndex": 0,
+    "explanation": "I like balloons. 是我喜歡氣球。",
+    "tags": [
+      "原創題",
+      "英文",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "english_middle_012",
+    "subject": "english",
+    "subjectName": "英文",
+    "gradeBand": "middle",
+    "gradeBandName": "中年級",
+    "difficulty": 2,
+    "question": "What is your name? 是在問？",
+    "choices": [
+      "你幾歲",
+      "你叫什麼名字",
+      "你在哪裡",
+      "你吃什麼"
+    ],
+    "answerIndex": 1,
+    "explanation": "What is your name? 是問名字。",
+    "tags": [
+      "原創題",
+      "英文",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "english_middle_013",
+    "subject": "english",
+    "subjectName": "英文",
+    "gradeBand": "middle",
+    "gradeBandName": "中年級",
+    "difficulty": 2,
+    "question": "「老師」的英文是？",
+    "choices": [
+      "student",
+      "teacher",
+      "doctor",
+      "driver"
+    ],
+    "answerIndex": 1,
+    "explanation": "teacher 是老師。",
+    "tags": [
+      "原創題",
+      "英文",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "english_middle_014",
+    "subject": "english",
+    "subjectName": "英文",
+    "gradeBand": "middle",
+    "gradeBandName": "中年級",
+    "difficulty": 2,
+    "question": "She is my sister. 的 sister 是？",
+    "choices": [
+      "哥哥",
+      "姊妹",
+      "爸爸",
+      "老師"
+    ],
+    "answerIndex": 1,
+    "explanation": "sister 是姊妹。",
+    "tags": [
+      "原創題",
+      "英文",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "english_middle_015",
+    "subject": "english",
+    "subjectName": "英文",
+    "gradeBand": "middle",
+    "gradeBandName": "中年級",
+    "difficulty": 2,
+    "question": "選出表示天氣的字：",
+    "choices": [
+      "sunny",
+      "table",
+      "pencil",
+      "chair"
+    ],
+    "answerIndex": 0,
+    "explanation": "sunny 是晴朗的。",
+    "tags": [
+      "原創題",
+      "英文",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "english_middle_016",
+    "subject": "english",
+    "subjectName": "英文",
+    "gradeBand": "middle",
+    "gradeBandName": "中年級",
+    "difficulty": 2,
+    "question": "I can jump. 的 can 表示？",
+    "choices": [
+      "可以、會",
+      "從不",
+      "昨天",
+      "紅色"
+    ],
+    "answerIndex": 0,
+    "explanation": "can 表示能夠。",
+    "tags": [
+      "原創題",
+      "英文",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "english_middle_017",
+    "subject": "english",
+    "subjectName": "英文",
+    "gradeBand": "middle",
+    "gradeBandName": "中年級",
+    "difficulty": 2,
+    "question": "「星期一」的英文是？",
+    "choices": [
+      "Monday",
+      "Friday",
+      "Sunday",
+      "Tuesday"
+    ],
+    "answerIndex": 0,
+    "explanation": "Monday 是星期一。",
+    "tags": [
+      "原創題",
+      "英文",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "english_middle_018",
+    "subject": "english",
+    "subjectName": "英文",
+    "gradeBand": "middle",
+    "gradeBandName": "中年級",
+    "difficulty": 2,
+    "question": "How many balloons? 是在問？",
+    "choices": [
+      "多少氣球",
+      "氣球顏色",
+      "誰的氣球",
+      "氣球在哪"
+    ],
+    "answerIndex": 0,
+    "explanation": "How many 是問數量。",
+    "tags": [
+      "原創題",
+      "英文",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "english_middle_019",
+    "subject": "english",
+    "subjectName": "英文",
+    "gradeBand": "middle",
+    "gradeBandName": "中年級",
+    "difficulty": 2,
+    "question": "big 的相反詞是？",
+    "choices": [
+      "small",
+      "tall",
+      "long",
+      "fast"
+    ],
+    "answerIndex": 0,
+    "explanation": "big 的相反是 small。",
+    "tags": [
+      "原創題",
+      "英文",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "english_middle_020",
+    "subject": "english",
+    "subjectName": "英文",
+    "gradeBand": "middle",
+    "gradeBandName": "中年級",
+    "difficulty": 2,
+    "question": "This is a magic show. 的 magic show 是？",
+    "choices": [
+      "魔術表演",
+      "讀書時間",
+      "運動會",
+      "午餐"
+    ],
+    "answerIndex": 0,
+    "explanation": "magic show 是魔術表演。",
+    "tags": [
+      "原創題",
+      "英文",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "english_high_011",
+    "subject": "english",
+    "subjectName": "英文",
+    "gradeBand": "high",
+    "gradeBandName": "高年級",
+    "difficulty": 3,
+    "question": "Which sentence is correct?",
+    "choices": [
+      "He are happy.",
+      "He is happy.",
+      "He am happy.",
+      "He be happy."
+    ],
+    "answerIndex": 1,
+    "explanation": "He 搭配 is。",
+    "tags": [
+      "原創題",
+      "英文",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "english_high_012",
+    "subject": "english",
+    "subjectName": "英文",
+    "gradeBand": "high",
+    "gradeBandName": "高年級",
+    "difficulty": 3,
+    "question": "「因為」的英文是？",
+    "choices": [
+      "because",
+      "before",
+      "behind",
+      "between"
+    ],
+    "answerIndex": 0,
+    "explanation": "because 是因為。",
+    "tags": [
+      "原創題",
+      "英文",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "english_high_013",
+    "subject": "english",
+    "subjectName": "英文",
+    "gradeBand": "high",
+    "gradeBandName": "高年級",
+    "difficulty": 3,
+    "question": "I went to the park yesterday. 的 yesterday 是？",
+    "choices": [
+      "昨天",
+      "明天",
+      "今天",
+      "每天"
+    ],
+    "answerIndex": 0,
+    "explanation": "yesterday 是昨天。",
+    "tags": [
+      "原創題",
+      "英文",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "english_high_014",
+    "subject": "english",
+    "subjectName": "英文",
+    "gradeBand": "high",
+    "gradeBandName": "高年級",
+    "difficulty": 3,
+    "question": "選出過去式：",
+    "choices": [
+      "go",
+      "went",
+      "going",
+      "goes"
+    ],
+    "answerIndex": 1,
+    "explanation": "went 是 go 的過去式。",
+    "tags": [
+      "原創題",
+      "英文",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "english_high_015",
+    "subject": "english",
+    "subjectName": "英文",
+    "gradeBand": "high",
+    "gradeBandName": "高年級",
+    "difficulty": 3,
+    "question": "There are three balloons. 表示？",
+    "choices": [
+      "有三顆氣球",
+      "有一顆氣球",
+      "沒有氣球",
+      "氣球是紅色"
+    ],
+    "answerIndex": 0,
+    "explanation": "There are three balloons. 是有三顆氣球。",
+    "tags": [
+      "原創題",
+      "英文",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "english_high_016",
+    "subject": "english",
+    "subjectName": "英文",
+    "gradeBand": "high",
+    "gradeBandName": "高年級",
+    "difficulty": 3,
+    "question": "「環保」可用哪個詞表達較接近？",
+    "choices": [
+      "eco-friendly",
+      "dangerous",
+      "noisy",
+      "hungry"
+    ],
+    "answerIndex": 0,
+    "explanation": "eco-friendly 表示環保友善。",
+    "tags": [
+      "原創題",
+      "英文",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "english_high_017",
+    "subject": "english",
+    "subjectName": "英文",
+    "gradeBand": "high",
+    "gradeBandName": "高年級",
+    "difficulty": 3,
+    "question": "The show starts at 3 p.m. 是指？",
+    "choices": [
+      "表演下午三點開始",
+      "表演早上三點開始",
+      "表演已結束",
+      "表演在三天後"
+    ],
+    "answerIndex": 0,
+    "explanation": "3 p.m. 是下午三點。",
+    "tags": [
+      "原創題",
+      "英文",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "english_high_018",
+    "subject": "english",
+    "subjectName": "英文",
+    "gradeBand": "high",
+    "gradeBandName": "高年級",
+    "difficulty": 3,
+    "question": "Choose the plural form of child.",
+    "choices": [
+      "childs",
+      "children",
+      "childes",
+      "child"
+    ],
+    "answerIndex": 1,
+    "explanation": "child 的複數是 children。",
+    "tags": [
+      "原創題",
+      "英文",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "english_high_019",
+    "subject": "english",
+    "subjectName": "英文",
+    "gradeBand": "high",
+    "gradeBandName": "高年級",
+    "difficulty": 3,
+    "question": "If it rains, we will stay inside. 句中的 if 表示？",
+    "choices": [
+      "如果",
+      "但是",
+      "因為",
+      "直到"
+    ],
+    "answerIndex": 0,
+    "explanation": "if 是如果。",
+    "tags": [
+      "原創題",
+      "英文",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "english_high_020",
+    "subject": "english",
+    "subjectName": "英文",
+    "gradeBand": "high",
+    "gradeBandName": "高年級",
+    "difficulty": 3,
+    "question": "「我正在讀書」可說？",
+    "choices": [
+      "I read yesterday.",
+      "I am reading.",
+      "I will read tomorrow.",
+      "I never read."
+    ],
+    "answerIndex": 1,
+    "explanation": "I am reading. 表示正在讀。",
+    "tags": [
+      "原創題",
+      "英文",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "balloon_low_011",
+    "subject": "balloon",
+    "subjectName": "氣球知識",
+    "gradeBand": "low",
+    "gradeBandName": "低年級",
+    "difficulty": 1,
+    "question": "長條氣球最怕碰到什麼？",
+    "choices": [
+      "尖尖的東西",
+      "軟墊",
+      "空氣",
+      "手掌"
+    ],
+    "answerIndex": 0,
+    "explanation": "尖銳物容易刺破氣球。",
+    "tags": [
+      "原創題",
+      "氣球知識",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "balloon_low_012",
+    "subject": "balloon",
+    "subjectName": "氣球知識",
+    "gradeBand": "low",
+    "gradeBandName": "低年級",
+    "difficulty": 1,
+    "question": "氣球充氣後要打什麼才不會漏氣？",
+    "choices": [
+      "結",
+      "洞",
+      "顏色",
+      "名字"
+    ],
+    "answerIndex": 0,
+    "explanation": "打結可以防止漏氣。",
+    "tags": [
+      "原創題",
+      "氣球知識",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "balloon_low_013",
+    "subject": "balloon",
+    "subjectName": "氣球知識",
+    "gradeBand": "low",
+    "gradeBandName": "低年級",
+    "difficulty": 1,
+    "question": "拿氣球時應該？",
+    "choices": [
+      "輕輕拿",
+      "用力咬",
+      "拿針戳",
+      "丟進火裡"
+    ],
+    "answerIndex": 0,
+    "explanation": "氣球要輕拿並遠離危險。",
+    "tags": [
+      "原創題",
+      "氣球知識",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "balloon_low_014",
+    "subject": "balloon",
+    "subjectName": "氣球知識",
+    "gradeBand": "low",
+    "gradeBandName": "低年級",
+    "difficulty": 1,
+    "question": "氣球狗常用哪種氣球做？",
+    "choices": [
+      "長條氣球",
+      "玻璃球",
+      "石頭球",
+      "鐵球"
+    ],
+    "answerIndex": 0,
+    "explanation": "氣球狗通常用長條氣球扭成。",
+    "tags": [
+      "原創題",
+      "氣球知識",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "balloon_low_015",
+    "subject": "balloon",
+    "subjectName": "氣球知識",
+    "gradeBand": "low",
+    "gradeBandName": "低年級",
+    "difficulty": 1,
+    "question": "氣球遇到高溫可能會？",
+    "choices": [
+      "容易破",
+      "變成書",
+      "變成水晶",
+      "不會變"
+    ],
+    "answerIndex": 0,
+    "explanation": "高溫會讓氣球更容易膨脹或破裂。",
+    "tags": [
+      "原創題",
+      "氣球知識",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "balloon_low_016",
+    "subject": "balloon",
+    "subjectName": "氣球知識",
+    "gradeBand": "low",
+    "gradeBandName": "低年級",
+    "difficulty": 1,
+    "question": "表演拿到氣球作品時應該？",
+    "choices": [
+      "好好保護",
+      "故意踩破",
+      "丟到火裡",
+      "用筆戳"
+    ],
+    "answerIndex": 0,
+    "explanation": "氣球作品要好好保護。",
+    "tags": [
+      "原創題",
+      "氣球知識",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "balloon_low_017",
+    "subject": "balloon",
+    "subjectName": "氣球知識",
+    "gradeBand": "low",
+    "gradeBandName": "低年級",
+    "difficulty": 1,
+    "question": "氣球常用來讓活動變得？",
+    "choices": [
+      "更有氣氛",
+      "更黑暗",
+      "更安靜",
+      "更危險"
+    ],
+    "answerIndex": 0,
+    "explanation": "氣球能增加活動氣氛。",
+    "tags": [
+      "原創題",
+      "氣球知識",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "balloon_low_018",
+    "subject": "balloon",
+    "subjectName": "氣球知識",
+    "gradeBand": "low",
+    "gradeBandName": "低年級",
+    "difficulty": 1,
+    "question": "氣球破掉時聲音通常？",
+    "choices": [
+      "很大聲",
+      "完全無聲",
+      "像唱歌",
+      "像下雨"
+    ],
+    "answerIndex": 0,
+    "explanation": "氣球破掉常有很大聲響。",
+    "tags": [
+      "原創題",
+      "氣球知識",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "balloon_low_019",
+    "subject": "balloon",
+    "subjectName": "氣球知識",
+    "gradeBand": "low",
+    "gradeBandName": "低年級",
+    "difficulty": 1,
+    "question": "小朋友玩氣球時應注意？",
+    "choices": [
+      "不要咬破碎氣球",
+      "把碎片放嘴巴",
+      "靠近火源",
+      "用針玩"
+    ],
+    "answerIndex": 0,
+    "explanation": "破碎氣球不可放入口中。",
+    "tags": [
+      "原創題",
+      "氣球知識",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "balloon_low_020",
+    "subject": "balloon",
+    "subjectName": "氣球知識",
+    "gradeBand": "low",
+    "gradeBandName": "低年級",
+    "difficulty": 1,
+    "question": "空飄氣球通常需要什麼讓它飄？",
+    "choices": [
+      "氦氣",
+      "沙子",
+      "水泥",
+      "木頭"
+    ],
+    "answerIndex": 0,
+    "explanation": "氦氣能讓氣球飄起來。",
+    "tags": [
+      "原創題",
+      "氣球知識",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "balloon_middle_011",
+    "subject": "balloon",
+    "subjectName": "氣球知識",
+    "gradeBand": "middle",
+    "gradeBandName": "中年級",
+    "difficulty": 2,
+    "question": "長條氣球扭轉時，通常要先留下什麼？",
+    "choices": [
+      "尾端空間",
+      "剪刀孔",
+      "鐵絲",
+      "水"
+    ],
+    "answerIndex": 0,
+    "explanation": "留尾端空間可避免壓力過大破裂。",
+    "tags": [
+      "原創題",
+      "氣球知識",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "balloon_middle_012",
+    "subject": "balloon",
+    "subjectName": "氣球知識",
+    "gradeBand": "middle",
+    "gradeBandName": "中年級",
+    "difficulty": 2,
+    "question": "氣球作品完成後怕什麼環境？",
+    "choices": [
+      "太熱或尖銳",
+      "柔軟桌面",
+      "陰涼處",
+      "乾淨地板"
+    ],
+    "answerIndex": 0,
+    "explanation": "高溫和尖銳物都容易傷害氣球。",
+    "tags": [
+      "原創題",
+      "氣球知識",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "balloon_middle_013",
+    "subject": "balloon",
+    "subjectName": "氣球知識",
+    "gradeBand": "middle",
+    "gradeBandName": "中年級",
+    "difficulty": 2,
+    "question": "為什麼氣球不能靠近火？",
+    "choices": [
+      "可能融化或爆裂",
+      "會變成冰",
+      "會變更安全",
+      "會自己打結"
+    ],
+    "answerIndex": 0,
+    "explanation": "火與高溫會使氣球危險。",
+    "tags": [
+      "原創題",
+      "氣球知識",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "balloon_middle_014",
+    "subject": "balloon",
+    "subjectName": "氣球知識",
+    "gradeBand": "middle",
+    "gradeBandName": "中年級",
+    "difficulty": 2,
+    "question": "氣球佈置常見的拱形作品叫？",
+    "choices": [
+      "氣球拱門",
+      "氣球水管",
+      "氣球書架",
+      "氣球梯子"
+    ],
+    "answerIndex": 0,
+    "explanation": "氣球拱門是常見佈置。",
+    "tags": [
+      "原創題",
+      "氣球知識",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "balloon_middle_015",
+    "subject": "balloon",
+    "subjectName": "氣球知識",
+    "gradeBand": "middle",
+    "gradeBandName": "中年級",
+    "difficulty": 2,
+    "question": "做氣球造型時，扭轉處主要靠什麼固定？",
+    "choices": [
+      "氣球摩擦與壓力",
+      "膠水一定要很多",
+      "鐵釘",
+      "火燒"
+    ],
+    "answerIndex": 0,
+    "explanation": "扭轉後靠氣球本身摩擦與壓力固定。",
+    "tags": [
+      "原創題",
+      "氣球知識",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "balloon_middle_016",
+    "subject": "balloon",
+    "subjectName": "氣球知識",
+    "gradeBand": "middle",
+    "gradeBandName": "中年級",
+    "difficulty": 2,
+    "question": "氣球要延長壽命，可以避免？",
+    "choices": [
+      "陽光直曬",
+      "放在陰涼處",
+      "輕拿輕放",
+      "遠離尖物"
+    ],
+    "answerIndex": 0,
+    "explanation": "陽光直曬會讓氣球較快老化。",
+    "tags": [
+      "原創題",
+      "氣球知識",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "balloon_middle_017",
+    "subject": "balloon",
+    "subjectName": "氣球知識",
+    "gradeBand": "middle",
+    "gradeBandName": "中年級",
+    "difficulty": 2,
+    "question": "表演時把氣球交給壽星，主要增加什麼？",
+    "choices": [
+      "互動和驚喜",
+      "噪音污染",
+      "危險",
+      "時間浪費"
+    ],
+    "answerIndex": 0,
+    "explanation": "交給壽星能提升參與感。",
+    "tags": [
+      "原創題",
+      "氣球知識",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "balloon_middle_018",
+    "subject": "balloon",
+    "subjectName": "氣球知識",
+    "gradeBand": "middle",
+    "gradeBandName": "中年級",
+    "difficulty": 2,
+    "question": "氣球柱通常用來？",
+    "choices": [
+      "佈置入口或舞台",
+      "煮飯",
+      "寫字",
+      "測量時間"
+    ],
+    "answerIndex": 0,
+    "explanation": "氣球柱常用於活動佈置。",
+    "tags": [
+      "原創題",
+      "氣球知識",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "balloon_middle_019",
+    "subject": "balloon",
+    "subjectName": "氣球知識",
+    "gradeBand": "middle",
+    "gradeBandName": "中年級",
+    "difficulty": 2,
+    "question": "氣球顏色搭配會影響？",
+    "choices": [
+      "活動視覺風格",
+      "氣球一定不會破",
+      "重量變成零",
+      "聲音變小"
+    ],
+    "answerIndex": 0,
+    "explanation": "顏色搭配影響佈置風格。",
+    "tags": [
+      "原創題",
+      "氣球知識",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "balloon_middle_020",
+    "subject": "balloon",
+    "subjectName": "氣球知識",
+    "gradeBand": "middle",
+    "gradeBandName": "中年級",
+    "difficulty": 2,
+    "question": "扭氣球時如果氣太滿，可能？",
+    "choices": [
+      "更容易破",
+      "永遠不破",
+      "變透明",
+      "自己飛走"
+    ],
+    "answerIndex": 0,
+    "explanation": "太滿會使壓力大，容易破。",
+    "tags": [
+      "原創題",
+      "氣球知識",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "balloon_high_011",
+    "subject": "balloon",
+    "subjectName": "氣球知識",
+    "gradeBand": "high",
+    "gradeBandName": "高年級",
+    "difficulty": 3,
+    "question": "大型氣球佈置前最需要先確認什麼？",
+    "choices": [
+      "場地尺寸與安全動線",
+      "午餐菜單",
+      "觀眾星座",
+      "主持人鞋號"
+    ],
+    "answerIndex": 0,
+    "explanation": "佈置需考量尺寸與安全動線。",
+    "tags": [
+      "原創題",
+      "氣球知識",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "balloon_high_012",
+    "subject": "balloon",
+    "subjectName": "氣球知識",
+    "gradeBand": "high",
+    "gradeBandName": "高年級",
+    "difficulty": 3,
+    "question": "戶外氣球佈置最需要注意？",
+    "choices": [
+      "日曬、風與固定方式",
+      "電視節目",
+      "室內冷氣",
+      "鉛筆數量"
+    ],
+    "answerIndex": 0,
+    "explanation": "戶外受天氣影響大，需注意固定與材質。",
+    "tags": [
+      "原創題",
+      "氣球知識",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "balloon_high_013",
+    "subject": "balloon",
+    "subjectName": "氣球知識",
+    "gradeBand": "high",
+    "gradeBandName": "高年級",
+    "difficulty": 3,
+    "question": "氣球拱門若要穩定，通常需要？",
+    "choices": [
+      "合適底座與結構固定",
+      "只靠運氣",
+      "用手一直扶",
+      "不用檢查"
+    ],
+    "answerIndex": 0,
+    "explanation": "大型佈置需穩固結構。",
+    "tags": [
+      "原創題",
+      "氣球知識",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "balloon_high_014",
+    "subject": "balloon",
+    "subjectName": "氣球知識",
+    "gradeBand": "high",
+    "gradeBandName": "高年級",
+    "difficulty": 3,
+    "question": "乳膠氣球會隨時間漏氣，主要因為？",
+    "choices": [
+      "氣體會慢慢穿透材質",
+      "氣球會吃空氣",
+      "顏色太亮",
+      "地球不轉"
+    ],
+    "answerIndex": 0,
+    "explanation": "氣體會逐漸從材質孔隙逸出。",
+    "tags": [
+      "原創題",
+      "氣球知識",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "balloon_high_015",
+    "subject": "balloon",
+    "subjectName": "氣球知識",
+    "gradeBand": "high",
+    "gradeBandName": "高年級",
+    "difficulty": 3,
+    "question": "活動現場派發氣球時，最重要的是？",
+    "choices": [
+      "安全與秩序",
+      "誰跑最快",
+      "越擠越好",
+      "完全不用排隊"
+    ],
+    "answerIndex": 0,
+    "explanation": "發放時要維持安全秩序。",
+    "tags": [
+      "原創題",
+      "氣球知識",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "balloon_high_016",
+    "subject": "balloon",
+    "subjectName": "氣球知識",
+    "gradeBand": "high",
+    "gradeBandName": "高年級",
+    "difficulty": 3,
+    "question": "氣球藝術和魔術結合的優點是？",
+    "choices": [
+      "互動性和驚喜感更強",
+      "一定不用排練",
+      "道具會自動完成",
+      "觀眾不能參與"
+    ],
+    "answerIndex": 0,
+    "explanation": "兩者結合能提升互動與驚喜。",
+    "tags": [
+      "原創題",
+      "氣球知識",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "balloon_high_017",
+    "subject": "balloon",
+    "subjectName": "氣球知識",
+    "gradeBand": "high",
+    "gradeBandName": "高年級",
+    "difficulty": 3,
+    "question": "氣球作品若需長時間展示，應避免？",
+    "choices": [
+      "高溫與強光",
+      "陰涼室內",
+      "穩固支撐",
+      "乾淨環境"
+    ],
+    "answerIndex": 0,
+    "explanation": "高溫強光會加速老化。",
+    "tags": [
+      "原創題",
+      "氣球知識",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "balloon_high_018",
+    "subject": "balloon",
+    "subjectName": "氣球知識",
+    "gradeBand": "high",
+    "gradeBandName": "高年級",
+    "difficulty": 3,
+    "question": "設計主題氣球佈置時，最先考慮？",
+    "choices": [
+      "活動主題與色系",
+      "今天早餐",
+      "手機品牌",
+      "鞋子大小"
+    ],
+    "answerIndex": 0,
+    "explanation": "主題與色系決定整體風格。",
+    "tags": [
+      "原創題",
+      "氣球知識",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "balloon_high_019",
+    "subject": "balloon",
+    "subjectName": "氣球知識",
+    "gradeBand": "high",
+    "gradeBandName": "高年級",
+    "difficulty": 3,
+    "question": "氣球破裂碎片應該？",
+    "choices": [
+      "立刻清理避免誤食",
+      "留在地上當裝飾",
+      "給幼兒玩",
+      "吹回去"
+    ],
+    "answerIndex": 0,
+    "explanation": "破裂碎片需清理，避免危險。",
+    "tags": [
+      "原創題",
+      "氣球知識",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "balloon_high_020",
+    "subject": "balloon",
+    "subjectName": "氣球知識",
+    "gradeBand": "high",
+    "gradeBandName": "高年級",
+    "difficulty": 3,
+    "question": "專業氣球表演者需要控制節奏，原因是？",
+    "choices": [
+      "讓互動、笑點與安全都更穩定",
+      "讓觀眾看不懂",
+      "讓活動變亂",
+      "不用照顧孩子"
+    ],
+    "answerIndex": 0,
+    "explanation": "節奏控制能提升體驗與安全。",
+    "tags": [
+      "原創題",
+      "氣球知識",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "brand_low_011",
+    "subject": "brand",
+    "subjectName": "小V品牌",
+    "gradeBand": "low",
+    "gradeBandName": "低年級",
+    "difficulty": 1,
+    "question": "氣球小V常帶給大家什麼？",
+    "choices": [
+      "歡笑和驚喜",
+      "考卷和罰站",
+      "黑暗和害怕",
+      "噪音和危險"
+    ],
+    "answerIndex": 0,
+    "explanation": "小V的品牌重點是歡笑、魔術與氣球。",
+    "tags": [
+      "原創題",
+      "小V品牌",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "brand_low_012",
+    "subject": "brand",
+    "subjectName": "小V品牌",
+    "gradeBand": "low",
+    "gradeBandName": "低年級",
+    "difficulty": 1,
+    "question": "小V表演常會使用什麼？",
+    "choices": [
+      "魔術和氣球",
+      "石頭和鐵板",
+      "雨傘和鍋子",
+      "電鑽和水泥"
+    ],
+    "answerIndex": 0,
+    "explanation": "小V以魔術互動和造型氣球為主。",
+    "tags": [
+      "原創題",
+      "小V品牌",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "brand_low_013",
+    "subject": "brand",
+    "subjectName": "小V品牌",
+    "gradeBand": "low",
+    "gradeBandName": "低年級",
+    "difficulty": 1,
+    "question": "活動中拿到氣球作品應該？",
+    "choices": [
+      "珍惜並好好拿",
+      "立刻踩破",
+      "丟給別人",
+      "放進火裡"
+    ],
+    "answerIndex": 0,
+    "explanation": "氣球作品需要好好保護。",
+    "tags": [
+      "原創題",
+      "小V品牌",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "brand_low_014",
+    "subject": "brand",
+    "subjectName": "小V品牌",
+    "gradeBand": "low",
+    "gradeBandName": "低年級",
+    "difficulty": 1,
+    "question": "小V希望孩子在活動中感覺？",
+    "choices": [
+      "開心又被重視",
+      "害怕又孤單",
+      "無聊又想睡",
+      "生氣又難過"
+    ],
+    "answerIndex": 0,
+    "explanation": "活動希望帶給孩子快樂和參與感。",
+    "tags": [
+      "原創題",
+      "小V品牌",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "brand_low_015",
+    "subject": "brand",
+    "subjectName": "小V品牌",
+    "gradeBand": "low",
+    "gradeBandName": "低年級",
+    "difficulty": 1,
+    "question": "V學園是什麼風格的問答？",
+    "choices": [
+      "小V主持的知識挑戰",
+      "賽車比賽",
+      "煮菜節目",
+      "恐怖故事"
+    ],
+    "answerIndex": 0,
+    "explanation": "V學園是小V風格的問答挑戰。",
+    "tags": [
+      "原創題",
+      "小V品牌",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "brand_low_016",
+    "subject": "brand",
+    "subjectName": "小V品牌",
+    "gradeBand": "low",
+    "gradeBandName": "低年級",
+    "difficulty": 1,
+    "question": "小V的活動常見於？",
+    "choices": [
+      "生日派對和學校活動",
+      "深海探險",
+      "太空站維修",
+      "雪山採礦"
+    ],
+    "answerIndex": 0,
+    "explanation": "小V常服務派對、學校與親子活動。",
+    "tags": [
+      "原創題",
+      "小V品牌",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "brand_low_017",
+    "subject": "brand",
+    "subjectName": "小V品牌",
+    "gradeBand": "low",
+    "gradeBandName": "低年級",
+    "difficulty": 1,
+    "question": "氣球小V的作品通常給人什麼感覺？",
+    "choices": [
+      "可愛、有趣",
+      "可怕、危險",
+      "冰冷、無聊",
+      "不能互動"
+    ],
+    "answerIndex": 0,
+    "explanation": "小V作品偏可愛有趣且有互動感。",
+    "tags": [
+      "原創題",
+      "小V品牌",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "brand_low_018",
+    "subject": "brand",
+    "subjectName": "小V品牌",
+    "gradeBand": "low",
+    "gradeBandName": "低年級",
+    "difficulty": 1,
+    "question": "小V問答遊戲裡玩家可以累積？",
+    "choices": [
+      "知識力",
+      "木頭重量",
+      "沙子數量",
+      "電視遙控器"
+    ],
+    "answerIndex": 0,
+    "explanation": "問答遊戲會累積 V學園知識力。",
+    "tags": [
+      "原創題",
+      "小V品牌",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "brand_low_019",
+    "subject": "brand",
+    "subjectName": "小V品牌",
+    "gradeBand": "low",
+    "gradeBandName": "低年級",
+    "difficulty": 1,
+    "question": "小V主持人會做什麼？",
+    "choices": [
+      "出題並鼓勵玩家",
+      "把題目藏起來",
+      "不讓人玩",
+      "破壞氣球"
+    ],
+    "answerIndex": 0,
+    "explanation": "小V主持人會帶領問答並鼓勵玩家。",
+    "tags": [
+      "原創題",
+      "小V品牌",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "brand_low_020",
+    "subject": "brand",
+    "subjectName": "小V品牌",
+    "gradeBand": "low",
+    "gradeBandName": "低年級",
+    "difficulty": 1,
+    "question": "V學園成績單用來看什麼？",
+    "choices": [
+      "問答進度",
+      "早餐菜單",
+      "鞋子尺寸",
+      "天氣預報"
+    ],
+    "answerIndex": 0,
+    "explanation": "V學園成績單顯示玩家問答進度。",
+    "tags": [
+      "原創題",
+      "小V品牌",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "brand_middle_011",
+    "subject": "brand",
+    "subjectName": "小V品牌",
+    "gradeBand": "middle",
+    "gradeBandName": "中年級",
+    "difficulty": 2,
+    "question": "氣球小V的品牌特色較接近？",
+    "choices": [
+      "魔術互動＋造型氣球",
+      "只賣文具",
+      "只做考試",
+      "只播放新聞"
+    ],
+    "answerIndex": 0,
+    "explanation": "小V結合魔術互動與造型氣球。",
+    "tags": [
+      "原創題",
+      "小V品牌",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "brand_middle_012",
+    "subject": "brand",
+    "subjectName": "小V品牌",
+    "gradeBand": "middle",
+    "gradeBandName": "中年級",
+    "difficulty": 2,
+    "question": "小V在活動中重視什麼？",
+    "choices": [
+      "安全、品質和互動",
+      "只求最快",
+      "完全不管孩子",
+      "讓場面失控"
+    ],
+    "answerIndex": 0,
+    "explanation": "小V重視安全、品質與互動。",
+    "tags": [
+      "原創題",
+      "小V品牌",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "brand_middle_013",
+    "subject": "brand",
+    "subjectName": "小V品牌",
+    "gradeBand": "middle",
+    "gradeBandName": "中年級",
+    "difficulty": 2,
+    "question": "V學園知識力主要代表？",
+    "choices": [
+      "玩家問答累積成就",
+      "氣球重量",
+      "音樂音量",
+      "手機電量"
+    ],
+    "answerIndex": 0,
+    "explanation": "知識力代表問答遊戲的長期進度。",
+    "tags": [
+      "原創題",
+      "小V品牌",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "brand_middle_014",
+    "subject": "brand",
+    "subjectName": "小V品牌",
+    "gradeBand": "middle",
+    "gradeBandName": "中年級",
+    "difficulty": 2,
+    "question": "小V遊戲宇宙共用什麼？",
+    "choices": [
+      "玩家身份與頭像",
+      "每次都重設身份",
+      "只有紙本紀錄",
+      "完全不記分"
+    ],
+    "answerIndex": 0,
+    "explanation": "遊戲宇宙共用玩家身份、頭像與紀錄。",
+    "tags": [
+      "原創題",
+      "小V品牌",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "brand_middle_015",
+    "subject": "brand",
+    "subjectName": "小V品牌",
+    "gradeBand": "middle",
+    "gradeBandName": "中年級",
+    "difficulty": 2,
+    "question": "displayAvatarKey 的用途較接近？",
+    "choices": [
+      "顯示外觀",
+      "決定玩家身份",
+      "刪除資料",
+      "改變題庫"
+    ],
+    "answerIndex": 0,
+    "explanation": "displayAvatarKey 只影響顯示外觀。",
+    "tags": [
+      "原創題",
+      "小V品牌",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "brand_middle_016",
+    "subject": "brand",
+    "subjectName": "小V品牌",
+    "gradeBand": "middle",
+    "gradeBandName": "中年級",
+    "difficulty": 2,
+    "question": "baseAvatarKey 的用途較接近？",
+    "choices": [
+      "決定玩家身份",
+      "只換衣服",
+      "只換背景音樂",
+      "改題目答案"
+    ],
+    "answerIndex": 0,
+    "explanation": "baseAvatarKey 和 ID 組成 playerKey。",
+    "tags": [
+      "原創題",
+      "小V品牌",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "brand_middle_017",
+    "subject": "brand",
+    "subjectName": "小V品牌",
+    "gradeBand": "middle",
+    "gradeBandName": "中年級",
+    "difficulty": 2,
+    "question": "小V問答中的排行榜鼓勵玩家？",
+    "choices": [
+      "挑戰不同年級與科目",
+      "只玩同一題",
+      "永遠不答題",
+      "刪掉紀錄"
+    ],
+    "answerIndex": 0,
+    "explanation": "年級累積榜鼓勵玩不同科目。",
+    "tags": [
+      "原創題",
+      "小V品牌",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "brand_middle_018",
+    "subject": "brand",
+    "subjectName": "小V品牌",
+    "gradeBand": "middle",
+    "gradeBandName": "中年級",
+    "difficulty": 2,
+    "question": "氣球小V的活動適合什麼場合？",
+    "choices": [
+      "親子派對、學校、品牌活動",
+      "只有考場",
+      "只有工地",
+      "只有停車場"
+    ],
+    "answerIndex": 0,
+    "explanation": "小V常見於親子、學校與品牌活動。",
+    "tags": [
+      "原創題",
+      "小V品牌",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "brand_middle_019",
+    "subject": "brand",
+    "subjectName": "小V品牌",
+    "gradeBand": "middle",
+    "gradeBandName": "中年級",
+    "difficulty": 2,
+    "question": "小V品牌故事重視留下什麼？",
+    "choices": [
+      "作品與回憶",
+      "垃圾和危險",
+      "混亂和抱怨",
+      "只有分數"
+    ],
+    "answerIndex": 0,
+    "explanation": "小V重視留下作品與回憶。",
+    "tags": [
+      "原創題",
+      "小V品牌",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "brand_middle_020",
+    "subject": "brand",
+    "subjectName": "小V品牌",
+    "gradeBand": "middle",
+    "gradeBandName": "中年級",
+    "difficulty": 2,
+    "question": "V學園 Quiz Show 的定位是？",
+    "choices": [
+      "有節目感的益智問答",
+      "恐怖逃脫遊戲",
+      "純打字練習",
+      "賽車遊戲"
+    ],
+    "answerIndex": 0,
+    "explanation": "V學園 Quiz Show 是節目感問答。",
+    "tags": [
+      "原創題",
+      "小V品牌",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "brand_high_011",
+    "subject": "brand",
+    "subjectName": "小V品牌",
+    "gradeBand": "high",
+    "gradeBandName": "高年級",
+    "difficulty": 3,
+    "question": "氣球小V遊戲宇宙的 playerKey 由什麼組成？",
+    "choices": [
+      "ID + baseAvatarKey",
+      "ID + displayAvatarKey",
+      "分數 + 科目",
+      "音樂 + 題目"
+    ],
+    "answerIndex": 0,
+    "explanation": "playerKey 由玩家 ID 與身份頭像 baseAvatarKey 組成。",
+    "tags": [
+      "原創題",
+      "小V品牌",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "brand_high_012",
+    "subject": "brand",
+    "subjectName": "小V品牌",
+    "gradeBand": "high",
+    "gradeBandName": "高年級",
+    "difficulty": 3,
+    "question": "為什麼 displayAvatarKey 不應改變 playerKey？",
+    "choices": [
+      "它只是外觀，不是身份",
+      "它是題庫答案",
+      "它是音樂音量",
+      "它是遊戲時間"
+    ],
+    "answerIndex": 0,
+    "explanation": "displayAvatarKey 只影響外觀。",
+    "tags": [
+      "原創題",
+      "小V品牌",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "brand_high_013",
+    "subject": "brand",
+    "subjectName": "小V品牌",
+    "gradeBand": "high",
+    "gradeBandName": "高年級",
+    "difficulty": 3,
+    "question": "排行榜保留當場頭像快照的好處是？",
+    "choices": [
+      "保留遊玩歷程真實性",
+      "讓所有紀錄自動消失",
+      "讓分數亂跳",
+      "不能辨識玩家"
+    ],
+    "answerIndex": 0,
+    "explanation": "快照能保留當場狀態。",
+    "tags": [
+      "原創題",
+      "小V品牌",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "brand_high_014",
+    "subject": "brand",
+    "subjectName": "小V品牌",
+    "gradeBand": "high",
+    "gradeBandName": "高年級",
+    "difficulty": 3,
+    "question": "問答遊戲年級榜採用各科最佳分數加總，目的是？",
+    "choices": [
+      "鼓勵挑戰多科",
+      "只鼓勵刷一題",
+      "讓題目消失",
+      "不讓玩家進步"
+    ],
+    "answerIndex": 0,
+    "explanation": "年級榜鼓勵玩家玩不同科目。",
+    "tags": [
+      "原創題",
+      "小V品牌",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "brand_high_015",
+    "subject": "brand",
+    "subjectName": "小V品牌",
+    "gradeBand": "high",
+    "gradeBandName": "高年級",
+    "difficulty": 3,
+    "question": "V學園成績單主要從哪個身份讀資料？",
+    "choices": [
+      "playerKey",
+      "顯示名稱而已",
+      "背景音樂名稱",
+      "手機型號"
+    ],
+    "answerIndex": 0,
+    "explanation": "成績單跟著 playerKey 的資料走。",
+    "tags": [
+      "原創題",
+      "小V品牌",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "brand_high_016",
+    "subject": "brand",
+    "subjectName": "小V品牌",
+    "gradeBand": "high",
+    "gradeBandName": "高年級",
+    "difficulty": 3,
+    "question": "小V品牌活動中的「互動」代表？",
+    "choices": [
+      "讓觀眾參與並產生記憶點",
+      "觀眾不能說話",
+      "只看不玩",
+      "完全不溝通"
+    ],
+    "answerIndex": 0,
+    "explanation": "互動能讓觀眾參與並留下記憶。",
+    "tags": [
+      "原創題",
+      "小V品牌",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "brand_high_017",
+    "subject": "brand",
+    "subjectName": "小V品牌",
+    "gradeBand": "high",
+    "gradeBandName": "高年級",
+    "difficulty": 3,
+    "question": "問答遊戲不自動裝備解鎖頭像，是為了？",
+    "choices": [
+      "保留玩家選擇權與紀錄快照",
+      "強迫換身份",
+      "刪除舊分數",
+      "改變 ID"
+    ],
+    "answerIndex": 0,
+    "explanation": "解鎖不等於自動裝備。",
+    "tags": [
+      "原創題",
+      "小V品牌",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "brand_high_018",
+    "subject": "brand",
+    "subjectName": "小V品牌",
+    "gradeBand": "high",
+    "gradeBandName": "高年級",
+    "difficulty": 3,
+    "question": "小V遊戲中的 V幣目前在問答第一階段？",
+    "choices": [
+      "預留但不發放",
+      "每秒自動增加",
+      "不能存在",
+      "用來改題目"
+    ],
+    "answerIndex": 0,
+    "explanation": "問答目前只預留 V幣，不實際發放。",
+    "tags": [
+      "原創題",
+      "小V品牌",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "brand_high_019",
+    "subject": "brand",
+    "subjectName": "小V品牌",
+    "gradeBand": "high",
+    "gradeBandName": "高年級",
+    "difficulty": 3,
+    "question": "如果同 ID 換 baseAvatarKey，系統會視為？",
+    "choices": [
+      "不同玩家身份",
+      "同一場題目",
+      "同一首歌",
+      "同一個選項"
+    ],
+    "answerIndex": 0,
+    "explanation": "baseAvatarKey 會影響 playerKey，因此是不同身份。",
+    "tags": [
+      "原創題",
+      "小V品牌",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "brand_high_020",
+    "subject": "brand",
+    "subjectName": "小V品牌",
+    "gradeBand": "high",
+    "gradeBandName": "高年級",
+    "difficulty": 3,
+    "question": "V學園 Quiz Show 使用限時答題，主要增加？",
+    "choices": [
+      "節目感與緊張感",
+      "玩家身高",
+      "氣球重量",
+      "題庫刪除速度"
+    ],
+    "answerIndex": 0,
+    "explanation": "限時可以增加節目感和挑戰感。",
+    "tags": [
+      "原創題",
+      "小V品牌",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "brain_low_011",
+    "subject": "brain",
+    "subjectName": "腦筋急轉彎",
+    "gradeBand": "low",
+    "gradeBandName": "低年級",
+    "difficulty": 1,
+    "question": "什麼東西越洗越髒？",
+    "choices": [
+      "水",
+      "毛巾",
+      "肥皂",
+      "手"
+    ],
+    "answerIndex": 0,
+    "explanation": "水洗東西後會帶走髒污，所以越洗越髒。",
+    "tags": [
+      "原創題",
+      "腦筋急轉彎",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "brain_low_012",
+    "subject": "brain",
+    "subjectName": "腦筋急轉彎",
+    "gradeBand": "low",
+    "gradeBandName": "低年級",
+    "difficulty": 1,
+    "question": "什麼門永遠關不上？",
+    "choices": [
+      "球門",
+      "房門",
+      "車門",
+      "校門"
+    ],
+    "answerIndex": 0,
+    "explanation": "球門不是拿來關的門。",
+    "tags": [
+      "原創題",
+      "腦筋急轉彎",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "brain_low_013",
+    "subject": "brain",
+    "subjectName": "腦筋急轉彎",
+    "gradeBand": "low",
+    "gradeBandName": "低年級",
+    "difficulty": 1,
+    "question": "哪一種魚不能吃？",
+    "choices": [
+      "木魚",
+      "鮪魚",
+      "鯛魚",
+      "金魚"
+    ],
+    "answerIndex": 0,
+    "explanation": "木魚是法器，不是真的魚。",
+    "tags": [
+      "原創題",
+      "腦筋急轉彎",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "brain_low_014",
+    "subject": "brain",
+    "subjectName": "腦筋急轉彎",
+    "gradeBand": "low",
+    "gradeBandName": "低年級",
+    "difficulty": 1,
+    "question": "什麼東西有腳卻不會走？",
+    "choices": [
+      "桌子",
+      "小狗",
+      "小鳥",
+      "小貓"
+    ],
+    "answerIndex": 0,
+    "explanation": "桌子有桌腳，但不會走。",
+    "tags": [
+      "原創題",
+      "腦筋急轉彎",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "brain_low_015",
+    "subject": "brain",
+    "subjectName": "腦筋急轉彎",
+    "gradeBand": "low",
+    "gradeBandName": "低年級",
+    "difficulty": 1,
+    "question": "什麼車不能開？",
+    "choices": [
+      "風車",
+      "汽車",
+      "公車",
+      "計程車"
+    ],
+    "answerIndex": 0,
+    "explanation": "風車不是交通工具。",
+    "tags": [
+      "原創題",
+      "腦筋急轉彎",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "brain_low_016",
+    "subject": "brain",
+    "subjectName": "腦筋急轉彎",
+    "gradeBand": "low",
+    "gradeBandName": "低年級",
+    "difficulty": 1,
+    "question": "什麼「筆」沒有墨水，也不能寫字？",
+    "choices": [
+      "筆名",
+      "鉛筆",
+      "彩色筆",
+      "毛筆"
+    ],
+    "answerIndex": 0,
+    "explanation": "筆名是名字，不是真的筆，所以不能寫字。",
+    "tags": [
+      "原創題",
+      "腦筋急轉彎",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "brain_low_017",
+    "subject": "brain",
+    "subjectName": "腦筋急轉彎",
+    "gradeBand": "low",
+    "gradeBandName": "低年級",
+    "difficulty": 1,
+    "question": "什麼東西越曬越濕？",
+    "choices": [
+      "冰淇淋",
+      "衣服",
+      "毛巾",
+      "鞋子"
+    ],
+    "answerIndex": 0,
+    "explanation": "冰淇淋曬太陽會融化。",
+    "tags": [
+      "原創題",
+      "腦筋急轉彎",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "brain_low_018",
+    "subject": "brain",
+    "subjectName": "腦筋急轉彎",
+    "gradeBand": "low",
+    "gradeBandName": "低年級",
+    "difficulty": 1,
+    "question": "什麼人每天都在看黑板？",
+    "choices": [
+      "老師和學生",
+      "醫生",
+      "廚師",
+      "司機"
+    ],
+    "answerIndex": 0,
+    "explanation": "在教室裡老師和學生常看黑板。",
+    "tags": [
+      "原創題",
+      "腦筋急轉彎",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "brain_low_019",
+    "subject": "brain",
+    "subjectName": "腦筋急轉彎",
+    "gradeBand": "low",
+    "gradeBandName": "低年級",
+    "difficulty": 1,
+    "question": "什麼球最怕被踢？",
+    "choices": [
+      "氣球",
+      "足球",
+      "籃球",
+      "排球"
+    ],
+    "answerIndex": 0,
+    "explanation": "氣球被踢太大力容易破，所以最怕被踢。",
+    "tags": [
+      "原創題",
+      "腦筋急轉彎",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "brain_low_020",
+    "subject": "brain",
+    "subjectName": "腦筋急轉彎",
+    "gradeBand": "low",
+    "gradeBandName": "低年級",
+    "difficulty": 1,
+    "question": "什麼花不會開？",
+    "choices": [
+      "雪花",
+      "玫瑰花",
+      "櫻花",
+      "向日葵"
+    ],
+    "answerIndex": 0,
+    "explanation": "雪花不是植物的花。",
+    "tags": [
+      "原創題",
+      "腦筋急轉彎",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "brain_middle_011",
+    "subject": "brain",
+    "subjectName": "腦筋急轉彎",
+    "gradeBand": "middle",
+    "gradeBandName": "中年級",
+    "difficulty": 2,
+    "question": "什麼東西越生氣越大？",
+    "choices": [
+      "氣球",
+      "鉛筆",
+      "書本",
+      "鞋子"
+    ],
+    "answerIndex": 0,
+    "explanation": "氣球越吹氣越大，題目用「生氣」玩雙關。",
+    "tags": [
+      "原創題",
+      "腦筋急轉彎",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "brain_middle_012",
+    "subject": "brain",
+    "subjectName": "腦筋急轉彎",
+    "gradeBand": "middle",
+    "gradeBandName": "中年級",
+    "difficulty": 2,
+    "question": "什麼人不用電也會亮？",
+    "choices": [
+      "聰明的人",
+      "電燈工人",
+      "修電器的人",
+      "賣燈的人"
+    ],
+    "answerIndex": 0,
+    "explanation": "聰明的人可以說「頭腦很亮」。",
+    "tags": [
+      "原創題",
+      "腦筋急轉彎",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "brain_middle_013",
+    "subject": "brain",
+    "subjectName": "腦筋急轉彎",
+    "gradeBand": "middle",
+    "gradeBandName": "中年級",
+    "difficulty": 2,
+    "question": "什麼杯子不能裝水？",
+    "choices": [
+      "獎盃",
+      "茶杯",
+      "水杯",
+      "紙杯"
+    ],
+    "answerIndex": 0,
+    "explanation": "獎盃不是拿來裝水的。",
+    "tags": [
+      "原創題",
+      "腦筋急轉彎",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "brain_middle_014",
+    "subject": "brain",
+    "subjectName": "腦筋急轉彎",
+    "gradeBand": "middle",
+    "gradeBandName": "中年級",
+    "difficulty": 2,
+    "question": "什麼路不能走？",
+    "choices": [
+      "電路",
+      "馬路",
+      "小路",
+      "山路"
+    ],
+    "answerIndex": 0,
+    "explanation": "電路不是給人走的路。",
+    "tags": [
+      "原創題",
+      "腦筋急轉彎",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "brain_middle_015",
+    "subject": "brain",
+    "subjectName": "腦筋急轉彎",
+    "gradeBand": "middle",
+    "gradeBandName": "中年級",
+    "difficulty": 2,
+    "question": "什麼海沒有水？",
+    "choices": [
+      "書海",
+      "大海",
+      "南海",
+      "東海"
+    ],
+    "answerIndex": 0,
+    "explanation": "書海是比喻，沒有真正的水。",
+    "tags": [
+      "原創題",
+      "腦筋急轉彎",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "brain_middle_016",
+    "subject": "brain",
+    "subjectName": "腦筋急轉彎",
+    "gradeBand": "middle",
+    "gradeBandName": "中年級",
+    "difficulty": 2,
+    "question": "什麼東西越吃越少，越想越多？",
+    "choices": [
+      "問題",
+      "飯",
+      "糖果",
+      "餅乾"
+    ],
+    "answerIndex": 0,
+    "explanation": "問題被解決會變少，但思考可能越來越多。",
+    "tags": [
+      "原創題",
+      "腦筋急轉彎",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "brain_middle_017",
+    "subject": "brain",
+    "subjectName": "腦筋急轉彎",
+    "gradeBand": "middle",
+    "gradeBandName": "中年級",
+    "difficulty": 2,
+    "question": "什麼聲音大家都聽得到，卻看不到？",
+    "choices": [
+      "掌聲",
+      "氣球",
+      "書本",
+      "雲朵"
+    ],
+    "answerIndex": 0,
+    "explanation": "聲音可以聽到但看不到。",
+    "tags": [
+      "原創題",
+      "腦筋急轉彎",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "brain_middle_018",
+    "subject": "brain",
+    "subjectName": "腦筋急轉彎",
+    "gradeBand": "middle",
+    "gradeBandName": "中年級",
+    "difficulty": 2,
+    "question": "什麼船永遠不會沉？",
+    "choices": [
+      "宇宙飛船",
+      "漁船",
+      "帆船",
+      "郵輪"
+    ],
+    "answerIndex": 0,
+    "explanation": "宇宙飛船不在水上航行。",
+    "tags": [
+      "原創題",
+      "腦筋急轉彎",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "brain_middle_019",
+    "subject": "brain",
+    "subjectName": "腦筋急轉彎",
+    "gradeBand": "middle",
+    "gradeBandName": "中年級",
+    "difficulty": 2,
+    "question": "什麼東西越切越長？",
+    "choices": [
+      "隊伍",
+      "蛋糕",
+      "紙張",
+      "繩子"
+    ],
+    "answerIndex": 0,
+    "explanation": "插隊或排隊增加時，隊伍會變長。",
+    "tags": [
+      "原創題",
+      "腦筋急轉彎",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "brain_middle_020",
+    "subject": "brain",
+    "subjectName": "腦筋急轉彎",
+    "gradeBand": "middle",
+    "gradeBandName": "中年級",
+    "difficulty": 2,
+    "question": "什麼字大家都會念錯？",
+    "choices": [
+      "錯",
+      "小",
+      "大",
+      "中"
+    ],
+    "answerIndex": 0,
+    "explanation": "「錯」這個字念出來就是錯。",
+    "tags": [
+      "原創題",
+      "腦筋急轉彎",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "brain_high_011",
+    "subject": "brain",
+    "subjectName": "腦筋急轉彎",
+    "gradeBand": "high",
+    "gradeBandName": "高年級",
+    "difficulty": 3,
+    "question": "公車上有 10 人，下一站下 3 人、上 5 人，請問司機叫什麼？",
+    "choices": [
+      "題目沒說",
+      "小V",
+      "阿明",
+      "老師"
+    ],
+    "answerIndex": 0,
+    "explanation": "題目沒有提供司機名字。",
+    "tags": [
+      "原創題",
+      "腦筋急轉彎",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "brain_high_012",
+    "subject": "brain",
+    "subjectName": "腦筋急轉彎",
+    "gradeBand": "high",
+    "gradeBandName": "高年級",
+    "difficulty": 3,
+    "question": "一個人在雨中走，沒撐傘也沒戴帽，頭髮卻沒濕，為什麼？",
+    "choices": [
+      "他沒有頭髮",
+      "雨很小",
+      "他跑很快",
+      "他穿白衣"
+    ],
+    "answerIndex": 0,
+    "explanation": "因為他沒有頭髮。",
+    "tags": [
+      "原創題",
+      "腦筋急轉彎",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "brain_high_013",
+    "subject": "brain",
+    "subjectName": "腦筋急轉彎",
+    "gradeBand": "high",
+    "gradeBandName": "高年級",
+    "difficulty": 3,
+    "question": "什麼東西你越拿走，它反而越大？",
+    "choices": [
+      "洞",
+      "糖果",
+      "氣球",
+      "書本"
+    ],
+    "answerIndex": 0,
+    "explanation": "挖走越多，洞越大。",
+    "tags": [
+      "原創題",
+      "腦筋急轉彎",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "brain_high_014",
+    "subject": "brain",
+    "subjectName": "腦筋急轉彎",
+    "gradeBand": "high",
+    "gradeBandName": "高年級",
+    "difficulty": 3,
+    "question": "有一個字，人人都會念錯，是什麼字？",
+    "choices": [
+      "錯",
+      "難",
+      "怪",
+      "忘"
+    ],
+    "answerIndex": 0,
+    "explanation": "這是文字遊戲，「錯」字本身就是錯。",
+    "tags": [
+      "原創題",
+      "腦筋急轉彎",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "brain_high_015",
+    "subject": "brain",
+    "subjectName": "腦筋急轉彎",
+    "gradeBand": "high",
+    "gradeBandName": "高年級",
+    "difficulty": 3,
+    "question": "什麼東西買的人不用，使用的人不知道？",
+    "choices": [
+      "棺材",
+      "書包",
+      "氣球",
+      "手機"
+    ],
+    "answerIndex": 0,
+    "explanation": "傳統腦筋急轉彎答案是棺材。",
+    "tags": [
+      "原創題",
+      "腦筋急轉彎",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "brain_high_016",
+    "subject": "brain",
+    "subjectName": "腦筋急轉彎",
+    "gradeBand": "high",
+    "gradeBandName": "高年級",
+    "difficulty": 3,
+    "question": "什麼東西沒有嘴卻會告訴你時間？",
+    "choices": [
+      "時鐘",
+      "老師",
+      "主持人",
+      "電話"
+    ],
+    "answerIndex": 0,
+    "explanation": "時鐘沒有嘴但能顯示時間。",
+    "tags": [
+      "原創題",
+      "腦筋急轉彎",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "brain_high_017",
+    "subject": "brain",
+    "subjectName": "腦筋急轉彎",
+    "gradeBand": "high",
+    "gradeBandName": "高年級",
+    "difficulty": 3,
+    "question": "什麼東西越擦越黑？",
+    "choices": [
+      "黑板",
+      "玻璃",
+      "白紙",
+      "鏡子"
+    ],
+    "answerIndex": 0,
+    "explanation": "黑板用粉筆寫再擦，可能越擦越黑或留下粉塵感。",
+    "tags": [
+      "原創題",
+      "腦筋急轉彎",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "brain_high_018",
+    "subject": "brain",
+    "subjectName": "腦筋急轉彎",
+    "gradeBand": "high",
+    "gradeBandName": "高年級",
+    "difficulty": 3,
+    "question": "兩個人同時過一條河，只有一人淋濕，為什麼？",
+    "choices": [
+      "另一人走橋上",
+      "河沒有水",
+      "天氣很熱",
+      "他們飛過去"
+    ],
+    "answerIndex": 0,
+    "explanation": "一人可能走橋上，另一人涉水。",
+    "tags": [
+      "原創題",
+      "腦筋急轉彎",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "brain_high_019",
+    "subject": "brain",
+    "subjectName": "腦筋急轉彎",
+    "gradeBand": "high",
+    "gradeBandName": "高年級",
+    "difficulty": 3,
+    "question": "什麼書沒有字？",
+    "choices": [
+      "臉書",
+      "課本",
+      "字典",
+      "故事書"
+    ],
+    "answerIndex": 0,
+    "explanation": "臉書是社群平台名稱，不一定是有字的書。",
+    "tags": [
+      "原創題",
+      "腦筋急轉彎",
+      "擴充題庫"
+    ]
+  },
+  {
+    "id": "brain_high_020",
+    "subject": "brain",
+    "subjectName": "腦筋急轉彎",
+    "gradeBand": "high",
+    "gradeBandName": "高年級",
+    "difficulty": 3,
+    "question": "有一種東西，你給別人後自己還擁有，是什麼？",
+    "choices": [
+      "建議",
+      "糖果",
+      "鉛筆",
+      "氣球"
+    ],
+    "answerIndex": 0,
+    "explanation": "給別人建議後，自己仍然知道這個建議。",
+    "tags": [
+      "原創題",
+      "腦筋急轉彎",
+      "擴充題庫"
+    ]
   }
 ]

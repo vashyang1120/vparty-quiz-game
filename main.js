@@ -1,4 +1,4 @@
-/* 小V知識挑戰 quiz-v0.2.16-unlock-banner-host-scale
+/* 小V知識挑戰 quiz-v0.2.17-question-bank-480-host-shift
    目標：穩定可跑、沿用共用玩家身份、寫入 gameLogs/quiz、quizProgress 與年級累積排行榜。
    V幣：第一版只預留 wallet / vCoinLogs 註解，不實際發放。
 */
@@ -16,7 +16,7 @@ var FIREBASE_CONFIG = {
 };
 var FIREBASE_ENABLED = true;
 
-var QUIZ_VERSION = "quiz-v0.2.16-unlock-banner-host-scale";
+var QUIZ_VERSION = "quiz-v0.2.17-question-bank-480-host-shift";
 
 var DB_PATHS = {
   gameLogs:            "gameLogs/quiz",

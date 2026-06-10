@@ -197,3 +197,218 @@ main{flex:1;display:grid;place-items:center;padding:20px}
 .lb-score{display:flex;flex-direction:column;align-items:flex-end;line-height:1.05}
 .lb-score small{font-family:'Nunito','Noto Sans TC',sans-serif;font-size:10px;color:var(--muted);font-weight:900;margin-bottom:3px}
 @media(max-width:720px){.lb-score{align-items:flex-start}.academy-student-card::after{font-size:24px;right:-15px}.academy-power-hero strong{font-size:30px}}
+
+/* v0.1.7 V學園紙張成績單 UI：只改視覺，不改資料結構 */
+:root{
+  --paper:#fff8ec;
+  --paper2:#fffdf6;
+  --ink:#5a3a4a;
+  --line:#e7c99f;
+  --seal:#e86f9a;
+}
+
+/* 更像紙本成績單的 V學園卡 */
+.academy-student-card{
+  max-width:720px;
+  border-radius:18px;
+  padding:24px 26px 22px;
+  background:
+    linear-gradient(90deg, rgba(90,58,74,.035) 1px, transparent 1px) 0 0/28px 28px,
+    linear-gradient(0deg, rgba(90,58,74,.025) 1px, transparent 1px) 0 0/28px 28px,
+    radial-gradient(circle at 10% 10%, rgba(255,209,102,.22), transparent 24%),
+    linear-gradient(135deg,var(--paper),var(--paper2));
+  border:2px solid rgba(201,153,94,.34);
+  box-shadow:
+    0 20px 44px rgba(112,71,88,.13),
+    inset 0 0 0 2px rgba(255,255,255,.82),
+    inset 0 0 0 8px rgba(255,239,211,.44);
+  color:var(--ink);
+}
+.academy-student-card::before{
+  content:"V學園 成績單";
+  position:absolute;
+  left:24px;
+  top:14px;
+  font-size:10px;
+  letter-spacing:.22em;
+  color:rgba(90,58,74,.36);
+  font-weight:900;
+}
+.academy-student-card::after{
+  content:"V ACADEMY";
+  right:18px;
+  bottom:18px;
+  font-size:38px;
+  color:rgba(155,93,229,.06);
+  transform:rotate(-7deg);
+}
+.academy-head{
+  margin-top:8px;
+  padding-bottom:13px;
+  border-bottom:2px double rgba(201,153,94,.38);
+}
+.academy-head strong{
+  color:#7b4b31;
+  font-size:22px;
+  letter-spacing:.03em;
+}
+.academy-head small{
+  background:linear-gradient(135deg,#7b4b31,#e86f9a);
+  color:#fff7ea;
+  box-shadow:none;
+  border:1px solid rgba(255,255,255,.55);
+}
+.academy-head span{
+  position:relative;
+  color:#9f5b72;
+  background:rgba(255,255,255,.42);
+  border:1px solid rgba(201,153,94,.28);
+  border-radius:999px;
+  padding:5px 10px;
+}
+.academy-power-hero{
+  margin:16px 0 12px;
+  background:rgba(255,255,255,.58);
+  border:1.5px solid rgba(201,153,94,.30);
+  border-radius:14px;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.72);
+}
+.academy-power-hero span{color:#7b4b31}
+.academy-power-hero strong{
+  color:#9b5de5;
+  text-shadow:none;
+}
+.academy-power-hero em{color:#9f5b72}
+.academy-mini-grid{gap:10px;margin:14px 0 14px}
+.academy-mini-grid>div{
+  background:rgba(255,255,255,.48);
+  border:1px solid rgba(201,153,94,.20);
+  border-radius:12px;
+}
+.academy-mini-grid span{color:#7b4b31}
+.academy-mini-grid strong{color:var(--pink2);font-size:18px}
+
+/* 進度條修正：避免舊的 .academy-grade-lines div 影響到 bar 內層 */
+.academy-progress-lines{
+  gap:10px;
+}
+.academy-progress-lines .academy-grade-row{
+  display:block !important;
+  background:rgba(255,255,255,.52) !important;
+  border:1px dashed rgba(201,153,94,.34) !important;
+  border-radius:14px !important;
+  padding:12px 14px !important;
+}
+.academy-progress-lines .academy-grade-top{
+  display:flex !important;
+  justify-content:space-between !important;
+  align-items:center !important;
+  gap:12px !important;
+  margin:0 0 9px !important;
+  background:transparent !important;
+  border:0 !important;
+  padding:0 !important;
+}
+.academy-progress-lines .academy-grade-top span{
+  color:#5a3a4a;
+  font-weight:900;
+}
+.academy-progress-lines .academy-grade-top strong{
+  color:#5a3a4a;
+  font-weight:900;
+}
+.academy-progress-lines .academy-bar{
+  display:block !important;
+  width:100% !important;
+  height:14px !important;
+  padding:0 !important;
+  margin:0 !important;
+  border:1px solid rgba(232,111,154,.22) !important;
+  border-radius:999px !important;
+  background:rgba(255,255,255,.72) !important;
+  overflow:hidden !important;
+  box-shadow:inset 0 2px 5px rgba(112,71,88,.08) !important;
+}
+.academy-progress-lines .academy-bar i{
+  display:block !important;
+  height:100% !important;
+  min-width:0;
+  border-radius:999px !important;
+  background:linear-gradient(90deg,#ff85a1,#ffd166,#9b5de5) !important;
+  box-shadow:0 0 10px rgba(232,111,154,.22);
+  transition:width .45s ease !important;
+}
+
+/* 首頁整體更像學園入口 */
+.hero-card h2{
+  letter-spacing:.02em;
+}
+.notice{
+  background:#fff1d9;
+  border:1px solid rgba(201,153,94,.25);
+  color:#8a5a1e;
+}
+
+/* 排行榜：真正分頁感 */
+.lb-tabs{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:0;
+  padding:4px;
+  background:#fff;
+  border:2px solid var(--pinkLight);
+  border-radius:22px 22px 0 0;
+  margin:16px 0 0;
+  box-shadow:0 6px 18px rgba(232,111,154,.08);
+}
+.lb-tabs .btn{
+  width:100%;
+  border-radius:16px 16px 0 0;
+  padding:12px 8px;
+  color:#9b7a8a;
+  background:transparent;
+  border:0;
+  box-shadow:none;
+}
+.lb-tabs .btn.active{
+  background:linear-gradient(135deg,#ff85a1,#e86f9a);
+  color:#fff;
+  border:0;
+  box-shadow:0 8px 20px rgba(232,111,154,.25);
+  transform:translateY(1px);
+}
+.leaderboard-list{
+  margin-top:0;
+  padding:14px;
+  background:#fff;
+  border:2px solid var(--pinkLight);
+  border-top:0;
+  border-radius:0 0 22px 22px;
+  box-shadow:0 10px 26px rgba(232,111,154,.10);
+}
+.lb-row{
+  border-radius:16px;
+  background:linear-gradient(135deg,#fff,#fff8fb);
+}
+.lb-row + .lb-row{margin-top:4px}
+
+/* 結算頁 V學園進度也給紙張感 */
+.academy-result{
+  background:
+    linear-gradient(90deg, rgba(90,58,74,.025) 1px, transparent 1px) 0 0/22px 22px,
+    linear-gradient(0deg, rgba(90,58,74,.018) 1px, transparent 1px) 0 0/22px 22px,
+    linear-gradient(135deg,#fff8ec,#fffdf6);
+  border:1.5px solid rgba(201,153,94,.34);
+  color:#5a3a4a;
+  box-shadow:0 10px 24px rgba(112,71,88,.10);
+}
+.academy-result strong{color:#7b4b31}
+
+@media(max-width:720px){
+  .academy-student-card{padding:22px 16px 18px;border-radius:16px}
+  .academy-student-card::before{left:16px}
+  .academy-student-card::after{font-size:26px;right:12px;bottom:12px}
+  .lb-tabs{grid-template-columns:repeat(2,1fr);border-radius:20px}
+  .lb-tabs .btn{border-radius:14px;padding:10px 6px}
+  .leaderboard-list{border-radius:0 0 20px 20px}
+}

@@ -1,4 +1,4 @@
-/* 小V知識挑戰 quiz-v0.1.7-paper-report-card-ui
+/* 小V知識挑戰 quiz-v0.2.0-v-academy-quiz-show
    目標：穩定可跑、沿用共用玩家身份、寫入 gameLogs/quiz、quizProgress 與年級累積排行榜。
    V幣：第一版只預留 wallet / vCoinLogs 註解，不實際發放。
 */
@@ -16,7 +16,7 @@ var FIREBASE_CONFIG = {
 };
 var FIREBASE_ENABLED = true;
 
-var QUIZ_VERSION = "quiz-v0.1.7-paper-report-card-ui";
+var QUIZ_VERSION = "quiz-v0.2.0-v-academy-quiz-show";
 
 var DB_PATHS = {
   gameLogs:            "gameLogs/quiz",
@@ -86,6 +86,10 @@ var selectedSubject = "math";
 var leaderboardMode = "main";
 var pickerMode = "base";
 
+var QUESTION_TIME_LIMIT = 15;
+var soundEnabled = localStorage.getItem("vquiz_soundEnabled") !== "false";
+var audioCtx = null;
+
 var quizState = {
   active: false,
   currentIndex: 0,
@@ -98,6 +102,9 @@ var quizState = {
   startedAt: 0,
   questionStartedAt: 0,
   timeTimer: null,
+  questionTimer: null,
+  questionTimeLeft: QUESTION_TIME_LIMIT,
+  questionAnswered: false,
   totalQuestions: 10
 };
 
@@ -129,11 +136,60 @@ function toast(msg, dur){
   toast._timer = setTimeout(function(){ el.classList.remove("show"); }, dur || 2400);
 }
 
+
+function setHostMessage(msg, tone){
+  var el = $("host-message");
+  if (el) el.textContent = msg;
+  var card = $("host-card");
+  if (card) {
+    card.classList.remove("host-correct","host-wrong","host-urgent");
+    if (tone) card.classList.add("host-" + tone);
+  }
+}
+
+function updateSoundButton(){
+  var btn = $("btn-sound-toggle");
+  if (!btn) return;
+  btn.textContent = soundEnabled ? "🔊 音效" : "🔇 靜音";
+  btn.classList.toggle("muted", !soundEnabled);
+}
+
+function ensureAudioContext(){
+  if (!soundEnabled) return null;
+  var Ctx = window.AudioContext || window.webkitAudioContext;
+  if (!Ctx) return null;
+  if (!audioCtx) audioCtx = new Ctx();
+  if (audioCtx.state === "suspended") audioCtx.resume().catch(function(){});
+  return audioCtx;
+}
+
+function beep(freq, duration, type, gainValue){
+  if (!soundEnabled) return;
+  var ctx = ensureAudioContext();
+  if (!ctx) return;
+  var osc = ctx.createOscillator();
+  var gain = ctx.createGain();
+  osc.type = type || "sine";
+  osc.frequency.value = freq || 440;
+  gain.gain.setValueAtTime(0.0001, ctx.currentTime);
+  gain.gain.exponentialRampToValueAtTime(gainValue || 0.055, ctx.currentTime + 0.01);
+  gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + (duration || 0.12));
+  osc.connect(gain);
+  gain.connect(ctx.destination);
+  osc.start();
+  osc.stop(ctx.currentTime + (duration || 0.12) + 0.02);
+}
+
+function playTick(){ beep(720, 0.055, "square", 0.035); }
+function playCorrect(){ beep(660, 0.10, "sine", 0.05); setTimeout(function(){ beep(880, 0.13, "sine", 0.05); }, 95); }
+function playWrong(){ beep(180, 0.22, "sawtooth", 0.035); }
+function playTimeout(){ beep(140, 0.32, "triangle", 0.055); }
+
 function showScreen(id){
   document.querySelectorAll(".screen").forEach(function(s){ s.classList.remove("active"); });
   var el = $(id);
   if (el) el.classList.add("active");
-  if (id !== "screen-quiz") stopQuizTimer();
+  if (id !== "screen-quiz") { stopQuizTimer(); stopQuestionTimer(); }
   if (id === "screen-leaderboard") renderLeaderboard();
 }
 
@@ -684,7 +740,10 @@ function startQuiz(){
   quizState.maxCombo = 0;
   quizState.startedAt = Date.now();
   quizState.questionStartedAt = Date.now();
+  quizState.questionTimeLeft = QUESTION_TIME_LIMIT;
+  quizState.questionAnswered = false;
   quizState.totalQuestions = 10;
+  ensureAudioContext();
 
   showScreen("screen-quiz");
   startQuizTimer();
@@ -704,11 +763,57 @@ function stopQuizTimer(){
   quizState.timeTimer = null;
 }
 
+function stopQuestionTimer(){
+  if (quizState.questionTimer) clearInterval(quizState.questionTimer);
+  quizState.questionTimer = null;
+}
+
+function startQuestionCountdown(){
+  stopQuestionTimer();
+  quizState.questionTimeLeft = QUESTION_TIME_LIMIT;
+  updateQuestionTimerUI();
+  quizState.questionTimer = setInterval(function(){
+    if (!quizState.active || quizState.questionAnswered) return;
+    quizState.questionTimeLeft -= 1;
+    if (quizState.questionTimeLeft <= 5 && quizState.questionTimeLeft > 0) {
+      playTick();
+      setHostMessage("時間快到了！相信直覺，選一個答案吧！", "urgent");
+    }
+    updateQuestionTimerUI();
+    if (quizState.questionTimeLeft <= 0) {
+      handleQuestionTimeout();
+    }
+  }, 1000);
+}
+
+function updateQuestionTimerUI(){
+  var left = Math.max(0, quizState.questionTimeLeft || 0);
+  var pct = Math.max(0, Math.min(100, (left / QUESTION_TIME_LIMIT) * 100));
+  var text = $("question-timer-text");
+  var bar = $("question-timer-bar");
+  var card = $("timer-card");
+  if (text) text.textContent = left + "秒";
+  if (bar) bar.style.width = pct + "%";
+  if (card) card.classList.toggle("urgent", left <= 5 && left > 0 && !quizState.questionAnswered);
+}
+
+function handleQuestionTimeout(){
+  stopQuestionTimer();
+  if (quizState.questionAnswered) return;
+  playTimeout();
+  answerQuestion(-1, true);
+}
+
 function renderQuestion(){
   var q = quizState.questions[quizState.currentIndex];
   if (!q) return finishQuiz();
 
   quizState.questionStartedAt = Date.now();
+  quizState.questionAnswered = false;
+  quizState.questionTimeLeft = QUESTION_TIME_LIMIT;
+  setHostMessage("第 " + (quizState.currentIndex + 1) + " 題來囉！請聽題～", "");
+  var qCard = document.querySelector(".question-card");
+  if (qCard) qCard.classList.remove("show-correct","show-wrong","show-timeout");
   $("hud-progress").textContent = (quizState.currentIndex + 1) + " / " + quizState.totalQuestions;
   $("hud-score").textContent = quizState.score;
   $("hud-combo").textContent = quizState.combo;
@@ -728,17 +833,20 @@ function renderQuestion(){
     btn.addEventListener("click", function(){ answerQuestion(index); });
     choices.appendChild(btn);
   });
+  startQuestionCountdown();
 }
 
-function answerQuestion(selectedIndex){
+function answerQuestion(selectedIndex, timedOut){
   var q = quizState.questions[quizState.currentIndex];
   if (!q) return;
 
   var buttons = Array.prototype.slice.call(document.querySelectorAll(".choice-btn"));
-  if (buttons.some(function(b){ return b.disabled; })) return;
+  if (quizState.questionAnswered || buttons.some(function(b){ return b.disabled; })) return;
+  quizState.questionAnswered = true;
+  stopQuestionTimer();
 
   var answerIndex = Number(q.answerIndex);
-  var correct = selectedIndex === answerIndex;
+  var correct = !timedOut && selectedIndex === answerIndex;
   var timeUsed = Math.max(0, Math.round((Date.now() - quizState.questionStartedAt) / 1000));
 
   if (correct) {
@@ -756,6 +864,7 @@ function answerQuestion(selectedIndex){
     selectedIndex: selectedIndex,
     answerIndex: answerIndex,
     correct: correct,
+    timedOut: !!timedOut,
     timeUsed: timeUsed
   });
 
@@ -767,8 +876,13 @@ function answerQuestion(selectedIndex){
 
   $("hud-score").textContent = quizState.score;
   $("hud-combo").textContent = quizState.combo;
+  var qCard = document.querySelector(".question-card");
+  if (qCard) qCard.classList.add(correct ? "show-correct" : (timedOut ? "show-timeout" : "show-wrong"));
+  if (correct) { playCorrect(); setHostMessage("太棒了！魔法氣球升起，combo 繼續累積！", "correct"); }
+  else if (timedOut) { setHostMessage("時間到！沒關係，來看看解析，下題再出發。", "wrong"); }
+  else { playWrong(); setHostMessage("沒關係，來看看解析，下一題再追回來！", "wrong"); }
 
-  $("answer-result").textContent = correct ? "✅ 答對了！" : "❌ 答錯了";
+  $("answer-result").textContent = correct ? "✅ 答對了！" : (timedOut ? "⏰ 時間到！" : "❌ 答錯了");
   $("answer-result").style.color = correct ? "#158657" : "#b23838";
   $("explanation-text").textContent = q.explanation || "這題目前沒有解析。";
   $("explanation-box").classList.remove("hidden");
@@ -781,6 +895,7 @@ function nextQuestion(){
 }
 
 function finishQuiz(){
+  stopQuestionTimer();
   stopQuizTimer();
   quizState.active = false;
 
@@ -1505,11 +1620,21 @@ function bindEvents(){
       renderLeaderboard();
     });
   });
+  if ($("btn-sound-toggle")) {
+    updateSoundButton();
+    $("btn-sound-toggle").addEventListener("click", function(){
+      soundEnabled = !soundEnabled;
+      localStorage.setItem("vquiz_soundEnabled", soundEnabled ? "true" : "false");
+      if (soundEnabled) { ensureAudioContext(); beep(660, 0.08, "sine", 0.04); }
+      updateSoundButton();
+    });
+  }
   $("btn-start-quiz").addEventListener("click", startQuiz);
   $("btn-play-again").addEventListener("click", function(){ showScreen("screen-setup"); });
   $("btn-quit-quiz").addEventListener("click", function(){
     if (confirm("確定要離開本次挑戰嗎？本局不會寫入紀錄。")) {
       stopQuizTimer();
+      stopQuestionTimer();
       showScreen("screen-title");
     }
   });

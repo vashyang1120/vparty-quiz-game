@@ -571,7 +571,7 @@ main{flex:1;display:grid;place-items:center;padding:20px}
 }
 
 
-/* ── quiz-v0.2.9-quiz-show-flow-polish: sticker placement, larger host image, real pause overlay ── */
+/* ── quiz-v0.2.10-mobile-host-reveal-fix: sticker placement, larger host image, real pause overlay ── */
 .quiz-hud{grid-template-columns:repeat(4,1fr) auto auto auto;align-items:stretch;}
 .pause-toggle{border:1.5px solid rgba(255,190,11,.45);background:#fff8e6;border-radius:18px;padding:8px 12px;color:#9b6a00;font-weight:900;box-shadow:0 4px 14px rgba(255,190,11,.14);min-width:86px;}
 .pause-toggle:active{transform:scale(.94)}
@@ -666,7 +666,7 @@ main{flex:1;display:grid;place-items:center;padding:20px}
 }
 
 
-/* ── v0.2.9 Quiz Show Flow Polish：手機浮動主持人、答題揭曉節奏、節目感文案 ── */
+/* ── v0.2.10 Mobile Host Reveal Fix：手機主持人正常站位、公布答案時放大、避免 timewarning 插隊 ── */
 .choice-btn.selected-pending{
   border-color:rgba(155,93,229,.55);
   background:linear-gradient(135deg,#f8f0ff,#fff7fb);
@@ -680,35 +680,40 @@ main{flex:1;display:grid;place-items:center;padding:20px}
 .mobile-host-sticker{
   display:none;
   position:fixed;
-  right:12px;
+  right:4px;
   bottom:74px;
   z-index:80;
-  width:86px;
-  height:110px;
+  width:82px;
+  height:116px;
   pointer-events:none;
-  border-radius:22px;
-  padding:5px;
-  background:rgba(255,255,255,.88);
-  border:2px solid rgba(255,182,215,.72);
-  box-shadow:0 10px 28px rgba(90,40,120,.20);
-  transform:rotate(3deg);
-  backdrop-filter:blur(4px);
+  padding:0;
+  background:transparent;
+  border:none;
+  box-shadow:none;
+  transform:translateX(6px);
+  filter:drop-shadow(0 12px 18px rgba(80,40,90,.18));
 }
 .mobile-host-sticker img{width:100%;height:100%;object-fit:contain;display:block;}
-.mobile-host-sticker.host-correct{border-color:rgba(32,201,130,.75);box-shadow:0 12px 30px rgba(32,201,130,.22)}
-.mobile-host-sticker.host-wrong,.mobile-host-sticker.host-timeout{border-color:rgba(232,111,154,.78);box-shadow:0 12px 30px rgba(232,111,154,.24)}
-.mobile-host-sticker.host-urgent{border-color:rgba(255,190,11,.8);box-shadow:0 12px 30px rgba(255,190,11,.28)}
+.mobile-host-sticker.host-urgent{filter:drop-shadow(0 12px 20px rgba(255,190,11,.28));}
+.mobile-host-sticker.host-reveal{
+  width:118px;
+  height:162px;
+  right:-6px;
+  bottom:88px;
+  filter:drop-shadow(0 16px 24px rgba(80,40,90,.24));
+}
+.mobile-host-sticker.host-correct.host-reveal{filter:drop-shadow(0 16px 24px rgba(32,201,130,.25));}
+.mobile-host-sticker.host-wrong.host-reveal,.mobile-host-sticker.host-timeout.host-reveal{filter:drop-shadow(0 16px 24px rgba(232,111,154,.26));}
 .mobile-host-sticker.pop{animation:mobileHostPop .38s cubic-bezier(.34,1.56,.64,1)}
-@keyframes mobileHostPop{0%{transform:rotate(3deg) scale(.86);opacity:.65}60%{transform:rotate(3deg) scale(1.08);opacity:1}100%{transform:rotate(3deg) scale(1);opacity:1}}
+@keyframes mobileHostPop{0%{transform:translateX(6px) scale(.82);opacity:.72}60%{transform:translateX(0) scale(1.08);opacity:1}100%{transform:translateX(6px) scale(1);opacity:1}}
 .quiz-pause-overlay .pause-copy strong::after{content:"｜節目暫停中";font-size:.82em;color:rgba(255,255,255,.72);}
 @media(max-width:760px){
   .mobile-host-sticker.show{display:block;}
   .host-card.brand-host-card{display:none;}
   .question-card{padding-bottom:24px;}
-  .explanation{padding-bottom:96px;}
-  .mobile-host-sticker.host-correct,.mobile-host-sticker.host-wrong,.mobile-host-sticker.host-timeout,.mobile-host-sticker.host-urgent{width:96px;height:126px;right:10px;bottom:78px;}
+  .explanation{padding-bottom:118px;}
 }
 @media(max-width:380px){
-  .mobile-host-sticker{width:76px;height:100px;right:8px;bottom:70px;}
-  .mobile-host-sticker.host-correct,.mobile-host-sticker.host-wrong,.mobile-host-sticker.host-timeout,.mobile-host-sticker.host-urgent{width:84px;height:110px;}
+  .mobile-host-sticker{width:70px;height:98px;right:2px;bottom:68px;}
+  .mobile-host-sticker.host-reveal{width:96px;height:132px;right:-4px;bottom:82px;}
 }

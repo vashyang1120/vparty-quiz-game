@@ -1,4 +1,4 @@
-/* 小V知識挑戰 quiz-v0.2.9-quiz-show-flow-polish
+/* 小V知識挑戰 quiz-v0.2.10-mobile-host-reveal-fix
    目標：穩定可跑、沿用共用玩家身份、寫入 gameLogs/quiz、quizProgress 與年級累積排行榜。
    V幣：第一版只預留 wallet / vCoinLogs 註解，不實際發放。
 */
@@ -16,7 +16,7 @@ var FIREBASE_CONFIG = {
 };
 var FIREBASE_ENABLED = true;
 
-var QUIZ_VERSION = "quiz-v0.2.9-quiz-show-flow-polish";
+var QUIZ_VERSION = "quiz-v0.2.10-mobile-host-reveal-fix";
 
 var DB_PATHS = {
   gameLogs:            "gameLogs/quiz",
@@ -206,9 +206,13 @@ function setHostMessage(msg, tone){
   }
   var floater = $("mobile-host-sticker");
   if (floater) {
-    floater.classList.remove("host-correct","host-wrong","host-urgent","host-timeout","pop");
+    floater.classList.remove("host-correct","host-wrong","host-urgent","host-timeout","host-reveal","pop");
     if (tone) floater.classList.add("host-" + tone);
-    if (tone === "correct" || tone === "wrong" || tone === "urgent" || tone === "timeout") {
+
+    // 手機浮動主持人平時維持「站在旁邊」的正常狀態；
+    // 只有公布結果/逾時時才放大強調，避免答題鎖定時先閃 timewarning。
+    if (tone === "correct" || tone === "wrong" || tone === "timeout") {
+      floater.classList.add("host-reveal");
       void floater.offsetWidth;
       floater.classList.add("pop");
     }
@@ -1183,7 +1187,9 @@ function answerQuestion(selectedIndex, timedOut){
   }
 
   var revealDelay = timedOut ? 0 : 320;
-  setHostMessage(timedOut ? "時間到！" : "答案鎖定！小V要公布結果囉～", timedOut ? "timeout" : "urgent");
+  // 選答案後已經停止倒數，等待公布時不切 timewarning；
+  // 真正公布時才切 correct / wrong / timeout，讓視覺差異更明確。
+  setHostMessage(timedOut ? "時間到！" : "答案鎖定！小V要公布結果囉～", timedOut ? "timeout" : "");
 
   setTimeout(function(){
     revealAnswerResult(q, selectedIndex, !!timedOut, buttons);

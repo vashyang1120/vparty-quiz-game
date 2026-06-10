@@ -83,6 +83,14 @@ main{flex:1;display:grid;place-items:center;padding:20px}
 .avatar-item img{width:62px;height:62px;border-radius:50%;object-fit:cover;border:3px solid var(--pinkLight);background:var(--pinkLight);display:block;margin:auto;transition:.16s}
 .avatar-item.selected img{border-color:var(--pink);box-shadow:0 0 0 3px var(--pink);transform:scale(1.08)}
 .avatar-item span{display:block;font-size:10px;color:var(--muted);margin-top:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.avatar-img-wrap{position:relative;display:block;width:62px;height:62px;margin:auto}
+.avatar-img-wrap img{margin:0}
+.avatar-item.locked img{filter:grayscale(.8);opacity:.48}
+.avatar-item.locked .avatar-img-wrap::after{content:"";position:absolute;inset:0;border-radius:50%;background:rgba(40,20,36,.24);pointer-events:none}
+.avatar-lock-badge{position:absolute;right:-2px;bottom:-2px;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;background:#fff;color:var(--pink2);border:2px solid var(--pinkLight);box-shadow:0 4px 10px rgba(80,40,90,.16);font-size:12px;z-index:2}
+.avatar-lock-text{display:block;font-style:normal;font-size:9px;color:#b48a98;margin-top:1px;font-weight:900}
+.avatar-item.locked span:not(.avatar-img-wrap){color:#b48a98}
+
 
 .option-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
 .subject-grid{grid-template-columns:repeat(auto-fit,minmax(120px,1fr))}
@@ -571,7 +579,7 @@ main{flex:1;display:grid;place-items:center;padding:20px}
 }
 
 
-/* ── quiz-v0.2.14-xiaov-base-unlock: sticker placement, larger host image, real pause overlay ── */
+/* ── quiz-v0.2.15-locked-avatar-picker-fix: sticker placement, larger host image, real pause overlay ── */
 .quiz-hud{grid-template-columns:repeat(4,1fr) auto auto auto;align-items:stretch;}
 .pause-toggle{border:1.5px solid rgba(255,190,11,.45);background:#fff8e6;border-radius:18px;padding:8px 12px;color:#9b6a00;font-weight:900;box-shadow:0 4px 14px rgba(255,190,11,.14);min-width:86px;}
 .pause-toggle:active{transform:scale(.94)}

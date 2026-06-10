@@ -1,4 +1,4 @@
-/* 小V知識挑戰 quiz-v0.2.14-xiaov-base-unlock
+/* 小V知識挑戰 quiz-v0.2.15-locked-avatar-picker-fix
    目標：穩定可跑、沿用共用玩家身份、寫入 gameLogs/quiz、quizProgress 與年級累積排行榜。
    V幣：第一版只預留 wallet / vCoinLogs 註解，不實際發放。
 */
@@ -16,7 +16,7 @@ var FIREBASE_CONFIG = {
 };
 var FIREBASE_ENABLED = true;
 
-var QUIZ_VERSION = "quiz-v0.2.14-xiaov-base-unlock";
+var QUIZ_VERSION = "quiz-v0.2.15-locked-avatar-picker-fix";
 
 var DB_PATHS = {
   gameLogs:            "gameLogs/quiz",
@@ -523,14 +523,17 @@ function hasUnlockedAvatar(key) {
   return u.unlocked === true;
 }
 
-function isPrivateCatalogAvatar(key, cat) {
+function getCatalogVisibility(cat) {
+  return String((cat && (cat.visibility || cat.visible || cat.displayMode)) || "").toLowerCase();
+}
+
+function isStudentCatalogAvatar(key, cat) {
   if (!cat) return false;
   var k = String(key || cat.key || "").toLowerCase();
   var tier = String(cat.tier || "").toLowerCase();
   var type = String(cat.type || cat.category || cat.group || cat.kind || "").toLowerCase();
 
-  return cat.hiddenUntilUnlocked === true ||
-    tier === "student" ||
+  return tier === "student" ||
     type === "student" ||
     k.indexOf("student_") === 0 ||
     k.indexOf("student-") === 0 ||
@@ -538,6 +541,33 @@ function isPrivateCatalogAvatar(key, cat) {
     cat.private === true ||
     !!cat.ownerPlayerKey ||
     !!cat.exclusivePlayerKey;
+}
+
+function isHiddenUntilUnlockedCatalogAvatar(key, cat) {
+  if (!cat) return false;
+  var visibility = getCatalogVisibility(cat);
+  return cat.hiddenUntilUnlocked === true ||
+    visibility === "hiddenuntilunlocked" ||
+    visibility === "lockeduntilunlocked" ||
+    visibility === "unlock" ||
+    visibility === "locked" ||
+    cat.manualUnlock === true ||
+    cat.requireUnlock === true;
+}
+
+function isLockedAvatarHiddenFromPicker(key, cat) {
+  // 學生 / 私人 / 指定玩家專屬頭像：未解鎖時完全不出現在選單，避免洩漏。
+  return isStudentCatalogAvatar(key, cat);
+}
+
+function getAvatarUnlockText(key, cat) {
+  var text = cat && (cat.unlockText || cat.unlockCondition || cat.conditionText || cat.hint || cat.description);
+  if (text) return String(text);
+  if (key === "xiaov_base") return "完成任一遊戲即可解鎖。";
+  if (key === "balloon_brother_01") return "完成方塊遊戲指定條件解鎖。";
+  if (key === "balloon_brother_02") return "節奏遊戲達成 A / A+ / S 解鎖。";
+  if (key === "balloon_brother_03") return "完成指定活動或任務解鎖。";
+  return "尚未解鎖，請完成指定條件。";
 }
 
 function isDisplayAvatarAllowed(key) {
@@ -550,11 +580,14 @@ function isDisplayAvatarAllowed(key) {
   // 但不能只因為有 metadata / name / src 就視為可用。
   if (hasUnlockedAvatar(key)) return true;
 
-  // catalog 的學生 / hiddenUntilUnlocked / 私人頭像未解鎖時不可用。
   var cat = AVATAR_CATALOG[key];
-  if (cat && cat.active !== false && !isPrivateCatalogAvatar(key, cat)) return true;
+  if (!cat || cat.active === false) return false;
 
-  return false;
+  // hiddenUntilUnlocked / manualUnlock / 學生或私人頭像未解鎖時都不可套用。
+  if (isHiddenUntilUnlockedCatalogAvatar(key, cat) || isStudentCatalogAvatar(key, cat)) return false;
+
+  // 只有明確公開、且不需解鎖的 catalog 頭像可直接套用。
+  return true;
 }
 
 function getAvatarByKey(key) {
@@ -575,7 +608,7 @@ function getAvatarByKey(key) {
     return { key: key, src: cSrc, url: cSrc, name: cat.name || key };
   }
 
-  if (unlockedAvatars[key]) {
+  if (unlockedAvatars[key] && typeof unlockedAvatars[key] === "object") {
     var meta = unlockedAvatars[key];
     var mSrc = resolveAvatarSrc(meta.src || meta.file || meta.url || "");
     if (mSrc) return { key: key, src: mSrc, url: mSrc, name: meta.name || key };
@@ -867,39 +900,63 @@ function updatePlayerUI(){
 
 function getAvailableDisplayAvatars(){
   var list = AVATARS.map(function(a){
-    return { key:a.key, name:a.label || a.key, src:a.url, type:"builtin" };
+    return { key:a.key, name:a.label || a.key, src:a.url, type:"builtin", locked:false };
   });
 
+  function addCandidate(item){
+    if (!item || !item.key) return;
+    var cat = AVATAR_CATALOG[item.key] || null;
+    var unlocked = hasUnlockedAvatar(item.key);
+    var mustHideWhenLocked = cat ? isLockedAvatarHiddenFromPicker(item.key, cat) : false;
+
+    // 學生 / 私人專屬頭像：未解鎖時完全不出現。
+    if (!unlocked && mustHideWhenLocked) return;
+
+    item.locked = !unlocked && !isDisplayAvatarAllowed(item.key);
+    item.unlockText = item.unlockText || getAvatarUnlockText(item.key, cat);
+    list.push(item);
+  }
+
+  // 固定特殊頭像：未解鎖時也可顯示成鎖住，讓玩家知道解鎖條件。
   UNLOCKABLE_AVATARS.forEach(function(a){
-    if (hasUnlockedAvatar(a.key)) {
-      list.push({ key:a.key, name:a.name || a.key, src:resolveAvatarSrc(a.file || a.src || a.url), type:"unlock" });
-    }
+    addCandidate({
+      key:a.key,
+      name:a.name || a.key,
+      src:resolveAvatarSrc(a.file || a.src || a.url),
+      type:"unlock",
+      unlockText:getAvatarUnlockText(a.key, AVATAR_CATALOG[a.key] || null)
+    });
   });
 
   Object.keys(AVATAR_CATALOG).forEach(function(key){
     var cat = AVATAR_CATALOG[key];
     if (!cat || cat.active === false) return;
 
-    var isPrivate = isPrivateCatalogAvatar(key, cat);
-    var isUnlocked = hasUnlockedAvatar(key);
+    var src = resolveAvatarSrc(cat.src || cat.file || cat.url || "");
+    if (!src) return;
 
-    // 學生專屬 / hiddenUntilUnlocked / 私人頭像：未解鎖時完全不出現在顯示頭像選單。
-    if (isPrivate && !isUnlocked) return;
+    addCandidate({
+      key:key,
+      name:cat.name || key,
+      src:src,
+      type:"catalog",
+      unlockText:getAvatarUnlockText(key, cat)
+    });
+  });
 
-    // 公開 catalog 頭像可以顯示；私人 catalog 頭像只有已解鎖才顯示。
-    if (!isPrivate || isUnlocked) {
-      var src = resolveAvatarSrc(cat.src || cat.file || cat.url || "");
-      if (src) list.push({ key:key, name:cat.name || key, src:src, type:"catalog" });
+  // 去重：同 key 同時存在於 UNLOCKABLE_AVATARS 與 avatarCatalog 時，優先保留已解鎖資料；未解鎖則保留有解鎖文案的鎖定卡。
+  var byKey = {};
+  list.forEach(function(a){
+    var prev = byKey[a.key];
+    if (!prev) {
+      byKey[a.key] = a;
+      return;
     }
+    if (prev.locked && !a.locked) byKey[a.key] = a;
+    else if (!prev.unlockText && a.unlockText) byKey[a.key] = a;
   });
 
-  // 去重
-  var seen = {};
-  return list.filter(function(a){
-    if (seen[a.key]) return false;
-    seen[a.key] = true;
-    return true;
-  });
+  return Object.keys(byKey).map(function(key){ return byKey[key]; });
 }
 
 function buildAvatarPicker(mode){
@@ -919,9 +976,13 @@ function buildAvatarPicker(mode){
   list.forEach(function(av){
     var btn = document.createElement("button");
     btn.className = "avatar-item";
+    if (av.locked) btn.classList.add("locked");
     var selected = mode === "base" ? av.key === PLAYER.baseAvatarKey : av.key === PLAYER.displayAvatarKey;
     if (selected) btn.classList.add("selected");
-    btn.innerHTML = '<img src="' + escapeHtml(av.src) + '" alt=""><span>' + escapeHtml(av.name) + '</span>';
+    btn.innerHTML = '<span class="avatar-img-wrap"><img src="' + escapeHtml(av.src) + '" alt="">' +
+      (av.locked ? '<b class="avatar-lock-badge">🔒</b>' : '') +
+      '</span><span>' + escapeHtml(av.name) + '</span>' +
+      (av.locked ? '<em class="avatar-lock-text">未解鎖</em>' : '');
     btn.addEventListener("click", function(){
       if (mode === "base") {
         PLAYER.baseAvatarKey = av.key;
@@ -935,8 +996,8 @@ function buildAvatarPicker(mode){
         buildAvatarPicker("base");
         toast("已選擇身份頭像：" + av.name + "\\nplayerKey 會跟著身份切換。");
       } else {
-        if (!isDisplayAvatarAllowed(av.key)) {
-          toast("這個顯示頭像尚未解鎖，不能套用。");
+        if (av.locked || !isDisplayAvatarAllowed(av.key)) {
+          toast("🔒 " + av.name + " 尚未解鎖\\n" + (av.unlockText || "請完成指定條件解鎖。"), 3600);
           return;
         }
 

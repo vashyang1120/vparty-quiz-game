@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
-  <title>小V知識挑戰｜quiz-v0.2.2-auto-bgm-louder-sfx</title>
+  <title>小V知識挑戰｜quiz-v0.2.3-brand-host-visual</title>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
-  <link rel="stylesheet" href="./style.css?v=quiz-v0.2.2-auto-bgm-louder-sfx">
+  <link rel="stylesheet" href="./style.css?v=quiz-v0.2.3-brand-host-visual">
 </head>
 <body>
   <div id="app">
@@ -16,7 +16,7 @@
         <div class="logo-bubble">🎈</div>
         <div>
           <h1>小V知識挑戰</h1>
-          <p>quiz-v0.2.2-auto-bgm-louder-sfx</p>
+          <p>quiz-v0.2.3-brand-host-visual</p>
         </div>
       </div>
       <div class="player-chip">
@@ -30,10 +30,19 @@
 
     <main>
       <section id="screen-title" class="screen active">
-        <div class="hero-card">
-          <div class="hero-deco">🎈📚✨</div>
-          <h2>V學園 Quiz Show</h2>
-          <p>小V主持開問！每題 15 秒限時挑戰，答對累積魔法氣球，連續答對還有 combo 加成。</p>
+        <div class="hero-card brand-hero-card">
+          <div class="hero-brand-layout">
+            <div class="hero-copy">
+              <div class="hero-deco">🎈📚✨</div>
+              <h2>V學園 Quiz Show</h2>
+              <p>小V主持開問！每題 15 秒限時挑戰，答對累積魔法氣球，連續答對還有 combo 加成。</p>
+            </div>
+            <div class="hero-host-stage">
+              <div class="hero-host-badge">🎤 小V主持人</div>
+              <img id="home-host-image" class="hero-host-image" src="" alt="小V主持人主視覺">
+              <div class="hero-host-note">歡迎來到小V知識挑戰！準備和小V一起累積 V學園知識力吧！</div>
+            </div>
+          </div>
           <div id="academy-card" class="academy-card compact academy-student-card">
             <div class="academy-head">
               <div>
@@ -66,6 +75,7 @@
                 <div class="academy-bar"><i id="academy-high-bar"></i></div>
               </div>
             </div>
+            <img id="academy-host-image" class="academy-mascot" src="" alt="小V角色裝飾">
           </div>
 
           <div class="actions">
@@ -166,10 +176,12 @@
             </div>
           </div>
 
-          <div class="host-card" id="host-card">
-            <div class="host-avatar">🎤</div>
+          <div class="host-card brand-host-card" id="host-card">
+            <div class="host-avatar host-avatar-image">
+              <img id="host-image" src="" alt="小V主持人">
+            </div>
             <div class="host-lines">
-              <strong>小V主持人</strong>
+              <strong>🎤 小V主持人</strong>
               <span id="host-message">歡迎來到 V學園 Quiz Show！</span>
             </div>
           </div>
@@ -201,6 +213,7 @@
       <section id="screen-result" class="screen">
         <div class="panel result-panel">
           <div class="result-emoji" id="result-emoji">🎈</div>
+          <img id="result-host-image" class="result-host-image" src="" alt="小V主持人">
           <h2 id="result-title">挑戰完成！</h2>
           <div class="result-stats">
             <div><span>分數</span><strong id="result-score">0</strong></div>
@@ -225,6 +238,13 @@
       <section id="screen-leaderboard" class="screen">
         <div class="panel wide">
           <h2>排行榜</h2>
+          <div class="leaderboard-brand">
+            <img id="leaderboard-brand-image" class="leaderboard-brand-image" src="" alt="小V主持人">
+            <div class="leaderboard-brand-copy">
+              <strong>🎤 小V排行榜舞台</strong>
+              <span>看看誰是目前 V學園的知識挑戰王！</span>
+            </div>
+          </div>
           <p id="leaderboard-desc" class="muted">leaderboards/quiz/main/{playerKey}：三個年級總分加總的綜合榜。</p>
           <div class="lb-tabs">
             <button class="btn ghost small active" data-lb-mode="main">🏆 總榜</button>
@@ -279,6 +299,6 @@
     <div id="toast" class="toast"></div>
   </div>
 
-  <script src="./main.js?v=quiz-v0.2.2-auto-bgm-louder-sfx"></script>
+  <script src="./main.js?v=quiz-v0.2.3-brand-host-visual"></script>
 </body>
 </html>

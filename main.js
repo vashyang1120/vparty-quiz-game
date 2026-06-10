@@ -16,7 +16,7 @@ var FIREBASE_CONFIG = {
 };
 var FIREBASE_ENABLED = true;
 
-var QUIZ_VERSION = "quiz-v0.2.2-auto-bgm-louder-sfx";
+var QUIZ_VERSION = "quiz-v0.2.3-brand-host-visual";
 
 var DB_PATHS = {
   gameLogs:            "gameLogs/quiz",
@@ -91,6 +91,14 @@ var soundEnabled = localStorage.getItem("vquiz_soundEnabled") !== "false";
 var audioCtx = null;
 var SFX_MASTER_GAIN = 3.0;
 
+
+var HOST_ART = {
+  intro: "https://balloonv.com/wp-content/uploads/xiaov_quiz_host_intro_v1.png",
+  question: "https://balloonv.com/wp-content/uploads/xiaov_quiz_host_question_v1.png",
+  correct: "https://balloonv.com/wp-content/uploads/xiaov_quiz_host_correct_v1.png",
+  timewarning: "https://balloonv.com/wp-content/uploads/xiaov_quiz_host_timewarning_v1.png"
+};
+
 // 音樂播放器：讀取節奏遊戲 songs.json，歌曲檔不複製到問答 repo
 var SONG_BASE = "https://vashyang1120.github.io/vparty-rhythm-game/";
 var MUSIC_EMOJIS = ["🎈","🎤","✨","💫","🌟","🎵","🎶","🎀","🎪","⭐"];
@@ -151,14 +159,43 @@ function toast(msg, dur){
 }
 
 
+function setImageSrc(id, src){
+  var el = $(id);
+  if (el && src) el.src = src;
+}
+
+function getHostArtByTone(tone){
+  if (tone === "correct") return HOST_ART.correct;
+  if (tone === "urgent") return HOST_ART.timewarning;
+  if (tone === "intro") return HOST_ART.intro;
+  return HOST_ART.question;
+}
+
+function refreshBrandHostVisuals(){
+  setImageSrc("home-host-image", HOST_ART.intro);
+  setImageSrc("academy-host-image", HOST_ART.correct);
+  setImageSrc("leaderboard-brand-image", HOST_ART.intro);
+  setImageSrc("result-host-image", HOST_ART.correct);
+  setImageSrc("host-image", HOST_ART.question);
+}
+
 function setHostMessage(msg, tone){
   var el = $("host-message");
   if (el) el.textContent = msg;
+  setImageSrc("host-image", getHostArtByTone(tone));
   var card = $("host-card");
   if (card) {
     card.classList.remove("host-correct","host-wrong","host-urgent");
     if (tone) card.classList.add("host-" + tone);
   }
+}
+
+function setResultHostVisual(){
+  var key = "intro";
+  if (quizState.correctCount >= 8) key = "correct";
+  else if (quizState.correctCount >= 5) key = "intro";
+  else key = "question";
+  setImageSrc("result-host-image", HOST_ART[key]);
 }
 
 function updateSoundButton(){
@@ -398,7 +435,14 @@ function showScreen(id){
   var el = $(id);
   if (el) el.classList.add("active");
   if (id !== "screen-quiz") { stopQuizTimer(); stopQuestionTimer(); }
-  if (id === "screen-leaderboard") renderLeaderboard();
+  if (id === "screen-title") {
+    setImageSrc("home-host-image", HOST_ART.intro);
+    setImageSrc("academy-host-image", HOST_ART.correct);
+  }
+  if (id === "screen-leaderboard") {
+    setImageSrc("leaderboard-brand-image", HOST_ART.intro);
+    renderLeaderboard();
+  }
 }
 
 function normalizePlayerId(id) {
@@ -1125,6 +1169,7 @@ function finishQuiz(){
   else { title = "再挑戰一次！"; emoji = "💪"; }
   $("result-title").textContent = title;
   $("result-emoji").textContent = emoji;
+  setResultHostVisual();
 
   showScreen("screen-result");
   saveQuizResult(totalTime, accuracy);
@@ -1946,6 +1991,7 @@ function init(){
   loadPlayerLocal();
   buildSetupOptions();
   updatePlayerUI();
+  refreshBrandHostVisuals();
   loadSongs();
 
   // v0.1.1：獨立測試頁首次進入時，強制先確認玩家身份。

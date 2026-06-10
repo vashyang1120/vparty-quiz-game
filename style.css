@@ -508,3 +508,44 @@ main{flex:1;display:grid;place-items:center;padding:20px}
   .music-mini{grid-column:1 / -1;min-width:0;}
   .mini-title{max-width:100%;}
 }
+
+
+/* ── v0.2.3 Brand Host Visual ── */
+.brand-hero-card{width:min(1120px,96vw);}
+.hero-brand-layout{display:grid;grid-template-columns:minmax(0,1.12fr) minmax(280px,.88fr);gap:24px;align-items:center;margin-bottom:22px;}
+.hero-copy{text-align:left;}
+.hero-copy p{max-width:620px;margin:8px 0 0;}
+.hero-host-stage{position:relative;background:linear-gradient(135deg,#fff7fb,#f8ebff 54%,#fff4d9);border:2px solid rgba(255,182,215,.42);border-radius:28px;padding:18px 18px 14px;box-shadow:0 14px 32px rgba(155,93,229,.12);overflow:hidden;}
+.hero-host-stage::after{content:"V Host";position:absolute;right:14px;bottom:8px;font-family:'Fredoka One','Nunito',sans-serif;font-size:32px;letter-spacing:.08em;color:rgba(155,93,229,.08);pointer-events:none;}
+.hero-host-badge{display:inline-flex;align-items:center;gap:6px;padding:8px 12px;border-radius:999px;background:linear-gradient(135deg,var(--pink),var(--pink2));color:#fff;font-weight:900;box-shadow:0 10px 20px rgba(232,111,154,.18);}
+.hero-host-image{display:block;width:min(100%,340px);max-height:420px;object-fit:contain;margin:12px auto 8px;filter:drop-shadow(0 18px 26px rgba(101,52,131,.18));}
+.hero-host-note{background:rgba(255,255,255,.82);border:1.5px solid rgba(255,182,215,.36);border-radius:18px;padding:12px 14px;color:var(--text);font-weight:800;line-height:1.6;}
+.academy-student-card{position:relative;}
+.academy-mascot{position:absolute;right:14px;bottom:18px;width:92px;max-width:24%;opacity:.92;pointer-events:none;filter:drop-shadow(0 10px 18px rgba(101,52,131,.14));}
+.brand-host-card{align-items:center;gap:16px;}
+.brand-host-card .host-avatar{width:128px;height:128px;border-radius:26px;background:rgba(255,255,255,.14);box-shadow:0 0 0 5px rgba(255,255,255,.16);overflow:hidden;padding:6px;display:flex;align-items:center;justify-content:center;}
+.brand-host-card .host-avatar img{width:100%;height:100%;object-fit:contain;display:block;}
+.brand-host-card .host-lines strong{font-size:15px;letter-spacing:.08em;}
+.brand-host-card .host-lines span{font-size:19px;max-width:760px;}
+.result-host-image{display:block;width:min(240px,58vw);margin:10px auto 8px;filter:drop-shadow(0 18px 24px rgba(101,52,131,.14));}
+.leaderboard-brand{display:flex;align-items:center;gap:16px;margin:8px 0 10px;padding:14px 16px;background:linear-gradient(135deg,#fff8fd,#f7efff 56%,#fff4de);border:1.5px solid rgba(255,182,215,.4);border-radius:22px;box-shadow:0 10px 24px rgba(155,93,229,.08);}
+.leaderboard-brand-image{width:110px;height:110px;object-fit:contain;flex-shrink:0;filter:drop-shadow(0 12px 20px rgba(101,52,131,.12));}
+.leaderboard-brand-copy strong{display:block;font-size:18px;color:var(--text);margin-bottom:4px;}
+.leaderboard-brand-copy span{display:block;color:var(--muted);line-height:1.6;font-weight:700;}
+#leaderboard-list .muted{background:#fff9fc;border:1.5px dashed rgba(255,182,215,.4);border-radius:20px;padding:18px;text-align:center;}
+@media(max-width:920px){
+  .hero-brand-layout{grid-template-columns:1fr;}
+  .hero-copy{text-align:center;}
+  .hero-copy p{max-width:none;}
+  .brand-host-card .host-lines span{font-size:16px;}
+}
+@media(max-width:720px){
+  .hero-host-stage{padding:14px 14px 12px;}
+  .hero-host-image{max-height:300px;}
+  .academy-mascot{width:76px;max-width:30%;right:10px;bottom:12px;}
+  .brand-host-card{align-items:flex-start;}
+  .brand-host-card .host-avatar{width:92px;height:92px;border-radius:20px;padding:4px;}
+  .brand-host-card .host-lines span{font-size:15px;}
+  .leaderboard-brand{align-items:flex-start;padding:12px 12px 10px;}
+  .leaderboard-brand-image{width:82px;height:82px;}
+}

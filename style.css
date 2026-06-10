@@ -75,6 +75,15 @@ main{flex:1;display:grid;place-items:center;padding:20px}
 .avatar-box p{margin:8px 0 12px;color:var(--muted);font-size:12px;line-height:1.5}
 .identity-box{margin:14px 0;background:#fff7fb;border:1px dashed var(--pink);border-radius:18px;padding:12px;color:var(--muted);font-size:12px}
 .identity-box code{display:block;margin-top:4px;color:var(--text);word-break:break-all;font-size:11px}
+
+.identity-guide{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:12px 0 16px}
+.identity-guide>div{background:#fff7fb;border:1.5px solid var(--pinkLight);border-radius:18px;padding:12px 14px;color:var(--muted);font-size:13px;line-height:1.55}
+.identity-guide strong{color:var(--text);font-size:14px}
+.picker-note{border-radius:16px;padding:10px 12px;margin:0 0 12px;font-size:12px;line-height:1.5;text-align:left}
+.picker-note.danger{background:#fff4f4;border:1.5px dashed #ff8aa8;color:#8b4256}
+.picker-note.safe{background:#f2fff8;border:1.5px dashed #70d6a0;color:#3e7254}
+.picker-note strong{font-size:13px;color:var(--text)}
+
 .avatar-picker{background:#fff;border:1.5px solid var(--pinkLight);border-radius:22px;padding:14px;margin:16px 0;box-shadow:0 6px 18px rgba(232,111,154,.1)}
 .hidden{display:none!important}
 .picker-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px}
@@ -143,7 +152,7 @@ main{flex:1;display:grid;place-items:center;padding:20px}
   .topbar{align-items:flex-start}
   .player-chip{max-width:54vw}
   .player-chip strong,.player-chip span{max-width:150px}
-  .profile-preview-grid,.choices,.result-stats{grid-template-columns:1fr}
+  .identity-guide,.profile-preview-grid,.choices,.result-stats{grid-template-columns:1fr}
   .option-grid{grid-template-columns:1fr}
   .quiz-hud{grid-template-columns:repeat(2,1fr)}
   .lb-row{grid-template-columns:34px 42px minmax(0,1fr);grid-template-areas:"rank av main" "rank av score"}
@@ -579,7 +588,7 @@ main{flex:1;display:grid;place-items:center;padding:20px}
 }
 
 
-/* ── quiz-v0.2.18-question-bank-720-host-up: sticker placement, larger host image, real pause overlay ── */
+/* ── quiz-v0.2.19-base-avatar-warning: sticker placement, larger host image, real pause overlay ── */
 .quiz-hud{grid-template-columns:repeat(4,1fr) auto auto auto;align-items:stretch;}
 .pause-toggle{border:1.5px solid rgba(255,190,11,.45);background:#fff8e6;border-radius:18px;padding:8px 12px;color:#9b6a00;font-weight:900;box-shadow:0 4px 14px rgba(255,190,11,.14);min-width:86px;}
 .pause-toggle:active{transform:scale(.94)}
@@ -726,7 +735,7 @@ main{flex:1;display:grid;place-items:center;padding:20px}
   .mobile-host-sticker.host-reveal{width:96px;height:132px;right:-4px;bottom:82px;}
 }
 
-/* ── quiz-v0.2.18-question-bank-720-host-up: 解鎖提示與手機浮動主持人放大 ── */
+/* ── quiz-v0.2.19-base-avatar-warning: 解鎖提示與手機浮動主持人放大 ── */
 .unlock-banner{
   display:flex;
   align-items:center;
@@ -787,7 +796,7 @@ main{flex:1;display:grid;place-items:center;padding:20px}
   }
 }
 
-/* ── quiz-v0.2.18-question-bank-720-host-up: mobile floating host left shift ── */
+/* ── quiz-v0.2.19-base-avatar-warning: mobile floating host left shift ── */
 @media(max-width:760px){
   .mobile-host-sticker.show{
     right:18px;
@@ -806,7 +815,7 @@ main{flex:1;display:grid;place-items:center;padding:20px}
 }
 
 
-/* ── quiz-v0.2.18-question-bank-720-host-up: mobile floating host move up to avoid explanation text ── */
+/* ── quiz-v0.2.19-base-avatar-warning: mobile floating host move up to avoid explanation text ── */
 @media(max-width:760px){
   .mobile-host-sticker.show{
     right:20px;

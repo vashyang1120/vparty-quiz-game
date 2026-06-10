@@ -1,4 +1,4 @@
-/* 小V知識挑戰 quiz-v0.2.18-question-bank-720-host-up
+/* 小V知識挑戰 quiz-v0.2.19-base-avatar-warning
    目標：穩定可跑、沿用共用玩家身份、寫入 gameLogs/quiz、quizProgress 與年級累積排行榜。
    V幣：第一版只預留 wallet / vCoinLogs 註解，不實際發放。
 */
@@ -16,7 +16,7 @@ var FIREBASE_CONFIG = {
 };
 var FIREBASE_ENABLED = true;
 
-var QUIZ_VERSION = "quiz-v0.2.18-question-bank-720-host-up";
+var QUIZ_VERSION = "quiz-v0.2.19-base-avatar-warning";
 
 var DB_PATHS = {
   gameLogs:            "gameLogs/quiz",
@@ -959,6 +959,26 @@ function getAvailableDisplayAvatars(){
   return Object.keys(byKey).map(function(key){ return byKey[key]; });
 }
 
+
+function getIdentityChangeWarningText(newAvatarName, newAvatarKey){
+  var currentKey = PLAYER.baseAvatarKey || "boy1";
+  var currentPlayerKey = makePlayerKey(PLAYER.id || "玩家", currentKey);
+  var nextPlayerKey = makePlayerKey(PLAYER.id || "玩家", newAvatarKey || currentKey);
+  return "你正在更換「身份頭像」。\n\n" +
+    "身份頭像 = 遊戲身分證，會決定 playerKey 與成績歸屬。\n" +
+    "換成「" + (newAvatarName || newAvatarKey || "新頭像") + "」後，系統會把你當成另一個玩家身份。\n\n" +
+    "目前身份：" + currentPlayerKey + "\n" +
+    "新身份：" + nextPlayerKey + "\n\n" +
+    "原本成績、解鎖、排行榜不會自動一起帶過來。\n" +
+    "確定要更換身份頭像嗎？";
+}
+
+function confirmBaseAvatarChange(av){
+  if (!av || !av.key) return false;
+  if (av.key === PLAYER.baseAvatarKey) return true;
+  return confirm(getIdentityChangeWarningText(av.name || av.key, av.key));
+}
+
 function buildAvatarPicker(mode){
   pickerMode = mode;
   var wrap = $("avatar-picker");
@@ -966,8 +986,16 @@ function buildAvatarPicker(mode){
   var title = $("avatar-picker-title");
   if (!wrap || !grid) return;
 
-  title.textContent = mode === "base" ? "🔑 選擇身份頭像（只限內建頭像）" : "🎨 選擇顯示頭像";
+  title.textContent = mode === "base" ? "🔑 選擇身份頭像（遊戲身分證）" : "🎨 選擇顯示頭像（只改外觀）";
   grid.innerHTML = "";
+  var oldNote = grid.parentNode.querySelector(".picker-note");
+  if (oldNote) oldNote.remove();
+  var note = document.createElement("div");
+  note.className = "picker-note " + (mode === "base" ? "danger" : "safe");
+  note.innerHTML = mode === "base"
+    ? "<strong>⚠️ 身份頭像 = 遊戲身分證</strong><br>換掉身份頭像會變成另一個玩家，原本成績、解鎖與排行榜不會自動帶過來。"
+    : "<strong>✅ 顯示頭像 = 外觀造型</strong><br>只改畫面與排行榜顯示快照，不會改變 playerKey。";
+  grid.parentNode.insertBefore(note, grid);
 
   var list = mode === "base"
     ? AVATARS.map(function(a){ return { key:a.key, name:a.label || a.key, src:a.url }; })
@@ -985,6 +1013,10 @@ function buildAvatarPicker(mode){
       (av.locked ? '<em class="avatar-lock-text">未解鎖</em>' : '');
     btn.addEventListener("click", function(){
       if (mode === "base") {
+        if (!confirmBaseAvatarChange(av)) {
+          toast("已取消更換身份頭像。", 2200);
+          return;
+        }
         PLAYER.baseAvatarKey = av.key;
         PLAYER.playerKey = makePlayerKey(PLAYER.id, PLAYER.baseAvatarKey);
         // 切換身份頭像時，若目前 display 未必屬於新身份，先暫時退回 base，確認後會重新讀 unlocked。
@@ -994,7 +1026,7 @@ function buildAvatarPicker(mode){
         savePlayerLocal();
         updatePlayerUI();
         buildAvatarPicker("base");
-        toast("已選擇身份頭像：" + av.name + "\\nplayerKey 會跟著身份切換。");
+        toast("已選擇身份頭像：" + av.name + "\n這會變成新的玩家身份，請再按「確認身份」。", 3600);
       } else {
         if (av.locked || !isDisplayAvatarAllowed(av.key)) {
           toast("🔒 " + av.name + " 尚未解鎖\\n" + (av.unlockText || "請完成指定條件解鎖。"), 3600);

@@ -1,4 +1,4 @@
-/* 小V知識挑戰 quiz-v0.2.2-auto-bgm-louder-sfx
+/* 小V知識挑戰 quiz-v0.2.1-audio-tension-host-assets
    目標：穩定可跑、沿用共用玩家身份、寫入 gameLogs/quiz、quizProgress 與年級累積排行榜。
    V幣：第一版只預留 wallet / vCoinLogs 註解，不實際發放。
 */
@@ -16,7 +16,7 @@ var FIREBASE_CONFIG = {
 };
 var FIREBASE_ENABLED = true;
 
-var QUIZ_VERSION = "quiz-v0.2.5-home-menu-brand-layout-question-fix";
+var QUIZ_VERSION = "quiz-v0.2.1-audio-tension-host-assets";
 
 var DB_PATHS = {
   gameLogs:            "gameLogs/quiz",
@@ -89,29 +89,18 @@ var pickerMode = "base";
 var QUESTION_TIME_LIMIT = 15;
 var soundEnabled = localStorage.getItem("vquiz_soundEnabled") !== "false";
 var audioCtx = null;
-var SFX_MASTER_GAIN = 3.0;
-
-
-var HOST_ART = {
-  intro: "./assets/hosts/xiaov_quiz_host_intro_v1.png",
-  question: "./assets/hosts/xiaov_quiz_host_question_v1.png",
-  correct: "./assets/hosts/xiaov_quiz_host_correct_v1.png",
-  timewarning: "./assets/hosts/xiaov_quiz_host_timewarning_v1.png"
+var SFX_MASTER_VOLUME = 2.25;
+var HOST_IMAGE_BASE = "./assets/hosts/";
+var HOST_IMAGES = {
+  intro: HOST_IMAGE_BASE + "xiaov_quiz_host_intro_v1.png",
+  question: HOST_IMAGE_BASE + "xiaov_quiz_host_question_v1.png",
+  correct: HOST_IMAGE_BASE + "xiaov_quiz_host_correct_v1.png",
+  wrong: HOST_IMAGE_BASE + "xiaov_quiz_host_wrong_v1.png",
+  timeout: HOST_IMAGE_BASE + "xiaov_quiz_host_timeout_v2.png",
+  timewarning: HOST_IMAGE_BASE + "xiaov_quiz_host_timewarning_v1.png",
+  result: HOST_IMAGE_BASE + "xiaov_quiz_host_result_v1.png",
+  ranking: HOST_IMAGE_BASE + "xiaov_quiz_host_ranking_v1.png"
 };
-var GAME_MENU_URL = "https://balloonv.com/%e6%b0%a3%e7%90%83%e5%b0%8fv%e9%ad%94%e6%b3%95%e6%b4%be%e5%b0%8d%e9%81%8a%e6%88%b2";
-
-// 音樂播放器：讀取節奏遊戲 songs.json，歌曲檔不複製到問答 repo
-var SONG_BASE = "https://vashyang1120.github.io/vparty-rhythm-game/";
-var MUSIC_EMOJIS = ["🎈","🎤","✨","💫","🌟","🎵","🎶","🎀","🎪","⭐"];
-var SONGS = [];
-var musicAudio = new Audio();
-var musicIndex = 0;
-var musicPlaying = false;
-var musicLoop = "all";
-var musicShuffle = false;
-var musicProgressTimer = null;
-var quizBgmManaged = false;
-musicAudio.volume = 0.10;
 
 var quizState = {
   active: false,
@@ -160,43 +149,23 @@ function toast(msg, dur){
 }
 
 
-function setImageSrc(id, src){
-  var el = $(id);
-  if (el && src) el.src = src;
+function setHostImage(state){
+  var img = $("host-image");
+  if (!img) return;
+  var key = state || "question";
+  img.src = HOST_IMAGES[key] || HOST_IMAGES.question;
+  img.alt = "小V主持人 - " + key;
 }
 
-function getHostArtByTone(tone){
-  if (tone === "correct") return HOST_ART.correct;
-  if (tone === "urgent") return HOST_ART.timewarning;
-  if (tone === "intro") return HOST_ART.intro;
-  return HOST_ART.question;
-}
-
-function refreshBrandHostVisuals(){
-  setImageSrc("home-host-image", HOST_ART.intro);
-  setImageSrc("academy-host-image", HOST_ART.correct);
-  setImageSrc("leaderboard-brand-image", HOST_ART.intro);
-  setImageSrc("result-host-image", HOST_ART.correct);
-  setImageSrc("host-image", HOST_ART.question);
-}
-
-function setHostMessage(msg, tone){
+function setHostMessage(msg, tone, imageState){
   var el = $("host-message");
   if (el) el.textContent = msg;
-  setImageSrc("host-image", getHostArtByTone(tone));
   var card = $("host-card");
   if (card) {
-    card.classList.remove("host-correct","host-wrong","host-urgent");
+    card.classList.remove("host-correct","host-wrong","host-urgent","host-timeout");
     if (tone) card.classList.add("host-" + tone);
   }
-}
-
-function setResultHostVisual(){
-  var key = "intro";
-  if (quizState.correctCount >= 8) key = "correct";
-  else if (quizState.correctCount >= 5) key = "intro";
-  else key = "question";
-  setImageSrc("result-host-image", HOST_ART[key]);
+  setHostImage(imageState || tone || "question");
 }
 
 function updateSoundButton(){
@@ -215,235 +184,76 @@ function ensureAudioContext(){
   return audioCtx;
 }
 
-function clampGain(v){ return Math.max(0.0001, Math.min(0.55, v * SFX_MASTER_GAIN)); }
-
-function beep(freq, duration, type, gainValue, when){
+function playTone(freq, duration, type, gainValue, delay){
   if (!soundEnabled) return;
   var ctx = ensureAudioContext();
   if (!ctx) return;
-  var t0 = typeof when === "number" ? when : ctx.currentTime;
-  var dur = duration || 0.12;
+  var t0 = ctx.currentTime + (delay || 0);
   var osc = ctx.createOscillator();
   var gain = ctx.createGain();
   osc.type = type || "sine";
   osc.frequency.setValueAtTime(freq || 440, t0);
+  var g = Math.max(0.001, Math.min(0.55, (gainValue || 0.08) * SFX_MASTER_VOLUME));
   gain.gain.setValueAtTime(0.0001, t0);
-  gain.gain.exponentialRampToValueAtTime(clampGain(gainValue || 0.06), t0 + 0.012);
-  gain.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+  gain.gain.exponentialRampToValueAtTime(g, t0 + 0.012);
+  gain.gain.exponentialRampToValueAtTime(0.0001, t0 + (duration || 0.12));
   osc.connect(gain);
   gain.connect(ctx.destination);
   osc.start(t0);
-  osc.stop(t0 + dur + 0.03);
+  osc.stop(t0 + (duration || 0.12) + 0.04);
 }
 
-function playTick(secondsLeft){
-  var left = Number(secondsLeft || quizState.questionTimeLeft || 5);
-  var step = Math.max(1, Math.min(5, left));
-  var freqMap = {5:520,4:620,3:760,2:930,1:1120};
-  var gainMap = {5:0.075,4:0.09,3:0.115,2:0.14,1:0.17};
-  var durMap = {5:0.08,4:0.075,3:0.065,2:0.055,1:0.048};
-  beep(freqMap[step] || 720, durMap[step] || 0.055, "square", gainMap[step] || 0.065);
-  if (step <= 2) {
-    setTimeout(function(){ beep((freqMap[step] || 900) * 1.25, 0.04, "square", 0.09); }, 95);
-  }
+function playSweep(startFreq, endFreq, duration, type, gainValue, delay){
+  if (!soundEnabled) return;
+  var ctx = ensureAudioContext();
+  if (!ctx) return;
+  var t0 = ctx.currentTime + (delay || 0);
+  var osc = ctx.createOscillator();
+  var gain = ctx.createGain();
+  osc.type = type || "sine";
+  osc.frequency.setValueAtTime(startFreq, t0);
+  osc.frequency.exponentialRampToValueAtTime(Math.max(20, endFreq), t0 + duration);
+  var g = Math.max(0.001, Math.min(0.55, (gainValue || 0.08) * SFX_MASTER_VOLUME));
+  gain.gain.setValueAtTime(0.0001, t0);
+  gain.gain.exponentialRampToValueAtTime(g, t0 + 0.015);
+  gain.gain.exponentialRampToValueAtTime(0.0001, t0 + duration);
+  osc.connect(gain);
+  gain.connect(ctx.destination);
+  osc.start(t0);
+  osc.stop(t0 + duration + 0.04);
+}
+
+function playTick(left){
+  var level = Math.max(1, Math.min(5, left || 5));
+  var step = 6 - level; // 5秒=1，1秒=5
+  var freq = 560 + step * 120;
+  var gain = 0.075 + step * 0.018;
+  var dur = Math.max(0.045, 0.09 - step * 0.006);
+  playTone(freq, dur, "square", gain, 0);
+  // 最後兩秒加一點低頻敲擊，增加節目倒數壓力。
+  if (left <= 2) playTone(150, 0.055, "triangle", 0.055, 0.035);
 }
 function playCorrect(){
-  var ctx = ensureAudioContext();
-  if (!ctx) return;
-  var now = ctx.currentTime;
-  beep(523.25, 0.10, "sine", 0.09, now);
-  beep(659.25, 0.11, "sine", 0.105, now + 0.085);
-  beep(783.99, 0.18, "triangle", 0.13, now + 0.17);
-  beep(1046.5, 0.10, "sine", 0.08, now + 0.29);
+  playTone(523, 0.10, "sine", 0.08, 0);
+  playTone(659, 0.11, "sine", 0.085, 0.08);
+  playTone(784, 0.16, "triangle", 0.09, 0.17);
 }
 function playWrong(){
-  var ctx = ensureAudioContext();
-  if (!ctx) return;
-  var now = ctx.currentTime;
-  beep(300, 0.10, "sawtooth", 0.095, now);
-  beep(210, 0.15, "sawtooth", 0.09, now + 0.09);
-  beep(130, 0.26, "triangle", 0.085, now + 0.22);
+  playSweep(260, 120, 0.28, "sawtooth", 0.075, 0);
+  playTone(95, 0.18, "triangle", 0.055, 0.16);
 }
 function playTimeout(){
-  var ctx = ensureAudioContext();
-  if (!ctx) return;
-  var now = ctx.currentTime;
-  beep(130, 0.48, "triangle", 0.17, now);
-  beep(82, 0.60, "sine", 0.13, now + 0.07);
-  beep(55, 0.42, "sine", 0.095, now + 0.18);
-}
-
-function musicFmt(sec){
-  sec = Math.floor(sec || 0);
-  return Math.floor(sec / 60) + ":" + String(sec % 60).padStart(2, "0");
-}
-function normalizeSongAudioPath(song){
-  var raw = song.audioUrl || song.audio || song.file || song.src || "";
-  if (!raw && song.id) raw = "songs/" + song.id + "/audio.mp3";
-  if (/^https?:\/\//.test(raw)) return raw;
-  return SONG_BASE + String(raw).replace(/^\.\//, "");
-}
-function normalizeSongList(data){
-  var arr = Array.isArray(data) ? data : (data && Array.isArray(data.songs) ? data.songs : []);
-  return arr.map(function(s, i){
-    return {
-      id: s.id || ("song" + String(i + 1).padStart(3, "0")),
-      title: s.title || s.name || ("歌曲 " + (i + 1)),
-      artist: s.artist || "氣球小V",
-      duration: Number(s.duration || s.seconds || 120),
-      audio: normalizeSongAudioPath(s),
-      emoji: s.emoji || MUSIC_EMOJIS[i % MUSIC_EMOJIS.length]
-    };
-  }).filter(function(s){ return !!s.audio; });
-}
-function fallbackSongs(){
-  return normalizeSongList([
-    {id:"song001",title:"在小V派對裡夢想",artist:"氣球小V",duration:122,audio:"songs/song001/audio.mp3",emoji:"🎈"},
-    {id:"song002",title:"V-MEN",artist:"氣球小V",duration:128,audio:"songs/song002/audio.mp3",emoji:"🎤"},
-    {id:"song003",title:"掌心的初光",artist:"氣球小V",duration:123,audio:"songs/song003/audio.mp3",emoji:"✨"},
-    {id:"song004",title:"一顆氣球的重量",artist:"氣球小V",duration:259,audio:"songs/song004/audio.mp3",emoji:"💫"},
-    {id:"song005",title:"小V派對歌曲 5",artist:"氣球小V",duration:120,audio:"songs/song005/audio.mp3",emoji:"🌟"},
-    {id:"song006",title:"小V派對歌曲 6",artist:"氣球小V",duration:120,audio:"songs/song006/audio.mp3",emoji:"🎵"}
-  ]);
-}
-function loadSongs(){
-  return fetch(SONG_BASE + "songs.json?v=" + encodeURIComponent(QUIZ_VERSION), { cache:"no-store" })
-    .then(function(r){ if (!r.ok) throw new Error("songs.json " + r.status); return r.json(); })
-    .then(function(data){
-      SONGS = normalizeSongList(data);
-      if (!SONGS.length) SONGS = fallbackSongs();
-      loadSong(0, false);
-      updateSongList();
-      toast("🎵 已載入節奏遊戲播放清單：" + SONGS.length + " 首", 1800);
-      return SONGS;
-    })
-    .catch(function(e){
-      console.warn("[Music] songs.json load failed:", e.message);
-      SONGS = fallbackSongs();
-      loadSong(0, false);
-      updateSongList();
-      return SONGS;
-    });
-}
-function loadSong(index, playAfter){
-  if (!SONGS.length) return;
-  musicIndex = ((index % SONGS.length) + SONGS.length) % SONGS.length;
-  var song = SONGS[musicIndex];
-  musicAudio.src = song.audio;
-  musicAudio.load();
-  var nt = $("mp-nt"), disc = $("mp-disc"), ar = $("mp-ar"), dur = $("mp-dur"), cur = $("mp-cur"), fill = $("mp-fill"), mini = $("mini-title");
-  if (nt) nt.textContent = song.title;
-  if (disc) disc.textContent = song.emoji;
-  if (ar) ar.textContent = song.artist || "氣球小V";
-  if (dur) dur.textContent = musicFmt(song.duration);
-  if (cur) cur.textContent = "0:00";
-  if (fill) fill.style.width = "0%";
-  if (mini) mini.textContent = song.emoji + " " + song.title;
-  updateSongList();
-  if (playAfter) playSong();
-}
-function playSong(){
-  if (!SONGS.length) return;
-  if (!musicAudio.src) loadSong(musicIndex || 0, false);
-  musicAudio.volume = Number(( $("mp-vol") && $("mp-vol").value ? $("mp-vol").value : 10)) / 100;
-  musicAudio.play().then(function(){
-    musicPlaying = true;
-    updateMusicButtons();
-    startMusicProgress();
-    updateSongList();
-    var disc = $("mp-disc"); if (disc) disc.classList.add("playing");
-  }).catch(function(e){
-    console.warn("[Music] play failed:", e.message);
-    toast("瀏覽器需要你先點一下播放鍵才能播放音樂。", 2400);
-  });
-}
-function pauseSong(){
-  musicAudio.pause();
-  musicPlaying = false;
-  updateMusicButtons();
-  stopMusicProgress();
-  updateSongList();
-  var disc = $("mp-disc"); if (disc) disc.classList.remove("playing");
-}
-function togglePlay(){ if (musicPlaying) pauseSong(); else playSong(); }
-function updateMusicButtons(){
-  var icon = musicPlaying ? "⏸" : "▶";
-  if ($("mc-play")) $("mc-play").textContent = icon;
-  if ($("mp-play2")) $("mp-play2").textContent = icon;
-}
-function startMusicProgress(){
-  stopMusicProgress();
-  musicProgressTimer = setInterval(function(){
-    var dur = musicAudio.duration || (SONGS[musicIndex] && SONGS[musicIndex].duration) || 120;
-    var cur = musicAudio.currentTime || 0;
-    if ($("mp-cur")) $("mp-cur").textContent = musicFmt(cur);
-    if ($("mp-fill")) $("mp-fill").style.width = dur ? ((cur / dur) * 100) + "%" : "0%";
-  }, 500);
-}
-function stopMusicProgress(){
-  if (musicProgressTimer) clearInterval(musicProgressTimer);
-  musicProgressTimer = null;
-}
-function updateSongList(){
-  var list = $("mp-list");
-  if (!list) return;
-  list.innerHTML = "";
-  if (!SONGS.length) {
-    list.innerHTML = '<div class="mp-item"><div class="mp-item-info"><div class="mp-item-name">播放清單載入中...</div></div></div>';
-    return;
-  }
-  SONGS.forEach(function(song, i){
-    var item = document.createElement("div");
-    item.className = "mp-item" + (i === musicIndex ? " on" : "");
-    item.innerHTML = '<div class="mp-item-num">' + (i + 1) + '</div>' +
-      '<div class="mp-item-info"><div class="mp-item-name">' + escapeHtml(song.emoji + " " + song.title) + '</div>' +
-      '<div class="mp-item-dur">' + escapeHtml(song.artist || "氣球小V") + ' · ' + musicFmt(song.duration) + '</div></div>' +
-      '<div class="mp-eq" style="display:' + (i === musicIndex && musicPlaying ? "" : "none") + '">🎵</div>';
-    item.addEventListener("click", function(){ loadSong(i, true); });
-    list.appendChild(item);
-  });
-}
-function openMusic(){ updateSongList(); if ($("music-modal")) $("music-modal").classList.add("show"); }
-function closeMusic(){ if ($("music-modal")) $("music-modal").classList.remove("show"); }
-
-function startQuizBgm(){
-  quizBgmManaged = true;
-  if (!SONGS.length) {
-    loadSongs().then(function(){ playSong(); });
-    return;
-  }
-  playSong();
-}
-
-function pauseQuizBgm(){
-  if (!quizBgmManaged) return;
-  pauseSong();
-  quizBgmManaged = false;
+  playTone(110, 0.16, "triangle", 0.13, 0);
+  playTone(82, 0.38, "sine", 0.11, 0.13);
+  playSweep(210, 95, 0.32, "sawtooth", 0.055, 0.2);
 }
 
 function showScreen(id){
-  var current = document.querySelector(".screen.active");
-  var currentId = current ? current.id : "";
-
-  // 問答 BGM 管理：開始答題後自動播放，結算畫面保持播放；離開結算或中途離開答題時暫停。
-  if (quizBgmManaged) {
-    var leavingResult = currentId === "screen-result" && id !== "screen-result";
-    var leavingQuizBeforeResult = currentId === "screen-quiz" && id !== "screen-result" && id !== "screen-quiz";
-    if (leavingResult || leavingQuizBeforeResult) pauseQuizBgm();
-  }
-
   document.querySelectorAll(".screen").forEach(function(s){ s.classList.remove("active"); });
   var el = $(id);
   if (el) el.classList.add("active");
   if (id !== "screen-quiz") { stopQuizTimer(); stopQuestionTimer(); }
-  if (id === "screen-title") {
-    setImageSrc("home-host-image", HOST_ART.intro);
-    setImageSrc("academy-host-image", HOST_ART.correct);
-  }
-  if (id === "screen-leaderboard") {
-    setImageSrc("leaderboard-brand-image", HOST_ART.intro);
-    renderLeaderboard();
-  }
+  if (id === "screen-leaderboard") renderLeaderboard();
 }
 
 function normalizePlayerId(id) {
@@ -997,7 +807,6 @@ function startQuiz(){
   quizState.questionAnswered = false;
   quizState.totalQuestions = 10;
   ensureAudioContext();
-  startQuizBgm();
 
   showScreen("screen-quiz");
   startQuizTimer();
@@ -1031,7 +840,7 @@ function startQuestionCountdown(){
     quizState.questionTimeLeft -= 1;
     if (quizState.questionTimeLeft <= 5 && quizState.questionTimeLeft > 0) {
       playTick(quizState.questionTimeLeft);
-      setHostMessage("時間快到了！相信直覺，選一個答案吧！", "urgent");
+      setHostMessage("時間快到了！倒數聲越來越急了！", "urgent", "timewarning");
     }
     updateQuestionTimerUI();
     if (quizState.questionTimeLeft <= 0) {
@@ -1065,7 +874,7 @@ function renderQuestion(){
   quizState.questionStartedAt = Date.now();
   quizState.questionAnswered = false;
   quizState.questionTimeLeft = QUESTION_TIME_LIMIT;
-  setHostMessage("第 " + (quizState.currentIndex + 1) + " 題來囉！請聽題～", "");
+  setHostMessage("第 " + (quizState.currentIndex + 1) + " 題來囉！請聽題～", "", "question");
   var qCard = document.querySelector(".question-card");
   if (qCard) qCard.classList.remove("show-correct","show-wrong","show-timeout");
   $("hud-progress").textContent = (quizState.currentIndex + 1) + " / " + quizState.totalQuestions;
@@ -1132,9 +941,9 @@ function answerQuestion(selectedIndex, timedOut){
   $("hud-combo").textContent = quizState.combo;
   var qCard = document.querySelector(".question-card");
   if (qCard) qCard.classList.add(correct ? "show-correct" : (timedOut ? "show-timeout" : "show-wrong"));
-  if (correct) { playCorrect(); setHostMessage("太棒了！魔法氣球升起，combo 繼續累積！", "correct"); }
-  else if (timedOut) { setHostMessage("時間到！沒關係，來看看解析，下題再出發。", "wrong"); }
-  else { playWrong(); setHostMessage("沒關係，來看看解析，下一題再追回來！", "wrong"); }
+  if (correct) { playCorrect(); setHostMessage("太棒了！魔法氣球升起，combo 繼續累積！", "correct", "correct"); }
+  else if (timedOut) { setHostMessage("時間到！沒關係，來看看解析，下題再出發。", "timeout", "timeout"); }
+  else { playWrong(); setHostMessage("沒關係，來看看解析，下一題再追回來！", "wrong", "wrong"); }
 
   $("answer-result").textContent = correct ? "✅ 答對了！" : (timedOut ? "⏰ 時間到！" : "❌ 答錯了");
   $("answer-result").style.color = correct ? "#158657" : "#b23838";
@@ -1170,7 +979,6 @@ function finishQuiz(){
   else { title = "再挑戰一次！"; emoji = "💪"; }
   $("result-title").textContent = title;
   $("result-emoji").textContent = emoji;
-  setResultHostVisual();
 
   showScreen("screen-result");
   saveQuizResult(totalTime, accuracy);
@@ -1852,55 +1660,6 @@ function formatSeconds(sec){
   return m + "分" + String(s).padStart(2, "0") + "秒";
 }
 
-function bindMusicEvents(){
-  if (bindMusicEvents._bound) return;
-  bindMusicEvents._bound = true;
-  if ($("btn-music-title")) $("btn-music-title").addEventListener("click", openMusic);
-  if ($("mc-prev")) $("mc-prev").addEventListener("click", function(){ if (SONGS.length) loadSong(musicIndex - 1, musicPlaying); });
-  if ($("mc-next")) $("mc-next").addEventListener("click", function(){ if (SONGS.length) loadSong(musicIndex + 1, musicPlaying); });
-  if ($("mc-play")) $("mc-play").addEventListener("click", togglePlay);
-  if ($("mc-list")) $("mc-list").addEventListener("click", openMusic);
-  if ($("mp-prev2")) $("mp-prev2").addEventListener("click", function(){ if (SONGS.length) loadSong(musicIndex - 1, musicPlaying); });
-  if ($("mp-next2")) $("mp-next2").addEventListener("click", function(){ if (SONGS.length) loadSong(musicIndex + 1, musicPlaying); });
-  if ($("mp-play2")) $("mp-play2").addEventListener("click", togglePlay);
-  if ($("mp-close")) $("mp-close").addEventListener("click", closeMusic);
-  if ($("music-modal")) $("music-modal").addEventListener("click", function(e){ if (e.target === $("music-modal")) closeMusic(); });
-  if ($("mp-prog")) $("mp-prog").addEventListener("click", function(e){
-    var r = $("mp-prog").getBoundingClientRect();
-    var pct = Math.max(0, Math.min(1, (e.clientX - r.left) / r.width));
-    var dur = musicAudio.duration || (SONGS[musicIndex] && SONGS[musicIndex].duration) || 120;
-    musicAudio.currentTime = pct * dur;
-  });
-  if ($("mp-vol")) $("mp-vol").addEventListener("input", function(e){ musicAudio.volume = Number(e.target.value || 10) / 100; });
-  if ($("mp-shuf")) $("mp-shuf").addEventListener("click", function(){
-    musicShuffle = !musicShuffle;
-    $("mp-shuf").classList.toggle("act", musicShuffle);
-    toast(musicShuffle ? "🔀 隨機播放開啟" : "🔀 隨機播放關閉");
-  });
-  if ($("mp-loop")) $("mp-loop").addEventListener("click", function(){
-    var modes = ["all", "one", "none"];
-    var labels = ["全部循環", "單曲循環", "不循環"];
-    var icons = ["🔁", "🔂", "➡"];
-    musicLoop = modes[(modes.indexOf(musicLoop) + 1) % modes.length];
-    var i = modes.indexOf(musicLoop);
-    $("mp-loop").textContent = icons[i];
-    $("mp-badge").textContent = labels[i];
-    $("mp-loop").classList.toggle("act", musicLoop !== "none");
-    toast("循環模式：" + labels[i]);
-  });
-  musicAudio.addEventListener("ended", function(){
-    if (musicLoop === "one") {
-      musicAudio.currentTime = 0;
-      playSong();
-    } else if (musicLoop === "all" || musicShuffle) {
-      var next = musicShuffle ? Math.floor(Math.random() * Math.max(1, SONGS.length)) : musicIndex + 1;
-      loadSong(next, true);
-    } else {
-      pauseSong();
-    }
-  });
-}
-
 function bindEvents(){
   $("btn-go-profile").addEventListener("click", function(){ showScreen("screen-profile"); });
   $("btn-go-setup").addEventListener("click", function(){
@@ -1912,9 +1671,6 @@ function bindEvents(){
     showScreen("screen-setup");
   });
   $("btn-go-leaderboard").addEventListener("click", function(){ showScreen("screen-leaderboard"); });
-  if ($("btn-game-menu")) $("btn-game-menu").addEventListener("click", function(){
-    window.top.location.href = GAME_MENU_URL;
-  });
   $("btn-profile-back").addEventListener("click", function(){ showScreen("screen-title"); });
   $("btn-setup-back").addEventListener("click", function(){ showScreen("screen-title"); });
   $("btn-leaderboard-back").addEventListener("click", function(){ showScreen("screen-title"); });
@@ -1929,14 +1685,14 @@ function bindEvents(){
   });
   if ($("btn-sound-toggle")) {
     updateSoundButton();
+  setHostImage("intro");
     $("btn-sound-toggle").addEventListener("click", function(){
       soundEnabled = !soundEnabled;
       localStorage.setItem("vquiz_soundEnabled", soundEnabled ? "true" : "false");
-      if (soundEnabled) { ensureAudioContext(); beep(660, 0.10, "sine", 0.09); }
+      if (soundEnabled) { ensureAudioContext(); beep(660, 0.08, "sine", 0.04); }
       updateSoundButton();
     });
   }
-  bindMusicEvents();
   $("btn-start-quiz").addEventListener("click", startQuiz);
   $("btn-play-again").addEventListener("click", function(){ showScreen("screen-setup"); });
   $("btn-quit-quiz").addEventListener("click", function(){
@@ -1995,8 +1751,6 @@ function init(){
   loadPlayerLocal();
   buildSetupOptions();
   updatePlayerUI();
-  refreshBrandHostVisuals();
-  loadSongs();
 
   // v0.1.1：獨立測試頁首次進入時，強制先確認玩家身份。
   // 未來統一遊戲入口完成後，可以改由入口傳入已確認的 profile。

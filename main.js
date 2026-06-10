@@ -1,4 +1,4 @@
-/* 小V知識挑戰 quiz-v0.2.8-host-sticker-pause-layout-fix
+/* 小V知識挑戰 quiz-v0.2.9-quiz-show-flow-polish
    目標：穩定可跑、沿用共用玩家身份、寫入 gameLogs/quiz、quizProgress 與年級累積排行榜。
    V幣：第一版只預留 wallet / vCoinLogs 註解，不實際發放。
 */
@@ -16,7 +16,7 @@ var FIREBASE_CONFIG = {
 };
 var FIREBASE_ENABLED = true;
 
-var QUIZ_VERSION = "quiz-v0.2.8-host-sticker-pause-layout-fix";
+var QUIZ_VERSION = "quiz-v0.2.9-quiz-show-flow-polish";
 
 var DB_PATHS = {
   gameLogs:            "gameLogs/quiz",
@@ -189,22 +189,43 @@ function refreshBrandHostVisuals(){
   setImageSrc("leaderboard-brand-image", HOST_ART.ranking || HOST_ART.intro);
   setImageSrc("result-host-image", HOST_ART.result || HOST_ART.correct);
   setImageSrc("host-image", HOST_ART.question);
+  setImageSrc("mobile-host-image", HOST_ART.question);
   setImageSrc("pause-host-image", HOST_ART.timeout || HOST_ART.timewarning || HOST_ART.question);
 }
 
 function setHostMessage(msg, tone){
   var el = $("host-message");
   if (el) el.textContent = msg;
-  setImageSrc("host-image", getHostArtByTone(tone));
+  var src = getHostArtByTone(tone);
+  setImageSrc("host-image", src);
+  setImageSrc("mobile-host-image", src);
   var card = $("host-card");
   if (card) {
     card.classList.remove("host-correct","host-wrong","host-urgent","host-timeout");
     if (tone) card.classList.add("host-" + tone);
   }
+  var floater = $("mobile-host-sticker");
+  if (floater) {
+    floater.classList.remove("host-correct","host-wrong","host-urgent","host-timeout","pop");
+    if (tone) floater.classList.add("host-" + tone);
+    if (tone === "correct" || tone === "wrong" || tone === "urgent" || tone === "timeout") {
+      void floater.offsetWidth;
+      floater.classList.add("pop");
+    }
+  }
 }
 
 function setResultHostVisual(){
   setImageSrc("result-host-image", HOST_ART.result || HOST_ART.correct || HOST_ART.intro);
+}
+
+function getQuizIntroMessage(){
+  var n = quizState.currentIndex + 1;
+  if (n === 1) return "第一題開始！請聽題～";
+  if (n === quizState.totalQuestions) return "最後一題，穩住節奏，準備好了嗎？";
+  if (n === 5) return "第 5 題來囉，集中注意力！";
+  if (n >= 8) return "第 " + n + " 題，挑戰進入尾聲了！";
+  return "第 " + n + " 題來囉！請聽題～";
 }
 
 function updateSoundButton(){
@@ -443,6 +464,8 @@ function showScreen(id){
   document.querySelectorAll(".screen").forEach(function(s){ s.classList.remove("active"); });
   var el = $(id);
   if (el) el.classList.add("active");
+  var floater = $("mobile-host-sticker");
+  if (floater) floater.classList.toggle("show", id === "screen-quiz");
   if (id !== "screen-quiz") { stopQuizTimer(); stopQuestionTimer(); quizState.paused = false; hidePauseOverlay(); }
   if (id === "screen-title") {
     setImageSrc("home-host-image", HOST_ART.intro);
@@ -1120,7 +1143,7 @@ function renderQuestion(){
   quizState.questionStartedAt = Date.now();
   quizState.questionAnswered = false;
   quizState.questionTimeLeft = QUESTION_TIME_LIMIT;
-  setHostMessage("第 " + (quizState.currentIndex + 1) + " 題來囉！請聽題～", "");
+  setHostMessage(getQuizIntroMessage(), "");
   var qCard = document.querySelector(".question-card");
   if (qCard) qCard.classList.remove("show-correct","show-wrong","show-timeout");
   $("hud-progress").textContent = (quizState.currentIndex + 1) + " / " + quizState.totalQuestions;
@@ -1131,7 +1154,7 @@ function renderQuestion(){
   $("q-difficulty").textContent = "★".repeat(Math.max(1, Math.min(3, q.difficulty || 1)));
   $("question-text").textContent = q.question;
   $("explanation-box").classList.add("hidden");
-  $("btn-next-question").textContent = quizState.currentIndex === quizState.totalQuestions - 1 ? "查看結算" : "下一題";
+  $("btn-next-question").textContent = quizState.currentIndex === quizState.totalQuestions - 1 ? "🎓 查看成績單" : "🎤 下一題，請聽題！";
 
   var choices = $("choices");
   choices.innerHTML = "";
@@ -1154,6 +1177,20 @@ function answerQuestion(selectedIndex, timedOut){
   quizState.questionAnswered = true;
   stopQuestionTimer();
 
+  buttons.forEach(function(btn){ btn.disabled = true; });
+  if (!timedOut && selectedIndex >= 0 && buttons[selectedIndex]) {
+    buttons[selectedIndex].classList.add("selected-pending");
+  }
+
+  var revealDelay = timedOut ? 0 : 320;
+  setHostMessage(timedOut ? "時間到！" : "答案鎖定！小V要公布結果囉～", timedOut ? "timeout" : "urgent");
+
+  setTimeout(function(){
+    revealAnswerResult(q, selectedIndex, !!timedOut, buttons);
+  }, revealDelay);
+}
+
+function revealAnswerResult(q, selectedIndex, timedOut, buttons){
   var answerIndex = Number(q.answerIndex);
   var correct = !timedOut && selectedIndex === answerIndex;
   var timeUsed = Math.max(0, Math.round((Date.now() - quizState.questionStartedAt) / 1000));
@@ -1178,7 +1215,7 @@ function answerQuestion(selectedIndex, timedOut){
   });
 
   buttons.forEach(function(btn, idx){
-    btn.disabled = true;
+    btn.classList.remove("selected-pending");
     if (idx === answerIndex) btn.classList.add("correct");
     if (idx === selectedIndex && !correct) btn.classList.add("wrong");
   });
@@ -1187,9 +1224,9 @@ function answerQuestion(selectedIndex, timedOut){
   $("hud-combo").textContent = quizState.combo;
   var qCard = document.querySelector(".question-card");
   if (qCard) qCard.classList.add(correct ? "show-correct" : (timedOut ? "show-timeout" : "show-wrong"));
-  if (correct) { playCorrect(); setHostMessage("太棒了！魔法氣球升起，combo 繼續累積！", "correct"); }
-  else if (timedOut) { setHostMessage("時間到！沒關係，來看看解析，下題再出發。", "timeout"); }
-  else { playWrong(); setHostMessage("沒關係，來看看解析，下一題再追回來！", "wrong"); }
+  if (correct) { playCorrect(); setHostMessage("答對！太棒了，魔法氣球升起，combo 繼續累積！", "correct"); }
+  else if (timedOut) { setHostMessage("時間到！沒關係，看看解析，下題再出發。", "timeout"); }
+  else { playWrong(); setHostMessage("答錯了！沒關係，看看解析，下一題再追回來！", "wrong"); }
 
   $("answer-result").textContent = correct ? "✅ 答對了！" : (timedOut ? "⏰ 時間到！" : "❌ 答錯了");
   $("answer-result").style.color = correct ? "#158657" : "#b23838";
@@ -1217,12 +1254,12 @@ function finishQuiz(){
   $("result-max-combo").textContent = quizState.maxCombo;
   $("result-time").textContent = totalTime + "s";
 
-  var title = "挑戰完成！";
+  var title = "🎉 小V宣布：挑戰完成！";
   var emoji = "🎈";
-  if (quizState.correctCount === 10) { title = "知識派對王！"; emoji = "🏆"; }
-  else if (quizState.correctCount >= 8) { title = "魔法小學霸！"; emoji = "🌟"; }
-  else if (quizState.correctCount >= 5) { title = "派對挑戰成功！"; emoji = "🎉"; }
-  else { title = "再挑戰一次！"; emoji = "💪"; }
+  if (quizState.correctCount === 10) { title = "🏆 V學園滿分王！"; emoji = "🏆"; }
+  else if (quizState.correctCount >= 8) { title = "🌟 知識派對高手！"; emoji = "🌟"; }
+  else if (quizState.correctCount >= 5) { title = "🎉 穩定挑戰者！"; emoji = "🎉"; }
+  else { title = "💪 再接再厲學員！"; emoji = "💪"; }
   $("result-title").textContent = title;
   $("result-emoji").textContent = emoji;
   setResultHostVisual();
@@ -1998,8 +2035,6 @@ function bindEvents(){
     if (confirm("確定要離開本次挑戰嗎？本局不會寫入紀錄。")) {
       quizState.paused = false;
       hidePauseOverlay();
-      quizState.paused = false;
-      hidePauseOverlay();
       stopQuizTimer();
       stopQuestionTimer();
       showScreen("screen-title");
@@ -2015,6 +2050,8 @@ function bindEvents(){
   $("btn-play-again").addEventListener("click", function(){ showScreen("screen-setup"); });
   $("btn-quit-quiz").addEventListener("click", function(){
     if (confirm("確定要離開本次挑戰嗎？本局不會寫入紀錄。")) {
+      quizState.paused = false;
+      hidePauseOverlay();
       stopQuizTimer();
       stopQuestionTimer();
       showScreen("screen-title");

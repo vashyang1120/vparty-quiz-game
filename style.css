@@ -549,3 +549,23 @@ main{flex:1;display:grid;place-items:center;padding:20px}
   .leaderboard-brand{align-items:flex-start;padding:12px 12px 10px;}
   .leaderboard-brand-image{width:82px;height:82px;}
 }
+
+
+/* ── v0.2.5 Home Menu / Brand Layout / Question Fix ── */
+.academy-student-card{overflow:visible;}
+.academy-mascot{
+  position:absolute;
+  right:-42px;
+  bottom:-18px;
+  width:82px;
+  max-width:18%;
+  opacity:.42;
+  z-index:0;
+  pointer-events:none;
+  filter:drop-shadow(0 10px 18px rgba(101,52,131,.12));
+}
+.academy-student-card > *:not(.academy-mascot){position:relative;z-index:1;}
+#btn-game-menu{border-color:rgba(155,93,229,.28);}
+@media(max-width:720px){
+  .academy-mascot{right:8px;bottom:10px;width:52px;max-width:18%;opacity:.22;}
+}

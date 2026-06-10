@@ -16,7 +16,7 @@ var FIREBASE_CONFIG = {
 };
 var FIREBASE_ENABLED = true;
 
-var QUIZ_VERSION = "quiz-v0.2.4-local-host-assets-fix";
+var QUIZ_VERSION = "quiz-v0.2.5-home-menu-brand-layout-question-fix";
 
 var DB_PATHS = {
   gameLogs:            "gameLogs/quiz",
@@ -98,6 +98,7 @@ var HOST_ART = {
   correct: "./assets/hosts/xiaov_quiz_host_correct_v1.png",
   timewarning: "./assets/hosts/xiaov_quiz_host_timewarning_v1.png"
 };
+var GAME_MENU_URL = "https://balloonv.com/%e6%b0%a3%e7%90%83%e5%b0%8fv%e9%ad%94%e6%b3%95%e6%b4%be%e5%b0%8d%e9%81%8a%e6%88%b2";
 
 // 音樂播放器：讀取節奏遊戲 songs.json，歌曲檔不複製到問答 repo
 var SONG_BASE = "https://vashyang1120.github.io/vparty-rhythm-game/";
@@ -1911,6 +1912,9 @@ function bindEvents(){
     showScreen("screen-setup");
   });
   $("btn-go-leaderboard").addEventListener("click", function(){ showScreen("screen-leaderboard"); });
+  if ($("btn-game-menu")) $("btn-game-menu").addEventListener("click", function(){
+    window.top.location.href = GAME_MENU_URL;
+  });
   $("btn-profile-back").addEventListener("click", function(){ showScreen("screen-title"); });
   $("btn-setup-back").addEventListener("click", function(){ showScreen("screen-title"); });
   $("btn-leaderboard-back").addEventListener("click", function(){ showScreen("screen-title"); });

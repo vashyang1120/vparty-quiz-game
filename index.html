@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
-  <title>小V知識挑戰｜quiz-v0.2.22-quiz-admin-panel</title>
+  <title>小V知識挑戰｜quiz-v0.2.23-admin-question-overrides-csv</title>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
-  <link rel="stylesheet" href="./style.css?v=quiz-v0.2.22-quiz-admin-panel">
+  <link rel="stylesheet" href="./style.css?v=quiz-v0.2.23-admin-question-overrides-csv">
 </head>
 <body>
   <div id="app">
@@ -16,7 +16,7 @@
         <div class="logo-bubble">🎈</div>
         <div>
           <h1 id="quiz-logo-title">小V知識挑戰</h1>
-          <p>quiz-v0.2.22-quiz-admin-panel</p>
+          <p>quiz-v0.2.23-admin-question-overrides-csv</p>
         </div>
       </div>
       <div class="player-chip">
@@ -321,6 +321,30 @@
             <div id="adm-question-groups" class="admin-group-list"></div>
           </div>
 
+
+          <div class="admin-card">
+            <div class="admin-card-head">
+              <strong>🛠 題目管理</strong>
+              <span>停用 / 恢復題目會寫入 Firebase 覆寫表，不會直接改 quiz_questions.json</span>
+            </div>
+            <div class="admin-question-tools">
+              <select id="adm-q-grade-filter" aria-label="年級篩選">
+                <option value="all">全部年級</option>
+                <option value="low">低年級</option>
+                <option value="middle">中年級</option>
+                <option value="high">高年級</option>
+              </select>
+              <select id="adm-q-subject-filter" aria-label="科目篩選">
+                <option value="all">全部科目</option>
+              </select>
+              <input id="adm-q-search" type="search" placeholder="搜尋題目 / 解析 / ID">
+              <label class="admin-check"><input id="adm-q-only-disabled" type="checkbox"> 只看停用</label>
+              <button id="btn-admin-q-export-csv" class="btn secondary tiny" type="button">📚 匯出題目 CSV</button>
+            </div>
+            <div id="adm-q-manage-count" class="muted">尚未載入題目</div>
+            <div id="adm-q-manage-list" class="admin-question-list"></div>
+          </div>
+
           <div class="admin-card">
             <div class="admin-card-head">
               <strong>📝 最近問答紀錄</strong>
@@ -331,6 +355,7 @@
               <button class="btn ghost tiny" data-admin-sort="score_desc" type="button">分數高→低</button>
               <button class="btn ghost tiny" data-admin-sort="time_asc" type="button">最舊→最新</button>
               <button id="btn-admin-export" class="btn secondary tiny" type="button">📥 匯出 JSON</button>
+              <button id="btn-admin-export-csv" class="btn secondary tiny" type="button">📊 匯出 CSV</button>
             </div>
             <div id="adm-log-list" class="admin-log-list">載入中...</div>
           </div>
@@ -401,6 +426,6 @@
     <div id="toast" class="toast"></div>
   </div>
 
-  <script src="./main.js?v=quiz-v0.2.22-quiz-admin-panel"></script>
+  <script src="./main.js?v=quiz-v0.2.23-admin-question-overrides-csv"></script>
 </body>
 </html>

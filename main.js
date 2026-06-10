@@ -1,4 +1,4 @@
-/* 小V知識挑戰 quiz-v0.2.22-quiz-admin-panel
+/* 小V知識挑戰 quiz-v0.2.23-admin-question-overrides-csv
    目標：穩定可跑、沿用共用玩家身份、寫入 gameLogs/quiz、quizProgress 與年級累積排行榜。
    V幣：第一版只預留 wallet / vCoinLogs 註解，不實際發放。
 */
@@ -16,7 +16,7 @@ var FIREBASE_CONFIG = {
 };
 var FIREBASE_ENABLED = true;
 
-var QUIZ_VERSION = "quiz-v0.2.22-quiz-admin-panel";
+var QUIZ_VERSION = "quiz-v0.2.23-admin-question-overrides-csv";
 
 var DB_PATHS = {
   gameLogs:            "gameLogs/quiz",
@@ -24,7 +24,8 @@ var DB_PATHS = {
   leaderboardsMain:    "leaderboards/quiz/main",
   leaderboardsByGrade: "leaderboards/quiz/byGrade",
   players:             "players",
-  avatarCatalog:       "avatarCatalog"
+  avatarCatalog:       "avatarCatalog",
+  questionOverrides:  "quizQuestionOverrides"
   // V幣預留，不在本版寫入：
   // wallet:      "players/{playerKey}/wallet"
   // vCoinLogs:  "players/{playerKey}/vCoinLogs/{autoId}"
@@ -81,6 +82,7 @@ var PLAYER = {
 };
 
 var QUESTIONS = [];
+var QUESTION_OVERRIDES = {};
 var selectedGrade = "low";
 var selectedSubject = "math";
 var leaderboardMode = "main";
@@ -891,6 +893,10 @@ function getBaseAvatarName(key){
   return key || "未選擇";
 }
 
+function getAvatarName(key){
+  return getBaseAvatarName(key);
+}
+
 function getFriendlyIdentityLabel(id, baseAvatarKey){
   var cleanId = normalizePlayerId(id || PLAYER.id || "玩家");
   return cleanId + " + " + getBaseAvatarName(baseAvatarKey || PLAYER.baseAvatarKey || "boy1");
@@ -1079,6 +1085,42 @@ function escapeHtml(s){
   });
 }
 
+
+function loadQuestionOverrides(){
+  QUESTION_OVERRIDES = {};
+  if (!FIREBASE_ENABLED) return Promise.resolve(QUESTION_OVERRIDES);
+  return ensureFirebaseReady().then(function(ok){
+    if (!ok || !firebaseDb) return QUESTION_OVERRIDES;
+    return firebaseDb.ref(DB_PATHS.questionOverrides).once("value").then(function(snap){
+      QUESTION_OVERRIDES = snap.exists() ? (snap.val() || {}) : {};
+      return QUESTION_OVERRIDES;
+    });
+  }).catch(function(e){
+    console.warn("[QuestionOverrides] load failed:", e);
+    QUESTION_OVERRIDES = {};
+    return QUESTION_OVERRIDES;
+  });
+}
+
+function applyQuestionOverrides(){
+  if (!Array.isArray(QUESTIONS)) return;
+  QUESTIONS = QUESTIONS.map(function(q){
+    if (!q || !q.id) return q;
+    var ov = QUESTION_OVERRIDES[q.id];
+    if (!ov) return q;
+    var merged = Object.assign({}, q);
+    ["disabled", "active", "quality", "reviewNote", "updatedAt", "updatedBy"].forEach(function(k){
+      if (Object.prototype.hasOwnProperty.call(ov, k)) merged[k] = ov[k];
+    });
+    merged.overrideApplied = true;
+    return merged;
+  });
+}
+
+function getQuestionById(questionId){
+  return (QUESTIONS || []).find(function(q){ return q && q.id === questionId; }) || null;
+}
+
 function loadQuestions(){
   return fetch("./quiz_questions.json?v=" + encodeURIComponent(QUIZ_VERSION), { cache:"no-store" })
     .then(function(res){
@@ -1087,8 +1129,11 @@ function loadQuestions(){
     })
     .then(function(data){
       QUESTIONS = Array.isArray(data) ? data : [];
-      updateQuestionCountHint();
-      return QUESTIONS;
+      return loadQuestionOverrides().then(function(){
+        applyQuestionOverrides();
+        updateQuestionCountHint();
+        return QUESTIONS;
+      });
     })
     .catch(function(e){
       console.warn("[Questions] load failed:", e);
@@ -2497,7 +2542,7 @@ function formatSeconds(sec){
 
 
 
-// ── v0.2.22 問答遊戲內建後台 ──
+// ── v0.2.23 問答遊戲內建後台：題目覆寫 + CSV 匯出 ──
 var ADMIN_PW_KEY = "vquiz_admin_pw";
 var adminTapCount = 0;
 var adminTapTimer = null;
@@ -2632,9 +2677,15 @@ function normalizeAdminLog(child){
 
 function loadAdminData(){
   if ($("adm-log-list")) $("adm-log-list").innerHTML = '<div class="muted">🎈 載入中...</div>';
-  renderAdminQuestionStats();
+  if ($("adm-q-manage-list")) $("adm-q-manage-list").innerHTML = '<div class="muted">📚 載入題目管理資料...</div>';
 
-  return ensureFirebaseReady().then(function(ok){
+  return loadQuestionOverrides().then(function(){
+    applyQuestionOverrides();
+    populateAdminQuestionFilters();
+    renderAdminQuestionStats();
+    renderAdminQuestionManagement();
+    return ensureFirebaseReady();
+  }).then(function(ok){
     if (!ok || !firebaseDb) throw new Error("Firebase 尚未就緒");
     return firebaseDb.ref(DB_PATHS.gameLogs).orderByChild("ts").limitToLast(300).once("value");
   }).then(function(snap){
@@ -2717,6 +2768,192 @@ function exportAdminLogs(){
   toast("已匯出最近問答紀錄 JSON");
 }
 
+
+function csvCell(value){
+  var s = String(value == null ? "" : value);
+  if (/^[=+\-@]/.test(s)) s = "'" + s;
+  return '"' + s.replace(/"/g, '""') + '"';
+}
+
+function downloadTextFile(filename, text, mime){
+  var blob = new Blob([text], { type: mime || "text/plain;charset=utf-8" });
+  var a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = filename;
+  a.click();
+  setTimeout(function(){ URL.revokeObjectURL(a.href); }, 1000);
+}
+
+function exportAdminLogsCsv(){
+  if (!adminLogs.length) { toast("目前沒有資料可匯出"); return; }
+  var headers = ["時間","玩家ID","遊戲身份","身份頭像","顯示頭像","年級","科目","分數","答對題數","總題數","最高連擊","總用時秒數","是否滿分","版本","playerKey"];
+  var lines = [headers.map(csvCell).join(",")];
+  getSortedAdminLogs().forEach(function(r){
+    var ts = r.ts || Date.parse(r.date || "") || 0;
+    var total = Number(r.totalQuestions || 10);
+    var correct = Number(r.correctCount || 0);
+    var row = [
+      ts ? new Date(ts).toLocaleString("zh-TW") : (r.date || ""),
+      r.id || r.name || "",
+      getFriendlyIdentityLabel(r.id || r.name || "玩家", r.baseAvatarKey || "boy1"),
+      getAvatarName(r.baseAvatarKey || ""),
+      getAvatarName(r.displayAvatarKey || r.avatarKey || ""),
+      r.gradeBandName || getGradeName(r.gradeBand),
+      r.subjectName || getSubjectName(r.subject),
+      r.score || 0,
+      correct,
+      total,
+      r.maxCombo || 0,
+      r.timeUsedTotal || 0,
+      correct >= total ? "是" : "否",
+      r.version || "",
+      r.playerKey || ""
+    ];
+    lines.push(row.map(csvCell).join(","));
+  });
+  downloadTextFile("quiz_gamelogs_" + new Date().toISOString().slice(0,10) + ".csv", "\ufeff" + lines.join("\n"), "text/csv;charset=utf-8");
+  toast("已匯出最近問答紀錄 CSV");
+}
+
+function exportAdminQuestionsCsv(){
+  if (!QUESTIONS.length) { toast("題庫尚未載入"); return; }
+  var headers = ["questionId","年級","科目","題目","正確答案","解析","disabled","quality","reviewNote","source","overrideApplied"];
+  var lines = [headers.map(csvCell).join(",")];
+  QUESTIONS.forEach(function(q){
+    var answer = (q.choices && q.choices[q.answerIndex]) || "";
+    var row = [
+      q.id || "",
+      q.gradeBandName || getGradeName(q.gradeBand),
+      q.subjectName || getSubjectName(q.subject),
+      q.question || "",
+      answer,
+      q.explanation || "",
+      q.disabled === true ? "true" : "false",
+      q.quality || "ok",
+      q.reviewNote || "",
+      q.source || "manual",
+      q.overrideApplied ? "true" : "false"
+    ];
+    lines.push(row.map(csvCell).join(","));
+  });
+  downloadTextFile("quiz_questions_" + new Date().toISOString().slice(0,10) + ".csv", "\ufeff" + lines.join("\n"), "text/csv;charset=utf-8");
+  toast("已匯出題目清單 CSV");
+}
+
+function populateAdminQuestionFilters(){
+  var subjectSel = $("adm-q-subject-filter");
+  if (subjectSel && !populateAdminQuestionFilters._done) {
+    SUBJECT_OPTIONS.forEach(function(s){
+      var opt = document.createElement("option");
+      opt.value = s.key;
+      opt.textContent = s.name;
+      subjectSel.appendChild(opt);
+    });
+    populateAdminQuestionFilters._done = true;
+  }
+}
+
+function getAdminFilteredQuestions(){
+  var g = ($("adm-q-grade-filter") && $("adm-q-grade-filter").value) || "all";
+  var s = ($("adm-q-subject-filter") && $("adm-q-subject-filter").value) || "all";
+  var kw = (($("adm-q-search") && $("adm-q-search").value) || "").trim().toLowerCase();
+  var onlyDisabled = !!($("adm-q-only-disabled") && $("adm-q-only-disabled").checked);
+  return QUESTIONS.filter(function(q){
+    if (g !== "all" && q.gradeBand !== g) return false;
+    if (s !== "all" && q.subject !== s) return false;
+    if (onlyDisabled && isQuestionEnabled(q)) return false;
+    if (kw) {
+      var text = [q.id, q.question, q.explanation, (q.choices || []).join(" "), q.reviewNote].join(" ").toLowerCase();
+      if (text.indexOf(kw) < 0) return false;
+    }
+    return true;
+  });
+}
+
+function renderAdminQuestionManagement(){
+  var list = $("adm-q-manage-list");
+  var countEl = $("adm-q-manage-count");
+  if (!list) return;
+  var rows = getAdminFilteredQuestions();
+  if (countEl) countEl.textContent = "符合條件 " + rows.length + " 題，畫面最多顯示前 80 題。";
+  rows = rows.slice(0, 80);
+  if (!rows.length) {
+    list.innerHTML = '<div class="muted">沒有符合條件的題目。</div>';
+    return;
+  }
+  list.innerHTML = "";
+  rows.forEach(function(q){
+    var enabled = isQuestionEnabled(q);
+    var answer = (q.choices && q.choices[q.answerIndex]) || "—";
+    var row = document.createElement("div");
+    row.className = "admin-question-row" + (enabled ? "" : " disabled");
+    row.innerHTML =
+      '<div class="admin-question-row-head"><strong>' + escapeHtml(q.question || "") + '</strong><span>' + escapeHtml(q.id || "") + '</span></div>' +
+      '<div class="admin-question-meta">' + escapeHtml((q.gradeBandName || getGradeName(q.gradeBand)) + '｜' + (q.subjectName || getSubjectName(q.subject)) + '｜難度 ' + (q.difficulty || '-')) +
+      '　<span class="admin-status-badge ' + (enabled ? '' : 'off') + '">' + (enabled ? '啟用中' : '已停用') + '</span></div>' +
+      '<div class="admin-question-answer">正解：' + escapeHtml(answer) + '</div>' +
+      '<div class="admin-question-meta">解析：' + escapeHtml(q.explanation || '—') + '</div>' +
+      '<div class="admin-question-note-row"><input id="adm-note-' + escapeHtml(q.id) + '" value="' + escapeHtml(q.reviewNote || '') + '" placeholder="管理備註，例如：題目太牽強，暫停出題">' +
+      '<div class="admin-question-actions">' +
+      '<button class="btn ghost tiny" data-admin-q-note="' + escapeHtml(q.id) + '" type="button">儲存備註</button>' +
+      (enabled ? '<button class="btn secondary tiny" data-admin-q-disable="' + escapeHtml(q.id) + '" type="button">停用題目</button>' : '<button class="btn primary tiny" data-admin-q-enable="' + escapeHtml(q.id) + '" type="button">恢復題目</button>') +
+      '</div></div>';
+    list.appendChild(row);
+  });
+}
+
+function updateQuestionOverride(questionId, patch){
+  if (!questionId) return Promise.resolve();
+  return ensureFirebaseReady().then(function(ok){
+    if (!ok || !firebaseDb) throw new Error("Firebase 尚未就緒");
+    var payload = Object.assign({}, patch, { updatedAt: Date.now(), updatedBy: "quiz-admin" });
+    return firebaseDb.ref(DB_PATHS.questionOverrides + "/" + questionId).update(payload);
+  }).then(function(){
+    return loadQuestions();
+  }).then(function(){
+    renderAdminQuestionStats();
+    renderAdminQuestionManagement();
+    updateQuestionCountHint();
+  });
+}
+
+function setAdminQuestionDisabled(questionId, disabled){
+  var q = getQuestionById(questionId) || {};
+  var noteInput = $("adm-note-" + questionId);
+  var note = noteInput ? noteInput.value.trim() : (q.reviewNote || "");
+  var patch = disabled ? {
+    disabled: true,
+    quality: "disabled",
+    reviewNote: note || "後台停用"
+  } : {
+    disabled: false,
+    quality: "ok",
+    reviewNote: note
+  };
+  updateQuestionOverride(questionId, patch).then(function(){
+    toast(disabled ? "題目已停用，玩家不會抽到這題。" : "題目已恢復出題。", 2800);
+  }).catch(function(e){
+    console.warn("[Admin] update question override failed:", e);
+    toast("題目狀態更新失敗：" + (e.message || e), 3600);
+  });
+}
+
+function saveAdminQuestionNote(questionId){
+  var q = getQuestionById(questionId) || {};
+  var noteInput = $("adm-note-" + questionId);
+  var note = noteInput ? noteInput.value.trim() : "";
+  updateQuestionOverride(questionId, {
+    reviewNote: note,
+    disabled: q.disabled === true,
+    quality: q.quality || "ok"
+  }).then(function(){
+    toast("管理備註已儲存");
+  }).catch(function(e){
+    console.warn("[Admin] save question note failed:", e);
+    toast("備註儲存失敗：" + (e.message || e), 3600);
+  });
+}
+
 function changeAdminPassword(){
   var pw1 = ($("adm-pw1") && $("adm-pw1").value || "").trim();
   var pw2 = ($("adm-pw2") && $("adm-pw2").value || "").trim();
@@ -2740,7 +2977,23 @@ function bindAdminEvents(){
   if ($("btn-admin-out")) $("btn-admin-out").addEventListener("click", function(){ showScreen("screen-title"); });
   if ($("btn-admin-refresh")) $("btn-admin-refresh").addEventListener("click", loadAdminData);
   if ($("btn-admin-export")) $("btn-admin-export").addEventListener("click", exportAdminLogs);
+  if ($("btn-admin-export-csv")) $("btn-admin-export-csv").addEventListener("click", exportAdminLogsCsv);
+  if ($("btn-admin-q-export-csv")) $("btn-admin-q-export-csv").addEventListener("click", exportAdminQuestionsCsv);
   if ($("btn-admin-pw")) $("btn-admin-pw").addEventListener("click", changeAdminPassword);
+  ["adm-q-grade-filter", "adm-q-subject-filter", "adm-q-search", "adm-q-only-disabled"].forEach(function(id){
+    var el = $(id);
+    if (!el) return;
+    el.addEventListener(id === "adm-q-search" ? "input" : "change", renderAdminQuestionManagement);
+  });
+  var qList = $("adm-q-manage-list");
+  if (qList) qList.addEventListener("click", function(e){
+    var disableBtn = e.target.closest("[data-admin-q-disable]");
+    var enableBtn = e.target.closest("[data-admin-q-enable]");
+    var noteBtn = e.target.closest("[data-admin-q-note]");
+    if (disableBtn) setAdminQuestionDisabled(disableBtn.getAttribute("data-admin-q-disable"), true);
+    if (enableBtn) setAdminQuestionDisabled(enableBtn.getAttribute("data-admin-q-enable"), false);
+    if (noteBtn) saveAdminQuestionNote(noteBtn.getAttribute("data-admin-q-note"));
+  });
   document.querySelectorAll("[data-admin-sort]").forEach(function(btn){
     btn.addEventListener("click", function(){
       adminSortMode = btn.getAttribute("data-admin-sort") || "time_desc";

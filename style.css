@@ -579,7 +579,7 @@ main{flex:1;display:grid;place-items:center;padding:20px}
 }
 
 
-/* ── quiz-v0.2.17-question-bank-480-host-shift: sticker placement, larger host image, real pause overlay ── */
+/* ── quiz-v0.2.18-question-bank-720-host-up: sticker placement, larger host image, real pause overlay ── */
 .quiz-hud{grid-template-columns:repeat(4,1fr) auto auto auto;align-items:stretch;}
 .pause-toggle{border:1.5px solid rgba(255,190,11,.45);background:#fff8e6;border-radius:18px;padding:8px 12px;color:#9b6a00;font-weight:900;box-shadow:0 4px 14px rgba(255,190,11,.14);min-width:86px;}
 .pause-toggle:active{transform:scale(.94)}
@@ -726,7 +726,7 @@ main{flex:1;display:grid;place-items:center;padding:20px}
   .mobile-host-sticker.host-reveal{width:96px;height:132px;right:-4px;bottom:82px;}
 }
 
-/* ── quiz-v0.2.17-question-bank-480-host-shift: 解鎖提示與手機浮動主持人放大 ── */
+/* ── quiz-v0.2.18-question-bank-720-host-up: 解鎖提示與手機浮動主持人放大 ── */
 .unlock-banner{
   display:flex;
   align-items:center;
@@ -787,7 +787,7 @@ main{flex:1;display:grid;place-items:center;padding:20px}
   }
 }
 
-/* ── quiz-v0.2.17-question-bank-480-host-shift: mobile floating host left shift ── */
+/* ── quiz-v0.2.18-question-bank-720-host-up: mobile floating host left shift ── */
 @media(max-width:760px){
   .mobile-host-sticker.show{
     right:18px;
@@ -802,5 +802,34 @@ main{flex:1;display:grid;place-items:center;padding:20px}
   }
   .mobile-host-sticker.host-reveal{
     right:0;
+  }
+}
+
+
+/* ── quiz-v0.2.18-question-bank-720-host-up: mobile floating host move up to avoid explanation text ── */
+@media(max-width:760px){
+  .mobile-host-sticker.show{
+    right:20px;
+    bottom:92px;
+  }
+  .mobile-host-sticker.host-reveal{
+    right:8px;
+    bottom:142px;
+  }
+  .explanation{
+    padding-bottom:170px;
+  }
+}
+@media(max-width:380px){
+  .mobile-host-sticker.show{
+    right:12px;
+    bottom:86px;
+  }
+  .mobile-host-sticker.host-reveal{
+    right:2px;
+    bottom:132px;
+  }
+  .explanation{
+    padding-bottom:158px;
   }
 }

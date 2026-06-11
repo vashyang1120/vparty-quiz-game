@@ -39,6 +39,11 @@ button{cursor:pointer}
 .player-chip strong{display:block;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px}
 .player-chip span{display:block;font-size:9px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px}
 
+.player-chip{cursor:pointer;transition:transform .16s ease, box-shadow .16s ease, border-color .16s ease}
+.player-chip:hover{transform:translateY(-1px);box-shadow:0 8px 22px rgba(232,111,154,.18);border-color:var(--pink)}
+.player-chip:active{transform:scale(.98)}
+.lb-title-snapshot{display:inline-flex;align-items:center;gap:3px;color:#9b5de5;font-weight:900;margin-right:6px}
+
 main{flex:1;display:grid;place-items:center;padding:20px}
 .screen{display:none;width:100%;min-height:calc(100vh - 96px);align-items:center;justify-content:center}
 .screen.active{display:flex}

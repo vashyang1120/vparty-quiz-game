@@ -1,4 +1,4 @@
-/* 小V知識挑戰 quiz-v0.2.30-badge-title-system-test-1
+/* 小V知識挑戰 quiz-v0.2.31-title-snapshot-player-card-entry
    目標：穩定可跑、沿用共用玩家身份、寫入 gameLogs/quiz、quizProgress 與年級累積排行榜。
    V幣：測試版加入每日任一遊戲完成一次 +30 V幣，正式來源為 Firebase wallet / dailyRewards / vCoinLogs。
 */
@@ -16,7 +16,7 @@ var FIREBASE_CONFIG = {
 };
 var FIREBASE_ENABLED = true;
 
-var QUIZ_VERSION = "quiz-v0.2.30-badge-title-system-test-1";
+var QUIZ_VERSION = "quiz-v0.2.31-title-snapshot-player-card-entry";
 
 var DB_PATHS = {
   gameLogs:            "gameLogs/quiz",
@@ -1888,6 +1888,42 @@ function renderEquippedTitle(){
   renderTitlePicker();
 }
 
+function getEquippedTitleSnapshot(){
+  var t = normalizeQuizTitleData(PLAYER_EQUIPPED_TITLE);
+  return {
+    equippedTitleKey: t && t.titleKey ? t.titleKey : "",
+    equippedTitleName: t && t.name ? t.name : ""
+  };
+}
+
+function addEquippedTitleSnapshot(payload){
+  payload = payload || {};
+  var snap = getEquippedTitleSnapshot();
+  payload.equippedTitleKey = snap.equippedTitleKey;
+  payload.equippedTitleName = snap.equippedTitleName;
+  return payload;
+}
+
+function syncLeaderboardTitleSnapshot(gradeBand){
+  if (!PLAYER.playerKey) return Promise.resolve(false);
+  return ensureFirebaseReady().then(function(ok){
+    if (!ok || !firebaseDb) return false;
+    var snap = getEquippedTitleSnapshot();
+    var payload = {
+      equippedTitleKey: snap.equippedTitleKey,
+      equippedTitleName: snap.equippedTitleName,
+      titleSnapshotUpdatedAt: Date.now()
+    };
+    var jobs = [
+      firebaseDb.ref(DB_PATHS.leaderboardsMain + "/" + PLAYER.playerKey).update(payload)
+    ];
+    if (gradeBand) {
+      jobs.push(firebaseDb.ref(DB_PATHS.leaderboardsByGrade + "/" + gradeBand + "/" + PLAYER.playerKey).update(payload));
+    }
+    return Promise.all(jobs).then(function(){ return true; });
+  });
+}
+
 function loadQuizTitleData(playerKey){
   playerKey = playerKey || (PLAYER && PLAYER.playerKey);
   PLAYER_QUIZ_TITLES = {};
@@ -2262,6 +2298,11 @@ function saveQuizResult(totalTime, accuracy){
         })
         .then(function(badgeResult){
           result.badgeResult = badgeResult || { unlocked: [] };
+          if (result.badgeResult && result.badgeResult.unlocked && result.badgeResult.unlocked.length) {
+            return safeStep("sync leaderboard title snapshot", function(){
+              return syncLeaderboardTitleSnapshot(record.gradeBand);
+            }, false).then(function(){ return result; });
+          }
           return result;
         });
     })
@@ -2439,7 +2480,7 @@ function buildGradeRecordFromProgress(gradeBand, progressMap){
   });
 
   var av = getAvatarByKey(PLAYER.displayAvatarKey);
-  return {
+  var record = {
     gameId: "quiz",
     version: QUIZ_VERSION,
 
@@ -2471,6 +2512,7 @@ function buildGradeRecordFromProgress(gradeBand, progressMap){
     updatedAt: now,
     date: new Date(now).toISOString()
   };
+  return addEquippedTitleSnapshot(record);
 }
 
 function updateGradeLeaderboard(gradeBand){
@@ -2520,7 +2562,7 @@ function buildMainRecordFromGradeRecords(gradeRecords){
   });
 
   var av = getAvatarByKey(PLAYER.displayAvatarKey);
-  return {
+  var record = {
     gameId: "quiz",
     version: QUIZ_VERSION,
 
@@ -2549,6 +2591,7 @@ function buildMainRecordFromGradeRecords(gradeRecords){
     updatedAt: now,
     date: new Date(now).toISOString()
   };
+  return addEquippedTitleSnapshot(record);
 }
 
 function updateMainLeaderboardFromGrades(){
@@ -3154,6 +3197,7 @@ function renderLeaderboardRows(rows){
         '<div class="lb-rank">' + (idx + 1) + '</div>' +
         '<img src="' + escapeHtml(src) + '" alt="">' +
         '<div class="lb-main"><strong>' + escapeHtml(r.name || r.id || "玩家") + '</strong>' +
+        (r.equippedTitleName ? '<span class="lb-title-snapshot">🏅 ' + escapeHtml(r.equippedTitleName) + '</span>' : '') +
         '<span><b>總成就</b>｜' + (r.completedSubjects || 0) + '科 / 滿分' + (r.perfectSubjects || 0) + '科｜' + escapeHtml(r.gradeSummaryText || "尚未完成挑戰") + '</span></div>' +
         '<div class="lb-score"><small>總分</small>' + (r.totalScore || 0) + '</div>';
     } else {
@@ -3161,6 +3205,7 @@ function renderLeaderboardRows(rows){
         '<div class="lb-rank">' + (idx + 1) + '</div>' +
         '<img src="' + escapeHtml(src) + '" alt="">' +
         '<div class="lb-main"><strong>' + escapeHtml(r.name || r.id || "玩家") + '</strong>' +
+        (r.equippedTitleName ? '<span class="lb-title-snapshot">🏅 ' + escapeHtml(r.equippedTitleName) + '</span>' : '') +
         '<span><b>年級累積</b>｜' + (r.completedSubjects || 0) + '科 / 滿分' + (r.perfectSubjects || 0) + '科｜' + escapeHtml((r.subjectNames || []).join(" / ") || r.subjectSummaryText || "-") + '｜' + formatSeconds(r.totalTimeUsed || 0) + '</span></div>' +
         '<div class="lb-score"><small>年級分</small>' + (r.gradeTotalScore || 0) + '</div>';
     }
@@ -3705,6 +3750,15 @@ function bindMusicEvents(){
 
 function bindEvents(){
   $("btn-go-profile").addEventListener("click", function(){ showScreen("screen-profile"); });
+  if ($("top-player-card")) {
+    $("top-player-card").addEventListener("click", function(){ showScreen("screen-profile"); });
+    $("top-player-card").addEventListener("keydown", function(e){
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        showScreen("screen-profile");
+      }
+    });
+  }
   $("btn-go-setup").addEventListener("click", function(){
     if (!hasConfirmedQuizProfile()) {
       toast("首次遊玩請先確認玩家身份。");

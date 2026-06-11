@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
-  <title>小V知識挑戰｜quiz-v0.2.25-question-randomizer-host-floating</title>
+  <title>小V知識挑戰｜quiz-v0.2.26-daily-vcoin-reward-test-1</title>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
-  <link rel="stylesheet" href="./style.css?v=quiz-v0.2.25-question-randomizer-host-floating">
+  <link rel="stylesheet" href="./style.css?v=quiz-v0.2.26-daily-vcoin-reward-test-1">
 </head>
 <body>
   <div id="app">
@@ -16,7 +16,7 @@
         <div class="logo-bubble">🎈</div>
         <div>
           <h1 id="quiz-logo-title">小V知識挑戰</h1>
-          <p>quiz-v0.2.25-question-randomizer-host-floating</p>
+          <p>quiz-v0.2.26-daily-vcoin-reward-test-1</p>
         </div>
       </div>
       <div class="player-chip">
@@ -86,7 +86,7 @@
             <button id="btn-game-menu" class="btn ghost">🏠 遊戲選單</button>
           </div>
           <div class="notice">
-            V幣仍只預留，不發放；本版新增本機主持人素材、遊戲選單按鈕與題庫回饋修正。
+            每日首次完成任一遊戲可獲得 V幣；本版為問答遊戲每日 V幣獎勵測試版。
           </div>
         </div>
       </section>
@@ -247,6 +247,13 @@
             <div>
               <strong id="unlock-title">新頭像解鎖！</strong>
               <p id="unlock-message">你解鎖了新的顯示頭像。</p>
+            </div>
+          </div>
+          <div id="result-vcoin-banner" class="vcoin-banner hidden">
+            <div class="vcoin-spark">🪙</div>
+            <div>
+              <strong id="vcoin-title">V幣獎勵</strong>
+              <p id="vcoin-message">每日獎勵確認中...</p>
             </div>
           </div>
           <div id="save-status" class="save-status">準備寫入紀錄...</div>
@@ -426,6 +433,6 @@
     <div id="toast" class="toast"></div>
   </div>
 
-  <script src="./main.js?v=quiz-v0.2.25-question-randomizer-host-floating"></script>
+  <script src="./main.js?v=quiz-v0.2.26-daily-vcoin-reward-test-1"></script>
 </body>
 </html>

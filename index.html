@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
-  <title>小V知識挑戰｜quiz-v0.2.29-progress-helper-restore</title>
+  <title>小V知識挑戰｜quiz-v0.2.30-badge-title-system-test-1</title>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
-  <link rel="stylesheet" href="./style.css?v=quiz-v0.2.29-progress-helper-restore">
+  <link rel="stylesheet" href="./style.css?v=quiz-v0.2.30-badge-title-system-test-1">
 </head>
 <body>
   <div id="app">
@@ -16,7 +16,7 @@
         <div class="logo-bubble">🎈</div>
         <div>
           <h1 id="quiz-logo-title">小V知識挑戰</h1>
-          <p>quiz-v0.2.29-progress-helper-restore</p>
+          <p>quiz-v0.2.30-badge-title-system-test-1</p>
         </div>
       </div>
       <div class="player-chip">
@@ -24,6 +24,7 @@
         <div>
           <strong id="top-name">玩家</strong>
           <span id="top-player-key">尚未設定身份</span>
+          <span id="top-player-title" class="title-chip-inline">稱號：未裝備</span>
           <span id="top-vcoin-balance" class="wallet-chip-inline">🪙 V幣：—</span>
         </div>
       </div>
@@ -132,6 +133,14 @@
           <div class="profile-wallet-box">
             <span>🪙 目前 V幣</span>
             <strong id="profile-vcoin-balance">—</strong>
+          </div>
+
+          <div class="profile-title-panel">
+            <div class="profile-title-current">
+              <span>🎖 目前稱號</span>
+              <strong id="profile-equipped-title">未裝備</strong>
+            </div>
+            <div id="profile-title-list" class="title-list">尚未解鎖稱號</div>
           </div>
 
           <div class="actions">
@@ -259,6 +268,13 @@
             <div>
               <strong id="vcoin-title">V幣獎勵</strong>
               <p id="vcoin-message">每日獎勵確認中...</p>
+            </div>
+          </div>
+          <div id="result-badge-banner" class="badge-banner hidden">
+            <div class="badge-spark">🏅</div>
+            <div>
+              <strong id="badge-unlock-title">新徽章解鎖！</strong>
+              <p id="badge-unlock-message">你解鎖了新的 V學園稱號。</p>
             </div>
           </div>
           <div id="save-status" class="save-status">準備寫入紀錄...</div>
@@ -438,6 +454,6 @@
     <div id="toast" class="toast"></div>
   </div>
 
-  <script src="./main.js?v=quiz-v0.2.29-progress-helper-restore"></script>
+  <script src="./main.js?v=quiz-v0.2.30-badge-title-system-test-1"></script>
 </body>
 </html>

@@ -936,3 +936,22 @@ main{flex:1;display:grid;place-items:center;padding:20px}
   .mobile-host-sticker.host-reveal{width:173px!important;right:2px!important;bottom:132px!important;}
   .explanation{padding-bottom:158px;}
 }
+
+
+/* v0.2.26+ 每日 V幣獎勵提示 */
+.vcoin-banner{display:flex;align-items:center;gap:12px;background:linear-gradient(135deg,#fff7d6,#ffe8a3);border:2px solid rgba(255,190,11,.55);border-radius:20px;padding:12px 14px;margin:12px 0;color:#6f4b00;box-shadow:0 8px 24px rgba(255,190,11,.18);text-align:left}
+.vcoin-banner.hidden{display:none}
+.vcoin-banner strong{display:block;font-size:15px;font-weight:1000;color:#8a5b00}
+.vcoin-banner p{margin:2px 0 0;font-size:13px;font-weight:900;line-height:1.45;white-space:pre-line}
+.vcoin-spark{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex:0 0 auto;background:#fff;box-shadow:0 4px 14px rgba(255,190,11,.25);font-size:24px}
+.vcoin-banner.claimed{background:linear-gradient(135deg,#fff7d6,#ffe8a3);border-color:rgba(255,190,11,.65)}
+.vcoin-banner.already{background:linear-gradient(135deg,#f7f0ff,#efe4ff);border-color:rgba(155,93,229,.35);color:#5a3a7a}
+.vcoin-banner.already strong{color:#6b3cb5}
+.vcoin-banner.failed{background:linear-gradient(135deg,#fff0f0,#ffe1e1);border-color:rgba(255,107,107,.45);color:#7d3030}
+.vcoin-banner.failed strong{color:#b23838}
+
+/* v0.2.27 前台 V幣餘額顯示 */
+.wallet-chip-inline{display:block;margin-top:2px;color:#8a5b00;font-weight:1000;font-size:12px;line-height:1.25;white-space:nowrap}
+.profile-wallet-box{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:12px 0 0;padding:12px 14px;border-radius:18px;background:linear-gradient(135deg,#fff7d6,#ffe8a3);border:1.5px solid rgba(255,190,11,.5);box-shadow:0 8px 20px rgba(255,190,11,.12);color:#6f4b00;font-weight:900}
+.profile-wallet-box strong{font-family:'Fredoka One','Noto Sans TC',cursive;font-size:22px;color:#8a5b00}
+@media(max-width:560px){.wallet-chip-inline{font-size:11px}.profile-wallet-box{padding:10px 12px}.profile-wallet-box strong{font-size:20px}}

@@ -1,6 +1,6 @@
-/* 小V知識挑戰 quiz-v0.2.25-question-randomizer-host-floating
+/* 小V知識挑戰 quiz-v0.2.27-wallet-display-brand-question-cleanup
    目標：穩定可跑、沿用共用玩家身份、寫入 gameLogs/quiz、quizProgress 與年級累積排行榜。
-   V幣：第一版只預留 wallet / vCoinLogs 註解，不實際發放。
+   V幣：測試版加入每日任一遊戲完成一次 +30 V幣，正式來源為 Firebase wallet / dailyRewards / vCoinLogs。
 */
 
 // Firebase compat SDK - same project as rhythm/tetris games
@@ -16,7 +16,7 @@ var FIREBASE_CONFIG = {
 };
 var FIREBASE_ENABLED = true;
 
-var QUIZ_VERSION = "quiz-v0.2.25-question-randomizer-host-floating";
+var QUIZ_VERSION = "quiz-v0.2.27-wallet-display-brand-question-cleanup";
 
 var DB_PATHS = {
   gameLogs:            "gameLogs/quiz",
@@ -26,9 +26,6 @@ var DB_PATHS = {
   players:             "players",
   avatarCatalog:       "avatarCatalog",
   questionOverrides:  "quizQuestionOverrides"
-  // V幣預留，不在本版寫入：
-  // wallet:      "players/{playerKey}/wallet"
-  // vCoinLogs:  "players/{playerKey}/vCoinLogs/{autoId}"
 };
 
 var db = null;
@@ -80,6 +77,7 @@ var PLAYER = {
   avatarSrc: AV_BASE + "boy1.png",
   playerKey: ""
 };
+var PLAYER_WALLET_BALANCE = null;
 
 var QUESTIONS = [];
 var QUESTION_OVERRIDES = {};
@@ -910,6 +908,7 @@ function updatePlayerUI(){
   if ($("top-avatar")) $("top-avatar").src = PLAYER.avatarSrc;
   if ($("top-name")) $("top-name").textContent = PLAYER.name || PLAYER.id || "玩家";
   if ($("top-player-key")) $("top-player-key").textContent = PLAYER.playerKey ? ("身份：" + getFriendlyIdentityLabel(PLAYER.id, PLAYER.baseAvatarKey)) : "尚未設定身份";
+  updateWalletBalanceUI();
 
   if ($("player-id-input")) $("player-id-input").value = PLAYER.id || "";
   if ($("base-avatar-preview")) $("base-avatar-preview").src = getAvatarUrl(PLAYER.baseAvatarKey);
@@ -1044,7 +1043,9 @@ function buildAvatarPicker(mode){
         PLAYER.avatarKey = av.key;
         PLAYER.avatarSrc = getAvatarUrl(av.key);
         savePlayerLocal();
+        PLAYER_WALLET_BALANCE = null;
         updatePlayerUI();
+        loadWalletBalance();
         buildAvatarPicker("base");
         toast("已選擇身份頭像：" + av.name + "\n這會變成新的玩家身份，請再按「確認身份」。", 3600);
       } else {
@@ -1526,6 +1527,7 @@ function finishQuiz(){
   $("result-emoji").textContent = emoji;
   setResultHostVisual();
   if ($("result-unlock-banner")) $("result-unlock-banner").classList.add("hidden");
+  if ($("result-vcoin-banner")) $("result-vcoin-banner").classList.add("hidden");
 
   showScreen("screen-result");
   saveQuizResult(totalTime, accuracy);
@@ -1569,8 +1571,8 @@ function buildQuizRecord(totalTime, accuracy){
     answers: quizState.answers.slice(),
 
     rewardsPreview: {
-      vCoins: 0,
-      note: "V幣系統預留，第一版不發放"
+      vCoins: 30,
+      note: "每日任一遊戲完成一次可領取；實際領取以 Firebase dailyRewards 判斷"
     },
 
     ts: now,
@@ -1685,20 +1687,207 @@ function showAvatarUnlockBanner(unlockPayload){
   box.classList.add("pop");
 }
 
+function getTaiwanDateKey(dateInput){
+  var d = dateInput ? new Date(dateInput) : new Date();
+  try {
+    var parts = new Intl.DateTimeFormat("en-US", {
+      timeZone: "Asia/Taipei",
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit"
+    }).formatToParts(d);
+    var map = {};
+    parts.forEach(function(part){ map[part.type] = part.value; });
+    if (map.year && map.month && map.day) return map.year + map.month + map.day;
+  } catch(e) {}
+  // Fallback：用 UTC + 8 小時計算台灣日期，避免直接使用 UTC 日期。
+  var tw = new Date(d.getTime() + 8 * 60 * 60 * 1000);
+  var y = tw.getUTCFullYear();
+  var m = String(tw.getUTCMonth() + 1).padStart(2, "0");
+  var day = String(tw.getUTCDate()).padStart(2, "0");
+  return String(y) + m + day;
+}
+
+function normalizeWalletData(wallet){
+  wallet = wallet || {};
+  var balance = Number(wallet.balance || 0);
+  var totalEarned = Number(wallet.totalEarned || 0);
+  var totalSpent = Number(wallet.totalSpent || 0);
+  if (!isFinite(balance)) balance = 0;
+  if (!isFinite(totalEarned)) totalEarned = 0;
+  if (!isFinite(totalSpent)) totalSpent = 0;
+  return { balance: balance, totalEarned: totalEarned, totalSpent: totalSpent };
+}
+
+function updateWalletBalanceUI(balance){
+  if (typeof balance === "number" && isFinite(balance)) PLAYER_WALLET_BALANCE = balance;
+  var text = typeof PLAYER_WALLET_BALANCE === "number" ? String(PLAYER_WALLET_BALANCE) : "—";
+  if ($("top-vcoin-balance")) $("top-vcoin-balance").textContent = "🪙 V幣：" + text;
+  if ($("profile-vcoin-balance")) $("profile-vcoin-balance").textContent = text;
+}
+
+function loadWalletBalance(playerKey){
+  playerKey = playerKey || (PLAYER && PLAYER.playerKey);
+  if (!playerKey) {
+    PLAYER_WALLET_BALANCE = null;
+    updateWalletBalanceUI();
+    return Promise.resolve(null);
+  }
+  return ensureFirebaseReady().then(function(ok){
+    if (!ok || !firebaseDb) return null;
+    return firebaseDb.ref(DB_PATHS.players + "/" + playerKey + "/wallet").once("value").then(function(snap){
+      var wallet = normalizeWalletData(snap.val() || {});
+      updateWalletBalanceUI(wallet.balance);
+      return wallet.balance;
+    });
+  }).catch(function(e){
+    console.warn("[Wallet] load failed:", e);
+    return null;
+  });
+}
+
+function applyVCoinEarnTransaction(playerKey, tx){
+  tx = tx || {};
+  var amount = Number(tx.amount || 0);
+  if (!playerKey) return Promise.reject(new Error("playerKey is required"));
+  if (!amount || amount <= 0) return Promise.reject(new Error("amount must be greater than 0"));
+
+  return ensureFirebaseReady().then(function(ok){
+    if (!ok || !firebaseDb) throw new Error("Firebase not ready");
+    var now = Date.now();
+    var walletRef = firebaseDb.ref(DB_PATHS.players + "/" + playerKey + "/wallet");
+    var balanceAfter = 0;
+
+    return walletRef.transaction(function(current){
+      var oldWallet = normalizeWalletData(current);
+      balanceAfter = oldWallet.balance + amount;
+      return {
+        balance: balanceAfter,
+        totalEarned: oldWallet.totalEarned + amount,
+        totalSpent: oldWallet.totalSpent,
+        updatedAt: now
+      };
+    }).then(function(result){
+      if (!result || result.committed !== true) throw new Error("wallet transaction not committed");
+      var savedWallet = result.snapshot && result.snapshot.val ? result.snapshot.val() : null;
+      if (savedWallet && typeof savedWallet.balance === "number") balanceAfter = savedWallet.balance;
+
+      var logPayload = {
+        type: "earn",
+        reason: tx.reason || "daily_any_game_complete",
+        amount: amount,
+        balanceAfter: balanceAfter,
+        gameId: tx.gameId || "quiz",
+        sourceLogId: tx.sourceLogId || "",
+        dateKey: tx.dateKey || getTaiwanDateKey(now),
+        createdAt: now
+      };
+
+      return firebaseDb.ref(DB_PATHS.players + "/" + playerKey + "/vCoinLogs").push(logPayload).then(function(logRef){
+        return { balanceAfter: balanceAfter, logId: logRef && logRef.key ? logRef.key : null };
+      });
+    });
+  });
+}
+
+function claimDailyAnyGameReward(playerKey, gameId, sourceLogId){
+  if (!playerKey) return Promise.reject(new Error("playerKey is required"));
+  gameId = gameId || "quiz";
+  var amount = 30;
+  var dateKey = getTaiwanDateKey();
+  var now = Date.now();
+
+  return ensureFirebaseReady().then(function(ok){
+    if (!ok || !firebaseDb) throw new Error("Firebase not ready");
+
+    var dailyPayload = {
+      claimed: true,
+      rewardType: "daily_any_game_complete",
+      amount: amount,
+      gameId: gameId,
+      sourceLogId: sourceLogId || "",
+      dateKey: dateKey,
+      claimedAt: now
+    };
+
+    var rewardRef = firebaseDb.ref(DB_PATHS.players + "/" + playerKey + "/dailyRewards/" + dateKey);
+    return rewardRef.transaction(function(currentData){
+      if (currentData && currentData.claimed === true) return;
+      return dailyPayload;
+    }).then(function(result){
+      if (!result || result.committed !== true) {
+        return loadWalletBalance(playerKey).then(function(balance){
+          return {
+            claimed: false,
+            amount: 0,
+            reason: "already_claimed",
+            dateKey: dateKey,
+            balanceAfter: typeof balance === "number" ? balance : undefined
+          };
+        });
+      }
+
+      return applyVCoinEarnTransaction(playerKey, {
+        reason: "daily_any_game_complete",
+        amount: amount,
+        gameId: gameId,
+        sourceLogId: sourceLogId || "",
+        dateKey: dateKey
+      }).then(function(coinResult){
+        return {
+          claimed: true,
+          amount: amount,
+          reason: "daily_any_game_complete",
+          dateKey: dateKey,
+          balanceAfter: coinResult.balanceAfter
+        };
+      });
+    });
+  });
+}
+
+function showVCoinRewardBanner(vcoinResult){
+  var box = $("result-vcoin-banner");
+  if (!box || !vcoinResult) return;
+  var title = $("vcoin-title");
+  var msg = $("vcoin-message");
+  box.classList.remove("hidden", "claimed", "already", "failed");
+
+  if (typeof vcoinResult.balanceAfter === "number") updateWalletBalanceUI(vcoinResult.balanceAfter);
+
+  if (vcoinResult.claimed === true) {
+    box.classList.add("claimed");
+    if (title) title.textContent = "🎁 今日首次完成遊戲！";
+    if (msg) msg.textContent = "+" + (vcoinResult.amount || 30) + " V幣" + (typeof vcoinResult.balanceAfter === "number" ? "\n目前餘額：" + vcoinResult.balanceAfter + " V幣" : "");
+  } else if (vcoinResult.reason === "already_claimed") {
+    box.classList.add("already");
+    if (title) title.textContent = "今日每日 V幣已領取";
+    if (msg) msg.textContent = "明天再完成任一遊戲可再領 +30" + (typeof vcoinResult.balanceAfter === "number" ? "\n目前餘額：" + vcoinResult.balanceAfter + " V幣" : "");
+  } else {
+    box.classList.add("failed");
+    if (title) title.textContent = "V幣獎勵寫入失敗";
+    if (msg) msg.textContent = "請稍後再試";
+  }
+}
+
 function saveQuizResult(totalTime, accuracy){
   var record = buildQuizRecord(totalTime, accuracy);
   $("save-status").textContent = "正在保存本次成績、個人進度、排行榜與 V學園成績單...";
   if ($("result-academy-progress")) $("result-academy-progress").classList.add("hidden");
   if ($("result-unlock-banner")) $("result-unlock-banner").classList.add("hidden");
+  if ($("result-vcoin-banner")) $("result-vcoin-banner").classList.add("hidden");
 
   saveLocalLog(record);
 
   var academyBefore = null;
+  var sourceLogId = null;
+
   return loadQuizAcademyProgressSummary().then(function(before){
       academyBefore = before;
       return saveGameLog(record);
     })
-    .then(function(){
+    .then(function(logRef){
+      sourceLogId = logRef && logRef.key ? logRef.key : null;
       return unlockXiaovBaseAfterGameComplete().catch(function(err){
         console.warn("[Quiz] unlock xiaov_base failed:", err);
         return null;
@@ -1714,9 +1903,24 @@ function saveQuizResult(totalTime, accuracy){
       return updateGradeLeaderboard(record.gradeBand).then(function(gradeRecord){
         return updateMainLeaderboardFromGrades().then(function(mainRecord){
           return updateQuizAcademyProgress().then(function(academyAfter){
-            return { unlockResult:stage.unlockResult, progressResult:progressResult, gradeRecord:gradeRecord, mainRecord:mainRecord, academyAfter:academyAfter };
+            return {
+              unlockResult: stage.unlockResult,
+              progressResult: progressResult,
+              gradeRecord: gradeRecord,
+              mainRecord: mainRecord,
+              academyAfter: academyAfter
+            };
           });
         });
+      });
+    })
+    .then(function(result){
+      return claimDailyAnyGameReward(PLAYER.playerKey, "quiz", sourceLogId).catch(function(err){
+        console.warn("[Quiz] daily VCoin reward failed:", err);
+        return { claimed:false, amount:0, reason:"write_failed", dateKey:getTaiwanDateKey(), error:err };
+      }).then(function(vcoinResult){
+        result.vcoinResult = vcoinResult;
+        return result;
       });
     })
     .then(function(result){
@@ -1726,13 +1930,16 @@ function saveQuizResult(totalTime, accuracy){
       var mainRecord = result.mainRecord || {};
       var academyAfter = result.academyAfter || null;
       var unlockResult = result.unlockResult || null;
+      var vcoinResult = result.vcoinResult || null;
       var subjectName = record.subjectName || record.subject;
       showAvatarUnlockBanner(unlockResult);
+      showVCoinRewardBanner(vcoinResult);
       var lines = ["✅ 本次紀錄已保存"];
       if (bestUpdated) lines.push("✅ " + subjectName + "最佳紀錄刷新！");
       else if (progress) lines.push(subjectName + "最佳仍維持 " + (progress.bestScore || 0) + " 分");
       lines.push("🌱 " + (record.gradeBandName || record.gradeBand) + "總分：" + (gradeRecord.gradeTotalScore || 0) + " 分");
       lines.push("🏆 總榜總分：" + (mainRecord.totalScore || 0) + " 分");
+      if (vcoinResult && vcoinResult.reason === "write_failed") lines.push("⚠️ V幣獎勵寫入失敗，請稍後再試");
       if (!bestUpdated) lines.push("再挑戰其他科目，也可以提升 V學園完成度。");
       $("save-status").textContent = lines.join("\n");
 
@@ -1746,49 +1953,6 @@ function saveQuizResult(totalTime, accuracy){
       console.warn("[SaveResult] failed:", e);
       $("save-status").textContent = "⚠️ Firebase 寫入可能失敗，已保留本機測試紀錄。";
     });
-}
-
-function makeSubjectProgressFromRecord(record, oldProgress){
-  var attempts = (oldProgress && Number(oldProgress.attempts || 0) || 0) + 1;
-  var oldBest = oldProgress ? {
-    score: oldProgress.bestScore || 0,
-    correctCount: oldProgress.bestCorrectCount || 0,
-    maxCombo: oldProgress.bestMaxCombo || 0,
-    timeUsedTotal: oldProgress.bestTimeUsedTotal || 999999,
-    ts: oldProgress.bestUpdatedAt || oldProgress.updatedAt || 0
-  } : null;
-  var bestUpdated = shouldUpdateBestRecord(oldBest, record);
-
-  var progress = {
-    gameId: "quiz",
-    version: QUIZ_VERSION,
-    playerKey: PLAYER.playerKey,
-    gradeBand: record.gradeBand,
-    gradeBandName: record.gradeBandName,
-    subject: record.subject,
-    subjectName: record.subjectName,
-
-    bestScore: bestUpdated ? record.score : (oldProgress.bestScore || 0),
-    bestCorrectCount: bestUpdated ? record.correctCount : (oldProgress.bestCorrectCount || 0),
-    bestMaxCombo: bestUpdated ? record.maxCombo : (oldProgress.bestMaxCombo || 0),
-    bestTimeUsedTotal: bestUpdated ? record.timeUsedTotal : (oldProgress.bestTimeUsedTotal || 0),
-    bestTotalQuestions: bestUpdated ? record.totalQuestions : (oldProgress.bestTotalQuestions || oldProgress.totalQuestions || record.totalQuestions || 10),
-    bestUpdatedAt: bestUpdated ? record.ts : (oldProgress.bestUpdatedAt || oldProgress.updatedAt || record.ts),
-
-    attempts: attempts,
-    perfect: false,
-
-    lastScore: record.score,
-    lastCorrectCount: record.correctCount,
-    lastMaxCombo: record.maxCombo,
-    lastTimeUsedTotal: record.timeUsedTotal,
-    lastTotalQuestions: record.totalQuestions,
-
-    updatedAt: Date.now()
-  };
-  progress.totalQuestions = progress.bestTotalQuestions;
-  progress.perfect = (progress.bestCorrectCount || 0) >= (progress.bestTotalQuestions || record.totalQuestions || 10);
-  return { progress:progress, bestUpdated:bestUpdated };
 }
 
 function updateQuizProgress(record){
@@ -3227,6 +3391,8 @@ function bindEvents(){
       updatePlayerUI();
       return ensurePlayerProfile();
     }).then(function(){
+      return loadWalletBalance();
+    }).then(function(){
       return refreshAcademyProgressCard();
     }).then(function(){
       toast("玩家身份已確認！\\n" + getFriendlyIdentityLabel(PLAYER.id, PLAYER.baseAvatarKey));
@@ -3257,8 +3423,13 @@ function init(){
     .then(function(){
       validateDisplayAvatarForCurrentIdentity();
       updatePlayerUI();
-      if (alreadyConfirmed) return ensurePlayerProfile().then(refreshAcademyProgressCard);
+      if (alreadyConfirmed) {
+        return ensurePlayerProfile().then(function(){
+          return loadWalletBalance();
+        }).then(refreshAcademyProgressCard);
+      }
       renderAcademyProgress(null);
+      loadWalletBalance();
       return null;
     })
     .catch(function(e){ console.warn("[Init] Firebase/profile init skipped:", e.message); });

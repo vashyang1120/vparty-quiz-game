@@ -14636,18 +14636,18 @@
     "gradeBand": "middle",
     "gradeBandName": "中年級",
     "difficulty": 2,
-    "question": "氣球小V遊戲宇宙的玩家身份由什麼組成？",
+    "question": "「ID + 身份頭像」在遊戲裡比較像什麼？",
     "choices": [
-      "只有日期",
-      "只有分數",
-      "ID + 身份頭像",
-      "只有顯示頭像"
+      "遊戲身分證",
+      "背景音樂",
+      "題目答案",
+      "排行榜獎盃"
     ],
-    "answerIndex": 2,
-    "explanation": "目前規劃用 ID + baseAvatarKey 組成 playerKey。",
+    "answerIndex": 0,
+    "explanation": "ID + 身份頭像用來分辨玩家身份，成績和解鎖會跟著這個身份。",
     "tags": [
-      "原創題",
-      "小V品牌"
+      "小V品牌",
+      "品牌理念"
     ],
     "disabled": false,
     "quality": "ok",
@@ -14661,18 +14661,18 @@
     "gradeBand": "middle",
     "gradeBandName": "中年級",
     "difficulty": 2,
-    "question": "displayAvatarKey 的用途是？",
+    "question": "「顯示頭像」主要是用來做什麼？",
     "choices": [
-      "改變顯示外觀",
-      "建立新錢包",
-      "改變玩家身份",
-      "刪除所有紀錄"
+      "改變外觀造型",
+      "刪除成績",
+      "改變題目",
+      "增加難度"
     ],
     "answerIndex": 0,
-    "explanation": "displayAvatarKey 只影響外觀，不應改變 playerKey。",
+    "explanation": "顯示頭像只是外觀造型，不會改變遊戲身份。",
     "tags": [
-      "原創題",
-      "小V品牌"
+      "小V品牌",
+      "品牌理念"
     ],
     "disabled": false,
     "quality": "ok",
@@ -14686,18 +14686,18 @@
     "gradeBand": "middle",
     "gradeBandName": "中年級",
     "difficulty": 2,
-    "question": "baseAvatarKey 的用途是？",
+    "question": "如果更換 ID 或身份頭像，系統會怎麼看待？",
     "choices": [
-      "決定玩家身份",
-      "更改題目答案",
-      "只改衣服顏色",
-      "播放音樂"
+      "變成另一個玩家身份",
+      "自動滿分",
+      "題目變少",
+      "音樂變大聲"
     ],
     "answerIndex": 0,
-    "explanation": "baseAvatarKey 會和 ID 組成 playerKey。",
+    "explanation": "ID + 身份頭像就像遊戲身分證，換掉其中一個就會變成另一個身份。",
     "tags": [
-      "原創題",
-      "小V品牌"
+      "小V品牌",
+      "品牌理念"
     ],
     "disabled": false,
     "quality": "ok",
@@ -14711,18 +14711,18 @@
     "gradeBand": "middle",
     "gradeBandName": "中年級",
     "difficulty": 2,
-    "question": "問答遊戲第一版先不做什麼？",
+    "question": "小V問答遊戲希望玩家答錯時能怎麼做？",
     "choices": [
-      "結算畫面",
-      "排行榜",
-      "4 選 1",
-      "AI 即時生成題目"
+      "看解析再學一次",
+      "立刻放棄",
+      "怪別人",
+      "不再玩遊戲"
     ],
-    "answerIndex": 3,
-    "explanation": "第一版先不做 AI 即時生成題目。",
+    "answerIndex": 0,
+    "explanation": "答錯不是失敗，看解析再挑戰才是學習。",
     "tags": [
-      "原創題",
-      "小V品牌"
+      "小V品牌",
+      "品牌理念"
     ],
     "disabled": false,
     "quality": "ok",
@@ -14736,18 +14736,18 @@
     "gradeBand": "middle",
     "gradeBandName": "中年級",
     "difficulty": 2,
-    "question": "V幣在第一版問答遊戲中應該？",
+    "question": "完成每日首次遊戲可以獲得什麼？",
     "choices": [
-      "改名氣球幣",
-      "刪除 wallet",
-      "大量發放",
-      "只預留不發放"
+      "V幣",
+      "鉛筆盒",
+      "天氣預報",
+      "門票作業"
     ],
-    "answerIndex": 3,
-    "explanation": "第一版避免干擾冒險遊戲 V幣，先預留不發放。",
+    "answerIndex": 0,
+    "explanation": "每日首次完成任一遊戲可以獲得 V幣。",
     "tags": [
-      "原創題",
-      "小V品牌"
+      "小V品牌",
+      "品牌理念"
     ],
     "disabled": false,
     "quality": "ok",
@@ -14761,18 +14761,18 @@
     "gradeBand": "middle",
     "gradeBandName": "中年級",
     "difficulty": 2,
-    "question": "排行榜主要記錄什麼？",
+    "question": "排行榜主要鼓勵玩家做什麼？",
     "choices": [
-      "玩家午餐",
-      "天氣",
-      "手機型號",
-      "玩家最佳成績"
+      "挑戰更好的成績",
+      "只看不玩",
+      "亂猜不看題",
+      "刪除資料"
     ],
-    "answerIndex": 3,
-    "explanation": "排行榜會保存玩家在問答遊戲的最佳成績。",
+    "answerIndex": 0,
+    "explanation": "排行榜用來鼓勵玩家挑戰自己，也看看其他玩家表現。",
     "tags": [
-      "原創題",
-      "小V品牌"
+      "小V品牌",
+      "品牌理念"
     ],
     "disabled": false,
     "quality": "ok",
@@ -14786,18 +14786,18 @@
     "gradeBand": "middle",
     "gradeBandName": "中年級",
     "difficulty": 2,
-    "question": "gameLogs/quiz 的用途是？",
+    "question": "每場問答紀錄的主要用途是？",
     "choices": [
-      "存放家具圖片",
-      "管理後台密碼",
-      "改變題庫答案",
-      "保存每場問答紀錄"
+      "保存遊玩成果",
+      "更改早餐",
+      "關掉遊戲",
+      "改變天氣"
     ],
-    "answerIndex": 3,
-    "explanation": "gameLogs/quiz 會保存每局遊戲紀錄。",
+    "answerIndex": 0,
+    "explanation": "每場問答紀錄能保留玩家這次的挑戰成果。",
     "tags": [
-      "原創題",
-      "小V品牌"
+      "小V品牌",
+      "品牌理念"
     ],
     "disabled": false,
     "quality": "ok",
@@ -14811,18 +14811,18 @@
     "gradeBand": "middle",
     "gradeBandName": "中年級",
     "difficulty": 2,
-    "question": "小V品牌遊戲未來會共用什麼入口？",
+    "question": "未來多款小V遊戲共用入口的好處是？",
     "choices": [
-      "每款完全分開無關",
-      "只用電視入口",
-      "只用紙本入口",
-      "統一遊戲入口頁"
+      "玩家更容易找到所有遊戲",
+      "所有遊戲消失",
+      "不能選頭像",
+      "只能玩一次"
     ],
-    "answerIndex": 3,
-    "explanation": "未來規劃有統一遊戲入口頁。",
+    "answerIndex": 0,
+    "explanation": "統一入口能讓玩家更方便進入不同小V遊戲。",
     "tags": [
-      "原創題",
-      "小V品牌"
+      "小V品牌",
+      "品牌理念"
     ],
     "disabled": false,
     "quality": "ok",
@@ -14836,18 +14836,18 @@
     "gradeBand": "middle",
     "gradeBandName": "中年級",
     "difficulty": 2,
-    "question": "解鎖頭像後，通常可以作為？",
+    "question": "解鎖新的顯示頭像後，玩家可以怎麼做？",
     "choices": [
-      "題目答案",
-      "Firebase 名稱",
-      "顯示頭像",
-      "玩家 ID"
+      "自己選擇是否裝備",
+      "被強迫換身份",
+      "刪除所有分數",
+      "不能再玩"
     ],
-    "answerIndex": 2,
-    "explanation": "解鎖頭像可作為 displayAvatarKey。",
+    "answerIndex": 0,
+    "explanation": "解鎖後可以手動裝備，但不會強迫更換。",
     "tags": [
-      "原創題",
-      "小V品牌"
+      "小V品牌",
+      "品牌理念"
     ],
     "disabled": false,
     "quality": "ok",
@@ -14863,16 +14863,16 @@
     "difficulty": 2,
     "question": "小V問答遊戲和一般考試最大的不同應該是？",
     "choices": [
+      "更有遊戲感與鼓勵感",
       "只處罰答錯",
       "不能重玩",
-      "沒有解析",
-      "更有遊戲感與鼓勵感"
+      "沒有解析"
     ],
-    "answerIndex": 3,
-    "explanation": "問答遊戲應保有遊戲感與鼓勵感。",
+    "answerIndex": 0,
+    "explanation": "小V問答希望像節目挑戰，而不是讓玩家害怕考試。",
     "tags": [
-      "原創題",
-      "小V品牌"
+      "小V品牌",
+      "品牌理念"
     ],
     "disabled": false,
     "quality": "ok",
@@ -14894,11 +14894,10 @@
       "只播放新聞"
     ],
     "answerIndex": 0,
-    "explanation": "小V結合魔術互動與造型氣球。",
+    "explanation": "小V常結合魔術互動與造型氣球，創造派對體驗。",
     "tags": [
-      "原創題",
       "小V品牌",
-      "擴充題庫"
+      "品牌理念"
     ],
     "disabled": false,
     "quality": "ok",
@@ -14920,11 +14919,10 @@
       "讓場面失控"
     ],
     "answerIndex": 0,
-    "explanation": "小V重視安全、品質與互動。",
+    "explanation": "兒童活動中安全、品質和互動都很重要。",
     "tags": [
-      "原創題",
       "小V品牌",
-      "擴充題庫"
+      "品牌理念"
     ],
     "disabled": false,
     "quality": "ok",
@@ -14946,11 +14944,10 @@
       "手機電量"
     ],
     "answerIndex": 0,
-    "explanation": "知識力代表問答遊戲的長期進度。",
+    "explanation": "知識力代表玩家在問答遊戲裡累積的挑戰成果。",
     "tags": [
-      "原創題",
       "小V品牌",
-      "擴充題庫"
+      "品牌理念"
     ],
     "disabled": false,
     "quality": "ok",
@@ -14964,19 +14961,18 @@
     "gradeBand": "middle",
     "gradeBandName": "中年級",
     "difficulty": 2,
-    "question": "小V遊戲宇宙共用什麼？",
+    "question": "小V遊戲宇宙希望玩家可以保留什麼？",
     "choices": [
-      "玩家身份與頭像",
-      "每次都重設身份",
+      "自己的成績與解鎖進度",
+      "每次都重設",
       "只有紙本紀錄",
       "完全不記分"
     ],
     "answerIndex": 0,
-    "explanation": "遊戲宇宙共用玩家身份、頭像與紀錄。",
+    "explanation": "玩家身份能讓成績和解鎖進度持續累積。",
     "tags": [
-      "原創題",
       "小V品牌",
-      "擴充題庫"
+      "品牌理念"
     ],
     "disabled": false,
     "quality": "ok",
@@ -14990,19 +14986,18 @@
     "gradeBand": "middle",
     "gradeBandName": "中年級",
     "difficulty": 2,
-    "question": "displayAvatarKey 的用途較接近？",
+    "question": "外觀造型頭像的功能較接近？",
     "choices": [
-      "顯示外觀",
-      "決定玩家身份",
-      "刪除資料",
-      "改變題庫"
+      "換造型拍照",
+      "改變身份資料",
+      "刪除題庫",
+      "改變答案"
     ],
     "answerIndex": 0,
-    "explanation": "displayAvatarKey 只影響顯示外觀。",
+    "explanation": "外觀造型只是讓玩家看起來不同，不是新的身份。",
     "tags": [
-      "原創題",
       "小V品牌",
-      "擴充題庫"
+      "品牌理念"
     ],
     "disabled": false,
     "quality": "ok",
@@ -15016,19 +15011,18 @@
     "gradeBand": "middle",
     "gradeBandName": "中年級",
     "difficulty": 2,
-    "question": "baseAvatarKey 的用途較接近？",
+    "question": "身份頭像的功能較接近？",
     "choices": [
-      "決定玩家身份",
-      "只換衣服",
+      "遊戲身分證的一部分",
+      "只換衣服顏色",
       "只換背景音樂",
       "改題目答案"
     ],
     "answerIndex": 0,
-    "explanation": "baseAvatarKey 和 ID 組成 playerKey。",
+    "explanation": "身份頭像和 ID 一起決定玩家身份。",
     "tags": [
-      "原創題",
       "小V品牌",
-      "擴充題庫"
+      "品牌理念"
     ],
     "disabled": false,
     "quality": "ok",
@@ -15050,11 +15044,10 @@
       "刪掉紀錄"
     ],
     "answerIndex": 0,
-    "explanation": "年級累積榜鼓勵玩不同科目。",
+    "explanation": "挑戰更多科目，V學園成績單也會更完整。",
     "tags": [
-      "原創題",
       "小V品牌",
-      "擴充題庫"
+      "品牌理念"
     ],
     "disabled": false,
     "quality": "ok",
@@ -15076,11 +15069,10 @@
       "只有停車場"
     ],
     "answerIndex": 0,
-    "explanation": "小V常見於親子、學校與品牌活動。",
+    "explanation": "小V服務常見於親子派對、學校和品牌活動。",
     "tags": [
-      "原創題",
       "小V品牌",
-      "擴充題庫"
+      "品牌理念"
     ],
     "disabled": false,
     "quality": "ok",
@@ -15102,11 +15094,10 @@
       "只有分數"
     ],
     "answerIndex": 0,
-    "explanation": "小V重視留下作品與回憶。",
+    "explanation": "小V希望活動不只是熱鬧，也留下作品與回憶。",
     "tags": [
-      "原創題",
       "小V品牌",
-      "擴充題庫"
+      "品牌理念"
     ],
     "disabled": false,
     "quality": "ok",
@@ -15128,11 +15119,10 @@
       "賽車遊戲"
     ],
     "answerIndex": 0,
-    "explanation": "V學園 Quiz Show 是節目感問答。",
+    "explanation": "V學園 Quiz Show 是小V主持的益智問答節目感遊戲。",
     "tags": [
-      "原創題",
       "小V品牌",
-      "擴充題庫"
+      "品牌理念"
     ],
     "disabled": false,
     "quality": "ok",
@@ -15154,11 +15144,10 @@
       "完全不需要觀眾"
     ],
     "answerIndex": 0,
-    "explanation": "魔術互動能讓觀眾參與。",
+    "explanation": "魔術互動能讓孩子更投入活動。",
     "tags": [
-      "原創題",
       "小V品牌",
-      "擴充題庫"
+      "品牌理念"
     ],
     "disabled": false,
     "quality": "ok",
@@ -15180,11 +15169,10 @@
       "讓燈光關掉"
     ],
     "answerIndex": 0,
-    "explanation": "佈置能建立活動氛圍。",
+    "explanation": "氣球佈置可以讓活動現場更有主題感。",
     "tags": [
-      "原創題",
       "小V品牌",
-      "擴充題庫"
+      "品牌理念"
     ],
     "disabled": false,
     "quality": "ok",
@@ -15206,11 +15194,10 @@
       "只要漂亮就好"
     ],
     "answerIndex": 0,
-    "explanation": "兒童活動安全是基本。",
+    "explanation": "孩子參與活動時，安全永遠是優先考量。",
     "tags": [
-      "原創題",
       "小V品牌",
-      "擴充題庫"
+      "品牌理念"
     ],
     "disabled": false,
     "quality": "ok",
@@ -15232,11 +15219,10 @@
       "取消主題"
     ],
     "answerIndex": 0,
-    "explanation": "表演和氣球可提高互動與停留。",
+    "explanation": "互動表演和氣球作品能增加活動停留與好感。",
     "tags": [
-      "原創題",
       "小V品牌",
-      "擴充題庫"
+      "品牌理念"
     ],
     "disabled": false,
     "quality": "ok",
@@ -15258,11 +15244,10 @@
       "不用安全提醒"
     ],
     "answerIndex": 0,
-    "explanation": "造型氣球需要實作練習。",
+    "explanation": "造型氣球要靠實際動手和一步步練習。",
     "tags": [
-      "原創題",
       "小V品牌",
-      "擴充題庫"
+      "品牌理念"
     ],
     "disabled": false,
     "quality": "ok",
@@ -15284,11 +15269,10 @@
       "藥品名稱"
     ],
     "answerIndex": 0,
-    "explanation": "V~Twist!! 是帶有動作感的品牌口號。",
+    "explanation": "V~Twist!! 帶有氣球扭轉和活力開始的感覺。",
     "tags": [
-      "原創題",
       "小V品牌",
-      "擴充題庫"
+      "品牌理念"
     ],
     "disabled": false,
     "quality": "ok",
@@ -15310,11 +15294,10 @@
       "讓大家忘記"
     ],
     "answerIndex": 0,
-    "explanation": "活動回憶常靠影像與體驗延續。",
+    "explanation": "活動中的照片、影片與體驗都能讓回憶延續。",
     "tags": [
-      "原創題",
       "小V品牌",
-      "擴充題庫"
+      "品牌理念"
     ],
     "disabled": false,
     "quality": "ok",
@@ -15336,11 +15319,10 @@
       "只讓孩子混亂"
     ],
     "answerIndex": 0,
-    "explanation": "流程節奏和控場會影響體驗。",
+    "explanation": "好的流程能讓孩子參與，也讓現場保持安全與秩序。",
     "tags": [
-      "原創題",
       "小V品牌",
-      "擴充題庫"
+      "品牌理念"
     ],
     "disabled": false,
     "quality": "ok",
@@ -15362,11 +15344,10 @@
       "嚴肅黑白"
     ],
     "answerIndex": 0,
-    "explanation": "粉紫粉黃容易呈現可愛溫暖感。",
+    "explanation": "粉紫、粉黃等品牌色會帶來可愛溫暖的感覺。",
     "tags": [
-      "原創題",
       "小V品牌",
-      "擴充題庫"
+      "品牌理念"
     ],
     "disabled": false,
     "quality": "ok",
@@ -15388,11 +15369,10 @@
       "完全沒有用途"
     ],
     "answerIndex": 0,
-    "explanation": "影片能延續回憶並呈現服務特色。",
+    "explanation": "影片能讓回憶延續，也讓更多人理解活動內容。",
     "tags": [
-      "原創題",
       "小V品牌",
-      "擴充題庫"
+      "品牌理念"
     ],
     "disabled": false,
     "quality": "ok",
@@ -15406,18 +15386,18 @@
     "gradeBand": "high",
     "gradeBandName": "高年級",
     "difficulty": 3,
-    "question": "playerKey 的正確規則是？",
+    "question": "小V遊戲中，「遊戲身分證」指的是什麼概念？",
     "choices": [
-      "encodeFirebaseKeyPart(id) + '__' + baseAvatarKey",
-      "id + displayAvatarKey",
-      "score + id",
-      "avatarSrc + subject"
+      "ID + 身份頭像",
+      "分數 + 音樂",
+      "題目 + 答案",
+      "背景 + 顏色"
     ],
     "answerIndex": 0,
-    "explanation": "共用規格是 ID 編碼後加上身份頭像 baseAvatarKey。",
+    "explanation": "ID + 身份頭像一起決定玩家身份，讓成績和解鎖能正確歸屬。",
     "tags": [
-      "原創題",
-      "小V品牌"
+      "小V品牌",
+      "品牌理念"
     ],
     "disabled": false,
     "quality": "ok",
@@ -15431,18 +15411,18 @@
     "gradeBand": "high",
     "gradeBandName": "高年級",
     "difficulty": 3,
-    "question": "為什麼 displayAvatarKey 不應改變 playerKey？",
+    "question": "為什麼外觀造型不應該影響成績歸屬？",
     "choices": [
+      "避免換造型就變成不同玩家",
       "讓題目變少",
       "讓分數清零才公平",
-      "避免外觀更換造成身份分裂",
       "讓圖片破圖"
     ],
-    "answerIndex": 2,
-    "explanation": "displayAvatarKey 只影響顯示，若改變 playerKey 會造成身份資料混亂。",
+    "answerIndex": 0,
+    "explanation": "外觀造型只是外觀，不能讓玩家因為換造型而失去原本成績。",
     "tags": [
-      "原創題",
-      "小V品牌"
+      "小V品牌",
+      "品牌理念"
     ],
     "disabled": false,
     "quality": "ok",
@@ -15456,18 +15436,18 @@
     "gradeBand": "high",
     "gradeBandName": "高年級",
     "difficulty": 3,
-    "question": "問答遊戲使用 avatarCatalog 的主要目的？",
+    "question": "小V遊戲共用頭像目錄的主要好處是？",
     "choices": [
-      "刪除玩家 profile",
-      "共用頭像目錄與解鎖資料",
-      "建立新後台",
-      "自動改題目答案"
+      "不同遊戲能使用一致的頭像與解鎖規則",
+      "刪除玩家資料",
+      "讓每款遊戲互不相干",
+      "自動改答案"
     ],
-    "answerIndex": 1,
-    "explanation": "avatarCatalog 用於共用頭像資料。",
+    "answerIndex": 0,
+    "explanation": "共用頭像目錄可以讓多款遊戲的造型和解鎖規則更一致。",
     "tags": [
-      "原創題",
-      "小V品牌"
+      "小V品牌",
+      "品牌理念"
     ],
     "disabled": false,
     "quality": "ok",
@@ -15481,18 +15461,18 @@
     "gradeBand": "high",
     "gradeBandName": "高年級",
     "difficulty": 3,
-    "question": "iframe 環境下頭像不破圖，關鍵做法是？",
+    "question": "如果遊戲放在官網頁面中，圖片路徑最重要的是？",
     "choices": [
-      "刪除 avatarCatalog",
-      "只用表情符號",
+      "能穩定顯示不破圖",
       "完全不要圖片",
-      "相對路徑轉完整 URL"
+      "只用表情符號",
+      "讓圖片隨機消失"
     ],
-    "answerIndex": 3,
-    "explanation": "把 assets/avatars 路徑轉成完整 GitHub Pages URL 可避免 iframe 破圖。",
+    "answerIndex": 0,
+    "explanation": "遊戲嵌在官網時，圖片路徑要能穩定載入，玩家才看得到頭像與主持人。",
     "tags": [
-      "原創題",
-      "小V品牌"
+      "小V品牌",
+      "品牌理念"
     ],
     "disabled": false,
     "quality": "ok",
@@ -15506,18 +15486,18 @@
     "gradeBand": "high",
     "gradeBandName": "高年級",
     "difficulty": 3,
-    "question": "第一版不做每日獎勵的主要原因是？",
+    "question": "每日 V幣獎勵的設計重點是？",
     "choices": [
-      "因為題目不能玩",
-      "降低測試範圍與避免干擾 V幣系統",
-      "因為排行榜不能用",
-      "因為 ID 不能輸入"
+      "每天每個遊戲身份只領一次",
+      "每秒自動增加",
+      "答錯就扣光",
+      "重新整理就一直領"
     ],
-    "answerIndex": 1,
-    "explanation": "先控制範圍，等 V幣穩定後再接每日獎勵。",
+    "answerIndex": 0,
+    "explanation": "每日獎勵要鼓勵回來玩，但不能讓玩家一直重複領取。",
     "tags": [
-      "原創題",
-      "小V品牌"
+      "小V品牌",
+      "品牌理念"
     ],
     "disabled": false,
     "quality": "ok",
@@ -15531,18 +15511,18 @@
     "gradeBand": "high",
     "gradeBandName": "高年級",
     "difficulty": 3,
-    "question": "leaderboards/quiz/main/{playerKey} 建議保留什麼？",
+    "question": "排行榜最應該呈現什麼？",
     "choices": [
-      "每題題目全文",
-      "圖片原始檔",
+      "玩家努力後的最佳成果",
       "所有玩家密碼",
-      "該玩家最佳紀錄"
+      "每題完整程式碼",
+      "圖片原始檔"
     ],
-    "answerIndex": 3,
-    "explanation": "主排行榜每位玩家保留最佳紀錄即可。",
+    "answerIndex": 0,
+    "explanation": "排行榜應該呈現遊戲成果，而不是內部技術資料。",
     "tags": [
-      "原創題",
-      "小V品牌"
+      "小V品牌",
+      "品牌理念"
     ],
     "disabled": false,
     "quality": "ok",
@@ -15556,18 +15536,18 @@
     "gradeBand": "high",
     "gradeBandName": "高年級",
     "difficulty": 3,
-    "question": "若新成績分數相同，較合理的比較項目之一是？",
+    "question": "若兩次分數相同，合理的比較項目之一是？",
     "choices": [
+      "答對題數或最高連擊",
       "題目字數",
       "玩家名字筆畫",
-      "背景顏色",
-      "correctCount 或 maxCombo"
+      "背景顏色"
     ],
-    "answerIndex": 3,
-    "explanation": "同分時可比較答對題數、combo 或使用時間。",
+    "answerIndex": 0,
+    "explanation": "分數相同時，可以用答對題數、連擊或時間等遊戲表現比較。",
     "tags": [
-      "原創題",
-      "小V品牌"
+      "小V品牌",
+      "品牌理念"
     ],
     "disabled": false,
     "quality": "ok",
@@ -15581,18 +15561,18 @@
     "gradeBand": "high",
     "gradeBandName": "高年級",
     "difficulty": 3,
-    "question": "問答遊戲第一版最重要的原則是？",
+    "question": "問答遊戲開發時最重要的原則是？",
     "choices": [
+      "穩定可玩、資料正確、體驗清楚",
       "動畫越多越好",
       "不需要測試",
-      "一次做完所有系統",
-      "穩定可跑、資料結構正確"
+      "一次做完所有系統"
     ],
-    "answerIndex": 3,
-    "explanation": "第一版重點是穩定與正確接上共用系統。",
+    "answerIndex": 0,
+    "explanation": "遊戲要先穩定、資料正確，再逐步擴充功能。",
     "tags": [
-      "原創題",
-      "小V品牌"
+      "小V品牌",
+      "品牌理念"
     ],
     "disabled": false,
     "quality": "ok",
@@ -15606,18 +15586,18 @@
     "gradeBand": "high",
     "gradeBandName": "高年級",
     "difficulty": 3,
-    "question": "學生專屬頭像未解鎖時應該？",
+    "question": "學生專屬頭像未解鎖時，應該怎麼處理？",
     "choices": [
-      "不要顯示給該玩家使用",
+      "不要顯示給未解鎖玩家使用",
       "所有人都可使用",
-      "刪除 profile",
-      "自動變 baseAvatarKey"
+      "自動變身份頭像",
+      "刪除成績"
     ],
     "answerIndex": 0,
-    "explanation": "學生專屬頭像應只限已解鎖的 playerKey 使用。",
+    "explanation": "學生專屬頭像應保護隱私與專屬性，未解鎖時不應出現在清單。",
     "tags": [
-      "原創題",
-      "小V品牌"
+      "小V品牌",
+      "品牌理念"
     ],
     "disabled": false,
     "quality": "ok",
@@ -15633,16 +15613,16 @@
     "difficulty": 3,
     "question": "未來玩家的家系統最可能使用哪種資源購買家具？",
     "choices": [
-      "Firebase config",
-      "題目 ID",
       "V幣",
-      "瀏覽器標題"
+      "題目 ID",
+      "瀏覽器標題",
+      "音樂音量"
     ],
-    "answerIndex": 2,
-    "explanation": "規劃中玩家的家可用 V幣購買家具。",
+    "answerIndex": 0,
+    "explanation": "V幣可以作為未來玩家的家或裝飾系統的遊戲資源。",
     "tags": [
-      "原創題",
-      "小V品牌"
+      "小V品牌",
+      "品牌理念"
     ],
     "disabled": false,
     "quality": "ok",
@@ -15656,19 +15636,18 @@
     "gradeBand": "high",
     "gradeBandName": "高年級",
     "difficulty": 3,
-    "question": "氣球小V遊戲宇宙的 playerKey 由什麼組成？",
+    "question": "如果同一個名字換了身份頭像，系統會怎麼看？",
     "choices": [
-      "ID + baseAvatarKey",
-      "ID + displayAvatarKey",
-      "分數 + 科目",
-      "音樂 + 題目"
+      "另一個遊戲身份",
+      "同一場題目",
+      "同一首歌",
+      "同一個選項"
     ],
     "answerIndex": 0,
-    "explanation": "playerKey 由玩家 ID 與身份頭像 baseAvatarKey 組成。",
+    "explanation": "ID 或身份頭像任一個改變，都會變成另一個遊戲身份。",
     "tags": [
-      "原創題",
       "小V品牌",
-      "擴充題庫"
+      "品牌理念"
     ],
     "disabled": false,
     "quality": "ok",
@@ -15682,19 +15661,18 @@
     "gradeBand": "high",
     "gradeBandName": "高年級",
     "difficulty": 3,
-    "question": "為什麼 displayAvatarKey 不應改變 playerKey？",
+    "question": "顯示頭像和身份頭像最大的差別是？",
     "choices": [
-      "它只是外觀，不是身份",
-      "它是題庫答案",
-      "它是音樂音量",
-      "它是遊戲時間"
+      "顯示頭像改外觀，身份頭像影響身份",
+      "兩個完全一樣",
+      "顯示頭像會改分數",
+      "身份頭像只改音樂"
     ],
     "answerIndex": 0,
-    "explanation": "displayAvatarKey 只影響外觀。",
+    "explanation": "顯示頭像是造型；身份頭像和 ID 一起決定資料歸屬。",
     "tags": [
-      "原創題",
       "小V品牌",
-      "擴充題庫"
+      "品牌理念"
     ],
     "disabled": false,
     "quality": "ok",
@@ -15710,17 +15688,16 @@
     "difficulty": 3,
     "question": "排行榜保留當場頭像快照的好處是？",
     "choices": [
-      "保留遊玩歷程真實性",
+      "保留遊玩當下的歷程真實性",
       "讓所有紀錄自動消失",
       "讓分數亂跳",
       "不能辨識玩家"
     ],
     "answerIndex": 0,
-    "explanation": "快照能保留當場狀態。",
+    "explanation": "當場快照能保留那次遊戲結算時的真實樣子。",
     "tags": [
-      "原創題",
       "小V品牌",
-      "擴充題庫"
+      "品牌理念"
     ],
     "disabled": false,
     "quality": "ok",
@@ -15734,7 +15711,7 @@
     "gradeBand": "high",
     "gradeBandName": "高年級",
     "difficulty": 3,
-    "question": "問答遊戲年級榜採用各科最佳分數加總，目的是？",
+    "question": "問答年級榜採用各科最佳分數加總，目的是？",
     "choices": [
       "鼓勵挑戰多科",
       "只鼓勵刷一題",
@@ -15742,11 +15719,10 @@
       "不讓玩家進步"
     ],
     "answerIndex": 0,
-    "explanation": "年級榜鼓勵玩家玩不同科目。",
+    "explanation": "各科加總可以鼓勵玩家不要只玩單一擅長科目。",
     "tags": [
-      "原創題",
       "小V品牌",
-      "擴充題庫"
+      "品牌理念"
     ],
     "disabled": false,
     "quality": "ok",
@@ -15760,19 +15736,18 @@
     "gradeBand": "high",
     "gradeBandName": "高年級",
     "difficulty": 3,
-    "question": "V學園成績單主要從哪個身份讀資料？",
+    "question": "V學園成績單最應該跟著什麼走？",
     "choices": [
-      "playerKey",
-      "顯示名稱而已",
+      "玩家的遊戲身份",
+      "手機型號",
       "背景音樂名稱",
-      "手機型號"
+      "題目顏色"
     ],
     "answerIndex": 0,
-    "explanation": "成績單跟著 playerKey 的資料走。",
+    "explanation": "成績單要跟玩家的遊戲身份走，換裝造型不應讓進度消失。",
     "tags": [
-      "原創題",
       "小V品牌",
-      "擴充題庫"
+      "品牌理念"
     ],
     "disabled": false,
     "quality": "ok",
@@ -15794,11 +15769,10 @@
       "完全不溝通"
     ],
     "answerIndex": 0,
-    "explanation": "互動能讓觀眾參與並留下記憶。",
+    "explanation": "互動能讓孩子更投入，也讓活動留下記憶點。",
     "tags": [
-      "原創題",
       "小V品牌",
-      "擴充題庫"
+      "品牌理念"
     ],
     "disabled": false,
     "quality": "ok",
@@ -15820,11 +15794,10 @@
       "改變 ID"
     ],
     "answerIndex": 0,
-    "explanation": "解鎖不等於自動裝備。",
+    "explanation": "解鎖是獲得選擇權，不應強迫玩家立刻更換外觀。",
     "tags": [
-      "原創題",
       "小V品牌",
-      "擴充題庫"
+      "品牌理念"
     ],
     "disabled": false,
     "quality": "ok",
@@ -15838,19 +15811,18 @@
     "gradeBand": "high",
     "gradeBandName": "高年級",
     "difficulty": 3,
-    "question": "小V遊戲中的 V幣目前在問答第一階段？",
+    "question": "問答遊戲中的 V幣設計，最適合鼓勵什麼？",
     "choices": [
-      "預留但不發放",
-      "每秒自動增加",
-      "不能存在",
-      "用來改題目"
+      "每天回來完成一次挑戰",
+      "一直重新整理頁面",
+      "答錯就不能玩",
+      "只玩同一題"
     ],
     "answerIndex": 0,
-    "explanation": "問答目前只預留 V幣，不實際發放。",
+    "explanation": "每日 V幣能鼓勵玩家每天回來完成任一遊戲。",
     "tags": [
-      "原創題",
       "小V品牌",
-      "擴充題庫"
+      "品牌理念"
     ],
     "disabled": false,
     "quality": "ok",
@@ -15864,19 +15836,18 @@
     "gradeBand": "high",
     "gradeBandName": "高年級",
     "difficulty": 3,
-    "question": "如果同 ID 換 baseAvatarKey，系統會視為？",
+    "question": "如果孩子不小心換了身份頭像，最可能發生什麼？",
     "choices": [
-      "不同玩家身份",
-      "同一場題目",
-      "同一首歌",
-      "同一個選項"
+      "成績看起來像到了另一個身份",
+      "立刻滿分",
+      "題目變簡單",
+      "音樂停止"
     ],
     "answerIndex": 0,
-    "explanation": "baseAvatarKey 會影響 playerKey，因此是不同身份。",
+    "explanation": "因為身份頭像是遊戲身分證的一部分，換掉會變成另一個身份。",
     "tags": [
-      "原創題",
       "小V品牌",
-      "擴充題庫"
+      "品牌理念"
     ],
     "disabled": false,
     "quality": "ok",
@@ -15898,11 +15869,10 @@
       "題庫刪除速度"
     ],
     "answerIndex": 0,
-    "explanation": "限時可以增加節目感和挑戰感。",
+    "explanation": "限時答題能讓遊戲更像節目挑戰。",
     "tags": [
-      "原創題",
       "小V品牌",
-      "擴充題庫"
+      "品牌理念"
     ],
     "disabled": false,
     "quality": "ok",
@@ -15924,11 +15894,10 @@
       "只租停車位"
     ],
     "answerIndex": 0,
-    "explanation": "小V服務包含多種派對體驗整合。",
+    "explanation": "小V服務可以把表演、互動、造型氣球與佈置結合。",
     "tags": [
-      "原創題",
       "小V品牌",
-      "擴充題庫"
+      "品牌理念"
     ],
     "disabled": false,
     "quality": "ok",
@@ -15950,11 +15919,10 @@
       "路人晚餐"
     ],
     "answerIndex": 0,
-    "explanation": "活動目的和受眾會影響流程設計。",
+    "explanation": "了解活動目的與受眾，才能設計合適的互動內容。",
     "tags": [
-      "原創題",
       "小V品牌",
-      "擴充題庫"
+      "品牌理念"
     ],
     "disabled": false,
     "quality": "ok",
@@ -15976,11 +15944,10 @@
       "讓秩序消失"
     ],
     "answerIndex": 0,
-    "explanation": "安心的氛圍能提升參與。",
+    "explanation": "孩子感到安心，才更願意上台和參與互動。",
     "tags": [
-      "原創題",
       "小V品牌",
-      "擴充題庫"
+      "品牌理念"
     ],
     "disabled": false,
     "quality": "ok",
@@ -16002,11 +15969,10 @@
       "遊戲作弊"
     ],
     "answerIndex": 0,
-    "explanation": "這些是品牌價值的一部分。",
+    "explanation": "品質、安全、環保是品牌長期想守住的價值。",
     "tags": [
-      "原創題",
       "小V品牌",
-      "擴充題庫"
+      "品牌理念"
     ],
     "disabled": false,
     "quality": "ok",
@@ -16028,11 +15994,10 @@
       "取消節目"
     ],
     "answerIndex": 0,
-    "explanation": "互動表演能吸引停留。",
+    "explanation": "互動表演與氣球作品能吸引人潮並增加停留。",
     "tags": [
-      "原創題",
       "小V品牌",
-      "擴充題庫"
+      "品牌理念"
     ],
     "disabled": false,
     "quality": "ok",
@@ -16054,11 +16019,10 @@
       "避免觀眾理解"
     ],
     "answerIndex": 0,
-    "explanation": "影片能保存故事與情感。",
+    "explanation": "影片除了宣傳，也能讓活動故事與情感被保留下來。",
     "tags": [
-      "原創題",
       "小V品牌",
-      "擴充題庫"
+      "品牌理念"
     ],
     "disabled": false,
     "quality": "ok",
@@ -16080,11 +16044,10 @@
       "完全不互動"
     ],
     "answerIndex": 0,
-    "explanation": "讓孩子參與能提高投入感。",
+    "explanation": "好的互動讓孩子有參與感，而不是只有表演者單方面展示。",
     "tags": [
-      "原創題",
       "小V品牌",
-      "擴充題庫"
+      "品牌理念"
     ],
     "disabled": false,
     "quality": "ok",
@@ -16106,11 +16069,10 @@
       "只批評錯誤"
     ],
     "answerIndex": 0,
-    "explanation": "可完成的小作品能建立信心。",
+    "explanation": "初學者先完成小作品，會更有信心繼續學。",
     "tags": [
-      "原創題",
       "小V品牌",
-      "擴充題庫"
+      "品牌理念"
     ],
     "disabled": false,
     "quality": "ok",
@@ -16132,11 +16094,10 @@
       "讓標誌消失"
     ],
     "answerIndex": 0,
-    "explanation": "一致視覺能提高辨識度。",
+    "explanation": "一致的視覺能讓觀眾更容易記得品牌。",
     "tags": [
-      "原創題",
       "小V品牌",
-      "擴充題庫"
+      "品牌理念"
     ],
     "disabled": false,
     "quality": "ok",
@@ -16158,11 +16119,10 @@
       "完全沒有主題"
     ],
     "answerIndex": 0,
-    "explanation": "清楚有趣的內容更容易被不同年齡理解。",
+    "explanation": "好的內容應該清楚有趣，也能讓不同年齡的人理解。",
     "tags": [
-      "原創題",
       "小V品牌",
-      "擴充題庫"
+      "品牌理念"
     ],
     "disabled": false,
     "quality": "ok",

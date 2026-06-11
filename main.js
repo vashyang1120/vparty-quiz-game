@@ -16,7 +16,7 @@ var FIREBASE_CONFIG = {
 };
 var FIREBASE_ENABLED = true;
 
-var QUIZ_VERSION = "quiz-v0.2.27-wallet-display-brand-question-cleanup";
+var QUIZ_VERSION = "quiz-v0.2.28-vcoin-save-status-fix";
 
 var DB_PATHS = {
   gameLogs:            "gameLogs/quiz",
@@ -1882,46 +1882,77 @@ function saveQuizResult(totalTime, accuracy){
   var academyBefore = null;
   var sourceLogId = null;
 
-  return loadQuizAcademyProgressSummary().then(function(before){
+  function safeStep(label, fn, fallback){
+    return Promise.resolve().then(fn).catch(function(err){
+      console.warn("[SaveResult] " + label + " failed:", err);
+      return fallback;
+    });
+  }
+
+  return safeStep("load academy before", function(){
+      return loadQuizAcademyProgressSummary();
+    }, null)
+    .then(function(before){
       academyBefore = before;
       return saveGameLog(record);
     })
     .then(function(logRef){
       sourceLogId = logRef && logRef.key ? logRef.key : null;
-      return unlockXiaovBaseAfterGameComplete().catch(function(err){
-        console.warn("[Quiz] unlock xiaov_base failed:", err);
-        return null;
-      });
-    })
-    .then(function(unlockResult){
-      return updateQuizProgress(record).then(function(progressResult){
-        return { unlockResult: unlockResult, progressResult: progressResult };
-      });
-    })
-    .then(function(stage){
-      var progressResult = stage.progressResult;
-      return updateGradeLeaderboard(record.gradeBand).then(function(gradeRecord){
-        return updateMainLeaderboardFromGrades().then(function(mainRecord){
-          return updateQuizAcademyProgress().then(function(academyAfter){
-            return {
-              unlockResult: stage.unlockResult,
-              progressResult: progressResult,
-              gradeRecord: gradeRecord,
-              mainRecord: mainRecord,
-              academyAfter: academyAfter
-            };
+
+      // gameLogs 已成功後，後續各項同步分開處理：
+      // 任一附加流程失敗都不應把整場顯示為「成績保存失敗」。
+      var result = {
+        unlockResult: null,
+        progressResult: null,
+        gradeRecord: null,
+        mainRecord: null,
+        academyAfter: null,
+        vcoinResult: null,
+        syncWarnings: []
+      };
+
+      return safeStep("unlock xiaov_base", function(){
+          return unlockXiaovBaseAfterGameComplete();
+        }, null)
+        .then(function(unlockResult){
+          result.unlockResult = unlockResult;
+          return safeStep("update quizProgress", function(){
+            return updateQuizProgress(record);
+          }, null);
+        })
+        .then(function(progressResult){
+          result.progressResult = progressResult;
+          if (!progressResult) result.syncWarnings.push("quizProgress");
+          return safeStep("update grade leaderboard", function(){
+            return updateGradeLeaderboard(record.gradeBand);
+          }, null);
+        })
+        .then(function(gradeRecord){
+          result.gradeRecord = gradeRecord;
+          if (!gradeRecord) result.syncWarnings.push("gradeLeaderboard");
+          return safeStep("update main leaderboard", function(){
+            return updateMainLeaderboardFromGrades();
+          }, null);
+        })
+        .then(function(mainRecord){
+          result.mainRecord = mainRecord;
+          if (!mainRecord) result.syncWarnings.push("mainLeaderboard");
+          return safeStep("update academy progress", function(){
+            return updateQuizAcademyProgress();
+          }, null);
+        })
+        .then(function(academyAfter){
+          result.academyAfter = academyAfter;
+          if (!academyAfter) result.syncWarnings.push("academyProgress");
+          return claimDailyAnyGameReward(PLAYER.playerKey, "quiz", sourceLogId).catch(function(err){
+            console.warn("[Quiz] daily VCoin reward failed:", err);
+            return { claimed:false, amount:0, reason:"write_failed", dateKey:getTaiwanDateKey(), error:err };
           });
+        })
+        .then(function(vcoinResult){
+          result.vcoinResult = vcoinResult;
+          return result;
         });
-      });
-    })
-    .then(function(result){
-      return claimDailyAnyGameReward(PLAYER.playerKey, "quiz", sourceLogId).catch(function(err){
-        console.warn("[Quiz] daily VCoin reward failed:", err);
-        return { claimed:false, amount:0, reason:"write_failed", dateKey:getTaiwanDateKey(), error:err };
-      }).then(function(vcoinResult){
-        result.vcoinResult = vcoinResult;
-        return result;
-      });
     })
     .then(function(result){
       var progress = result.progressResult && result.progressResult.progress;
@@ -1932,26 +1963,41 @@ function saveQuizResult(totalTime, accuracy){
       var unlockResult = result.unlockResult || null;
       var vcoinResult = result.vcoinResult || null;
       var subjectName = record.subjectName || record.subject;
+
       showAvatarUnlockBanner(unlockResult);
       showVCoinRewardBanner(vcoinResult);
+
       var lines = ["✅ 本次紀錄已保存"];
       if (bestUpdated) lines.push("✅ " + subjectName + "最佳紀錄刷新！");
       else if (progress) lines.push(subjectName + "最佳仍維持 " + (progress.bestScore || 0) + " 分");
-      lines.push("🌱 " + (record.gradeBandName || record.gradeBand) + "總分：" + (gradeRecord.gradeTotalScore || 0) + " 分");
-      lines.push("🏆 總榜總分：" + (mainRecord.totalScore || 0) + " 分");
-      if (vcoinResult && vcoinResult.reason === "write_failed") lines.push("⚠️ V幣獎勵寫入失敗，請稍後再試");
+
+      if (gradeRecord && typeof gradeRecord.gradeTotalScore !== "undefined") {
+        lines.push("🌱 " + (record.gradeBandName || record.gradeBand) + "總分：" + (gradeRecord.gradeTotalScore || 0) + " 分");
+      }
+      if (mainRecord && typeof mainRecord.totalScore !== "undefined") {
+        lines.push("🏆 總榜總分：" + (mainRecord.totalScore || 0) + " 分");
+      }
+
+      if (vcoinResult && vcoinResult.reason === "write_failed") {
+        lines.push("⚠️ V幣獎勵寫入失敗，請稍後再試");
+      }
+      if (result.syncWarnings && result.syncWarnings.length) {
+        lines.push("⚠️ 部分進度 / 排行榜同步失敗，請稍後再試");
+      }
       if (!bestUpdated) lines.push("再挑戰其他科目，也可以提升 V學園完成度。");
       $("save-status").textContent = lines.join("\n");
 
-      if ($("result-academy-progress") && $("result-academy-lines")) {
+      if ($("result-academy-progress") && $("result-academy-lines") && academyAfter) {
         $("result-academy-lines").textContent = buildAcademyResultLines(academyBefore, academyAfter);
         $("result-academy-progress").classList.remove("hidden");
       }
-      renderAcademyProgress(academyAfter);
+      if (academyAfter) renderAcademyProgress(academyAfter);
     })
     .catch(function(e){
-      console.warn("[SaveResult] failed:", e);
+      // 只有 gameLogs 本身失敗，才視為本次 Firebase 成績保存失敗。
+      console.warn("[SaveResult] gameLogs save failed:", e);
       $("save-status").textContent = "⚠️ Firebase 寫入可能失敗，已保留本機測試紀錄。";
+      showVCoinRewardBanner({ claimed:false, amount:0, reason:"write_failed", dateKey:getTaiwanDateKey(), error:e });
     });
 }
 

@@ -1,4 +1,4 @@
-/* 小V知識挑戰 quiz-v0.2.31-title-snapshot-player-card-entry
+/* 小V知識挑戰 quiz-v0.2.32-polish-and-rules-notes
    目標：穩定可跑、沿用共用玩家身份、寫入 gameLogs/quiz、quizProgress 與年級累積排行榜。
    V幣：測試版加入每日任一遊戲完成一次 +30 V幣，正式來源為 Firebase wallet / dailyRewards / vCoinLogs。
 */
@@ -16,7 +16,7 @@ var FIREBASE_CONFIG = {
 };
 var FIREBASE_ENABLED = true;
 
-var QUIZ_VERSION = "quiz-v0.2.31-title-snapshot-player-card-entry";
+var QUIZ_VERSION = "quiz-v0.2.32-polish-and-rules-notes";
 
 var DB_PATHS = {
   gameLogs:            "gameLogs/quiz",
@@ -3357,6 +3357,7 @@ function normalizeAdminLog(child){
 }
 
 function loadAdminData(){
+  renderAdminHealth(false);
   if ($("adm-log-list")) $("adm-log-list").innerHTML = '<div class="muted">🎈 載入中...</div>';
   if ($("adm-q-manage-list")) $("adm-q-manage-list").innerHTML = '<div class="muted">📚 載入題目管理資料...</div>';
 
@@ -3367,6 +3368,7 @@ function loadAdminData(){
     renderAdminQuestionManagement();
     return ensureFirebaseReady();
   }).then(function(ok){
+    renderAdminHealth(ok && !!firebaseDb);
     if (!ok || !firebaseDb) throw new Error("Firebase 尚未就緒");
     return firebaseDb.ref(DB_PATHS.gameLogs).orderByChild("ts").limitToLast(300).once("value");
   }).then(function(snap){
@@ -3396,6 +3398,23 @@ function renderAdminStats(){
   if ($("adm-topscore")) $("adm-topscore").textContent = topScore;
   if ($("adm-today")) $("adm-today").textContent = today;
   if ($("adm-log-count")) $("adm-log-count").textContent = "最近 " + adminLogs.length + " 筆";
+}
+
+function renderAdminHealth(firebaseOk){
+  if ($("adm-health-version")) $("adm-health-version").textContent = QUIZ_VERSION;
+  if ($("adm-health-firebase")) {
+    $("adm-health-firebase").textContent = firebaseOk ? "已連線" : "未連線";
+    $("adm-health-firebase").className = firebaseOk ? "health-ok" : "health-warn";
+  }
+  var overrideCount = QUESTION_OVERRIDES ? Object.keys(QUESTION_OVERRIDES).length : 0;
+  if ($("adm-health-overrides")) {
+    $("adm-health-overrides").textContent = overrideCount ? (overrideCount + " 筆覆寫") : "無覆寫";
+    $("adm-health-overrides").className = overrideCount ? "health-warn" : "health-ok";
+  }
+  if ($("adm-health-index")) {
+    $("adm-health-index").textContent = "建議補上";
+    $("adm-health-index").className = "health-warn";
+  }
 }
 
 function getSortedAdminLogs(){

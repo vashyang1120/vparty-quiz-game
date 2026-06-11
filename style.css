@@ -977,3 +977,63 @@ main{flex:1;display:grid;place-items:center;padding:20px}
 .badge-banner strong{display:block;font-size:18px;font-weight:1000;color:#d95f8a;margin-bottom:4px}
 .badge-banner p{margin:0;font-size:13px;font-weight:900;line-height:1.5;white-space:pre-line;color:#6b3d2f}
 .badge-banner.pop{animation:unlockPop .48s cubic-bezier(.34,1.56,.64,1)}
+
+/* v0.2.32 後台健康狀態與整理 */
+.admin-health-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(130px,1fr));
+  gap:10px;
+  margin-top:10px;
+}
+.admin-health-grid>div{
+  background:rgba(255,255,255,.72);
+  border:1px solid rgba(232,111,154,.16);
+  border-radius:16px;
+  padding:10px 12px;
+}
+.admin-health-grid span{
+  display:block;
+  color:var(--muted);
+  font-size:12px;
+  font-weight:800;
+  margin-bottom:4px;
+}
+.admin-health-grid strong{
+  color:var(--text);
+  font-size:14px;
+  word-break:break-word;
+}
+.admin-health-grid .health-ok{color:#17a56a;}
+.admin-health-grid .health-warn{color:#d98900;}
+.admin-note-box{
+  margin-top:12px;
+  background:linear-gradient(135deg,#fff8e8,#fffdf8);
+  border:1px dashed rgba(216,137,0,.35);
+  border-radius:16px;
+  padding:12px 14px;
+  color:#6b4a2f;
+  display:flex;
+  flex-direction:column;
+  gap:5px;
+}
+.admin-note-box code{
+  display:inline-block;
+  background:#fff;
+  border:1px solid rgba(216,137,0,.22);
+  border-radius:10px;
+  padding:6px 8px;
+  font-weight:900;
+  color:#8a5a00;
+  overflow-wrap:anywhere;
+}
+.admin-note-box small{color:#8f765a;font-weight:700;}
+.profile-wallet-box,
+.profile-title-panel,
+.identity-box{
+  max-width:720px;
+  margin-left:auto;
+  margin-right:auto;
+}
+.profile-wallet-box strong::after{content:"";}
+.player-chip{cursor:pointer;}
+.player-chip:focus-visible{outline:3px solid rgba(155,93,229,.35);outline-offset:4px;}

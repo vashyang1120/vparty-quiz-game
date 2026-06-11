@@ -1,4 +1,4 @@
-/* 小V知識挑戰 quiz-v0.2.23-admin-question-overrides-csv
+/* 小V知識挑戰 quiz-v0.2.25-question-randomizer-host-floating
    目標：穩定可跑、沿用共用玩家身份、寫入 gameLogs/quiz、quizProgress 與年級累積排行榜。
    V幣：第一版只預留 wallet / vCoinLogs 註解，不實際發放。
 */
@@ -16,7 +16,7 @@ var FIREBASE_CONFIG = {
 };
 var FIREBASE_ENABLED = true;
 
-var QUIZ_VERSION = "quiz-v0.2.23-admin-question-overrides-csv";
+var QUIZ_VERSION = "quiz-v0.2.25-question-randomizer-host-floating";
 
 var DB_PATHS = {
   gameLogs:            "gameLogs/quiz",
@@ -1109,7 +1109,7 @@ function applyQuestionOverrides(){
     var ov = QUESTION_OVERRIDES[q.id];
     if (!ov) return q;
     var merged = Object.assign({}, q);
-    ["disabled", "active", "quality", "reviewNote", "updatedAt", "updatedBy"].forEach(function(k){
+    ["disabled", "active", "quality", "reviewNote", "reason", "updatedAt", "updatedBy"].forEach(function(k){
       if (Object.prototype.hasOwnProperty.call(ov, k)) merged[k] = ov[k];
     });
     merged.overrideApplied = true;
@@ -1207,6 +1207,60 @@ function shuffle(arr){
   return a;
 }
 
+function getDedupedQuestionPool(pool){
+  var seenIds = {};
+  var seenTexts = {};
+  var result = [];
+  shuffle(pool).forEach(function(q){
+    if (!q) return;
+    var idKey = String(q.id || "").trim();
+    var textKey = String(q.question || "").replace(/\s+/g, " ").trim();
+    if (idKey && seenIds[idKey]) return;
+    if (textKey && seenTexts[textKey]) return;
+    if (idKey) seenIds[idKey] = true;
+    if (textKey) seenTexts[textKey] = true;
+    result.push(q);
+  });
+  return result;
+}
+
+function normalizeQuestionChoicesForPlay(q, targetAnswerIndex){
+  var choices = Array.isArray(q.choices) ? q.choices.slice() : [];
+  var originalAnswerIndex = Number(q.answerIndex);
+  if (!choices.length || originalAnswerIndex < 0 || originalAnswerIndex >= choices.length) {
+    return Object.assign({}, q);
+  }
+
+  var correctChoice = choices[originalAnswerIndex];
+  var wrongChoices = choices.filter(function(choice, idx){ return idx !== originalAnswerIndex; });
+  wrongChoices = shuffle(wrongChoices);
+
+  var answerIndex = Math.max(0, Math.min(choices.length - 1, Number(targetAnswerIndex) || 0));
+  var newChoices = [];
+  var wrongCursor = 0;
+  for (var i=0;i<choices.length;i++) {
+    if (i === answerIndex) newChoices[i] = correctChoice;
+    else newChoices[i] = wrongChoices[wrongCursor++];
+  }
+
+  var cloned = Object.assign({}, q);
+  cloned.choices = newChoices;
+  cloned.answerIndex = answerIndex;
+  cloned.originalAnswerIndex = originalAnswerIndex;
+  return cloned;
+}
+
+function prepareQuestionsForPlay(pool, count){
+  var uniquePool = getDedupedQuestionPool(pool);
+  var selected = uniquePool.slice(0, count);
+  var answerSlots = [];
+  for (var i=0;i<selected.length;i++) answerSlots.push(i % 4);
+  answerSlots = shuffle(answerSlots);
+  return selected.map(function(q, idx){
+    return normalizeQuestionChoicesForPlay(q, answerSlots[idx]);
+  });
+}
+
 function startQuiz(){
   var pool = getQuestionPool();
   if (pool.length < 10) {
@@ -1214,9 +1268,15 @@ function startQuiz(){
     return;
   }
 
+  var uniquePool = getDedupedQuestionPool(pool);
+  if (uniquePool.length < 10) {
+    toast("這個年級與科目的不重複題目不足 10 題，請先補題或恢復題目。");
+    return;
+  }
+
   quizState.active = true;
   quizState.currentIndex = 0;
-  quizState.questions = shuffle(pool).slice(0, 10);
+  quizState.questions = prepareQuestionsForPlay(pool, 10);
   quizState.answers = [];
   quizState.score = 0;
   quizState.correctCount = 0;
@@ -2902,12 +2962,27 @@ function renderAdminQuestionManagement(){
   });
 }
 
+function formatQuestionOverrideWriteError(e){
+  var msg = e && (e.message || e.code || String(e));
+  var lower = String(msg || "").toLowerCase();
+  if (lower.indexOf("permission") >= 0 || lower.indexOf("denied") >= 0 || lower.indexOf("permission_denied") >= 0) {
+    return "題目狀態更新失敗：Firebase rules 尚未開放 quizQuestionOverrides 寫入。";
+  }
+  return "題目狀態更新失敗：" + (msg || "請稍後再試");
+}
+
 function updateQuestionOverride(questionId, patch){
   if (!questionId) return Promise.resolve();
   return ensureFirebaseReady().then(function(ok){
     if (!ok || !firebaseDb) throw new Error("Firebase 尚未就緒");
-    var payload = Object.assign({}, patch, { updatedAt: Date.now(), updatedBy: "quiz-admin" });
-    return firebaseDb.ref(DB_PATHS.questionOverrides + "/" + questionId).update(payload);
+    var payload = Object.assign({}, patch);
+    payload.disabled = payload.disabled === true;
+    payload.updatedAt = Date.now();
+    payload.updatedBy = String(payload.updatedBy || "quiz-admin");
+    if (payload.quality == null) payload.quality = payload.disabled ? "disabled" : "ok";
+    if (payload.reviewNote == null) payload.reviewNote = "";
+    if (payload.reason == null) payload.reason = payload.reviewNote || (payload.disabled ? "後台停用" : "後台恢復");
+    return firebaseDb.ref(DB_PATHS.questionOverrides + "/" + questionId).set(payload);
   }).then(function(){
     return loadQuestions();
   }).then(function(){
@@ -2934,7 +3009,7 @@ function setAdminQuestionDisabled(questionId, disabled){
     toast(disabled ? "題目已停用，玩家不會抽到這題。" : "題目已恢復出題。", 2800);
   }).catch(function(e){
     console.warn("[Admin] update question override failed:", e);
-    toast("題目狀態更新失敗：" + (e.message || e), 3600);
+    toast(formatQuestionOverrideWriteError(e), 5200);
   });
 }
 
@@ -2950,7 +3025,7 @@ function saveAdminQuestionNote(questionId){
     toast("管理備註已儲存");
   }).catch(function(e){
     console.warn("[Admin] save question note failed:", e);
-    toast("備註儲存失敗：" + (e.message || e), 3600);
+    toast(formatQuestionOverrideWriteError(e), 5200);
   });
 }
 

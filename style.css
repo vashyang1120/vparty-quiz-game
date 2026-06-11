@@ -903,3 +903,36 @@ main{flex:1;display:grid;place-items:center;padding:20px}
 .admin-status-badge{display:inline-flex;align-items:center;justify-content:center;border-radius:999px;padding:3px 8px;font-size:10px;font-weight:900;background:#e8fff4;color:#16895a}
 .admin-status-badge.off{background:#ffe8ec;color:#c9364f}
 @media(max-width:720px){.admin-question-row-head{flex-direction:column}.admin-question-row-head span{white-space:normal}.admin-question-tools select,.admin-question-tools input[type="search"]{width:100%}.admin-check{width:100%;justify-content:center}}
+
+
+/* ── quiz-v0.2.25-question-randomizer-host-floating: 全裝置浮動主持人 + 不遮平板/桌機出題區 ── */
+.host-card.brand-host-card{display:none!important;}
+.mobile-host-sticker.show{
+  display:block!important;
+  width:clamp(140px,15vw,190px)!important;
+  height:auto!important;
+  aspect-ratio:148/209;
+  right:clamp(20px,3vw,48px)!important;
+  bottom:clamp(96px,12vh,150px)!important;
+  transform:none!important;
+  pointer-events:none!important;
+}
+.mobile-host-sticker.host-reveal{
+  width:clamp(190px,21vw,260px)!important;
+  height:auto!important;
+  aspect-ratio:212/292;
+  right:clamp(10px,2.4vw,38px)!important;
+  bottom:clamp(136px,16vh,198px)!important;
+  pointer-events:none!important;
+}
+.explanation{padding-bottom:max(132px, 12vh);}
+@media(max-width:760px){
+  .mobile-host-sticker.show{width:148px!important;right:20px!important;bottom:92px!important;}
+  .mobile-host-sticker.host-reveal{width:212px!important;right:8px!important;bottom:142px!important;}
+  .explanation{padding-bottom:170px;}
+}
+@media(max-width:380px){
+  .mobile-host-sticker.show{width:126px!important;right:12px!important;bottom:86px!important;}
+  .mobile-host-sticker.host-reveal{width:173px!important;right:2px!important;bottom:132px!important;}
+  .explanation{padding-bottom:158px;}
+}

@@ -16,7 +16,7 @@ var FIREBASE_CONFIG = {
 };
 var FIREBASE_ENABLED = true;
 
-var QUIZ_VERSION = "quiz-v0.2.28-vcoin-save-status-fix";
+var QUIZ_VERSION = "quiz-v0.2.29-progress-helper-restore";
 
 var DB_PATHS = {
   gameLogs:            "gameLogs/quiz",
@@ -1999,6 +1999,59 @@ function saveQuizResult(totalTime, accuracy){
       $("save-status").textContent = "⚠️ Firebase 寫入可能失敗，已保留本機測試紀錄。";
       showVCoinRewardBanner({ claimed:false, amount:0, reason:"write_failed", dateKey:getTaiwanDateKey(), error:e });
     });
+}
+
+
+function makeSubjectProgressFromRecord(record, oldProgress){
+  oldProgress = oldProgress || {};
+  var now = Date.now();
+  var totalQuestions = Number(record.totalQuestions || oldProgress.totalQuestions || oldProgress.bestTotalQuestions || 10);
+  var current = {
+    score: Number(record.score || 0),
+    correctCount: Number(record.correctCount || 0),
+    maxCombo: Number(record.maxCombo || 0),
+    timeUsedTotal: Number(record.timeUsedTotal || record.timeUsed || 0),
+    ts: Number(record.ts || record.updatedAt || now)
+  };
+  var oldBest = oldProgress && (oldProgress.bestScore || oldProgress.bestCorrectCount || oldProgress.bestMaxCombo || oldProgress.bestUpdatedAt) ? {
+    score: Number(oldProgress.bestScore || 0),
+    correctCount: Number(oldProgress.bestCorrectCount || 0),
+    maxCombo: Number(oldProgress.bestMaxCombo || 0),
+    timeUsedTotal: Number(oldProgress.bestTimeUsedTotal || 999999),
+    ts: Number(oldProgress.bestUpdatedAt || oldProgress.updatedAt || 0)
+  } : null;
+  var bestUpdated = shouldUpdateBestRecord(oldBest, current);
+  var attempts = Number(oldProgress.attempts || 0) + 1;
+
+  var progress = {
+    gameId: "quiz",
+    version: QUIZ_VERSION,
+    playerKey: record.playerKey || PLAYER.playerKey,
+    gradeBand: record.gradeBand,
+    gradeBandName: record.gradeBandName || getGradeName(record.gradeBand),
+    subject: record.subject,
+    subjectName: record.subjectName || getSubjectName(record.subject),
+
+    bestScore: bestUpdated ? current.score : Number(oldProgress.bestScore || 0),
+    bestCorrectCount: bestUpdated ? current.correctCount : Number(oldProgress.bestCorrectCount || 0),
+    bestMaxCombo: bestUpdated ? current.maxCombo : Number(oldProgress.bestMaxCombo || 0),
+    bestTimeUsedTotal: bestUpdated ? current.timeUsedTotal : Number(oldProgress.bestTimeUsedTotal || 0),
+    bestTotalQuestions: bestUpdated ? totalQuestions : Number(oldProgress.bestTotalQuestions || oldProgress.totalQuestions || totalQuestions),
+    bestUpdatedAt: bestUpdated ? current.ts : Number(oldProgress.bestUpdatedAt || oldProgress.updatedAt || current.ts),
+
+    attempts: attempts,
+    lastScore: current.score,
+    lastCorrectCount: current.correctCount,
+    lastMaxCombo: current.maxCombo,
+    lastTimeUsedTotal: current.timeUsedTotal,
+    lastTotalQuestions: totalQuestions,
+    updatedAt: now
+  };
+
+  progress.totalQuestions = progress.bestTotalQuestions;
+  progress.perfect = Number(progress.bestCorrectCount || 0) >= Number(progress.bestTotalQuestions || totalQuestions || 10);
+
+  return { progress: progress, bestUpdated: bestUpdated };
 }
 
 function updateQuizProgress(record){

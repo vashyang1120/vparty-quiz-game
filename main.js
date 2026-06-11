@@ -1,4 +1,4 @@
-/* 小V知識挑戰 quiz-v0.2.27-wallet-display-brand-question-cleanup
+/* 小V知識挑戰 quiz-v0.2.30-badge-title-system-test-1
    目標：穩定可跑、沿用共用玩家身份、寫入 gameLogs/quiz、quizProgress 與年級累積排行榜。
    V幣：測試版加入每日任一遊戲完成一次 +30 V幣，正式來源為 Firebase wallet / dailyRewards / vCoinLogs。
 */
@@ -16,7 +16,7 @@ var FIREBASE_CONFIG = {
 };
 var FIREBASE_ENABLED = true;
 
-var QUIZ_VERSION = "quiz-v0.2.29-progress-helper-restore";
+var QUIZ_VERSION = "quiz-v0.2.30-badge-title-system-test-1";
 
 var DB_PATHS = {
   gameLogs:            "gameLogs/quiz",
@@ -78,6 +78,9 @@ var PLAYER = {
   playerKey: ""
 };
 var PLAYER_WALLET_BALANCE = null;
+var PLAYER_EQUIPPED_TITLE = null;
+var PLAYER_QUIZ_TITLES = {};
+var PLAYER_QUIZ_BADGES = {};
 
 var QUESTIONS = [];
 var QUESTION_OVERRIDES = {};
@@ -153,6 +156,15 @@ var SUBJECT_OPTIONS = [
   {key:"balloon", name:"氣球知識", emoji:"🎈"},
   {key:"brand", name:"小V品牌", emoji:"✨"},
   {key:"brain", name:"腦筋急轉彎", emoji:"🧠"}
+];
+
+var QUIZ_BADGE_DEFS = [
+  { badgeKey:"quiz_first_clear", titleKey:"v_academy_freshman", name:"V學園新生", description:"完成第一場問答挑戰", type:"first_clear" },
+  { badgeKey:"quiz_first_perfect", titleKey:"little_scholar", name:"小小學霸", description:"任一科滿分", type:"first_perfect" },
+  { badgeKey:"quiz_brain_perfect", titleKey:"brain_teaser_king", name:"冷笑話王", description:"腦筋急轉彎任一場滿分", type:"brain_perfect" },
+  { badgeKey:"quiz_low_all_subjects", titleKey:"low_grade_graduate", name:"低年級畢業", description:"低年級 8 科都挑戰過", type:"grade_all_subjects", gradeBand:"low" },
+  { badgeKey:"quiz_middle_all_subjects", titleKey:"middle_grade_graduate", name:"中年級畢業", description:"中年級 8 科都挑戰過", type:"grade_all_subjects", gradeBand:"middle" },
+  { badgeKey:"quiz_high_all_subjects", titleKey:"high_grade_graduate", name:"高年級畢業", description:"高年級 8 科都挑戰過", type:"grade_all_subjects", gradeBand:"high" }
 ];
 
 function $(id){ return document.getElementById(id); }
@@ -908,6 +920,7 @@ function updatePlayerUI(){
   if ($("top-avatar")) $("top-avatar").src = PLAYER.avatarSrc;
   if ($("top-name")) $("top-name").textContent = PLAYER.name || PLAYER.id || "玩家";
   if ($("top-player-key")) $("top-player-key").textContent = PLAYER.playerKey ? ("身份：" + getFriendlyIdentityLabel(PLAYER.id, PLAYER.baseAvatarKey)) : "尚未設定身份";
+  renderEquippedTitle();
   updateWalletBalanceUI();
 
   if ($("player-id-input")) $("player-id-input").value = PLAYER.id || "";
@@ -1044,6 +1057,9 @@ function buildAvatarPicker(mode){
         PLAYER.avatarSrc = getAvatarUrl(av.key);
         savePlayerLocal();
         PLAYER_WALLET_BALANCE = null;
+        PLAYER_QUIZ_TITLES = {};
+        PLAYER_QUIZ_BADGES = {};
+        PLAYER_EQUIPPED_TITLE = null;
         updatePlayerUI();
         loadWalletBalance();
         buildAvatarPicker("base");
@@ -1846,6 +1862,293 @@ function claimDailyAnyGameReward(playerKey, gameId, sourceLogId){
   });
 }
 
+
+function getBrainSubjectKey(){
+  var found = SUBJECT_OPTIONS.find(function(s){ return s.key === "brain"; });
+  if (found) return found.key;
+  var byName = SUBJECT_OPTIONS.find(function(s){ return String(s.name || "").indexOf("腦筋") >= 0; });
+  return byName ? byName.key : "brain";
+}
+
+function normalizeQuizTitleData(raw){
+  raw = raw || null;
+  if (!raw || raw.unlocked === false) return null;
+  if (!raw.titleKey && !raw.name) return null;
+  return {
+    titleKey: raw.titleKey || "",
+    name: raw.name || raw.titleKey || "未命名稱號",
+    updatedAt: raw.updatedAt || raw.unlockedAt || 0
+  };
+}
+
+function renderEquippedTitle(){
+  var name = (PLAYER_EQUIPPED_TITLE && PLAYER_EQUIPPED_TITLE.name) ? PLAYER_EQUIPPED_TITLE.name : "未裝備";
+  if ($("top-player-title")) $("top-player-title").textContent = "稱號：" + name;
+  if ($("profile-equipped-title")) $("profile-equipped-title").textContent = name;
+  renderTitlePicker();
+}
+
+function loadQuizTitleData(playerKey){
+  playerKey = playerKey || (PLAYER && PLAYER.playerKey);
+  PLAYER_QUIZ_TITLES = {};
+  PLAYER_QUIZ_BADGES = {};
+  PLAYER_EQUIPPED_TITLE = null;
+  renderEquippedTitle();
+  if (!playerKey) return Promise.resolve({ badges:{}, titles:{}, equipped:null });
+  return ensureFirebaseReady().then(function(ok){
+    if (!ok || !firebaseDb) return { badges:{}, titles:{}, equipped:null };
+    var base = DB_PATHS.players + "/" + playerKey;
+    return Promise.all([
+      firebaseDb.ref(base + "/quizBadges").once("value"),
+      firebaseDb.ref(base + "/quizTitles").once("value"),
+      firebaseDb.ref(base + "/quizEquippedTitle").once("value")
+    ]).then(function(snaps){
+      PLAYER_QUIZ_BADGES = snaps[0].val() || {};
+      PLAYER_QUIZ_TITLES = snaps[1].val() || {};
+      PLAYER_EQUIPPED_TITLE = normalizeQuizTitleData(snaps[2].val());
+      renderEquippedTitle();
+      return { badges:PLAYER_QUIZ_BADGES, titles:PLAYER_QUIZ_TITLES, equipped:PLAYER_EQUIPPED_TITLE };
+    });
+  }).catch(function(e){
+    console.warn("[QuizTitle] load failed:", e);
+    renderEquippedTitle();
+    return { badges:{}, titles:{}, equipped:null };
+  });
+}
+
+function equipQuizTitle(titleKey){
+  if (!titleKey || !PLAYER_QUIZ_TITLES || !PLAYER_QUIZ_TITLES[titleKey] || PLAYER_QUIZ_TITLES[titleKey].unlocked !== true) {
+    toast("這個稱號尚未解鎖，不能裝備。");
+    return Promise.resolve(false);
+  }
+  var title = PLAYER_QUIZ_TITLES[titleKey];
+  var payload = {
+    titleKey: titleKey,
+    name: title.name || titleKey,
+    updatedAt: Date.now()
+  };
+  return ensureFirebaseReady().then(function(ok){
+    if (!ok || !firebaseDb || !PLAYER.playerKey) throw new Error("Firebase not ready");
+    return firebaseDb.ref(DB_PATHS.players + "/" + PLAYER.playerKey + "/quizEquippedTitle").set(payload).then(function(){
+      PLAYER_EQUIPPED_TITLE = payload;
+      renderEquippedTitle();
+      toast("已裝備稱號：" + payload.name);
+      return true;
+    });
+  }).catch(function(e){
+    console.warn("[QuizTitle] equip failed:", e);
+    toast("稱號裝備失敗，請稍後再試。");
+    return false;
+  });
+}
+
+function renderTitlePicker(){
+  var list = $("profile-title-list");
+  if (!list) return;
+  list.innerHTML = "";
+  var titles = [];
+  Object.keys(PLAYER_QUIZ_TITLES || {}).forEach(function(key){
+    var t = PLAYER_QUIZ_TITLES[key];
+    if (t && t.unlocked === true) {
+      titles.push({ titleKey:key, name:t.name || key, unlockedAt:t.unlockedAt || 0 });
+    }
+  });
+  titles.sort(function(a,b){ return (a.unlockedAt || 0) - (b.unlockedAt || 0); });
+  if (!titles.length) {
+    var empty = document.createElement("span");
+    empty.className = "title-item empty";
+    empty.textContent = "尚未解鎖稱號";
+    list.appendChild(empty);
+    return;
+  }
+  titles.forEach(function(t){
+    var btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "title-item" + (PLAYER_EQUIPPED_TITLE && PLAYER_EQUIPPED_TITLE.titleKey === t.titleKey ? " equipped" : "");
+    btn.textContent = t.name;
+    btn.addEventListener("click", function(){ equipQuizTitle(t.titleKey); });
+    list.appendChild(btn);
+  });
+}
+
+function isFullScoreRecord(record){
+  var correct = Number(record && record.correctCount || 0);
+  var total = Number(record && record.totalQuestions || 0);
+  return total > 0 && correct >= total;
+}
+
+function gradeCompletedSubjectCountFromAcademy(academyAfter, gradeBand){
+  if (!academyAfter || !gradeBand) return null;
+  var source = academyAfter.gradeProgress || academyAfter.gradeSummary || {};
+  var gp = source[gradeBand];
+  if (!gp) return null;
+  var completed = Number(gp.completedSubjects || 0);
+  return isFinite(completed) ? completed : null;
+}
+
+function fallbackCompletedSubjectCount(gradeBand){
+  if (!PLAYER.playerKey || !gradeBand) return Promise.resolve(0);
+  return ensureFirebaseReady().then(function(ok){
+    if (!ok || !firebaseDb) return 0;
+    return firebaseDb.ref(DB_PATHS.players + "/" + PLAYER.playerKey + "/quizProgress/" + gradeBand).once("value").then(function(snap){
+      var data = snap.val() || {};
+      var count = 0;
+      Object.keys(data).forEach(function(subjectKey){
+        var p = data[subjectKey];
+        if (!p || typeof p !== "object") return;
+        if (Number(p.attempts || 0) > 0 || Number(p.bestScore || 0) > 0 || Number(p.lastScore || 0) > 0 || Number(p.updatedAt || 0) > 0) count += 1;
+      });
+      return count;
+    });
+  }).catch(function(e){
+    console.warn("[QuizBadge] fallback completed subject read failed:", e);
+    return 0;
+  });
+}
+
+function evaluateQuizBadgeDefs(record, academyAfter){
+  var candidates = [];
+  var brainKey = getBrainSubjectKey();
+  var fullScore = isFullScoreRecord(record);
+
+  QUIZ_BADGE_DEFS.forEach(function(def){
+    if (def.type === "first_clear") {
+      candidates.push(def);
+    } else if (def.type === "first_perfect" && fullScore) {
+      candidates.push(def);
+    } else if (def.type === "brain_perfect" && fullScore && record.subject === brainKey) {
+      candidates.push(def);
+    } else if (def.type === "grade_all_subjects") {
+      var completed = gradeCompletedSubjectCountFromAcademy(academyAfter, def.gradeBand);
+      if (completed !== null && completed >= SUBJECT_OPTIONS.length) candidates.push(def);
+    }
+  });
+
+  var pendingFallbacks = QUIZ_BADGE_DEFS.filter(function(def){
+    return def.type === "grade_all_subjects" && candidates.indexOf(def) < 0 && gradeCompletedSubjectCountFromAcademy(academyAfter, def.gradeBand) === null;
+  });
+  if (!pendingFallbacks.length) return Promise.resolve(candidates);
+
+  var jobs = pendingFallbacks.map(function(def){
+    return fallbackCompletedSubjectCount(def.gradeBand).then(function(count){ return { def:def, count:count }; });
+  });
+  return Promise.all(jobs).then(function(results){
+    results.forEach(function(item){ if (item.count >= SUBJECT_OPTIONS.length) candidates.push(item.def); });
+    return candidates;
+  });
+}
+
+function unlockQuizBadgeAndTitle(def, sourceLogId, existingEquipped){
+  if (!def || !PLAYER.playerKey) return Promise.resolve(null);
+  return ensureFirebaseReady().then(function(ok){
+    if (!ok || !firebaseDb) throw new Error("Firebase not ready");
+    var now = Date.now();
+    var base = DB_PATHS.players + "/" + PLAYER.playerKey;
+    var badgeRef = firebaseDb.ref(base + "/quizBadges/" + def.badgeKey);
+    var titleRef = firebaseDb.ref(base + "/quizTitles/" + def.titleKey);
+
+    return Promise.all([badgeRef.once("value"), titleRef.once("value")]).then(function(snaps){
+      var badgeOld = snaps[0].val();
+      var titleOld = snaps[1].val();
+      var alreadyBadge = badgeOld && badgeOld.unlocked === true;
+      var alreadyTitle = titleOld && titleOld.unlocked === true;
+      var writes = [];
+
+      if (!alreadyBadge) {
+        writes.push(badgeRef.set({
+          unlocked: true,
+          badgeKey: def.badgeKey,
+          name: def.name,
+          description: def.description,
+          unlockedAt: now,
+          sourceGameId: "quiz",
+          sourceLogId: sourceLogId || ""
+        }));
+      }
+      if (!alreadyTitle) {
+        writes.push(titleRef.set({
+          unlocked: true,
+          titleKey: def.titleKey,
+          name: def.name,
+          unlockedAt: now,
+          sourceGameId: "quiz",
+          sourceLogId: sourceLogId || ""
+        }));
+      }
+
+      if (!writes.length) return null;
+      return Promise.all(writes).then(function(){
+        return {
+          badgeKey: def.badgeKey,
+          titleKey: def.titleKey,
+          name: def.name,
+          description: def.description,
+          unlockedAt: now,
+          autoEquipCandidate: !existingEquipped
+        };
+      });
+    });
+  });
+}
+
+function checkAndUnlockQuizBadges(record, sourceLogId, academyAfter){
+  if (!PLAYER.playerKey) return Promise.resolve({ unlocked: [] });
+  return loadQuizTitleData(PLAYER.playerKey).then(function(current){
+    var existingEquipped = current && current.equipped ? current.equipped : null;
+    return evaluateQuizBadgeDefs(record, academyAfter).then(function(defs){
+      var chain = Promise.resolve([]);
+      defs.forEach(function(def){
+        chain = chain.then(function(list){
+          return unlockQuizBadgeAndTitle(def, sourceLogId, existingEquipped).then(function(item){
+            if (item) list.push(item);
+            return list;
+          });
+        });
+      });
+      return chain.then(function(unlocked){
+        if (!unlocked.length) return { unlocked: [] };
+        var autoEquip = !existingEquipped ? unlocked[0] : null;
+        var autoEquipPromise = Promise.resolve(false);
+        if (autoEquip) {
+          autoEquipPromise = firebaseDb.ref(DB_PATHS.players + "/" + PLAYER.playerKey + "/quizEquippedTitle").set({
+            titleKey: autoEquip.titleKey,
+            name: autoEquip.name,
+            updatedAt: Date.now()
+          }).then(function(){ return true; });
+        }
+        return autoEquipPromise.then(function(didEquip){
+          return loadQuizTitleData(PLAYER.playerKey).then(function(){
+            return { unlocked: unlocked, autoEquipped: didEquip ? autoEquip : null };
+          });
+        });
+      });
+    });
+  }).catch(function(e){
+    console.warn("[QuizBadge] check/unlock failed:", e);
+    return { unlocked: [], error:e };
+  });
+}
+
+function showBadgeUnlockBanner(badgeResult){
+  var box = $("result-badge-banner");
+  if (!box) return;
+  box.classList.add("hidden");
+  box.classList.remove("pop");
+  var unlocked = badgeResult && badgeResult.unlocked ? badgeResult.unlocked : [];
+  if (!unlocked.length) return;
+  var title = $("badge-unlock-title");
+  var msg = $("badge-unlock-message");
+  var names = unlocked.map(function(b){ return b.name; }).join("、");
+  if (title) title.textContent = "🏅 新徽章解鎖！";
+  if (msg) {
+    if (unlocked.length === 1) msg.textContent = unlocked[0].name + "\n" + (unlocked[0].description || "新的 V學園稱號已解鎖");
+    else msg.textContent = names;
+  }
+  box.classList.remove("hidden");
+  void box.offsetWidth;
+  box.classList.add("pop");
+}
+
 function showVCoinRewardBanner(vcoinResult){
   var box = $("result-vcoin-banner");
   if (!box || !vcoinResult) return;
@@ -1876,6 +2179,7 @@ function saveQuizResult(totalTime, accuracy){
   if ($("result-academy-progress")) $("result-academy-progress").classList.add("hidden");
   if ($("result-unlock-banner")) $("result-unlock-banner").classList.add("hidden");
   if ($("result-vcoin-banner")) $("result-vcoin-banner").classList.add("hidden");
+  if ($("result-badge-banner")) $("result-badge-banner").classList.add("hidden");
 
   saveLocalLog(record);
 
@@ -1908,6 +2212,7 @@ function saveQuizResult(totalTime, accuracy){
         mainRecord: null,
         academyAfter: null,
         vcoinResult: null,
+        badgeResult: null,
         syncWarnings: []
       };
 
@@ -1951,6 +2256,12 @@ function saveQuizResult(totalTime, accuracy){
         })
         .then(function(vcoinResult){
           result.vcoinResult = vcoinResult;
+          return safeStep("check quiz badges", function(){
+            return checkAndUnlockQuizBadges(record, sourceLogId, result.academyAfter);
+          }, { unlocked: [] });
+        })
+        .then(function(badgeResult){
+          result.badgeResult = badgeResult || { unlocked: [] };
           return result;
         });
     })
@@ -1962,10 +2273,12 @@ function saveQuizResult(totalTime, accuracy){
       var academyAfter = result.academyAfter || null;
       var unlockResult = result.unlockResult || null;
       var vcoinResult = result.vcoinResult || null;
+      var badgeResult = result.badgeResult || null;
       var subjectName = record.subjectName || record.subject;
 
       showAvatarUnlockBanner(unlockResult);
       showVCoinRewardBanner(vcoinResult);
+      showBadgeUnlockBanner(badgeResult);
 
       var lines = ["✅ 本次紀錄已保存"];
       if (bestUpdated) lines.push("✅ " + subjectName + "最佳紀錄刷新！");
@@ -3475,6 +3788,9 @@ function bindEvents(){
     PLAYER.id = normalizePlayerId(this.value);
     PLAYER.name = PLAYER.id;
     PLAYER.playerKey = makePlayerKey(PLAYER.id, PLAYER.baseAvatarKey);
+    PLAYER_QUIZ_TITLES = {};
+    PLAYER_QUIZ_BADGES = {};
+    PLAYER_EQUIPPED_TITLE = null;
     updatePlayerUI();
   });
 
@@ -3491,6 +3807,8 @@ function bindEvents(){
       return ensurePlayerProfile();
     }).then(function(){
       return loadWalletBalance();
+    }).then(function(){
+      return loadQuizTitleData();
     }).then(function(){
       return refreshAcademyProgressCard();
     }).then(function(){
@@ -3525,10 +3843,13 @@ function init(){
       if (alreadyConfirmed) {
         return ensurePlayerProfile().then(function(){
           return loadWalletBalance();
+        }).then(function(){
+          return loadQuizTitleData();
         }).then(refreshAcademyProgressCard);
       }
       renderAcademyProgress(null);
       loadWalletBalance();
+      loadQuizTitleData();
       return null;
     })
     .catch(function(e){ console.warn("[Init] Firebase/profile init skipped:", e.message); });

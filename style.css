@@ -955,3 +955,20 @@ main{flex:1;display:grid;place-items:center;padding:20px}
 .profile-wallet-box{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:12px 0 0;padding:12px 14px;border-radius:18px;background:linear-gradient(135deg,#fff7d6,#ffe8a3);border:1.5px solid rgba(255,190,11,.5);box-shadow:0 8px 20px rgba(255,190,11,.12);color:#6f4b00;font-weight:900}
 .profile-wallet-box strong{font-family:'Fredoka One','Noto Sans TC',cursive;font-size:22px;color:#8a5b00}
 @media(max-width:560px){.wallet-chip-inline{font-size:11px}.profile-wallet-box{padding:10px 12px}.profile-wallet-box strong{font-size:20px}}
+
+/* v0.2.30 badge / title system */
+.title-chip-inline{display:block;margin-top:2px;color:#7f4da8;font-weight:1000;font-size:12px;line-height:1.25;white-space:nowrap;max-width:210px;overflow:hidden;text-overflow:ellipsis}
+.profile-title-panel{margin-top:12px;background:linear-gradient(135deg,#fff7ff,#f7efff);border:1.5px solid rgba(155,93,229,.25);border-radius:20px;padding:14px;box-shadow:0 6px 18px rgba(155,93,229,.08)}
+.profile-title-current{display:flex;align-items:center;justify-content:space-between;gap:10px;font-weight:900;color:#6b4a5a;margin-bottom:10px}
+.profile-title-current strong{color:#7f4da8;font-size:16px}
+.title-list{display:flex;gap:8px;flex-wrap:wrap;color:var(--muted);font-size:13px;font-weight:900}
+.title-item{border:1.5px solid rgba(155,93,229,.24);background:#fff;border-radius:999px;padding:8px 12px;color:#7f4da8;font-weight:1000;cursor:pointer;transition:.16s;box-shadow:0 3px 10px rgba(155,93,229,.08)}
+.title-item:hover{transform:translateY(-1px);border-color:rgba(155,93,229,.55)}
+.title-item.equipped{background:linear-gradient(135deg,#9b5de5,#e86f9a);color:#fff;border-color:transparent;box-shadow:0 6px 16px rgba(155,93,229,.22)}
+.title-item.empty{cursor:default;background:transparent;border-style:dashed;color:var(--muted);box-shadow:none}
+.badge-banner{display:flex;align-items:center;gap:12px;background:linear-gradient(135deg,#fff7e8,#fff0fb);border:2px solid rgba(232,111,154,.35);border-radius:20px;padding:12px 14px;margin:12px 0;color:#6b3d2f;box-shadow:0 8px 24px rgba(232,111,154,.14);text-align:left}
+.badge-banner.hidden{display:none!important}
+.badge-banner .badge-spark{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#fff;font-size:26px;box-shadow:0 0 0 4px rgba(255,209,102,.25)}
+.badge-banner strong{display:block;font-size:18px;font-weight:1000;color:#d95f8a;margin-bottom:4px}
+.badge-banner p{margin:0;font-size:13px;font-weight:900;line-height:1.5;white-space:pre-line;color:#6b3d2f}
+.badge-banner.pop{animation:unlockPop .48s cubic-bezier(.34,1.56,.64,1)}

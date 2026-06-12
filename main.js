@@ -1,6 +1,6 @@
-/* 小V知識挑戰 quiz-v0.2.34-daily-challenge-test-1
+/* 小V知識挑戰 quiz-v0.2.36-daily-challenge-reward-commit-fix
    目標：穩定可跑、沿用共用玩家身份、寫入 gameLogs/quiz、quizProgress 與年級累積排行榜。
-   V幣：測試版加入每日任一遊戲完成一次 +30 V幣，正式來源為 Firebase wallet / dailyRewards / vCoinLogs。
+   V幣：每日任一遊戲完成一次 +30 V幣；問答今日挑戰 +10 V幣，分別寫入 dailyRewards 與 dailyChallenges/quiz，正式來源為 Firebase wallet / vCoinLogs。
 */
 
 // Firebase compat SDK - same project as rhythm/tetris games
@@ -16,7 +16,7 @@ var FIREBASE_CONFIG = {
 };
 var FIREBASE_ENABLED = true;
 
-var QUIZ_VERSION = "quiz-v0.2.34-daily-challenge-test-1";
+var QUIZ_VERSION = "quiz-v0.2.36-daily-challenge-reward-commit-fix";
 
 var DB_PATHS = {
   gameLogs:            "gameLogs/quiz",
@@ -2063,6 +2063,10 @@ function isRecordMatchingDailyChallenge(record, challenge){
   return record.gradeBand === challenge.gradeBand && record.subject === challenge.subject;
 }
 
+function getDailyChallengeRef(playerKey, dateKey){
+  return firebaseDb.ref(DB_PATHS.players + "/" + playerKey + "/dailyChallenges/" + DAILY_CHALLENGE_GAME_ID + "/" + dateKey);
+}
+
 function loadDailyChallengeStatus(){
   var challenge = getDailyChallengeForDate();
   DAILY_CHALLENGE_STATUS = {
@@ -2077,7 +2081,7 @@ function loadDailyChallengeStatus(){
   }
   return ensureFirebaseReady().then(function(ok){
     if (!ok || !firebaseDb) return DAILY_CHALLENGE_STATUS;
-    return firebaseDb.ref(DB_PATHS.players + "/" + PLAYER.playerKey + "/dailyQuizChallenges/" + challenge.dateKey).once("value").then(function(snap){
+    return getDailyChallengeRef(PLAYER.playerKey, challenge.dateKey).once("value").then(function(snap){
       var data = snap.val();
       DAILY_CHALLENGE_STATUS.completed = !!(data && data.completed === true);
       DAILY_CHALLENGE_STATUS.record = data || null;
@@ -2102,31 +2106,179 @@ function saveDailyChallengeCompletion(record, sourceLogId){
   }
   return ensureFirebaseReady().then(function(ok){
     if (!ok || !firebaseDb) throw new Error("Firebase not ready");
-    var payload = {
-      completed: true,
-      gameId: DAILY_CHALLENGE_GAME_ID,
-      dateKey: challenge.dateKey,
-      gradeBand: challenge.gradeBand,
-      gradeBandName: challenge.gradeBandName,
-      subject: challenge.subject,
-      subjectName: challenge.subjectName,
-      sourceLogId: sourceLogId || "",
-      score: Number(record.score || 0),
-      correctCount: Number(record.correctCount || 0),
-      totalQuestions: Number(record.totalQuestions || 0),
-      completedAt: Date.now()
-    };
-    return firebaseDb.ref(DB_PATHS.players + "/" + PLAYER.playerKey + "/dailyQuizChallenges/" + challenge.dateKey).once("value").then(function(snap){
-      if (snap.exists() && snap.val() && snap.val().completed === true) {
-        var existing = snap.val();
-        DAILY_CHALLENGE_STATUS = { challenge: challenge, completed: true, record: existing, loaded: true };
-        renderDailyChallengeCard();
-        return { completed:false, alreadyCompleted:true, reason:"already_completed", challenge:challenge, record:existing };
+
+    var rewardAmount = 10;
+    var now = Date.now();
+    var claimId = "quiz_daily_" + challenge.dateKey + "_" + now + "_" + Math.floor(Math.random() * 1000000);
+    var challengeRef = getDailyChallengeRef(PLAYER.playerKey, challenge.dateKey);
+
+    function buildCompletionPayload(extra){
+      var base = {
+        completed: true,
+        gameId: DAILY_CHALLENGE_GAME_ID,
+        dateKey: challenge.dateKey,
+        gradeBand: challenge.gradeBand,
+        gradeBandName: challenge.gradeBandName,
+        subject: challenge.subject,
+        subjectName: challenge.subjectName,
+        sourceLogId: sourceLogId || "",
+        score: Number(record.score || 0),
+        correctCount: Number(record.correctCount || 0),
+        totalQuestions: Number(record.totalQuestions || 0),
+        completedAt: now,
+        rewardClaimed: false,
+        rewardAmount: rewardAmount,
+        rewardType: "daily_quiz_challenge",
+        rewardGameId: DAILY_CHALLENGE_GAME_ID
+      };
+      extra = extra || {};
+      Object.keys(extra).forEach(function(k){ base[k] = extra[k]; });
+      return base;
+    }
+
+    function alreadyClaimedResult(existing){
+      DAILY_CHALLENGE_STATUS = { challenge: challenge, completed: true, record: existing || null, loaded: true };
+      renderDailyChallengeCard();
+      return loadWalletBalance(PLAYER.playerKey).then(function(balance){
+        return {
+          completed:false,
+          alreadyCompleted:true,
+          reason:"already_claimed",
+          challenge:challenge,
+          record:existing || null,
+          rewardClaimed:true,
+          rewardAmount:0,
+          balanceAfter: typeof balance === "number" ? balance : undefined
+        };
+      });
+    }
+
+    function pendingResult(existing){
+      DAILY_CHALLENGE_STATUS = { challenge: challenge, completed: true, record: existing || null, loaded: true };
+      renderDailyChallengeCard();
+      return loadWalletBalance(PLAYER.playerKey).then(function(balance){
+        return {
+          completed:true,
+          reason:"reward_pending",
+          challenge:challenge,
+          record:existing || null,
+          rewardClaimed:false,
+          rewardAmount:0,
+          balanceAfter: typeof balance === "number" ? balance : undefined
+        };
+      });
+    }
+
+    // 先在共用路徑建立「今日挑戰已完成，但獎勵尚未確認」的狀態。
+    // 只有 wallet 與 vCoinLogs 寫入成功後，才會把 rewardClaimed 改為 true。
+    return challengeRef.transaction(function(currentData){
+      var current = currentData || null;
+      if (current && current.rewardClaimed === true) return;
+
+      if (current && current.rewardStatus === "claiming" && current.rewardClaimId && current.claimStartedAt) {
+        var age = now - Number(current.claimStartedAt || 0);
+        if (age >= 0 && age < 2 * 60 * 1000) return;
       }
-      return firebaseDb.ref(DB_PATHS.players + "/" + PLAYER.playerKey + "/dailyQuizChallenges/" + challenge.dateKey).set(payload).then(function(){
-        DAILY_CHALLENGE_STATUS = { challenge: challenge, completed: true, record: payload, loaded: true };
-        renderDailyChallengeCard();
-        return { completed:true, reason:"daily_challenge_completed", challenge:challenge, record:payload };
+
+      var payload = buildCompletionPayload({
+        rewardStatus: "claiming",
+        rewardClaimId: claimId,
+        claimStartedAt: now
+      });
+
+      if (current) {
+        Object.keys(current).forEach(function(k){
+          if (payload[k] === undefined || payload[k] === null || payload[k] === "") payload[k] = current[k];
+        });
+        payload.completed = true;
+        payload.rewardClaimed = false;
+        payload.rewardAmount = rewardAmount;
+        payload.rewardType = "daily_quiz_challenge";
+        payload.rewardGameId = DAILY_CHALLENGE_GAME_ID;
+        payload.rewardStatus = "claiming";
+        payload.rewardClaimId = claimId;
+        payload.claimStartedAt = now;
+      }
+      return payload;
+    }).then(function(lockResult){
+      var locked = lockResult && lockResult.snapshot && lockResult.snapshot.val ? lockResult.snapshot.val() : null;
+      if (!lockResult || lockResult.committed !== true) {
+        if (locked && locked.rewardClaimed === true) return alreadyClaimedResult(locked);
+        return pendingResult(locked);
+      }
+
+      return applyVCoinEarnTransaction(PLAYER.playerKey, {
+        reason: "daily_quiz_challenge",
+        amount: rewardAmount,
+        gameId: DAILY_CHALLENGE_GAME_ID,
+        sourceLogId: sourceLogId || "",
+        dateKey: challenge.dateKey
+      }).then(function(coinResult){
+        var rewardedAt = Date.now();
+        var finalPayload = buildCompletionPayload({
+          rewardClaimed: true,
+          rewardStatus: "claimed",
+          rewardClaimId: claimId,
+          rewardedAt: rewardedAt,
+          vCoinLogId: coinResult.logId || "",
+          balanceAfter: coinResult.balanceAfter
+        });
+
+        return challengeRef.transaction(function(currentData){
+          var current = currentData || {};
+          if (current.rewardClaimed === true) return current;
+          if (current.rewardClaimId && current.rewardClaimId !== claimId && current.rewardStatus === "claiming") return;
+          Object.keys(current).forEach(function(k){
+            if (finalPayload[k] === undefined || finalPayload[k] === null || finalPayload[k] === "") finalPayload[k] = current[k];
+          });
+          finalPayload.completed = true;
+          finalPayload.rewardClaimed = true;
+          finalPayload.rewardStatus = "claimed";
+          finalPayload.rewardAmount = rewardAmount;
+          finalPayload.rewardType = "daily_quiz_challenge";
+          finalPayload.rewardGameId = DAILY_CHALLENGE_GAME_ID;
+          finalPayload.rewardedAt = rewardedAt;
+          finalPayload.vCoinLogId = coinResult.logId || "";
+          finalPayload.balanceAfter = coinResult.balanceAfter;
+          return finalPayload;
+        }).then(function(finalResult){
+          var saved = finalResult && finalResult.snapshot && finalResult.snapshot.val ? finalResult.snapshot.val() : finalPayload;
+          DAILY_CHALLENGE_STATUS = { challenge: challenge, completed: true, record: saved, loaded: true };
+          renderDailyChallengeCard();
+          updateWalletBalanceUI(coinResult.balanceAfter);
+          return {
+            completed:true,
+            reason:"daily_challenge_completed",
+            challenge:challenge,
+            record:saved,
+            rewardClaimed:true,
+            rewardAmount:rewardAmount,
+            balanceAfter:coinResult.balanceAfter
+          };
+        });
+      }).catch(function(err){
+        console.warn("[DailyChallenge] reward failed:", err);
+        return challengeRef.update({
+          completed: true,
+          rewardClaimed: false,
+          rewardStatus: "reward_failed",
+          rewardError: String(err && err.message ? err.message : err),
+          rewardFailedAt: Date.now()
+        }).then(function(){
+          return loadWalletBalance(PLAYER.playerKey).then(function(balance){
+            DAILY_CHALLENGE_STATUS = { challenge: challenge, completed: true, record: buildCompletionPayload({ rewardStatus:"reward_failed" }), loaded: true };
+            renderDailyChallengeCard();
+            return {
+              completed:true,
+              reason:"reward_failed",
+              challenge:challenge,
+              rewardClaimed:false,
+              rewardAmount:0,
+              balanceAfter: typeof balance === "number" ? balance : undefined,
+              error:err
+            };
+          });
+        });
       });
     });
   });
@@ -2145,11 +2297,19 @@ function renderDailyChallengeCard(){
   if (desc) desc.textContent = (c.subjectEmoji || "📘") + " " + c.description;
   card.classList.toggle("completed", !!status.completed);
   if (stat) {
-    stat.textContent = status.completed ? "今日挑戰已完成！明天會換新的挑戰。" : "完成指定年級與科目後，會留下今日挑戰紀錄。";
+    var record = status.record || {};
+    if (status.completed && record.rewardClaimed === true) {
+      stat.textContent = "今日挑戰已完成，+10 V幣已領取。";
+    } else if (status.completed) {
+      stat.textContent = "今日挑戰已完成，但 +10 V幣尚未領取；再完成一次今日挑戰可嘗試補領。";
+    } else {
+      stat.textContent = "完成指定年級與科目後，可領取 +10 V幣。";
+    }
   }
   if (btn) {
-    btn.textContent = status.completed ? "已完成" : "開始今日挑戰";
-    btn.disabled = !!status.completed;
+    var recordForButton = status.record || {};
+    btn.textContent = status.completed ? (recordForButton.rewardClaimed === true ? "已完成" : "補領今日獎勵") : "開始今日挑戰";
+    btn.disabled = !!(status.completed && recordForButton.rewardClaimed === true);
   }
 }
 
@@ -2177,20 +2337,32 @@ function showDailyChallengeResultBanner(dailyResult){
   var title = $("daily-result-title");
   var msg = $("daily-result-message");
   var c = dailyResult.challenge || getDailyChallengeForDate();
-  if (dailyResult.completed) {
+  if (dailyResult.completed && dailyResult.rewardClaimed === true) {
+    box.classList.add("completed");
+    if (title) title.textContent = "🎯 今日挑戰完成！+" + (dailyResult.rewardAmount || 10) + " V幣";
+    if (msg) msg.textContent = c.description + " 已完成，今日挑戰獎勵 +" + (dailyResult.rewardAmount || 10) + " V幣！" + (typeof dailyResult.balanceAfter === "number" ? "\n目前餘額：" + dailyResult.balanceAfter + " V幣" : "");
+  } else if (dailyResult.completed && dailyResult.reason === "reward_pending") {
+    box.classList.add("failed");
+    if (title) title.textContent = "今日挑戰獎勵處理中";
+    if (msg) msg.textContent = "今日挑戰已完成，但 +10 V幣尚未確認入帳。請稍後再試一次今日挑戰補領。" + (typeof dailyResult.balanceAfter === "number" ? "\n目前餘額：" + dailyResult.balanceAfter + " V幣" : "");
+  } else if (dailyResult.completed && dailyResult.reason === "reward_failed") {
+    box.classList.add("failed");
+    if (title) title.textContent = "今日挑戰完成，但獎勵未入帳";
+    if (msg) msg.textContent = "今日挑戰已完成，但 +10 V幣寫入失敗；系統保留補領狀態，請稍後再完成一次今日挑戰補領。" + (typeof dailyResult.balanceAfter === "number" ? "\n目前餘額：" + dailyResult.balanceAfter + " V幣" : "");
+  } else if (dailyResult.completed) {
     box.classList.add("completed");
     if (title) title.textContent = "🎯 今日挑戰完成！";
-    if (msg) msg.textContent = c.description + " 已完成，明天再來挑戰新的題目！";
+    if (msg) msg.textContent = c.description + " 已完成。" + (typeof dailyResult.balanceAfter === "number" ? "\n目前餘額：" + dailyResult.balanceAfter + " V幣" : "");
   } else if (dailyResult.alreadyCompleted) {
     box.classList.add("completed");
     if (title) title.textContent = "今日挑戰已完成";
-    if (msg) msg.textContent = "你今天已經完成今日挑戰，明天會換新的挑戰。";
+    if (msg) msg.textContent = "你今天已經完成今日挑戰，今日獎勵已領取。" + (typeof dailyResult.balanceAfter === "number" ? "\n目前餘額：" + dailyResult.balanceAfter + " V幣" : "");
   } else if (dailyResult.reason === "not_today_challenge") {
     return;
   } else if (dailyResult.reason === "write_failed") {
     box.classList.add("failed");
     if (title) title.textContent = "今日挑戰紀錄失敗";
-    if (msg) msg.textContent = "本次成績已保存，但今日挑戰紀錄寫入失敗。";
+    if (msg) msg.textContent = "本次成績已保存，但今日挑戰紀錄或 +10 V幣獎勵寫入失敗。";
   } else {
     return;
   }
@@ -2676,7 +2848,7 @@ function showVCoinRewardBanner(vcoinResult){
     if (msg) msg.textContent = "+" + (vcoinResult.amount || 30) + " V幣" + (typeof vcoinResult.balanceAfter === "number" ? "\n目前餘額：" + vcoinResult.balanceAfter + " V幣" : "");
   } else if (vcoinResult.reason === "already_claimed") {
     box.classList.add("already");
-    if (title) title.textContent = "今日每日 V幣已領取";
+    if (title) title.textContent = "今日 V幣已領取";
     if (msg) msg.textContent = "明天再完成任一遊戲可再領 +30" + (typeof vcoinResult.balanceAfter === "number" ? "\n目前餘額：" + vcoinResult.balanceAfter + " V幣" : "");
   } else {
     box.classList.add("failed");
@@ -2821,10 +2993,12 @@ function saveQuizResult(totalTime, accuracy){
       if (vcoinResult && vcoinResult.reason === "write_failed") {
         lines.push("⚠️ V幣獎勵寫入失敗，請稍後再試");
       }
-      if (dailyChallengeResult && dailyChallengeResult.completed) {
-        lines.push("🎯 今日挑戰完成");
+      if (dailyChallengeResult && dailyChallengeResult.completed && dailyChallengeResult.rewardClaimed === true) {
+        lines.push("🎯 今日挑戰完成，+" + (dailyChallengeResult.rewardAmount || 10) + " V幣");
+      } else if (dailyChallengeResult && dailyChallengeResult.completed && dailyChallengeResult.rewardClaimed !== true) {
+        lines.push("🎯 今日挑戰完成，+10 V幣待補領");
       } else if (dailyChallengeResult && dailyChallengeResult.reason === "write_failed") {
-        lines.push("⚠️ 今日挑戰紀錄寫入失敗");
+        lines.push("⚠️ 今日挑戰紀錄或 +10 V幣獎勵寫入失敗");
       }
       if (result.syncWarnings && result.syncWarnings.length) {
         lines.push("⚠️ 部分進度 / 排行榜同步失敗，請稍後再試");

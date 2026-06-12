@@ -1,4 +1,4 @@
-/* 小V知識挑戰 quiz-v0.2.37-wallet-ui-sync-after-daily-challenge
+/* 小V知識挑戰 quiz-v0.2.39-wallet-dom-direct-final-sync
    目標：穩定可跑、沿用共用玩家身份、寫入 gameLogs/quiz、quizProgress 與年級累積排行榜。
    V幣：每日任一遊戲完成一次 +30 V幣；問答今日挑戰 +10 V幣，分別寫入 dailyRewards 與 dailyChallenges/quiz，正式來源為 Firebase wallet / vCoinLogs。
 */
@@ -16,7 +16,7 @@ var FIREBASE_CONFIG = {
 };
 var FIREBASE_ENABLED = true;
 
-var QUIZ_VERSION = "quiz-v0.2.37-wallet-ui-sync-after-daily-challenge";
+var QUIZ_VERSION = "quiz-v0.2.39-wallet-dom-direct-final-sync";
 
 var DB_PATHS = {
   gameLogs:            "gameLogs/quiz",
@@ -2245,8 +2245,9 @@ function saveDailyChallengeCompletion(record, sourceLogId){
           var saved = finalResult && finalResult.snapshot && finalResult.snapshot.val ? finalResult.snapshot.val() : finalPayload;
           DAILY_CHALLENGE_STATUS = { challenge: challenge, completed: true, record: saved, loaded: true };
           renderDailyChallengeCard();
-          updateWalletBalanceUI(coinResult.balanceAfter);
+          forceWalletBalanceUIDirect(coinResult.balanceAfter, "daily_quiz_challenge");
           updatePlayerUI();
+          forceWalletBalanceUIDirect(coinResult.balanceAfter, "daily_quiz_challenge_after_player_ui");
           return {
             completed:true,
             reason:"daily_challenge_completed",
@@ -2335,6 +2336,14 @@ function showDailyChallengeResultBanner(dailyResult){
   box.classList.add("hidden");
   box.classList.remove("pop", "completed", "missed", "failed");
   if (!dailyResult) return;
+
+  // v0.2.38：每日首次完成 +30 與今日挑戰 +10 會在同一個結算流程中出現。
+  // showVCoinRewardBanner 可能先用 +30 的 balanceAfter 更新右上角，
+  // 因此今日挑戰 banner 必須再用最新的 +10 後餘額覆蓋一次，避免右上角停在 30。
+  if (typeof dailyResult.balanceAfter === "number" && isFinite(dailyResult.balanceAfter)) {
+    forceWalletBalanceUIDirect(dailyResult.balanceAfter, "show_daily_challenge_banner");
+  }
+
   var title = $("daily-result-title");
   var msg = $("daily-result-message");
   var c = dailyResult.challenge || getDailyChallengeForDate();
@@ -2389,6 +2398,39 @@ function updateWalletBalanceUI(balance){
   var text = typeof PLAYER_WALLET_BALANCE === "number" ? String(PLAYER_WALLET_BALANCE) : "—";
   if ($("top-vcoin-balance")) $("top-vcoin-balance").textContent = "🪙 V幣：" + text;
   if ($("profile-vcoin-balance")) $("profile-vcoin-balance").textContent = text;
+}
+
+function forceWalletBalanceUIDirect(balance, reason){
+  if (!(typeof balance === "number" && isFinite(balance))) return;
+  PLAYER_WALLET_BALANCE = balance;
+  var text = String(balance);
+
+  function apply(){
+    // v0.2.39：結算畫面右上角玩家卡偶爾會被舊的 +30 顯示結果覆蓋。
+    // 這裡不只改全域狀態，也直接改 DOM，並在下一個 repaint / 短延遲後再補一次。
+    var top = $("top-vcoin-balance");
+    var profile = $("profile-vcoin-balance");
+    if (top) {
+      top.textContent = "🪙 V幣：" + text;
+      top.setAttribute("data-wallet-balance", text);
+      if (top.parentElement) top.parentElement.setAttribute("data-wallet-balance", text);
+    }
+    if (profile) {
+      profile.textContent = text;
+      profile.setAttribute("data-wallet-balance", text);
+    }
+    if (document && document.body) {
+      document.body.setAttribute("data-wallet-balance", text);
+      document.body.setAttribute("data-wallet-sync-reason", reason || "wallet_sync");
+    }
+  }
+
+  updateWalletBalanceUI(balance);
+  apply();
+  if (typeof requestAnimationFrame === "function") requestAnimationFrame(apply);
+  setTimeout(apply, 0);
+  setTimeout(apply, 120);
+  setTimeout(apply, 400);
 }
 
 function loadWalletBalance(playerKey){
@@ -2499,8 +2541,9 @@ function claimDailyAnyGameReward(playerKey, gameId, sourceLogId){
         sourceLogId: sourceLogId || "",
         dateKey: dateKey
       }).then(function(coinResult){
-        updateWalletBalanceUI(coinResult.balanceAfter);
+        forceWalletBalanceUIDirect(coinResult.balanceAfter, "daily_any_game_complete");
         updatePlayerUI();
+        forceWalletBalanceUIDirect(coinResult.balanceAfter, "daily_any_game_complete_after_player_ui");
         return {
           claimed: true,
           amount: amount,
@@ -2981,6 +3024,25 @@ function saveQuizResult(totalTime, accuracy){
       showVCoinRewardBanner(vcoinResult);
       showBadgeUnlockBanner(badgeResult);
       showDailyChallengeResultBanner(dailyChallengeResult);
+
+      // v0.2.38：結算所有獎勵 banner 都渲染後，再做最後一次錢包 UI 對齊。
+      // 優先使用今日挑戰 +10 後的 balanceAfter；沒有今日挑戰獎勵時才使用每日 +30 的 balanceAfter。
+      var finalWalletBalance = null;
+      if (dailyChallengeResult && typeof dailyChallengeResult.balanceAfter === "number" && isFinite(dailyChallengeResult.balanceAfter)) {
+        finalWalletBalance = dailyChallengeResult.balanceAfter;
+      } else if (vcoinResult && typeof vcoinResult.balanceAfter === "number" && isFinite(vcoinResult.balanceAfter)) {
+        finalWalletBalance = vcoinResult.balanceAfter;
+      }
+      if (typeof finalWalletBalance === "number") {
+        forceWalletBalanceUIDirect(finalWalletBalance, "result_final_sync_before_player_ui");
+        updatePlayerUI();
+        forceWalletBalanceUIDirect(finalWalletBalance, "result_final_sync_after_player_ui");
+        loadWalletBalance(PLAYER.playerKey).then(function(firebaseBalance){
+          if (typeof firebaseBalance === "number" && isFinite(firebaseBalance)) {
+            forceWalletBalanceUIDirect(firebaseBalance, "result_final_firebase_wallet_confirm");
+          }
+        });
+      }
 
       var lines = ["✅ 本次紀錄已保存"];
       if (bestUpdated) lines.push("✅ " + subjectName + "最佳紀錄刷新！");

@@ -1037,3 +1037,38 @@ main{flex:1;display:grid;place-items:center;padding:20px}
 .profile-wallet-box strong::after{content:"";}
 .player-chip{cursor:pointer;}
 .player-chip:focus-visible{outline:3px solid rgba(155,93,229,.35);outline-offset:4px;}
+
+/* v0.2.34 daily challenge */
+.daily-challenge-card{
+  margin:16px 0 6px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+  padding:14px 16px;
+  border-radius:24px;
+  border:2px solid rgba(155,93,229,.22);
+  background:linear-gradient(135deg,#fff9ff,#f4edff);
+  box-shadow:0 10px 26px rgba(155,93,229,.09);
+  text-align:left;
+}
+.daily-challenge-main{display:flex;align-items:center;gap:12px;min-width:0;}
+.daily-challenge-icon{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#fff;font-size:24px;box-shadow:0 0 0 4px rgba(155,93,229,.12);flex:0 0 auto;}
+.daily-challenge-card strong{display:block;color:#7f4da8;font-size:17px;font-weight:1000;margin-bottom:3px;}
+.daily-challenge-card p{margin:0;color:#5a3a4a;font-weight:900;font-size:14px;}
+.daily-challenge-card small{display:block;color:#9b7a8a;font-weight:800;font-size:12px;margin-top:3px;}
+.daily-challenge-card.completed{background:linear-gradient(135deg,#effff7,#f6fff0);border-color:rgba(62,207,142,.35);}
+.daily-challenge-card.completed strong{color:#269b67;}
+.daily-challenge-card .btn[disabled]{opacity:.55;cursor:not-allowed;transform:none;}
+.daily-result-banner{display:flex;align-items:center;gap:12px;background:linear-gradient(135deg,#effff7,#f6fff0);border:2px solid rgba(62,207,142,.45);border-radius:20px;padding:12px 14px;margin:12px 0;color:#245f45;box-shadow:0 8px 24px rgba(62,207,142,.14);text-align:left;}
+.daily-result-banner.hidden{display:none!important;}
+.daily-result-banner.failed{background:linear-gradient(135deg,#fff0f0,#ffe1e1);border-color:rgba(255,107,107,.45);color:#7d3030;}
+.daily-result-spark{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#fff;font-size:26px;box-shadow:0 0 0 4px rgba(62,207,142,.16);}
+.daily-result-banner strong{display:block;font-size:18px;font-weight:1000;color:#279b68;margin-bottom:4px;}
+.daily-result-banner.failed strong{color:#b23838;}
+.daily-result-banner p{margin:0;font-size:13px;font-weight:900;line-height:1.5;white-space:pre-line;}
+.daily-result-banner.pop{animation:unlockPop .48s cubic-bezier(.34,1.56,.64,1);}
+@media(max-width:720px){
+  .daily-challenge-card{flex-direction:column;align-items:stretch;}
+  .daily-challenge-card .btn{width:100%;}
+}

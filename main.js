@@ -1,4 +1,4 @@
-/* 小V知識挑戰 quiz-v0.2.33-question-template-system-test-1
+/* 小V知識挑戰 quiz-v0.2.34-daily-challenge-test-1
    目標：穩定可跑、沿用共用玩家身份、寫入 gameLogs/quiz、quizProgress 與年級累積排行榜。
    V幣：測試版加入每日任一遊戲完成一次 +30 V幣，正式來源為 Firebase wallet / dailyRewards / vCoinLogs。
 */
@@ -16,7 +16,7 @@ var FIREBASE_CONFIG = {
 };
 var FIREBASE_ENABLED = true;
 
-var QUIZ_VERSION = "quiz-v0.2.33-question-template-system-test-1";
+var QUIZ_VERSION = "quiz-v0.2.34-daily-challenge-test-1";
 
 var DB_PATHS = {
   gameLogs:            "gameLogs/quiz",
@@ -157,6 +157,10 @@ var SUBJECT_OPTIONS = [
   {key:"brand", name:"小V品牌", emoji:"✨"},
   {key:"brain", name:"腦筋急轉彎", emoji:"🧠"}
 ];
+
+// ── v0.2.34 每日挑戰第一版：每日指定一個年級 + 科目，不額外發 V幣 ──
+var DAILY_CHALLENGE_GAME_ID = "quiz";
+var DAILY_CHALLENGE_STATUS = null;
 
 
 // ── v0.2.33 數學題目模板系統：第一版只用在數學科目 ──
@@ -784,6 +788,7 @@ function showScreen(id){
   if (id === "screen-title") {
     setImageSrc("home-host-image", HOST_ART.intro);
     setImageSrc("academy-host-image", HOST_ART.correct);
+    loadDailyChallengeStatus();
   }
   if (id === "screen-leaderboard") {
     setImageSrc("leaderboard-brand-image", HOST_ART.ranking || HOST_ART.intro);
@@ -2025,6 +2030,176 @@ function getTaiwanDateKey(dateInput){
   return String(y) + m + day;
 }
 
+
+function hashDateKeyForDailyChallenge(dateKey){
+  var str = "vquiz-daily-" + String(dateKey || "");
+  var h = 0;
+  for (var i=0;i<str.length;i++) {
+    h = ((h << 5) - h) + str.charCodeAt(i);
+    h |= 0;
+  }
+  return Math.abs(h);
+}
+
+function getDailyChallengeForDate(dateKey){
+  dateKey = dateKey || getTaiwanDateKey();
+  var h = hashDateKeyForDailyChallenge(dateKey);
+  var grade = GRADE_OPTIONS[h % GRADE_OPTIONS.length];
+  var subject = SUBJECT_OPTIONS[Math.floor(h / GRADE_OPTIONS.length) % SUBJECT_OPTIONS.length];
+  return {
+    dateKey: dateKey,
+    gradeBand: grade.key,
+    gradeBandName: grade.name,
+    subject: subject.key,
+    subjectName: subject.name,
+    subjectEmoji: subject.emoji || "📘",
+    title: "今日挑戰",
+    description: (grade.name || grade.key) + "・" + (subject.name || subject.key)
+  };
+}
+
+function isRecordMatchingDailyChallenge(record, challenge){
+  if (!record || !challenge) return false;
+  return record.gradeBand === challenge.gradeBand && record.subject === challenge.subject;
+}
+
+function loadDailyChallengeStatus(){
+  var challenge = getDailyChallengeForDate();
+  DAILY_CHALLENGE_STATUS = {
+    challenge: challenge,
+    completed: false,
+    record: null,
+    loaded: false
+  };
+  if (!PLAYER || !PLAYER.playerKey) {
+    renderDailyChallengeCard();
+    return Promise.resolve(DAILY_CHALLENGE_STATUS);
+  }
+  return ensureFirebaseReady().then(function(ok){
+    if (!ok || !firebaseDb) return DAILY_CHALLENGE_STATUS;
+    return firebaseDb.ref(DB_PATHS.players + "/" + PLAYER.playerKey + "/dailyQuizChallenges/" + challenge.dateKey).once("value").then(function(snap){
+      var data = snap.val();
+      DAILY_CHALLENGE_STATUS.completed = !!(data && data.completed === true);
+      DAILY_CHALLENGE_STATUS.record = data || null;
+      DAILY_CHALLENGE_STATUS.loaded = true;
+      renderDailyChallengeCard();
+      return DAILY_CHALLENGE_STATUS;
+    });
+  }).catch(function(err){
+    console.warn("[DailyChallenge] load failed:", err);
+    renderDailyChallengeCard();
+    return DAILY_CHALLENGE_STATUS;
+  });
+}
+
+function saveDailyChallengeCompletion(record, sourceLogId){
+  var challenge = getDailyChallengeForDate();
+  if (!isRecordMatchingDailyChallenge(record, challenge)) {
+    return Promise.resolve({ completed:false, reason:"not_today_challenge", challenge:challenge });
+  }
+  if (!PLAYER || !PLAYER.playerKey) {
+    return Promise.resolve({ completed:false, reason:"missing_player", challenge:challenge });
+  }
+  return ensureFirebaseReady().then(function(ok){
+    if (!ok || !firebaseDb) throw new Error("Firebase not ready");
+    var payload = {
+      completed: true,
+      gameId: DAILY_CHALLENGE_GAME_ID,
+      dateKey: challenge.dateKey,
+      gradeBand: challenge.gradeBand,
+      gradeBandName: challenge.gradeBandName,
+      subject: challenge.subject,
+      subjectName: challenge.subjectName,
+      sourceLogId: sourceLogId || "",
+      score: Number(record.score || 0),
+      correctCount: Number(record.correctCount || 0),
+      totalQuestions: Number(record.totalQuestions || 0),
+      completedAt: Date.now()
+    };
+    return firebaseDb.ref(DB_PATHS.players + "/" + PLAYER.playerKey + "/dailyQuizChallenges/" + challenge.dateKey).once("value").then(function(snap){
+      if (snap.exists() && snap.val() && snap.val().completed === true) {
+        var existing = snap.val();
+        DAILY_CHALLENGE_STATUS = { challenge: challenge, completed: true, record: existing, loaded: true };
+        renderDailyChallengeCard();
+        return { completed:false, alreadyCompleted:true, reason:"already_completed", challenge:challenge, record:existing };
+      }
+      return firebaseDb.ref(DB_PATHS.players + "/" + PLAYER.playerKey + "/dailyQuizChallenges/" + challenge.dateKey).set(payload).then(function(){
+        DAILY_CHALLENGE_STATUS = { challenge: challenge, completed: true, record: payload, loaded: true };
+        renderDailyChallengeCard();
+        return { completed:true, reason:"daily_challenge_completed", challenge:challenge, record:payload };
+      });
+    });
+  });
+}
+
+function renderDailyChallengeCard(){
+  var card = $("daily-challenge-card");
+  if (!card) return;
+  var status = DAILY_CHALLENGE_STATUS || { challenge:getDailyChallengeForDate(), completed:false };
+  var c = status.challenge || getDailyChallengeForDate();
+  var title = $("daily-challenge-title");
+  var desc = $("daily-challenge-desc");
+  var stat = $("daily-challenge-status");
+  var btn = $("btn-daily-challenge");
+  if (title) title.textContent = "🎯 今日挑戰";
+  if (desc) desc.textContent = (c.subjectEmoji || "📘") + " " + c.description;
+  card.classList.toggle("completed", !!status.completed);
+  if (stat) {
+    stat.textContent = status.completed ? "今日挑戰已完成！明天會換新的挑戰。" : "完成指定年級與科目後，會留下今日挑戰紀錄。";
+  }
+  if (btn) {
+    btn.textContent = status.completed ? "已完成" : "開始今日挑戰";
+    btn.disabled = !!status.completed;
+  }
+}
+
+function openDailyChallenge(){
+  if (!hasConfirmedQuizProfile()) {
+    toast("首次遊玩請先確認玩家身份。");
+    showScreen("screen-profile");
+    return;
+  }
+  var c = getDailyChallengeForDate();
+  selectedGrade = c.gradeBand;
+  selectedSubject = c.subject;
+  buildSetupOptions();
+  updateQuestionCountHint();
+  showScreen("screen-setup");
+  toast("今日挑戰：" + c.description);
+}
+
+function showDailyChallengeResultBanner(dailyResult){
+  var box = $("result-daily-challenge-banner");
+  if (!box) return;
+  box.classList.add("hidden");
+  box.classList.remove("pop", "completed", "missed", "failed");
+  if (!dailyResult) return;
+  var title = $("daily-result-title");
+  var msg = $("daily-result-message");
+  var c = dailyResult.challenge || getDailyChallengeForDate();
+  if (dailyResult.completed) {
+    box.classList.add("completed");
+    if (title) title.textContent = "🎯 今日挑戰完成！";
+    if (msg) msg.textContent = c.description + " 已完成，明天再來挑戰新的題目！";
+  } else if (dailyResult.alreadyCompleted) {
+    box.classList.add("completed");
+    if (title) title.textContent = "今日挑戰已完成";
+    if (msg) msg.textContent = "你今天已經完成今日挑戰，明天會換新的挑戰。";
+  } else if (dailyResult.reason === "not_today_challenge") {
+    return;
+  } else if (dailyResult.reason === "write_failed") {
+    box.classList.add("failed");
+    if (title) title.textContent = "今日挑戰紀錄失敗";
+    if (msg) msg.textContent = "本次成績已保存，但今日挑戰紀錄寫入失敗。";
+  } else {
+    return;
+  }
+  box.classList.remove("hidden");
+  box.classList.remove("pop");
+  void box.offsetWidth;
+  box.classList.add("pop");
+}
+
 function normalizeWalletData(wallet){
   wallet = wallet || {};
   var balance = Number(wallet.balance || 0);
@@ -2517,6 +2692,7 @@ function saveQuizResult(totalTime, accuracy){
   if ($("result-unlock-banner")) $("result-unlock-banner").classList.add("hidden");
   if ($("result-vcoin-banner")) $("result-vcoin-banner").classList.add("hidden");
   if ($("result-badge-banner")) $("result-badge-banner").classList.add("hidden");
+  if ($("result-daily-challenge-banner")) $("result-daily-challenge-banner").classList.add("hidden");
 
   saveLocalLog(record);
 
@@ -2550,6 +2726,7 @@ function saveQuizResult(totalTime, accuracy){
         academyAfter: null,
         vcoinResult: null,
         badgeResult: null,
+        dailyChallengeResult: null,
         syncWarnings: []
       };
 
@@ -2599,6 +2776,12 @@ function saveQuizResult(totalTime, accuracy){
         })
         .then(function(badgeResult){
           result.badgeResult = badgeResult || { unlocked: [] };
+          return safeStep("save daily challenge", function(){
+            return saveDailyChallengeCompletion(record, sourceLogId);
+          }, { completed:false, reason:"write_failed", challenge:getDailyChallengeForDate() });
+        })
+        .then(function(dailyChallengeResult){
+          result.dailyChallengeResult = dailyChallengeResult || null;
           if (result.badgeResult && result.badgeResult.unlocked && result.badgeResult.unlocked.length) {
             return safeStep("sync leaderboard title snapshot", function(){
               return syncLeaderboardTitleSnapshot(record.gradeBand);
@@ -2616,11 +2799,13 @@ function saveQuizResult(totalTime, accuracy){
       var unlockResult = result.unlockResult || null;
       var vcoinResult = result.vcoinResult || null;
       var badgeResult = result.badgeResult || null;
+      var dailyChallengeResult = result.dailyChallengeResult || null;
       var subjectName = record.subjectName || record.subject;
 
       showAvatarUnlockBanner(unlockResult);
       showVCoinRewardBanner(vcoinResult);
       showBadgeUnlockBanner(badgeResult);
+      showDailyChallengeResultBanner(dailyChallengeResult);
 
       var lines = ["✅ 本次紀錄已保存"];
       if (bestUpdated) lines.push("✅ " + subjectName + "最佳紀錄刷新！");
@@ -2635,6 +2820,11 @@ function saveQuizResult(totalTime, accuracy){
 
       if (vcoinResult && vcoinResult.reason === "write_failed") {
         lines.push("⚠️ V幣獎勵寫入失敗，請稍後再試");
+      }
+      if (dailyChallengeResult && dailyChallengeResult.completed) {
+        lines.push("🎯 今日挑戰完成");
+      } else if (dailyChallengeResult && dailyChallengeResult.reason === "write_failed") {
+        lines.push("⚠️ 今日挑戰紀錄寫入失敗");
       }
       if (result.syncWarnings && result.syncWarnings.length) {
         lines.push("⚠️ 部分進度 / 排行榜同步失敗，請稍後再試");
@@ -4074,6 +4264,8 @@ function bindMusicEvents(){
 
 function bindEvents(){
   $("btn-go-profile").addEventListener("click", function(){ showScreen("screen-profile"); });
+  if ($("btn-daily-challenge")) $("btn-daily-challenge").addEventListener("click", openDailyChallenge);
+
   if ($("top-player-card")) {
     $("top-player-card").addEventListener("click", function(){ showScreen("screen-profile"); });
     $("top-player-card").addEventListener("keydown", function(e){

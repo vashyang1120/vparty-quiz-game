@@ -1,4 +1,4 @@
-/* 小V知識挑戰 quiz-v0.2.32-polish-and-rules-notes
+/* 小V知識挑戰 quiz-v0.2.33-question-template-system-test-1
    目標：穩定可跑、沿用共用玩家身份、寫入 gameLogs/quiz、quizProgress 與年級累積排行榜。
    V幣：測試版加入每日任一遊戲完成一次 +30 V幣，正式來源為 Firebase wallet / dailyRewards / vCoinLogs。
 */
@@ -16,7 +16,7 @@ var FIREBASE_CONFIG = {
 };
 var FIREBASE_ENABLED = true;
 
-var QUIZ_VERSION = "quiz-v0.2.32-polish-and-rules-notes";
+var QUIZ_VERSION = "quiz-v0.2.33-question-template-system-test-1";
 
 var DB_PATHS = {
   gameLogs:            "gameLogs/quiz",
@@ -157,6 +157,304 @@ var SUBJECT_OPTIONS = [
   {key:"brand", name:"小V品牌", emoji:"✨"},
   {key:"brain", name:"腦筋急轉彎", emoji:"🧠"}
 ];
+
+
+// ── v0.2.33 數學題目模板系統：第一版只用在數學科目 ──
+// 原則：每場數學最多混入 4 題動態模板題，其餘仍使用靜態題庫，降低風險並減少背答案。
+var MATH_TEMPLATE_MAX_PER_GAME = 4;
+var MATH_QUESTION_TEMPLATES = [
+  {
+    templateId: "low_add_within_20",
+    gradeBand: "low",
+    difficulty: 1,
+    make: function(){
+      var a = randInt(2, 12);
+      var b = randInt(2, 8);
+      var ans = a + b;
+      return makeMathQuestionPayload(
+        "小V有 " + a + " 顆氣球，又收到 " + b + " 顆，現在共有幾顆？",
+        ans,
+        " 顆",
+        a + " + " + b + " = " + ans + "，所以共有 " + ans + " 顆。",
+        [ans + 1, ans - 1, ans + 2]
+      );
+    }
+  },
+  {
+    templateId: "low_sub_within_20",
+    gradeBand: "low",
+    difficulty: 1,
+    make: function(){
+      var a = randInt(8, 20);
+      var b = randInt(2, Math.min(9, a - 1));
+      var ans = a - b;
+      return makeMathQuestionPayload(
+        "桌上有 " + a + " 顆氣球，送出 " + b + " 顆，還剩幾顆？",
+        ans,
+        " 顆",
+        a + " - " + b + " = " + ans + "，所以還剩 " + ans + " 顆。",
+        [ans + 1, ans - 1, ans + 2]
+      );
+    }
+  },
+  {
+    templateId: "low_two_digit_plus_one_digit",
+    gradeBand: "low",
+    difficulty: 1,
+    make: function(){
+      var a = randInt(12, 39);
+      var b = randInt(2, 9);
+      var ans = a + b;
+      return makeMathQuestionPayload(
+        a + " + " + b + " = ?",
+        ans,
+        "",
+        a + " 加 " + b + " 等於 " + ans + "。",
+        [ans + 1, ans - 1, ans + 10]
+      );
+    }
+  },
+  {
+    templateId: "low_money_change_easy",
+    gradeBand: "low",
+    difficulty: 2,
+    make: function(){
+      var paid = [20, 30, 50][randInt(0,2)];
+      var price = randInt(6, Math.min(25, paid - 3));
+      var ans = paid - price;
+      return makeMathQuestionPayload(
+        "買一個小氣球花了 " + price + " 元，付 " + paid + " 元，要找回幾元？",
+        ans,
+        " 元",
+        paid + " - " + price + " = " + ans + "，所以要找回 " + ans + " 元。",
+        [ans + 1, Math.max(1, ans - 1), ans + 5]
+      );
+    }
+  },
+  {
+    templateId: "middle_multiplication",
+    gradeBand: "middle",
+    difficulty: 2,
+    make: function(){
+      var a = randInt(3, 9);
+      var b = randInt(3, 9);
+      var ans = a * b;
+      return makeMathQuestionPayload(
+        "每束有 " + a + " 顆氣球，做 " + b + " 束，共需要幾顆？",
+        ans,
+        " 顆",
+        a + " × " + b + " = " + ans + "。",
+        [ans + a, ans - a, ans + b]
+      );
+    }
+  },
+  {
+    templateId: "middle_division",
+    gradeBand: "middle",
+    difficulty: 2,
+    make: function(){
+      var b = randInt(3, 9);
+      var ans = randInt(3, 9);
+      var total = b * ans;
+      return makeMathQuestionPayload(
+        total + " 顆氣球平均分成 " + b + " 組，每組幾顆？",
+        ans,
+        " 顆",
+        total + " ÷ " + b + " = " + ans + "。",
+        [ans + 1, Math.max(1, ans - 1), ans + 2]
+      );
+    }
+  },
+  {
+    templateId: "middle_two_step",
+    gradeBand: "middle",
+    difficulty: 3,
+    make: function(){
+      var groups = randInt(2, 5);
+      var each = randInt(4, 9);
+      var extra = randInt(3, 12);
+      var ans = groups * each + extra;
+      return makeMathQuestionPayload(
+        "小V做了 " + groups + " 組氣球，每組 " + each + " 顆，又多做 " + extra + " 顆，共幾顆？",
+        ans,
+        " 顆",
+        groups + " × " + each + " + " + extra + " = " + ans + "。",
+        [ans + each, ans - extra, ans + groups]
+      );
+    }
+  },
+  {
+    templateId: "middle_time_minutes",
+    gradeBand: "middle",
+    difficulty: 2,
+    make: function(){
+      var start = randInt(10, 35);
+      var duration = randInt(12, 35);
+      var ans = start + duration;
+      return makeMathQuestionPayload(
+        "氣球教學從第 " + start + " 分鐘開始，進行 " + duration + " 分鐘後，是第幾分鐘？",
+        ans,
+        " 分鐘",
+        start + " + " + duration + " = " + ans + "。",
+        [ans + 5, ans - 5, ans + 1]
+      );
+    }
+  },
+  {
+    templateId: "high_fraction_same_denominator",
+    gradeBand: "high",
+    difficulty: 3,
+    make: function(){
+      var den = [6, 8, 10, 12][randInt(0,3)];
+      var a = randInt(1, Math.floor(den/2));
+      var b = randInt(1, den - a - 1);
+      var num = a + b;
+      var ans = num + "/" + den;
+      return {
+        question: "把 " + a + "/" + den + " 條長條氣球和 " + b + "/" + den + " 條合起來，共是多少條？",
+        choices: buildUniqueChoices(ans, [ (num+1) + "/" + den, Math.max(1,num-1) + "/" + den, num + "/" + (den+2) ]),
+        answerIndex: 0,
+        explanation: "同分母分數相加，分母不變，分子相加：" + a + "/" + den + " + " + b + "/" + den + " = " + ans + "。"
+      };
+    }
+  },
+  {
+    templateId: "high_decimal_add",
+    gradeBand: "high",
+    difficulty: 3,
+    make: function(){
+      var a = randInt(12, 48) / 10;
+      var b = randInt(11, 39) / 10;
+      var ansNum = Math.round((a + b) * 10) / 10;
+      var ans = ansNum.toFixed(1);
+      return makeMathQuestionPayload(
+        "一段氣球長 " + a.toFixed(1) + " 公尺，另一段長 " + b.toFixed(1) + " 公尺，合起來幾公尺？",
+        ans,
+        " 公尺",
+        a.toFixed(1) + " + " + b.toFixed(1) + " = " + ans + "。",
+        [(ansNum + 0.1).toFixed(1), (ansNum - 0.1).toFixed(1), (ansNum + 1).toFixed(1)]
+      );
+    }
+  },
+  {
+    templateId: "high_ratio",
+    gradeBand: "high",
+    difficulty: 3,
+    make: function(){
+      var unitA = randInt(2, 5);
+      var unitB = randInt(1, 4);
+      var times = randInt(3, 8);
+      var totalA = unitA * times;
+      var ans = unitB * times;
+      return makeMathQuestionPayload(
+        "粉色和黃色氣球比例是 " + unitA + ":" + unitB + "。如果粉色有 " + totalA + " 顆，黃色有幾顆？",
+        ans,
+        " 顆",
+        "粉色從 " + unitA + " 變成 " + totalA + "，放大 " + times + " 倍，所以黃色是 " + unitB + " × " + times + " = " + ans + " 顆。",
+        [ans + unitB, Math.max(1, ans - unitB), ans + times]
+      );
+    }
+  },
+  {
+    templateId: "high_average",
+    gradeBand: "high",
+    difficulty: 3,
+    make: function(){
+      var a = randInt(6, 16);
+      var b = randInt(6, 16);
+      var c = randInt(6, 16);
+      var sum = a + b + c;
+      var ans = Math.round(sum / 3 * 10) / 10;
+      var ansText = (ans % 1 === 0) ? String(ans) : ans.toFixed(1);
+      return makeMathQuestionPayload(
+        "三場活動分別用了 " + a + "、" + b + "、" + c + " 顆氣球，平均每場用幾顆？",
+        ansText,
+        " 顆",
+        "先相加：" + a + " + " + b + " + " + c + " = " + sum + "，再除以 3，平均是 " + ansText + " 顆。",
+        [String(Number(ansText)+1), String(Math.max(1, Number(ansText)-1)), String(sum)]
+      );
+    }
+  }
+];
+
+function randInt(min, max){
+  min = Math.ceil(min); max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function buildUniqueChoices(correct, distractors){
+  var out = [];
+  function add(v){
+    var s = String(v);
+    if (out.indexOf(s) < 0) out.push(s);
+  }
+  add(correct);
+  (distractors || []).forEach(add);
+  var base = String(correct);
+  var n = parseFloat(base);
+  var guard = 0;
+  while (out.length < 4 && guard < 20) {
+    guard++;
+    if (!isNaN(n)) add(String(Math.max(0, Math.round(n + guard))));
+    else add(base + "選項" + guard);
+  }
+  return out.slice(0, 4);
+}
+
+function makeMathQuestionPayload(question, answer, suffix, explanation, distractors){
+  var correct = String(answer) + (suffix || "");
+  var wrongs = (distractors || []).map(function(v){ return String(v) + (suffix || ""); });
+  return {
+    question: question,
+    choices: buildUniqueChoices(correct, wrongs),
+    answerIndex: 0,
+    explanation: explanation
+  };
+}
+
+function makeGeneratedMathQuestion(template, index){
+  var payload = template.make();
+  var now = Date.now();
+  return {
+    id: "gen:" + template.templateId + ":" + now + ":" + index + ":" + Math.random().toString(36).slice(2, 8),
+    templateId: template.templateId,
+    generated: true,
+    type: "generated",
+    source: "template",
+    subject: "math",
+    subjectName: "數學",
+    gradeBand: template.gradeBand,
+    gradeBandName: getGradeName(template.gradeBand),
+    difficulty: template.difficulty || 1,
+    question: payload.question,
+    choices: payload.choices,
+    answerIndex: payload.answerIndex || 0,
+    explanation: payload.explanation,
+    tags: ["動態題", "數學模板"],
+    disabled: false,
+    quality: "ok",
+    reviewNote: ""
+  };
+}
+
+function buildGeneratedMathQuestions(gradeBand, maxCount){
+  if (selectedSubject !== "math") return [];
+  var templates = MATH_QUESTION_TEMPLATES.filter(function(t){ return t.gradeBand === gradeBand; });
+  var results = [];
+  var seenTexts = {};
+  var attempts = 0;
+  while (results.length < maxCount && attempts < maxCount * 10) {
+    attempts++;
+    var template = templates[randInt(0, templates.length - 1)];
+    if (!template) break;
+    var q = makeGeneratedMathQuestion(template, attempts);
+    var textKey = String(q.question || "").replace(/\s+/g, " ").trim();
+    if (!textKey || seenTexts[textKey]) continue;
+    seenTexts[textKey] = true;
+    results.push(q);
+  }
+  return results;
+}
 
 var QUIZ_BADGE_DEFS = [
   { badgeKey:"quiz_first_clear", titleKey:"v_academy_freshman", name:"V學園新生", description:"完成第一場問答挑戰", type:"first_clear" },
@@ -1210,9 +1508,12 @@ function isQuestionEnabled(q){
 }
 
 function getQuestionPool(){
-  return QUESTIONS.filter(function(q){
+  var staticPool = QUESTIONS.filter(function(q){
     return q.gradeBand === selectedGrade && q.subject === selectedSubject && isQuestionEnabled(q);
   });
+  if (selectedSubject !== "math") return staticPool;
+  var generated = buildGeneratedMathQuestions(selectedGrade, MATH_TEMPLATE_MAX_PER_GAME);
+  return staticPool.concat(generated);
 }
 
 function shuffle(arr){
@@ -3327,7 +3628,7 @@ function renderAdminQuestionStats(){
   if ($("adm-q-enabled")) $("adm-q-enabled").textContent = enabled;
   if ($("adm-q-disabled")) $("adm-q-disabled").textContent = disabled;
   if ($("adm-q-review")) $("adm-q-review").textContent = review;
-  if ($("adm-question-summary")) $("adm-question-summary").textContent = "管理者用統計，不顯示給玩家";
+  if ($("adm-question-summary")) $("adm-question-summary").textContent = "管理者用統計，不顯示給玩家｜數學動態模板 " + MATH_QUESTION_TEMPLATES.length + " 組";
 
   var wrap = $("adm-question-groups");
   if (!wrap) return;
@@ -3410,6 +3711,10 @@ function renderAdminHealth(firebaseOk){
   if ($("adm-health-overrides")) {
     $("adm-health-overrides").textContent = overrideCount ? (overrideCount + " 筆覆寫") : "無覆寫";
     $("adm-health-overrides").className = overrideCount ? "health-warn" : "health-ok";
+  }
+  if ($("adm-health-templates")) {
+    $("adm-health-templates").textContent = MATH_QUESTION_TEMPLATES.length + " 組";
+    $("adm-health-templates").className = "health-ok";
   }
   if ($("adm-health-index")) {
     $("adm-health-index").textContent = "建議補上";

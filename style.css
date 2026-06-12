@@ -978,7 +978,7 @@ main{flex:1;display:grid;place-items:center;padding:20px}
 .badge-banner p{margin:0;font-size:13px;font-weight:900;line-height:1.5;white-space:pre-line;color:#6b3d2f}
 .badge-banner.pop{animation:unlockPop .48s cubic-bezier(.34,1.56,.64,1)}
 
-/* v0.2.32 後台健康狀態與整理 */
+/* v0.2.33 題目模板系統與後台健康狀態 */
 .admin-health-grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(130px,1fr));

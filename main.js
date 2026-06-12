@@ -1,4 +1,4 @@
-/* 小V知識挑戰 quiz-v0.2.36-daily-challenge-reward-commit-fix
+/* 小V知識挑戰 quiz-v0.2.37-wallet-ui-sync-after-daily-challenge
    目標：穩定可跑、沿用共用玩家身份、寫入 gameLogs/quiz、quizProgress 與年級累積排行榜。
    V幣：每日任一遊戲完成一次 +30 V幣；問答今日挑戰 +10 V幣，分別寫入 dailyRewards 與 dailyChallenges/quiz，正式來源為 Firebase wallet / vCoinLogs。
 */
@@ -16,7 +16,7 @@ var FIREBASE_CONFIG = {
 };
 var FIREBASE_ENABLED = true;
 
-var QUIZ_VERSION = "quiz-v0.2.36-daily-challenge-reward-commit-fix";
+var QUIZ_VERSION = "quiz-v0.2.37-wallet-ui-sync-after-daily-challenge";
 
 var DB_PATHS = {
   gameLogs:            "gameLogs/quiz",
@@ -2246,6 +2246,7 @@ function saveDailyChallengeCompletion(record, sourceLogId){
           DAILY_CHALLENGE_STATUS = { challenge: challenge, completed: true, record: saved, loaded: true };
           renderDailyChallengeCard();
           updateWalletBalanceUI(coinResult.balanceAfter);
+          updatePlayerUI();
           return {
             completed:true,
             reason:"daily_challenge_completed",
@@ -2498,6 +2499,8 @@ function claimDailyAnyGameReward(playerKey, gameId, sourceLogId){
         sourceLogId: sourceLogId || "",
         dateKey: dateKey
       }).then(function(coinResult){
+        updateWalletBalanceUI(coinResult.balanceAfter);
+        updatePlayerUI();
         return {
           claimed: true,
           amount: amount,

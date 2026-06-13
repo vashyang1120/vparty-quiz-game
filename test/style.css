@@ -1139,6 +1139,26 @@ main{flex:1;display:grid;place-items:center;padding:20px}
   overflow-y:auto;
   -webkit-overflow-scrolling:touch;
 }
+
+.profile-status-grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:10px;
+}
+.profile-status-grid .identity-box,
+.profile-status-grid .profile-wallet-box,
+.profile-status-grid .profile-title-panel{
+  margin:0;
+}
+.profile-status-grid .identity-box strong{
+  display:block;
+  color:var(--text);
+  font-size:14px;
+  margin:4px 0 2px;
+}
+.profile-id-field{max-width:min(480px,94vw);margin:14px auto 10px;}
+#screen-profile .profile-preview-grid{max-width:min(560px,94vw);margin:12px auto 12px;}
+
 .profile-data-content .field{margin-top:0;}
 .profile-data-content .profile-preview-grid{margin:12px 0;}
 .profile-title-summary{margin-bottom:0;}

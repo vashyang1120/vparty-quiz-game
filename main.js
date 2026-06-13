@@ -1,4 +1,4 @@
-/* 小V知識挑戰 quiz-v0.2.39-wallet-dom-direct-final-sync
+/* 小V知識挑戰 quiz-v0.2.43
    目標：穩定可跑、沿用共用玩家身份、寫入 gameLogs/quiz、quizProgress 與年級累積排行榜。
    V幣：每日任一遊戲完成一次 +30 V幣；問答今日挑戰 +10 V幣，分別寫入 dailyRewards 與 dailyChallenges/quiz，正式來源為 Firebase wallet / vCoinLogs。
 */
@@ -16,7 +16,7 @@ var FIREBASE_CONFIG = {
 };
 var FIREBASE_ENABLED = true;
 
-var QUIZ_VERSION = "quiz-v0.2.39-wallet-dom-direct-final-sync";
+var QUIZ_VERSION = "quiz-v0.2.43";
 
 var DB_PATHS = {
   gameLogs:            "gameLogs/quiz",
@@ -794,6 +794,73 @@ function showScreen(id){
     setImageSrc("leaderboard-brand-image", HOST_ART.ranking || HOST_ART.intro);
     renderLeaderboard();
   }
+  updateFullscreenButtonVisibility(id);
+}
+
+function setProfileDataCollapsed(collapsed){
+  var card = $("profile-data-card");
+  var toggle = $("profile-data-toggle");
+  if (!card || !toggle) return;
+  card.classList.toggle("collapsed", !!collapsed);
+  toggle.setAttribute("aria-expanded", collapsed ? "false" : "true");
+  var label = toggle.querySelector("em");
+  if (label) label.textContent = collapsed ? "點擊展開" : "點擊可收合";
+}
+function collapseProfileData(){ setProfileDataCollapsed(true); }
+function expandProfileData(){ setProfileDataCollapsed(false); }
+function toggleProfileData(){
+  var card = $("profile-data-card");
+  setProfileDataCollapsed(!(card && card.classList.contains("collapsed")));
+}
+function scrollToProfileDataToggle(){
+  var el = $("profile-data-card") || $("profile-data-toggle");
+  if (el && typeof el.scrollIntoView === "function") {
+    setTimeout(function(){ el.scrollIntoView({ behavior:"smooth", block:"start" }); }, 40);
+  }
+}
+function closeProfileTitleCollection(){
+  var panel = $("profile-title-collection");
+  if (panel) panel.classList.add("hidden");
+}
+function openProfileTitleCollection(){
+  var panel = $("profile-title-collection");
+  if (!panel) return;
+  var picker = $("avatar-picker");
+  if (picker) picker.classList.add("hidden");
+  collapseProfileData();
+  renderTitlePicker();
+  panel.classList.remove("hidden");
+  scrollToProfileDataToggle();
+}
+function updateFullscreenButtonVisibility(screenId){
+  var btn = $("fs-btn");
+  if (!btn) return;
+  btn.classList.toggle("hidden", screenId === "screen-admin");
+}
+function isFullscreenActive(){
+  return !!(document.fullscreenElement || document.webkitFullscreenElement);
+}
+function updateFullscreenButtonLabel(){
+  var btn = $("fs-btn");
+  if (!btn) return;
+  btn.textContent = isFullscreenActive() ? "×" : "⛶";
+  btn.title = isFullscreenActive() ? "退出全螢幕" : "全螢幕";
+}
+function toggleFullscreen(){
+  var root = document.documentElement;
+  if (isFullscreenActive()) {
+    var exitFn = document.exitFullscreen || document.webkitExitFullscreen;
+    if (exitFn) {
+      var exitResult = exitFn.call(document);
+      if (exitResult && typeof exitResult.catch === "function") exitResult.catch(function(){});
+    }
+    return;
+  }
+  var reqFn = root.requestFullscreen || root.webkitRequestFullscreen;
+  if (reqFn) {
+    var reqResult = reqFn.call(root);
+    if (reqResult && typeof reqResult.catch === "function") reqResult.catch(function(){});
+  }
 }
 
 function normalizePlayerId(id) {
@@ -1230,6 +1297,7 @@ function updatePlayerUI(){
   if ($("base-avatar-preview")) $("base-avatar-preview").src = getAvatarUrl(PLAYER.baseAvatarKey);
   if ($("display-avatar-preview")) $("display-avatar-preview").src = PLAYER.avatarSrc;
   if ($("profile-player-key")) $("profile-player-key").textContent = getFriendlyIdentityLabel(normalizePlayerId($("player-id-input").value), PLAYER.baseAvatarKey);
+  if ($("profile-identity-label")) $("profile-identity-label").textContent = "身份：" + getFriendlyIdentityLabel(normalizePlayerId($("player-id-input").value), PLAYER.baseAvatarKey);
 }
 
 function getAvailableDisplayAvatars(){
@@ -1320,6 +1388,8 @@ function buildAvatarPicker(mode){
   var grid = $("avatar-grid");
   var title = $("avatar-picker-title");
   if (!wrap || !grid) return;
+  closeProfileTitleCollection();
+  collapseProfileData();
 
   title.textContent = mode === "base" ? "🔑 選擇身份頭像（遊戲身分證）" : "🎨 選擇顯示頭像（只改外觀）";
   grid.innerHTML = "";
@@ -1397,6 +1467,7 @@ function buildAvatarPicker(mode){
   });
 
   wrap.classList.remove("hidden");
+  scrollToProfileDataToggle();
 }
 
 function escapeHtml(s){
@@ -2662,6 +2733,7 @@ function equipQuizTitle(titleKey){
     return firebaseDb.ref(DB_PATHS.players + "/" + PLAYER.playerKey + "/quizEquippedTitle").set(payload).then(function(){
       PLAYER_EQUIPPED_TITLE = payload;
       renderEquippedTitle();
+      renderTitlePicker();
       toast("已裝備稱號：" + payload.name);
       return true;
     });
@@ -4502,6 +4574,11 @@ function bindMusicEvents(){
 }
 
 function bindEvents(){
+  if ($("fs-btn")) $("fs-btn").addEventListener("click", toggleFullscreen);
+  document.addEventListener("fullscreenchange", updateFullscreenButtonLabel);
+  document.addEventListener("webkitfullscreenchange", updateFullscreenButtonLabel);
+  updateFullscreenButtonLabel();
+  if ($("profile-data-toggle")) $("profile-data-toggle").addEventListener("click", toggleProfileData);
   $("btn-go-profile").addEventListener("click", function(){ showScreen("screen-profile"); });
   if ($("btn-daily-challenge")) $("btn-daily-challenge").addEventListener("click", openDailyChallenge);
 
@@ -4592,6 +4669,19 @@ function bindEvents(){
     });
   });
   $("btn-close-picker").addEventListener("click", function(){ $("avatar-picker").classList.add("hidden"); });
+  if ($("btn-profile-avatar-collection")) $("btn-profile-avatar-collection").addEventListener("click", function(){
+    if (!PLAYER.playerKey) {
+      toast("請先確認玩家身份。");
+      return;
+    }
+    loadUnlockedAvatars().then(function(){
+      validateDisplayAvatarForCurrentIdentity();
+      buildAvatarPicker("display");
+    });
+  });
+  var titleCollectionBtn = $("btn-title-collection") || $("btn-profile-title-collection");
+  if (titleCollectionBtn) titleCollectionBtn.addEventListener("click", openProfileTitleCollection);
+  if ($("btn-close-title-collection")) $("btn-close-title-collection").addEventListener("click", function(){ closeProfileTitleCollection(); scrollToProfileDataToggle(); });
 
   $("player-id-input").addEventListener("input", function(){
     PLAYER.id = normalizePlayerId(this.value);
@@ -4609,6 +4699,7 @@ function bindEvents(){
     PLAYER.playerKey = makePlayerKey(PLAYER.id, PLAYER.baseAvatarKey);
     savePlayerLocal();
     $("avatar-picker").classList.add("hidden");
+    closeProfileTitleCollection();
     loadAvatarCatalog().then(loadUnlockedAvatars).then(function(){
       validateDisplayAvatarForCurrentIdentity();
       savePlayerLocal();

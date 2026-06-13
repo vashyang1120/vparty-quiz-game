@@ -1,4 +1,4 @@
-/* 小V知識挑戰 quiz-v0.2.43-profile-floating-ui-test-4
+/* 小V知識挑戰 quiz-v0.2.44-equipped-title-sync-test-1
    目標：穩定可跑、沿用共用玩家身份、寫入 gameLogs/quiz、quizProgress 與年級累積排行榜。
    V幣：每日任一遊戲完成一次 +30 V幣；問答今日挑戰 +10 V幣，分別寫入 dailyRewards 與 dailyChallenges/quiz，正式來源為 Firebase wallet / vCoinLogs。
 */
@@ -16,7 +16,7 @@ var FIREBASE_CONFIG = {
 };
 var FIREBASE_ENABLED = true;
 
-var QUIZ_VERSION = "quiz-v0.2.43-profile-floating-ui-test-4";
+var QUIZ_VERSION = "quiz-v0.2.44-equipped-title-sync-test-1";
 
 var DB_PATHS = {
   gameLogs:            "gameLogs/quiz",
@@ -1934,7 +1934,7 @@ function buildQuizRecord(totalTime, accuracy){
   validateDisplayAvatarForCurrentIdentity();
   var av = getAvatarByKey(PLAYER.displayAvatarKey);
 
-  return {
+  var record = {
     gameId: "quiz",
     version: QUIZ_VERSION,
     mode: "mvp",
@@ -1971,6 +1971,7 @@ function buildQuizRecord(totalTime, accuracy){
     ts: now,
     date: new Date(now).toISOString()
   };
+  return addEquippedTitleSnapshot(record);
 }
 
 function saveLocalLog(record){
@@ -2635,15 +2636,32 @@ function getBrainSubjectKey(){
   return byName ? byName.key : "brain";
 }
 
-function normalizeQuizTitleData(raw){
+function normalizeEquippedTitleData(raw, fallbackGameId, fallbackSource){
   raw = raw || null;
   if (!raw || raw.unlocked === false) return null;
-  if (!raw.titleKey && !raw.name) return null;
+
+  var titleKey = raw.titleKey || raw.key || raw.id || "";
+  var name = raw.name || raw.title || raw.label || titleKey || "";
+  if (!titleKey && !name) return null;
+
+  var gameId = raw.gameId || raw.sourceGameId || fallbackGameId || "quiz";
+  var source = raw.source || raw.sourceKey || fallbackSource || gameId || "quiz";
+  var originPath = raw.originPath || (titleKey ? ("titles/" + gameId + "/" + titleKey) : "");
+  var equippedAt = raw.equippedAt || raw.updatedAt || raw.unlockedAt || raw.createdAt || 0;
+
   return {
-    titleKey: raw.titleKey || "",
-    name: raw.name || raw.titleKey || "未命名稱號",
-    updatedAt: raw.updatedAt || raw.unlockedAt || 0
+    titleKey: titleKey,
+    name: name || titleKey || "未命名稱號",
+    gameId: gameId,
+    source: source,
+    originPath: originPath,
+    equippedAt: equippedAt,
+    updatedAt: raw.updatedAt || equippedAt || 0
   };
+}
+
+function normalizeQuizTitleData(raw){
+  return normalizeEquippedTitleData(raw, "quiz", "quiz_legacy");
 }
 
 function renderEquippedTitle(){
@@ -2654,10 +2672,11 @@ function renderEquippedTitle(){
 }
 
 function getEquippedTitleSnapshot(){
-  var t = normalizeQuizTitleData(PLAYER_EQUIPPED_TITLE);
+  var t = normalizeEquippedTitleData(PLAYER_EQUIPPED_TITLE, "quiz", "quiz_legacy");
   return {
     equippedTitleKey: t && t.titleKey ? t.titleKey : "",
-    equippedTitleName: t && t.name ? t.name : ""
+    equippedTitleName: t && t.name ? t.name : "",
+    equippedTitleGameId: t && t.gameId ? t.gameId : ""
   };
 }
 
@@ -2666,6 +2685,7 @@ function addEquippedTitleSnapshot(payload){
   var snap = getEquippedTitleSnapshot();
   payload.equippedTitleKey = snap.equippedTitleKey;
   payload.equippedTitleName = snap.equippedTitleName;
+  payload.equippedTitleGameId = snap.equippedTitleGameId;
   return payload;
 }
 
@@ -2677,6 +2697,7 @@ function syncLeaderboardTitleSnapshot(gradeBand){
     var payload = {
       equippedTitleKey: snap.equippedTitleKey,
       equippedTitleName: snap.equippedTitleName,
+      equippedTitleGameId: snap.equippedTitleGameId,
       titleSnapshotUpdatedAt: Date.now()
     };
     var jobs = [
@@ -2702,13 +2723,16 @@ function loadQuizTitleData(playerKey){
     return Promise.all([
       firebaseDb.ref(base + "/quizBadges").once("value"),
       firebaseDb.ref(base + "/quizTitles").once("value"),
+      firebaseDb.ref(base + "/equippedTitle").once("value"),
       firebaseDb.ref(base + "/quizEquippedTitle").once("value")
     ]).then(function(snaps){
       PLAYER_QUIZ_BADGES = snaps[0].val() || {};
       PLAYER_QUIZ_TITLES = snaps[1].val() || {};
-      PLAYER_EQUIPPED_TITLE = normalizeQuizTitleData(snaps[2].val());
+      var sharedEquipped = normalizeEquippedTitleData(snaps[2].val(), "quiz", "equippedTitle");
+      var legacyQuizEquipped = normalizeEquippedTitleData(snaps[3].val(), "quiz", "quiz_legacy");
+      PLAYER_EQUIPPED_TITLE = sharedEquipped || legacyQuizEquipped || null;
       renderEquippedTitle();
-      return { badges:PLAYER_QUIZ_BADGES, titles:PLAYER_QUIZ_TITLES, equipped:PLAYER_EQUIPPED_TITLE };
+      return { badges:PLAYER_QUIZ_BADGES, titles:PLAYER_QUIZ_TITLES, equipped:PLAYER_EQUIPPED_TITLE, sharedEquipped:sharedEquipped, legacyEquipped:legacyQuizEquipped };
     });
   }).catch(function(e){
     console.warn("[QuizTitle] load failed:", e);
@@ -2723,15 +2747,20 @@ function equipQuizTitle(titleKey){
     return Promise.resolve(false);
   }
   var title = PLAYER_QUIZ_TITLES[titleKey];
+  var now = Date.now();
   var payload = {
     titleKey: titleKey,
     name: title.name || titleKey,
-    updatedAt: Date.now()
+    gameId: "quiz",
+    source: "quiz",
+    originPath: "titles/quiz/" + titleKey,
+    equippedAt: now,
+    updatedAt: now
   };
   return ensureFirebaseReady().then(function(ok){
     if (!ok || !firebaseDb || !PLAYER.playerKey) throw new Error("Firebase not ready");
-    return firebaseDb.ref(DB_PATHS.players + "/" + PLAYER.playerKey + "/quizEquippedTitle").set(payload).then(function(){
-      PLAYER_EQUIPPED_TITLE = payload;
+    return firebaseDb.ref(DB_PATHS.players + "/" + PLAYER.playerKey + "/equippedTitle").set(payload).then(function(){
+      PLAYER_EQUIPPED_TITLE = normalizeEquippedTitleData(payload, "quiz", "quiz");
       renderEquippedTitle();
       renderTitlePicker();
       toast("已裝備稱號：" + payload.name);
@@ -2912,10 +2941,15 @@ function checkAndUnlockQuizBadges(record, sourceLogId, academyAfter){
         var autoEquip = !existingEquipped ? unlocked[0] : null;
         var autoEquipPromise = Promise.resolve(false);
         if (autoEquip) {
-          autoEquipPromise = firebaseDb.ref(DB_PATHS.players + "/" + PLAYER.playerKey + "/quizEquippedTitle").set({
+          var now = Date.now();
+          autoEquipPromise = firebaseDb.ref(DB_PATHS.players + "/" + PLAYER.playerKey + "/equippedTitle").set({
             titleKey: autoEquip.titleKey,
             name: autoEquip.name,
-            updatedAt: Date.now()
+            gameId: "quiz",
+            source: "quiz",
+            originPath: "titles/quiz/" + autoEquip.titleKey,
+            equippedAt: now,
+            updatedAt: now
           }).then(function(){ return true; });
         }
         return autoEquipPromise.then(function(didEquip){

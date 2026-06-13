@@ -1,4 +1,4 @@
-/* 小V知識挑戰 quiz-v0.2.41-profile-floating-ui-test-2
+/* 小V知識挑戰 quiz-v0.2.42-profile-floating-ui-test-3
    目標：穩定可跑、沿用共用玩家身份、寫入 gameLogs/quiz、quizProgress 與年級累積排行榜。
    V幣：每日任一遊戲完成一次 +30 V幣；問答今日挑戰 +10 V幣，分別寫入 dailyRewards 與 dailyChallenges/quiz，正式來源為 Firebase wallet / vCoinLogs。
 */
@@ -16,7 +16,7 @@ var FIREBASE_CONFIG = {
 };
 var FIREBASE_ENABLED = true;
 
-var QUIZ_VERSION = "quiz-v0.2.41-profile-floating-ui-test-2";
+var QUIZ_VERSION = "quiz-v0.2.42-profile-floating-ui-test-3";
 
 var DB_PATHS = {
   gameLogs:            "gameLogs/quiz",
@@ -4678,7 +4678,8 @@ function bindEvents(){
       buildAvatarPicker("display");
     });
   });
-  if ($("btn-profile-title-collection")) $("btn-profile-title-collection").addEventListener("click", openProfileTitleCollection);
+  var titleCollectionBtn = $("btn-title-collection") || $("btn-profile-title-collection");
+  if (titleCollectionBtn) titleCollectionBtn.addEventListener("click", openProfileTitleCollection);
   if ($("btn-close-title-collection")) $("btn-close-title-collection").addEventListener("click", function(){ closeProfileTitleCollection(); scrollToProfileDataToggle(); });
 
   $("player-id-input").addEventListener("input", function(){

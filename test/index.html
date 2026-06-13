@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
-  <title>小V知識挑戰｜quiz-v0.2.41-profile-floating-ui-test-2</title>
+  <title>小V知識挑戰｜quiz-v0.2.42-profile-floating-ui-test-3</title>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
-  <link rel="stylesheet" href="./style.css?v=quiz-v0.2.41-profile-floating-ui-test-2">
+  <link rel="stylesheet" href="./style.css?v=quiz-v0.2.42-profile-floating-ui-test-3">
 </head>
 <body>
   <div id="app">
@@ -16,7 +16,7 @@
         <div class="logo-bubble">🎈</div>
         <div>
           <h1 id="quiz-logo-title">小V知識挑戰</h1>
-          <p>quiz-v0.2.41-profile-floating-ui-test-2</p>
+          <p>quiz-v0.2.42-profile-floating-ui-test-3</p>
         </div>
       </div>
       <div id="top-player-card" class="player-chip" role="button" tabindex="0" title="開啟玩家設定">
@@ -112,54 +112,71 @@
           <h2>玩家設定</h2>
           <p class="muted">ID + 身份頭像就像遊戲身分證，會決定成績、解鎖和排行榜歸在哪一個玩家身上；只要更換 ID 或身份頭像，就會變成另一個玩家身份。顯示頭像只是外觀造型，不會影響成績。</p>
 
-          <label class="field">
-            <span>玩家 ID</span>
-            <input id="player-id-input" maxlength="16" placeholder="輸入玩家 ID">
-          </label>
+          <div id="profile-data-card" class="profile-data-card">
+            <button id="profile-data-toggle" class="profile-data-toggle" type="button" aria-expanded="true">
+              <span>👤 玩家資料</span>
+              <em>點擊可收合</em>
+            </button>
+            <div id="profile-data-content" class="profile-data-content">
+              <label class="field">
+                <span>玩家 ID</span>
+                <input id="player-id-input" maxlength="16" placeholder="輸入玩家 ID">
+              </label>
 
-          <div class="profile-preview-grid">
-            <div class="avatar-box">
-              <h3>🔑 身份頭像</h3>
-              <img id="base-avatar-preview" alt="身份頭像">
-              <p>遊戲身分證：ID + 身份頭像決定成績與解鎖歸屬</p>
-              <button id="btn-pick-base" class="btn ghost small">選身份頭像</button>
-            </div>
-            <div class="avatar-box">
-              <h3>🎨 顯示頭像</h3>
-              <img id="display-avatar-preview" alt="顯示頭像">
-              <p>外觀造型：只改畫面顯示</p>
-              <button id="btn-pick-display" class="btn ghost small">選顯示頭像</button>
+              <div class="profile-preview-grid">
+                <div class="avatar-box">
+                  <h3>🔑 身份頭像</h3>
+                  <img id="base-avatar-preview" alt="身份頭像">
+                  <p>遊戲身分證：ID + 身份頭像決定成績與解鎖歸屬</p>
+                  <button id="btn-pick-base" class="btn ghost small" type="button">選身份頭像</button>
+                </div>
+                <div class="avatar-box">
+                  <h3>🎨 顯示頭像</h3>
+                  <img id="display-avatar-preview" alt="顯示頭像">
+                  <p>外觀造型：只改畫面顯示</p>
+                  <button id="btn-pick-display" class="btn ghost small" type="button">選顯示頭像</button>
+                </div>
+              </div>
+
+              <div class="identity-box">
+                <div>目前遊戲身份：</div>
+                <code id="profile-player-key">—</code>
+              </div>
+              <div class="profile-wallet-box">
+                <span>🪙 目前 V幣</span>
+                <strong id="profile-vcoin-balance">—</strong>
+              </div>
+
+              <div class="profile-title-summary">
+                <div class="profile-title-current">
+                  <span>🎖 目前稱號</span>
+                  <strong id="profile-equipped-title">未裝備</strong>
+                </div>
+              </div>
             </div>
           </div>
 
           <div id="avatar-picker" class="avatar-picker hidden">
             <div class="picker-head">
               <strong id="avatar-picker-title">選擇頭像</strong>
-              <button id="btn-close-picker" class="btn ghost tiny">關閉</button>
+              <button id="btn-close-picker" class="btn ghost tiny" type="button">關閉</button>
             </div>
             <div id="avatar-grid" class="avatar-grid"></div>
           </div>
 
-          <div class="identity-box">
-            <div>目前遊戲身份：</div>
-            <code id="profile-player-key">—</code>
-          </div>
-          <div class="profile-wallet-box">
-            <span>🪙 目前 V幣</span>
-            <strong id="profile-vcoin-balance">—</strong>
-          </div>
-
-          <div class="profile-title-panel">
-            <div class="profile-title-current">
-              <span>🎖 目前稱號</span>
-              <strong id="profile-equipped-title">未裝備</strong>
+          <div id="profile-title-collection" class="profile-title-collection hidden">
+            <div class="picker-head">
+              <strong>🎖 稱號收藏</strong>
+              <button id="btn-close-title-collection" class="btn ghost tiny" type="button">關閉</button>
             </div>
             <div id="profile-title-list" class="title-list">尚未解鎖稱號</div>
           </div>
 
-          <div class="actions">
-            <button id="btn-save-profile" class="btn primary">🎈 確認身份</button>
-            <button id="btn-profile-back" class="btn ghost">回首頁</button>
+          <div class="profile-floating-actions">
+            <button id="btn-save-profile" class="btn primary" type="button">🎈 確認身份</button>
+            <button id="btn-profile-avatar-collection" class="btn ghost small" type="button">🏆 頭像收藏</button>
+            <button id="btn-title-collection" class="btn ghost small" type="button">🎖 稱號收藏</button>
+            <button id="btn-profile-back" class="btn ghost small" type="button">回首頁</button>
           </div>
         </div>
       </section>
@@ -493,8 +510,9 @@
     </div>
 
     <div id="toast" class="toast"></div>
+    <button id="fs-btn" title="全螢幕" type="button">⛶</button>
   </div>
 
-  <script src="./main.js?v=quiz-v0.2.41-profile-floating-ui-test-2"></script>
+  <script src="./main.js?v=quiz-v0.2.42-profile-floating-ui-test-3"></script>
 </body>
 </html>

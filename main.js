@@ -1,4 +1,4 @@
-/* 小V知識挑戰 quiz-v0.2.43
+/* 小V知識挑戰 quiz-v0.2.44
    目標：穩定可跑、沿用共用玩家身份、寫入 gameLogs/quiz、quizProgress 與年級累積排行榜。
    V幣：每日任一遊戲完成一次 +30 V幣；問答今日挑戰 +10 V幣，分別寫入 dailyRewards 與 dailyChallenges/quiz，正式來源為 Firebase wallet / vCoinLogs。
 */
@@ -16,7 +16,7 @@ var FIREBASE_CONFIG = {
 };
 var FIREBASE_ENABLED = true;
 
-var QUIZ_VERSION = "quiz-v0.2.43";
+var QUIZ_VERSION = "quiz-v0.2.44";
 
 var DB_PATHS = {
   gameLogs:            "gameLogs/quiz",
@@ -95,15 +95,71 @@ var audioCtx = null;
 var SFX_MASTER_GAIN = 3.0;
 
 
+var ASSET_ROOT = "https://vashyang1120.github.io/vparty-rhythm-game/";
+var QUIZ_ASSET_ROOT = "https://vashyang1120.github.io/vparty-quiz-game/";
+var RHYTHM_TEST_ASSET_ROOT = "https://vashyang1120.github.io/vparty-rhythm-game/test/";
+var HOST_IMAGE_FALLBACK = AV_BASE + "xiaov_base.png";
+
+function normalizeAssetPath(path) {
+  if (!path) return "";
+  var s = String(path).trim();
+  s = s.replace(/^\.\//, "");
+  while (s.indexOf("../") === 0) s = s.slice(3);
+  s = s.replace(/^\/+/, "");
+  if (s.indexOf("vparty-rhythm-game/") === 0) s = s.replace(/^vparty-rhythm-game\//, "");
+  if (s.indexOf("vparty-quiz-game/") === 0) s = s.replace(/^vparty-quiz-game\//, "");
+  return s;
+}
+
+function uniqueList(list) {
+  var seen = {};
+  return (list || []).filter(function(item){
+    if (!item || seen[item]) return false;
+    seen[item] = true;
+    return true;
+  });
+}
+
+function resolveQuizAssetPath(path) {
+  if (!path) return "";
+  var s = String(path).trim();
+  if (/^https?:\/\//.test(s) || /^data:/.test(s)) return s;
+  var clean = normalizeAssetPath(s);
+  if (clean.indexOf("assets/") === 0) {
+    return QUIZ_ASSET_ROOT + clean;
+  }
+  return s;
+}
+
+function resolveHostImageSrc(path) {
+  var list = resolveHostImageCandidates(path);
+  return list[0] || "";
+}
+
+function resolveHostImageCandidates(path) {
+  if (!path) return [];
+  var s = String(path).trim();
+  if (/^https?:\/\//.test(s) || /^data:/.test(s)) return [s];
+  var clean = normalizeAssetPath(s);
+  if (clean.indexOf("assets/") !== 0) return [s];
+  return uniqueList([
+    "./" + clean,
+    RHYTHM_TEST_ASSET_ROOT + clean,
+    QUIZ_ASSET_ROOT + clean,
+    ASSET_ROOT + clean,
+    resolveQuizAssetPath(clean)
+  ]);
+}
+
 var HOST_ART = {
-  intro: "./assets/hosts/xiaov_quiz_host_intro_v1.png",
-  question: "./assets/hosts/xiaov_quiz_host_question_v1.png",
-  correct: "./assets/hosts/xiaov_quiz_host_correct_v1.png",
-  timewarning: "./assets/hosts/xiaov_quiz_host_timewarning_v1.png",
-  wrong: "./assets/hosts/xiaov_quiz_host_wrong_v1.png",
-  timeout: "./assets/hosts/xiaov_quiz_host_timeout_v2.png",
-  result: "./assets/hosts/xiaov_quiz_host_result_v1.png",
-  ranking: "./assets/hosts/xiaov_quiz_host_ranking_v1.png"
+  intro: "assets/hosts/xiaov_quiz_host_intro_v1.png",
+  question: "assets/hosts/xiaov_quiz_host_question_v1.png",
+  correct: "assets/hosts/xiaov_quiz_host_correct_v1.png",
+  timewarning: "assets/hosts/xiaov_quiz_host_timewarning_v1.png",
+  wrong: "assets/hosts/xiaov_quiz_host_wrong_v1.png",
+  timeout: "assets/hosts/xiaov_quiz_host_timeout_v2.png",
+  result: "assets/hosts/xiaov_quiz_host_result_v1.png",
+  ranking: "assets/hosts/xiaov_quiz_host_ranking_v1.png"
 };
 var GAME_MENU_URL = "https://balloonv.com/%e6%b0%a3%e7%90%83%e5%b0%8fv%e9%ad%94%e6%b3%95%e6%b4%be%e5%b0%8d%e9%81%8a%e6%88%b2";
 
@@ -483,7 +539,35 @@ function toast(msg, dur){
 
 function setImageSrc(id, src){
   var el = $(id);
-  if (el && src) el.src = src;
+  if (!el || !src) return;
+  var candidates = resolveHostImageCandidates(src);
+  var fallbackCandidates = resolveHostImageCandidates(HOST_IMAGE_FALLBACK);
+  var queue = uniqueList(candidates.concat(fallbackCandidates));
+  var index = 0;
+  function applyNext(){
+    if (index >= queue.length) {
+      el.style.display = "none";
+      return;
+    }
+    var nextSrc = queue[index++];
+    if (el.dataset) {
+      el.dataset.hostFallbackApplied = index > candidates.length ? "1" : "0";
+      el.dataset.hostRequestedSrc = String(src);
+      el.dataset.hostResolvedSrc = nextSrc;
+    }
+    el.style.display = "";
+    el.src = nextSrc;
+  }
+  el.onerror = function(){
+    var failed = el.dataset ? el.dataset.hostResolvedSrc : el.src;
+    if (index <= candidates.length) {
+      console.warn("[quiz host image retry]", id, failed);
+    } else {
+      console.warn("[quiz host image fallback]", id, failed);
+    }
+    applyNext();
+  };
+  applyNext();
 }
 
 function getHostArtByTone(tone){
@@ -1934,7 +2018,7 @@ function buildQuizRecord(totalTime, accuracy){
   validateDisplayAvatarForCurrentIdentity();
   var av = getAvatarByKey(PLAYER.displayAvatarKey);
 
-  return {
+  var record = {
     gameId: "quiz",
     version: QUIZ_VERSION,
     mode: "mvp",
@@ -1971,6 +2055,7 @@ function buildQuizRecord(totalTime, accuracy){
     ts: now,
     date: new Date(now).toISOString()
   };
+  return addEquippedTitleSnapshot(record);
 }
 
 function saveLocalLog(record){
@@ -2635,15 +2720,32 @@ function getBrainSubjectKey(){
   return byName ? byName.key : "brain";
 }
 
-function normalizeQuizTitleData(raw){
+function normalizeEquippedTitleData(raw, fallbackGameId, fallbackSource){
   raw = raw || null;
   if (!raw || raw.unlocked === false) return null;
-  if (!raw.titleKey && !raw.name) return null;
+
+  var titleKey = raw.titleKey || raw.key || raw.id || "";
+  var name = raw.name || raw.title || raw.label || titleKey || "";
+  if (!titleKey && !name) return null;
+
+  var gameId = raw.gameId || raw.sourceGameId || fallbackGameId || "quiz";
+  var source = raw.source || raw.sourceKey || fallbackSource || gameId || "quiz";
+  var originPath = raw.originPath || (titleKey ? ("titles/" + gameId + "/" + titleKey) : "");
+  var equippedAt = raw.equippedAt || raw.updatedAt || raw.unlockedAt || raw.createdAt || 0;
+
   return {
-    titleKey: raw.titleKey || "",
-    name: raw.name || raw.titleKey || "未命名稱號",
-    updatedAt: raw.updatedAt || raw.unlockedAt || 0
+    titleKey: titleKey,
+    name: name || titleKey || "未命名稱號",
+    gameId: gameId,
+    source: source,
+    originPath: originPath,
+    equippedAt: equippedAt,
+    updatedAt: raw.updatedAt || equippedAt || 0
   };
+}
+
+function normalizeQuizTitleData(raw){
+  return normalizeEquippedTitleData(raw, "quiz", "quiz_legacy");
 }
 
 function renderEquippedTitle(){
@@ -2654,10 +2756,11 @@ function renderEquippedTitle(){
 }
 
 function getEquippedTitleSnapshot(){
-  var t = normalizeQuizTitleData(PLAYER_EQUIPPED_TITLE);
+  var t = normalizeEquippedTitleData(PLAYER_EQUIPPED_TITLE, "quiz", "quiz_legacy");
   return {
     equippedTitleKey: t && t.titleKey ? t.titleKey : "",
-    equippedTitleName: t && t.name ? t.name : ""
+    equippedTitleName: t && t.name ? t.name : "",
+    equippedTitleGameId: t && t.gameId ? t.gameId : ""
   };
 }
 
@@ -2666,6 +2769,7 @@ function addEquippedTitleSnapshot(payload){
   var snap = getEquippedTitleSnapshot();
   payload.equippedTitleKey = snap.equippedTitleKey;
   payload.equippedTitleName = snap.equippedTitleName;
+  payload.equippedTitleGameId = snap.equippedTitleGameId;
   return payload;
 }
 
@@ -2677,6 +2781,7 @@ function syncLeaderboardTitleSnapshot(gradeBand){
     var payload = {
       equippedTitleKey: snap.equippedTitleKey,
       equippedTitleName: snap.equippedTitleName,
+      equippedTitleGameId: snap.equippedTitleGameId,
       titleSnapshotUpdatedAt: Date.now()
     };
     var jobs = [
@@ -2702,13 +2807,16 @@ function loadQuizTitleData(playerKey){
     return Promise.all([
       firebaseDb.ref(base + "/quizBadges").once("value"),
       firebaseDb.ref(base + "/quizTitles").once("value"),
+      firebaseDb.ref(base + "/equippedTitle").once("value"),
       firebaseDb.ref(base + "/quizEquippedTitle").once("value")
     ]).then(function(snaps){
       PLAYER_QUIZ_BADGES = snaps[0].val() || {};
       PLAYER_QUIZ_TITLES = snaps[1].val() || {};
-      PLAYER_EQUIPPED_TITLE = normalizeQuizTitleData(snaps[2].val());
+      var sharedEquipped = normalizeEquippedTitleData(snaps[2].val(), "quiz", "equippedTitle");
+      var legacyQuizEquipped = normalizeEquippedTitleData(snaps[3].val(), "quiz", "quiz_legacy");
+      PLAYER_EQUIPPED_TITLE = sharedEquipped || legacyQuizEquipped || null;
       renderEquippedTitle();
-      return { badges:PLAYER_QUIZ_BADGES, titles:PLAYER_QUIZ_TITLES, equipped:PLAYER_EQUIPPED_TITLE };
+      return { badges:PLAYER_QUIZ_BADGES, titles:PLAYER_QUIZ_TITLES, equipped:PLAYER_EQUIPPED_TITLE, sharedEquipped:sharedEquipped, legacyEquipped:legacyQuizEquipped };
     });
   }).catch(function(e){
     console.warn("[QuizTitle] load failed:", e);
@@ -2723,15 +2831,20 @@ function equipQuizTitle(titleKey){
     return Promise.resolve(false);
   }
   var title = PLAYER_QUIZ_TITLES[titleKey];
+  var now = Date.now();
   var payload = {
     titleKey: titleKey,
     name: title.name || titleKey,
-    updatedAt: Date.now()
+    gameId: "quiz",
+    source: "quiz",
+    originPath: "titles/quiz/" + titleKey,
+    equippedAt: now,
+    updatedAt: now
   };
   return ensureFirebaseReady().then(function(ok){
     if (!ok || !firebaseDb || !PLAYER.playerKey) throw new Error("Firebase not ready");
-    return firebaseDb.ref(DB_PATHS.players + "/" + PLAYER.playerKey + "/quizEquippedTitle").set(payload).then(function(){
-      PLAYER_EQUIPPED_TITLE = payload;
+    return firebaseDb.ref(DB_PATHS.players + "/" + PLAYER.playerKey + "/equippedTitle").set(payload).then(function(){
+      PLAYER_EQUIPPED_TITLE = normalizeEquippedTitleData(payload, "quiz", "quiz");
       renderEquippedTitle();
       renderTitlePicker();
       toast("已裝備稱號：" + payload.name);
@@ -2912,10 +3025,15 @@ function checkAndUnlockQuizBadges(record, sourceLogId, academyAfter){
         var autoEquip = !existingEquipped ? unlocked[0] : null;
         var autoEquipPromise = Promise.resolve(false);
         if (autoEquip) {
-          autoEquipPromise = firebaseDb.ref(DB_PATHS.players + "/" + PLAYER.playerKey + "/quizEquippedTitle").set({
+          var now = Date.now();
+          autoEquipPromise = firebaseDb.ref(DB_PATHS.players + "/" + PLAYER.playerKey + "/equippedTitle").set({
             titleKey: autoEquip.titleKey,
             name: autoEquip.name,
-            updatedAt: Date.now()
+            gameId: "quiz",
+            source: "quiz",
+            originPath: "titles/quiz/" + autoEquip.titleKey,
+            equippedAt: now,
+            updatedAt: now
           }).then(function(){ return true; });
         }
         return autoEquipPromise.then(function(didEquip){

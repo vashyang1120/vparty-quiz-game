@@ -1,4 +1,4 @@
-/* 小V知識挑戰 quiz-v0.2.44-host-image-path-fix-test-2
+/* 小V知識挑戰 quiz-v0.2.44-host-image-correct-asset-test-3
    目標：穩定可跑、沿用共用玩家身份、寫入 gameLogs/quiz、quizProgress 與年級累積排行榜。
    V幣：每日任一遊戲完成一次 +30 V幣；問答今日挑戰 +10 V幣，分別寫入 dailyRewards 與 dailyChallenges/quiz，正式來源為 Firebase wallet / vCoinLogs。
 */
@@ -16,7 +16,7 @@ var FIREBASE_CONFIG = {
 };
 var FIREBASE_ENABLED = true;
 
-var QUIZ_VERSION = "quiz-v0.2.44-host-image-path-fix-test-2";
+var QUIZ_VERSION = "quiz-v0.2.44-host-image-correct-asset-test-3";
 
 var DB_PATHS = {
   gameLogs:            "gameLogs/quiz",
@@ -96,37 +96,70 @@ var SFX_MASTER_GAIN = 3.0;
 
 
 var ASSET_ROOT = "https://vashyang1120.github.io/vparty-rhythm-game/";
+var QUIZ_ASSET_ROOT = "https://vashyang1120.github.io/vparty-quiz-game/";
+var RHYTHM_TEST_ASSET_ROOT = "https://vashyang1120.github.io/vparty-rhythm-game/test/";
 var HOST_IMAGE_FALLBACK = AV_BASE + "xiaov_base.png";
+
+function normalizeAssetPath(path) {
+  if (!path) return "";
+  var s = String(path).trim();
+  s = s.replace(/^\.\//, "");
+  while (s.indexOf("../") === 0) s = s.slice(3);
+  s = s.replace(/^\/+/, "");
+  if (s.indexOf("vparty-rhythm-game/") === 0) s = s.replace(/^vparty-rhythm-game\//, "");
+  if (s.indexOf("vparty-quiz-game/") === 0) s = s.replace(/^vparty-quiz-game\//, "");
+  return s;
+}
+
+function uniqueList(list) {
+  var seen = {};
+  return (list || []).filter(function(item){
+    if (!item || seen[item]) return false;
+    seen[item] = true;
+    return true;
+  });
+}
 
 function resolveQuizAssetPath(path) {
   if (!path) return "";
-  var s = String(path);
+  var s = String(path).trim();
   if (/^https?:\/\//.test(s) || /^data:/.test(s)) return s;
-  if (s.charAt(0) === "/") {
-    if (s.indexOf("/vparty-rhythm-game/") === 0) {
-      return "https://vashyang1120.github.io" + s;
-    }
-    return ASSET_ROOT + s.replace(/^\/+/, "");
+  var clean = normalizeAssetPath(s);
+  if (clean.indexOf("assets/") === 0) {
+    return QUIZ_ASSET_ROOT + clean;
   }
-  if (s.indexOf("../assets/") === 0) return ASSET_ROOT + s.slice(3);
-  if (s.indexOf("./assets/") === 0) return ASSET_ROOT + s.slice(2);
-  if (s.indexOf("assets/") === 0) return ASSET_ROOT + s;
   return s;
 }
 
 function resolveHostImageSrc(path) {
-  return resolveQuizAssetPath(path);
+  var list = resolveHostImageCandidates(path);
+  return list[0] || "";
+}
+
+function resolveHostImageCandidates(path) {
+  if (!path) return [];
+  var s = String(path).trim();
+  if (/^https?:\/\//.test(s) || /^data:/.test(s)) return [s];
+  var clean = normalizeAssetPath(s);
+  if (clean.indexOf("assets/") !== 0) return [s];
+  return uniqueList([
+    "./" + clean,
+    RHYTHM_TEST_ASSET_ROOT + clean,
+    QUIZ_ASSET_ROOT + clean,
+    ASSET_ROOT + clean,
+    resolveQuizAssetPath(clean)
+  ]);
 }
 
 var HOST_ART = {
-  intro: resolveHostImageSrc("assets/hosts/xiaov_quiz_host_intro_v1.png"),
-  question: resolveHostImageSrc("assets/hosts/xiaov_quiz_host_question_v1.png"),
-  correct: resolveHostImageSrc("assets/hosts/xiaov_quiz_host_correct_v1.png"),
-  timewarning: resolveHostImageSrc("assets/hosts/xiaov_quiz_host_timewarning_v1.png"),
-  wrong: resolveHostImageSrc("assets/hosts/xiaov_quiz_host_wrong_v1.png"),
-  timeout: resolveHostImageSrc("assets/hosts/xiaov_quiz_host_timeout_v2.png"),
-  result: resolveHostImageSrc("assets/hosts/xiaov_quiz_host_result_v1.png"),
-  ranking: resolveHostImageSrc("assets/hosts/xiaov_quiz_host_ranking_v1.png")
+  intro: "assets/hosts/xiaov_quiz_host_intro_v1.png",
+  question: "assets/hosts/xiaov_quiz_host_question_v1.png",
+  correct: "assets/hosts/xiaov_quiz_host_correct_v1.png",
+  timewarning: "assets/hosts/xiaov_quiz_host_timewarning_v1.png",
+  wrong: "assets/hosts/xiaov_quiz_host_wrong_v1.png",
+  timeout: "assets/hosts/xiaov_quiz_host_timeout_v2.png",
+  result: "assets/hosts/xiaov_quiz_host_result_v1.png",
+  ranking: "assets/hosts/xiaov_quiz_host_ranking_v1.png"
 };
 var GAME_MENU_URL = "https://balloonv.com/%e6%b0%a3%e7%90%83%e5%b0%8fv%e9%ad%94%e6%b3%95%e6%b4%be%e5%b0%8d%e9%81%8a%e6%88%b2";
 
@@ -507,19 +540,34 @@ function toast(msg, dur){
 function setImageSrc(id, src){
   var el = $(id);
   if (!el || !src) return;
-  var resolved = resolveHostImageSrc(src);
-  el.onerror = function(){
-    if (el.dataset && el.dataset.hostFallbackApplied === "1") {
+  var candidates = resolveHostImageCandidates(src);
+  var fallbackCandidates = resolveHostImageCandidates(HOST_IMAGE_FALLBACK);
+  var queue = uniqueList(candidates.concat(fallbackCandidates));
+  var index = 0;
+  function applyNext(){
+    if (index >= queue.length) {
       el.style.display = "none";
       return;
     }
-    if (el.dataset) el.dataset.hostFallbackApplied = "1";
-    console.warn("[quiz host image fallback]", id, resolved);
-    el.src = HOST_IMAGE_FALLBACK;
+    var nextSrc = queue[index++];
+    if (el.dataset) {
+      el.dataset.hostFallbackApplied = index > candidates.length ? "1" : "0";
+      el.dataset.hostRequestedSrc = String(src);
+      el.dataset.hostResolvedSrc = nextSrc;
+    }
+    el.style.display = "";
+    el.src = nextSrc;
+  }
+  el.onerror = function(){
+    var failed = el.dataset ? el.dataset.hostResolvedSrc : el.src;
+    if (index <= candidates.length) {
+      console.warn("[quiz host image retry]", id, failed);
+    } else {
+      console.warn("[quiz host image fallback]", id, failed);
+    }
+    applyNext();
   };
-  if (el.dataset) el.dataset.hostFallbackApplied = "0";
-  el.style.display = "";
-  el.src = resolved;
+  applyNext();
 }
 
 function getHostArtByTone(tone){
